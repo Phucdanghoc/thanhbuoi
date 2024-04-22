@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ThanhBuoi.Models.Xe>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="bg-light rounded h-100 p-4 m-4">
+            <h6 class="mb-4">Quản lí Xe</h6>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên Xe</th>
+                            <th scope="col">Biển Số</th>
+                            <th scope="col">Mã xe</th>
+                            <th scope="col">Loại Xe</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Ten)</td>
+                                <td>@Html.DisplayFor(modelItem => item.BienSo)</td>
+                                <td>@Html.DisplayFor(modelItem => item.MaXe)</td>
+                                <td>@Html.DisplayFor(modelItem => item.LoaiXe.Mota)</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+       
+    </div>
+</div>

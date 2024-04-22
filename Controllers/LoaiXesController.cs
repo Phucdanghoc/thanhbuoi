@@ -1,0 +1,156 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using ThanhBuoi.Data;
+using ThanhBuoi.Models;
+
+namespace ThanhBuoi.Controllers
+{
+    public class LoaiXesController : Controller
+    {
+        private readonly DataContext _context;
+
+
+
+        public LoaiXesController(DataContext context)
+        {
+            _context = context;
+        }
+
+        // GET: LoaiXes
+        public async Task<IActionResult> Index()
+        {
+            return View(await _context.loaiXes.ToListAsync());
+        }
+
+        // GET: LoaiXes/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var loaiXe = await _context.loaiXes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (loaiXe == null)
+            {
+                return NotFound();
+            }
+
+            return View(loaiXe);
+        }
+
+        // GET: LoaiXes/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<IActionResult> Create([Bind("Ten,Mota")] LoaiXe loaiXe, int SoGhe, string LoaiGhe)
+        {
+            loaiXe.Ma = $"{SoGhe}-{LoaiGhe}";
+                if (_context.loaiXes.Any(x => x.Ten == loaiXe.Ten))
+                {
+                    TempData["ErrorMessage"] = "Tên đã tồn tại.";
+                    return RedirectToAction(nameof(Index));
+                }
+                _context.Add(loaiXe);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Thêm mới thành công.";
+                return RedirectToAction(nameof(Index));
+        }
+        // GET: LoaiXes/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var loaiXe = await _context.loaiXes.FindAsync(id);
+            if (loaiXe == null)
+            {
+                return NotFound();
+            }
+            return View(loaiXe);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,Mota")] LoaiXe loaiXe)
+        {
+            if (id != loaiXe.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(loaiXe);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!LoaiXeExists(loaiXe.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(loaiXe);
+        }
+
+        // GET: LoaiXes/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var loaiXe = await _context.loaiXes
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (loaiXe == null)
+            {
+                return NotFound();
+            }
+
+            return View(loaiXe);
+        }
+
+        // POST: LoaiXes/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var loaiXe = await _context.loaiXes.FindAsync(id);
+            if (loaiXe != null)
+            {
+                _context.loaiXes.Remove(loaiXe);
+            }
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool LoaiXeExists(int id)
+        {
+            return _context.loaiXes.Any(e => e.Id == id);
+        }
+    }
+}

@@ -1,0 +1,82 @@
+﻿@model ThanhBuoi.Models.Xe
+
+@{
+    ViewData["Title"] = "Create";
+
+}
+
+<h1>Create</h1>
+
+<h4>Xe</h4>
+<hr />
+<form asp-action="Create">
+    <div class="row">
+            <div class="col-md-4">
+                <div class="bg-light rounded  p-4">
+                    <h6 class="mb-4">Basic Form</h6>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            <label asp-for="Ten" class="form-label">Tên</label>
+                            <input asp-for="Ten" class="form-control" />
+                            <span asp-validation-for="Ten" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="BienSo" class="form-label">Biển số</label>
+                            <input asp-for="BienSo" class="form-control" />
+                            <span asp-validation-for="BienSo" class="text-danger"></span>
+                        </div>
+                    <div class="mb-3">
+                    <label for="loaixe_id" class="form-label">Loại xe</label>
+                    <select class="form-select" id="loaixe_id" for="loaixe_id" name="loaixe_id" aria-label="Default select example">
+                            <option value="">-- Select --</option>
+                            @foreach (var item in ViewBag.getLoaiXeList)
+                            {
+                                <option value="@item.Id">@item.Mota</option>
+                            }
+                        </select>
+                        <span asp-validation-for="LoaiXe" class="text-danger"></span>
+                    </div>
+                <div class="mb-3">
+                    <label asp-for="HangXe" class="form-label">Loại xe</label>
+                    <select class="form-select" id="HangXe" asp-for="HangXe" aria-label="Default select example">
+                        <option value="">-- Select --</option>
+                        @foreach (var item in ViewBag.getHangXe)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <span asp-validation-for="HangXe" class="text-danger"></span>
+                </div>
+
+                        <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+</div>
+</form>
+
+<style>
+    .seat {
+        width: 25px;
+        height: 25px;
+        border: 1px solid #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 3px;
+    }
+
+    .seat-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+</style>
+
+<script src="~/js/sodoxe/index.js"></script>
+
+
+
