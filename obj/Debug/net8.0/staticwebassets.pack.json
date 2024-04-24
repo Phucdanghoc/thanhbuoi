@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\img\\user.jpg"
     },
     {
+      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\diachi\\create.js",
+      "PackagePath": "staticwebassets\\js\\diachi\\create.js"
+    },
+    {
       "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\main.js",
       "PackagePath": "staticwebassets\\js\\main.js"
     },

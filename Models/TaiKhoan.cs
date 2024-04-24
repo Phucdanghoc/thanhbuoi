@@ -17,5 +17,8 @@ namespace ThanhBuoi.Models
         [JsonIgnore]
         // Navigation property for HangGui
         public ICollection<HangGui> HangGuis { get; set; }
+
+        [JsonIgnore]
+        public ICollection<Ve> Ves { get; set; }
     }
 }

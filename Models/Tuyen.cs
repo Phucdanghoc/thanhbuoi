@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ThanhBuoi.Models
 {
@@ -15,20 +17,15 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string Thoigian { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Diemdi { get; set; }
+        [ForeignKey("ID_diemDi")]
+        public Diadiem DiemDi { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Diemden { get; set; }
+        [ForeignKey("ID_diemDen")]
+        public Diadiem Diemden { get; set; }
 
         public double Khoangcach { get; set; }
 
-        public DateTime Capnhapngay { get; set; }
-
-        public ICollection<GiaTuyen> GiaTuyens { get; set; }
-
+        [JsonIgnore]
         public ICollection<Chuyen> Chuyens { get; set; }
     }
 }

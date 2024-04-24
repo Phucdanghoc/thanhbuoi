@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ThanhBuoi.Models
 {
-    public class GiaTuyen
+    public class GiaSukien
     {
         [Key]
         public int Id { get; set; }

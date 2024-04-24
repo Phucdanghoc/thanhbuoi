@@ -8,7 +8,6 @@ namespace ThanhBuoi.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         [StringLength(255)]
         public string Ten { get; set; }
 
@@ -19,7 +18,7 @@ namespace ThanhBuoi.Models
         [ForeignKey("ID_Hang")]
         public Hang Hang { get; set; }
 
-
+        public  ICollection<Ve> Ves { get; set; }
 
     }
 }

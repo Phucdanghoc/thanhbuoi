@@ -284,3 +284,4 @@ C:\Users\lep61\source\repos\ThanhBuoi\obj\Debug\net8.0\refint\ThanhBuoi.dll
 C:\Users\lep61\source\repos\ThanhBuoi\obj\Debug\net8.0\ThanhBuoi.pdb
 C:\Users\lep61\source\repos\ThanhBuoi\obj\Debug\net8.0\ThanhBuoi.genruntimeconfig.cache
 C:\Users\lep61\source\repos\ThanhBuoi\obj\Debug\net8.0\ref\ThanhBuoi.dll
+C:\Users\lep61\source\repos\ThanhBuoi\obj\Debug\net8.0\ThanhBuoi.sourcelink.json

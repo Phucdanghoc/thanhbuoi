@@ -25,6 +25,4 @@ namespace ThanhBuoi.Models
 
 
     }
-
-
 }
