@@ -8,41 +8,45 @@
 
 <h4>Tuyen</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ten" class="control-label"></label>
-                <input asp-for="Ten" class="form-control" />
-                <span asp-validation-for="Ten" class="text-danger"></span>
+<form asp-action="Create">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="bg-light rounded p-4">
+                <h6 class="mb-4">Basic Form</h6>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label for="diemdiID" class="form-label">Điểm đi</label>
+                    <select class="form-select" id="diemdiID" name="diemdiID" aria-label="Default select example">
+                        <option value="">-- Chọn --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="diemdenID" class="form-label">Điểm đến</label>
+                    <select class="form-select" id="diemdenID" name="diemdenID" aria-label="Default select example">
+                        <option value="">-- Chọn --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Khoangcach" class="form-label">Khoảng cách</label>
+                    <input type="number" min="10" max="1800" class="form-control"  asp-for="Khoangcach" />
+                    <span class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
-            <div class="form-group">
-                <label asp-for="Thoigian" class="control-label"></label>
-                <input asp-for="Thoigian" class="form-control" />
-                <span asp-validation-for="Thoigian" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Diemden" class="control-label"></label>
-                <input asp-for="Diemden" class="form-control" />
-                <span asp-validation-for="Diemden" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Khoangcach" class="control-label"></label>
-                <input asp-for="Khoangcach" class="form-control" />
-                <span asp-validation-for="Khoangcach" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

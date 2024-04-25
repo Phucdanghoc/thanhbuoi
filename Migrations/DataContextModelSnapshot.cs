@@ -672,12 +672,15 @@ namespace ThanhBuoi.Migrations
             modelBuilder.Entity("ThanhBuoi.Models.Tuyen", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_diemDen")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ID_DiemDen")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_diemDi")
+                    b.Property<int>("ID_DiemDi")
                         .HasColumnType("int");
 
                     b.Property<double>("Khoangcach")
@@ -688,14 +691,11 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("Thoigian")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ID_diemDi");
+                    b.HasIndex("ID_DiemDen");
+
+                    b.HasIndex("ID_DiemDi");
 
                     b.HasIndex("Ten")
                         .IsUnique();
@@ -978,21 +978,21 @@ namespace ThanhBuoi.Migrations
 
             modelBuilder.Entity("ThanhBuoi.Models.Tuyen", b =>
                 {
-                    b.HasOne("ThanhBuoi.Models.Diadiem", "DiemDi")
-                        .WithMany("Tuyens")
-                        .HasForeignKey("ID_diemDi")
+                    b.HasOne("ThanhBuoi.Models.Diadiem", "DiemDen")
+                        .WithMany()
+                        .HasForeignKey("ID_DiemDen")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ThanhBuoi.Models.Diadiem", "Diemden")
+                    b.HasOne("ThanhBuoi.Models.Diadiem", "DiemDi")
                         .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .HasForeignKey("ID_DiemDi")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("DiemDi");
+                    b.Navigation("DiemDen");
 
-                    b.Navigation("Diemden");
+                    b.Navigation("DiemDi");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.Ve", b =>
@@ -1029,11 +1029,6 @@ namespace ThanhBuoi.Migrations
                         .IsRequired();
 
                     b.Navigation("LoaiXe");
-                });
-
-            modelBuilder.Entity("ThanhBuoi.Models.Diadiem", b =>
-                {
-                    b.Navigation("Tuyens");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.DonHang", b =>

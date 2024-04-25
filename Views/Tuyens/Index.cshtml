@@ -15,11 +15,13 @@
             <th>
                 @Html.DisplayNameFor(model => model.Ten)
             </th>
+           
             <th>
-                @Html.DisplayNameFor(model => model.Thoigian)
+                @Html.DisplayNameFor(model => model.DiemDi)
             </th>
+
             <th>
-                @Html.DisplayNameFor(model => model.Diemden)
+                @Html.DisplayNameFor(model => model.DiemDen)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Khoangcach)
@@ -33,12 +35,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Ten)
             </td>
+            
             <td>
-                @Html.DisplayFor(modelItem => item.Thoigian)
+                    @Html.DisplayFor(modelItem => item.DiemDi.Ten)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Diemden)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiemDen.Ten)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Khoangcach)
             </td>

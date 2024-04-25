@@ -13,15 +13,12 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string Ten { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string Thoigian { get; set; }
-
-        [ForeignKey("ID_diemDi")]
+        [ForeignKey("ID_DiemDi")]
+        
         public Diadiem DiemDi { get; set; }
 
-        [ForeignKey("ID_diemDen")]
-        public Diadiem Diemden { get; set; }
+        [ForeignKey("ID_DiemDen")]
+        public Diadiem DiemDen { get; set; }
 
         public double Khoangcach { get; set; }
 

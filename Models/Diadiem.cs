@@ -16,7 +16,9 @@ namespace ThanhBuoi.Models
         [Required]
         [StringLength(255)]
         public string Diachi { get; set; }
-
-        public ICollection<Tuyen> Tuyens { get; set; }
+        [NotMapped]
+        public ICollection<Tuyen> TuyensDi { get; set; } // Danh sách các tuyến đi từ đây
+        [NotMapped]
+        public ICollection<Tuyen> TuyensDen { get; set; } // Danh sách các tuyến đến đây
     }
 }

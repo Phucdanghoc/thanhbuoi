@@ -254,27 +254,28 @@ namespace ThanhBuoi.Migrations
                 name: "Tuyens",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Ten = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Thoigian = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    ID_diemDi = table.Column<int>(type: "int", nullable: false),
-                    Khoangcach = table.Column<double>(type: "float", nullable: false),
-                    ID_diemDen = table.Column<int>(type: "int", nullable: false)
+                    ID_DiemDi = table.Column<int>(type: "int", nullable: false),
+                    ID_DiemDen = table.Column<int>(type: "int", nullable: false),
+                    Khoangcach = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tuyens", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tuyens_Diadiems_ID_diemDi",
-                        column: x => x.ID_diemDi,
+                        name: "FK_Tuyens_Diadiems_ID_DiemDen",
+                        column: x => x.ID_DiemDen,
                         principalTable: "Diadiems",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Tuyens_Diadiems_Id",
-                        column: x => x.Id,
+                        name: "FK_Tuyens_Diadiems_ID_DiemDi",
+                        column: x => x.ID_DiemDi,
                         principalTable: "Diadiems",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -647,9 +648,14 @@ namespace ThanhBuoi.Migrations
                 column: "ID_SoDoGhe");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tuyens_ID_diemDi",
+                name: "IX_Tuyens_ID_DiemDen",
                 table: "Tuyens",
-                column: "ID_diemDi");
+                column: "ID_DiemDen");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tuyens_ID_DiemDi",
+                table: "Tuyens",
+                column: "ID_DiemDi");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tuyens_Ten",
