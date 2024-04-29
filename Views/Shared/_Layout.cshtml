@@ -3,7 +3,9 @@
 
 @inject SignInManager<TaiKhoan> SignInManager
 @inject UserManager<TaiKhoan> UserManager
-
+@{
+    var user = await UserManager.GetUserAsync(User);
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +26,6 @@
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
     <!-- Libraries Stylesheet -->
     <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
@@ -53,10 +54,6 @@
 </head>
 
 <body>
-    @if (!SignInManager.IsSignedIn(User))
-    {
-        
-    }
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -77,7 +74,7 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">Jhon Doe</h6>
+                        <h6 class="mb-0">@user.Ten</h6>
                         <span>Admin</span>
                     </div>
                 </div>
@@ -107,7 +104,8 @@
                     <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
                     <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
                     <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
-                    <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Địa điểm</a>
+                    <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
+                    <a asp-controller="GiaSukiens" asp-action="Index" class="nav-item nav-link"><i class="bi bi-pause-circle me-2"></i>Giá sự kiện</a>
                     @* <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Phương tiện</a>
                         <div class="dropdown-menu bg-transparent border-0">
@@ -141,7 +139,7 @@
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="~/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -151,7 +149,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="~/img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -161,7 +159,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item">
                                 <div class="d-flex align-items-center">
-                                    <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;">
+                                    <img class="rounded-circle" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
                                     <div class="ms-2">
                                         <h6 class="fw-normal mb-0">Jhon send you a message</h6>
                                         <small>15 minutes ago</small>
@@ -198,8 +196,8 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <img class="rounded-circle me-lg-2" src="~/img/user.jpg" alt="" style="width: 40px; height: 40px;">
-                            <span class="d-none d-lg-inline-flex">John Doe</span>
+                            <img class="rounded-circle me-lg-2" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
+                            <span class="d-none d-lg-inline-flex"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             @if (User.Identity?.IsAuthenticated ?? false)

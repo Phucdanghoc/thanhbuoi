@@ -17,6 +17,9 @@ namespace ThanhBuoi.Data
                     .IsUnique();
             modelBuilder.Entity<Tuyen>()
                     .HasIndex(u => u.Ten)
+                    .IsUnique(); 
+            modelBuilder.Entity<GiaSukien>()
+                    .HasIndex(u => u.Ten)
                     .IsUnique();
             modelBuilder.Entity<Xe>()
                     .HasIndex(u => u.BienSo)

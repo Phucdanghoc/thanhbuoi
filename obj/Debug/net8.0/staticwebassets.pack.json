@@ -21,16 +21,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\avt.png",
+      "PackagePath": "staticwebassets\\img\\avt.png"
+    },
+    {
       "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-1.jpg",
       "PackagePath": "staticwebassets\\img\\testimonial-1.jpg"
     },
     {
       "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-2.jpg",
       "PackagePath": "staticwebassets\\img\\testimonial-2.jpg"
-    },
-    {
-      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\user.jpg",
-      "PackagePath": "staticwebassets\\img\\user.jpg"
     },
     {
       "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\diachi\\create.js",

@@ -1,4 +1,4 @@
-﻿@model ThanhBuoi.Models.Tuyen
+﻿@model ThanhBuoi.Models.GiaSukien
 
 @{
     ViewData["Title"] = "Create";
@@ -6,41 +6,46 @@
 
 <h1>Create</h1>
 
-<h4>Tuyen</h4>
+<h4>GiaSukien</h4>
 <hr />
+
 <form asp-action="Create">
     <div class="row">
         <div class="col-md-4">
             <div class="bg-light rounded p-4">
                 <h6 class="mb-4">Basic Form</h6>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
                 <div class="mb-3">
-                    <label for="diemdiID" class="form-label">Điểm đi</label>
-                    <select class="form-select" id="diemdiID" name="diemdiID" aria-label="Default select example">
-                        <option value="">-- Chọn --</option>
-                        @foreach (var item in ViewBag.ListDiaDiem)
-                        {
-                            <option value="@item.Id">@item.Ten</option>
-                        }
-                    </select>
+                    <label asp-for="Ten" class="form-label">Tên</label>
+                    <input type="text" class="form-control" asp-for="Ten" />
                     <span class="text-danger"></span>
                 </div>
+
                 <div class="mb-3">
-                    <label for="diemdenID" class="form-label">Điểm đến</label>
-                    <select class="form-select" id="diemdenID" name="diemdenID" aria-label="Default select example">
-                        <option value="">-- Chọn --</option>
-                        @foreach (var item in ViewBag.ListDiaDiem)
-                        {
-                            <option value="@item.Id">@item.Ten</option>
-                        }
-                    </select>
+                    <label asp-for="Gia_hang" class="form-label">Giá hàng</label>
+                    <input type="number" min="5" max="40" class="form-control" asp-for="Gia_hang" />
                     <span class="text-danger"></span>
                 </div>
+
                 <div class="mb-3">
-                    <label asp-for="Khoangcach" class="form-label">Khoảng cách</label>
-                    <input type="number" min="10" max="1800" class="form-control"  asp-for="Khoangcach" />
+                    <label asp-for="Gia_ve" class="form-label">Giá vé</label>
+                    <input type="number" class="form-control" asp-for="Gia_ve" />
                     <span class="text-danger"></span>
                 </div>
+
+                <div class="mb-3">
+                    <label asp-for="NgayBatDau" class="form-label">Ngày bắt đầu</label>
+                    <input type="datetime-local" class="form-control" asp-for="NgayBatDau" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="NgayKetThuc" class="form-label">Ngày kết thúc</label>
+                    <input type="datetime-local" class="form-control" asp-for="NgayKetThuc" />
+                    <span class="text-danger"></span>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </div>

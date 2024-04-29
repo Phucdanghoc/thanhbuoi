@@ -8,9 +8,7 @@ namespace ThanhBuoi.Models
         [Key]
         public int Id { get; set; }
 
-
-        [ForeignKey("ID_TaiKhoan")]
-        public TaiKhoan TaiKhoan { get; set; }
+        public int Ten { get; set; }
 
         public double Gia_hang { get; set; }
 

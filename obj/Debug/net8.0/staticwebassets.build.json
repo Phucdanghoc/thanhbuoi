@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "c0UdpfFAn2cQb5Vf96q4lEbyWf3x9+FTcQ//22CAd+M=",
+  "Hash": "nv4MMar+hlC+e3lJmAJApKalYDgIEyA+eqrmnPs0jdE=",
   "Source": "ThanhBuoi",
   "BasePath": "_content/ThanhBuoi",
   "Mode": "Default",
@@ -1271,6 +1271,25 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
+      "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\avt.png",
+      "SourceId": "ThanhBuoi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\",
+      "BasePath": "_content/ThanhBuoi",
+      "RelativePath": "img/avt.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\avt.png"
+    },
+    {
       "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-1.jpg",
       "SourceId": "ThanhBuoi",
       "SourceType": "Discovered",
@@ -1307,25 +1326,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\testimonial-2.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\user.jpg",
-      "SourceId": "ThanhBuoi",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\",
-      "BasePath": "_content/ThanhBuoi",
-      "RelativePath": "img/user.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\user.jpg"
     },
     {
       "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\diachi\\create.js",

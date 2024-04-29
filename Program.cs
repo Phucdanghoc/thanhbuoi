@@ -19,8 +19,8 @@ internal class Program
                                                options.SignIn.RequireConfirmedAccount = true)
             .AddEntityFrameworkStores<DataContext>();
         builder.Services.AddRazorPages();
-        var app = builder.Build();
 
+        var app = builder.Build();
 
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
