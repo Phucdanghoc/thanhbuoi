@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
@@ -49,20 +44,20 @@ namespace ThanhBuoi.Controllers
             return View();
         }
 
-        // POST: GiaSukiens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+     
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Ten,Gia_hang,Gia_ve,NgayBatDau,NgayKetThuc")] GiaSukien giaSukien)
+        public async Task<IActionResult> Create(String Ten,int Gia_hang,int Gia_ve,DateTime NgayBatDau,DateTime NgayKetThuc)
         {
-            if (ModelState.IsValid)
-            {
+                GiaSukien giaSukien = new GiaSukien();
+                giaSukien.NgayBatDau = NgayBatDau;
+                giaSukien.NgayKetThuc = NgayKetThuc;
+                giaSukien.Ten = Ten;
+                giaSukien.Gia_ve = Gia_ve;
+                giaSukien.Gia_hang = Gia_hang;
                 _context.Add(giaSukien);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(giaSukien);
+            
         }
 
         // GET: GiaSukiens/Edit/5

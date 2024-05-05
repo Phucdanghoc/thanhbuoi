@@ -22,13 +22,13 @@ namespace ThanhBuoi.Controllers
         // GET: Tuyens
         public async Task<IActionResult> Index(string di, string den)
         {
-            ViewBag.ListDiaDiem = await _context.Diadiems.Select(d => d.Ten).Distinct().ToListAsync();
+            ViewBag.ListDiaDiemDistinct = await _context.Diadiems.Select(d => d.Ten).Distinct().ToListAsync();
+            ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
             IQueryable<Tuyen> tuyens = _context.Tuyens;
             if (!string.IsNullOrEmpty(di) && !string.IsNullOrEmpty(den))
             {
                 tuyens = tuyens.Where(d => d.DiemDen.Ten == den && d.DiemDi.Ten == di);
             }
-
             return View(await tuyens.Include(x => x.DiemDi).Include(x => x.DiemDen).ToListAsync());
         }
 
@@ -62,33 +62,34 @@ namespace ThanhBuoi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Khoangcach")] Tuyen tuyen, int diemdenID, int diemdiID)
+        public async Task<IActionResult> Create(int diemdenID, int diemdiID,int Khoangcach)
         {
-                ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
-                Diadiem DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
-                Diadiem DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
-                if(diemdenID == diemdiID)
-                {
-                    TempData["ErrorMessage"] = "Không thể tạo tuyến trùng một địa điểm ";
-                return View(tuyen);
-                }
-                if (DiemDi != null && DiemDen != null)
-                {
+            ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
+            Tuyen tuyen = new Tuyen();
+            Diadiem DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
+            Diadiem DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
+            if(diemdenID == diemdiID)
+            {
+                TempData["ErrorMessage"] = "Không thể tạo tuyến trùng một địa điểm ";
+                return RedirectToAction(nameof(Index));
+            }
+            if (DiemDi != null && DiemDen != null)
+            {
                 
-                    tuyen.DiemDen = DiemDen;
-                    tuyen.DiemDi = DiemDi;
-                    tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";
-                    _context.Tuyens.Add(tuyen);
-                    await _context.SaveChangesAsync();
-                    TempData["SuccessMessage"] = "Thêm mới thành công.";
-                    return RedirectToAction(nameof(Index));
-                }
-                else
-                {
-                    TempData["ErrorMessage"] = "Không thể tạo tuyến do không tìm thấy điểm đi hoặc điểm đến.";
-                    return View(tuyen);
-
-                }
+                tuyen.DiemDen = DiemDen;
+                tuyen.Khoangcach = Khoangcach;
+                tuyen.DiemDi = DiemDi;
+                tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";
+                _context.Tuyens.Add(tuyen);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Thêm mới thành công.";
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "Không thể tạo tuyến do không tìm thấy điểm đi hoặc điểm đến.";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
 

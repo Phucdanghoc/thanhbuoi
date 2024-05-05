@@ -1,0 +1,173 @@
+﻿@model IEnumerable<ThanhBuoi.Models.Chuyen>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container">
+    <h1 class="mt-4">Danh sách Chuyến</h1>
+    <form id="createForm" asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="mt-4">Tạo mới</h2>
+            <div class="bg-light rounded p-4">
+        
+
+                    <div class="form-group">
+                        <label for="Ten" class="control-label">Tên</label>
+                        <input for="Ten" name="Ten" class="form-control form-control-sm" required type="text" />
+                        <span for="Ten" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="XeId" class="control-label">Xe</label>
+                        <select class="form-control form-control-sm" name="XeId" required>
+                            <option value="">-- Chọn Xe --</option>
+                            @foreach (var xe in ViewBag.listXeTrue)
+                            {
+                                <option value="@xe.Id">@xe.Ten</option>
+                            }
+                        </select>
+                        <span for="XeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="TuyenId" class="control-label">Tuyến</label>
+                        <select class="form-control form-control-sm" name="TuyenId" required>
+                            <option value="">-- Chọn Tuyến --</option>
+                            @foreach (var tuyen in ViewBag.listTuyen)
+                            {
+                                <option value="@tuyen.Id">@tuyen.Ten</option>
+                            }
+                        </select>
+                        <span for="TuyenId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="DiemDon" class="control-label">Điểm Đón</label>
+                        <input for="DiemDon" name="DiemDon" class="form-control form-control-sm" required type="text" />
+                        <span for="DiemDon" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ThoiGianDi" class="control-label">Thời Gian Đi</label>
+                        <input for="ThoiGianDi" name="ThoiGianDi" class="form-control form-control-sm" type="datetime-local" required />
+                        <span for="ThoiGianDi" class="text-danger"></span>
+                    </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h2 class="mt-4">&nbsp;</h2>
+            <div class="bg-light rounded p-4">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label for="ThoiGianDen" class="control-label">Thời Gian Đến</label>
+                        <input for="ThoiGianDen" name="ThoiGianDen" class="form-control form-control-sm" type="datetime-local" required />
+                        <span for="ThoiGianDen" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Trangthai" class="control-label">Trạng Thái</label>
+                        <input for="Trangthai" name="Trangthai" class="form-control form-control-sm" required type="text" />
+                        <span for="Trangthai" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="GiaSukienID" class="control-label">Giá Sự Kiện</label>
+                        <select class="form-control form-control-sm" name="GiaSukienID" required>
+                            <option value="">-- Chọn Giá Sự Kiện --</option>
+                            @foreach (var gia in ViewBag.listGiaSuKien)
+                            {
+                                <option value="@gia.Id">@gia.Ten</option>
+                            }
+                        </select>
+                        <span for="GiaSukienID" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Gia" class="control-label">Giá</label>
+                        <input for="Gia" name="Gia" class="form-control form-control-sm" type="number" required />
+                        <span for="Gia" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="KhoiluongHang" class="control-label">Khối Lượng Hàng</label>
+                        <input for="KhoiluongHang" name="KhoiluongHang" class="form-control form-control-sm" type="number" required />
+                        <span for="KhoiluongHang" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="GiaHangKhoiDiem" class="control-label">Giá Hàng Khởi Điểm</label>
+                        <input for="GiaHangKhoiDiem" name="GiaHangKhoiDiem" class="form-control form-control-sm" type="number" required />
+                        <span for="GiaHangKhoiDiem" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary btn-sm" />
+                    </div>
+            </div>
+        </div>
+    </div>
+                </form>
+
+</div>
+<div class="float-button">
+    <button onclick="scrollToCreateForm()" class="btn btn-primary btn-sm">Create New</button>
+</div>
+
+<div class="container mt-4">
+    <h2 class="mt-4">Danh sách</h2>
+    <div class="bg-light rounded p-4">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th scope="col">Tên</th>
+                    <th scope="col">Xe</th>
+                    <th scope="col">Tuyến</th>
+                    <th scope="col">Điểm Đón</th>
+                    <th scope="col">Thời Gian Đi</th>
+                    <th scope="col">Thời Gian Đến</th>
+                    <th scope="col">Trạng Thái</th>
+                    <th scope="col">Giá Sự Kiện</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Khối Lượng Hàng</th>
+                    <th scope="col">Giá Hàng Khởi Điểm</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Ten)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Xe.Ten)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Tuyen.Ten)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DiemDon)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ThoiGianDi)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ThoiGianDen)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Trangthai)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GiaSukien.Ten)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Gia)</td>
+                        <td>@Html.DisplayFor(modelItem => item.KhoiluongHang)</td>
+                        <td>@Html.DisplayFor(modelItem => item.GiaHangKhoiDiem)</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm h-auto">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm h-auto">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function scrollToCreateForm() {
+        var formSection = document.getElementById("createFormSection");
+        formSection.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>

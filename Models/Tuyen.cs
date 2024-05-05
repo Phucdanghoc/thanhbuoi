@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace ThanhBuoi.Models
@@ -13,11 +14,12 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string Ten { get; set; }
 
-        [ForeignKey("ID_DiemDi")]
-        
+        [ForeignKey("DiemDi")]
+        public int ID_DiemDi { get; set; }
         public Diadiem DiemDi { get; set; }
 
-        [ForeignKey("ID_DiemDen")]
+        [ForeignKey("DiemDen")]
+        public int ID_DiemDen { get; set; }
         public Diadiem DiemDen { get; set; }
 
         public double Khoangcach { get; set; }

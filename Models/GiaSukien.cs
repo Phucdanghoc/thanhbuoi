@@ -8,7 +8,7 @@ namespace ThanhBuoi.Models
         [Key]
         public int Id { get; set; }
 
-        public int Ten { get; set; }
+        public String Ten { get; set; }
 
         public double Gia_hang { get; set; }
 

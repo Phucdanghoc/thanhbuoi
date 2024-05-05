@@ -167,12 +167,7 @@ namespace ThanhBuoi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Diachibatdau")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Diachiketthuc")
+                    b.Property<string>("DiemDon")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -183,31 +178,28 @@ namespace ThanhBuoi.Migrations
                     b.Property<double>("GiaHangKhoiDiem")
                         .HasColumnType("float");
 
-                    b.Property<TimeSpan>("GioDenNoi")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("Giodi")
-                        .HasColumnType("time");
-
                     b.Property<int>("ID_GiaSuKien")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_Xe")
+                    b.Property<int?>("ID_Xe")
                         .HasColumnType("int");
 
-                    b.Property<int>("Id_Tuyen")
+                    b.Property<int?>("Id_Tuyen")
                         .HasColumnType("int");
 
                     b.Property<double>("KhoiluongHang")
                         .HasColumnType("float");
 
-                    b.Property<DateTime>("Ngaydi")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Ten")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("ThoiGianDen")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ThoiGianDi")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Trangthai")
                         .IsRequired()
@@ -378,8 +370,9 @@ namespace ThanhBuoi.Migrations
                     b.Property<DateTime>("NgayKetThuc")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Ten")
-                        .HasColumnType("int");
+                    b.Property<string>("Ten")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -707,10 +700,12 @@ namespace ThanhBuoi.Migrations
             modelBuilder.Entity("ThanhBuoi.Models.Ve", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
                     b.Property<string>("CMND")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
@@ -728,30 +723,33 @@ namespace ThanhBuoi.Migrations
                     b.Property<string>("ID_TaiKhoan")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("MaVe")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("NgayTao")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Sdt")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Ten")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<double>("Tien")
                         .HasColumnType("float");
 
-                    b.Property<string>("TrangThai")
+                    b.Property<bool?>("TrangThai")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ID_Chuyen");
+
+                    b.HasIndex("ID_Ghe");
 
                     b.HasIndex("ID_TaiKhoan");
 
@@ -862,23 +860,19 @@ namespace ThanhBuoi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ThanhBuoi.Models.Xe", "xe")
+                    b.HasOne("ThanhBuoi.Models.Xe", "Xe")
                         .WithMany("Chuyens")
-                        .HasForeignKey("ID_Xe")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ID_Xe");
 
                     b.HasOne("ThanhBuoi.Models.Tuyen", "Tuyen")
                         .WithMany("Chuyens")
-                        .HasForeignKey("Id_Tuyen")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Id_Tuyen");
 
                     b.Navigation("GiaSukien");
 
                     b.Navigation("Tuyen");
 
-                    b.Navigation("xe");
+                    b.Navigation("Xe");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.DonHang", b =>
@@ -995,15 +989,15 @@ namespace ThanhBuoi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ThanhBuoi.Models.Ghe", "Ghe")
+                        .WithMany("Ves")
+                        .HasForeignKey("ID_Ghe")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ThanhBuoi.Models.TaiKhoan", "TaiKhoan")
                         .WithMany("Ves")
                         .HasForeignKey("ID_TaiKhoan");
-
-                    b.HasOne("ThanhBuoi.Models.Ghe", "Ghe")
-                        .WithMany("Ves")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
 
                     b.Navigation("Chuyen");
 

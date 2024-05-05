@@ -27,8 +27,7 @@ namespace ThanhBuoi.Data
             modelBuilder.Entity<Xe>()
                     .HasIndex(u => u.Ten)
                     .IsUnique();
-            modelBuilder.Entity<Ve>().HasOne(Ve => Ve.Ghe).WithMany(Ghe => Ghe.Ves).HasForeignKey(Ve => Ve.Id).OnDelete(DeleteBehavior.Restrict);
-         
+/*            modelBuilder.Entity<Ve>().HasOne(Ve => Ve.Ghe).WithMany(Ghe => Ghe.Ves).HasForeignKey(Ve => Ve.Id).OnDelete(DeleteBehavior.Restrict);*/
             base.OnModelCreating(modelBuilder);
 
         }

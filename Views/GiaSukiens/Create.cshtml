@@ -3,51 +3,51 @@
 @{
     ViewData["Title"] = "Create";
 }
-
-<h1>Create</h1>
-
-<h4>GiaSukien</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Ten" class="control-label"></label>
-                <input asp-for="Ten" class="form-control" />
-                <span asp-validation-for="Ten" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gia_hang" class="control-label"></label>
-                <input asp-for="Gia_hang" class="form-control" />
-                <span asp-validation-for="Gia_hang" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gia_ve" class="control-label"></label>
-                <input asp-for="Gia_ve" class="form-control" />
-                <span asp-validation-for="Gia_ve" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayBatDau" class="control-label"></label>
-                <input asp-for="NgayBatDau" class="form-control" />
-                <span asp-validation-for="NgayBatDau" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NgayKetThuc" class="control-label"></label>
-                <input asp-for="NgayKetThuc" class="form-control" />
-                <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+    <div class="col-md-4 m-4">
+        <div class="bg-light rounded p-4 ">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Ten" class="control-label">Tên</label>
+                    <input asp-for="Ten" class="form-control" required />
+                    <span asp-validation-for="Ten" class="text-danger"></span>
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label asp-for="Gia_hang" class="control-label">Giá hàng</label>
+                        <input asp-for="Gia_hang" class="form-control" type="number" min="0" max="50" required />
+                        <span asp-validation-for="Gia_hang" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Gia_ve" class="control-label">Giá vé</label>
+                        <input asp-for="Gia_ve" class="form-control" type="number" min="0" max="50" required />
+                        <span asp-validation-for="Gia_ve" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NgayBatDau" class="control-label">Ngày bắt đầu</label>
+                    <input asp-for="NgayBatDau" class="form-control" type="date" required />
+                    <span asp-validation-for="NgayBatDau" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="NgayKetThuc" class="control-label">Ngày kết thúc</label>
+                    <input asp-for="NgayKetThuc" class="form-control" type="date" required />
+                    <span asp-validation-for="NgayKetThuc" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

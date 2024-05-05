@@ -4,15 +4,56 @@
     ViewData["Title"] = "Index";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container">
+    <h1 class="mt-4">Danh sách Giá sự kiện</h1>
 
-<div class="row">
-    <div class="col-12">
-        <div class="bg-light rounded h-100 p-4 m-4">
-            <h6 class="mb-4">Giá vé sự kiện</h6>
-            <div class="table-responsive">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 class="mt-4">Tạo mới</h2>
+            <div class="bg-light rounded p-4">
+                <form id="createForm" asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label for="Ten" class="control-label">Tên</label>
+                        <input for="Ten" name="Ten" class="form-control" required type="text" />
+                        <span for="Ten" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Gia_hang" class="control-label">Giá hàng</label>
+                        <input for="Gia_hang" name="Gia_Hang" class="form-control" type="number" min="0" max="50" required />
+                        <span for="Gia_hang" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Gia_ve" class="control-label">Giá vé</label>
+                        <input for="Gia_ve" name="Gia_ve" class="form-control" type="number" min="0" max="50" required />
+                        <span for="Gia_ve" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NgayBatDau" class="control-label">Ngày bắt đầu</label>
+                        <input for="NgayBatDau" name="NgayBatDau" id="NgayBatDau" class="form-control" type="date" required />
+                        <span for="NgayBatDau" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="NgayKetThuc" class="control-label">Ngày kết thúc</label>
+                        <input for="NgayKetThuc" name="NgayKetThuc" id="NgayKetThuc" class="form-control" type="date" required />
+                        <span for="NgayKetThuc" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h2 class="mt-4">Danh sách</h2>
+            <div class="bg-light rounded p-4">
                 <table class="table">
                     <thead>
                         <tr>
@@ -33,9 +74,10 @@
                                 <td>@Html.DisplayFor(modelItem => item.NgayBatDau)</td>
                                 <td>@Html.DisplayFor(modelItem => item.NgayKetThuc)</td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary h-auto">Edit</a>
+                                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger h-auto">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -43,6 +85,22 @@
                 </table>
             </div>
         </div>
-       
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $('#createForm').submit(function (event) {
+            var startDate = new Date($('#NgayBatDau').val());
+            var endDate = new Date($('#NgayKetThuc').val());
+
+            if (startDate >= endDate) {
+                event.preventDefault(); 
+                alert('Ngày bắt đầu phải nhỏ hơn ngày kết thúc.');
+            }
+        });
+
+       
+    });
+
+</script>

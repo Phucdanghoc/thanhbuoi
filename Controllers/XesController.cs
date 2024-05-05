@@ -104,7 +104,7 @@ namespace ThanhBuoi.Controllers
                     for(int Sotang = 0; Sotang < 2; Sotang++) {
                         Tang tang = new Tang
                         {
-                            Ten = $"Tầng 1",
+                            Ten = $"Tầng {Sotang+1}",
                             STT = 1,
                             SoDoGhe = sdg
 

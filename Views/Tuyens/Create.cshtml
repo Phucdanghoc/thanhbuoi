@@ -1,4 +1,4 @@
-﻿@model ThanhBuoi.Models.GiaSukien
+﻿@model ThanhBuoi.Models.Tuyen
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,7 @@
 
 <h1>Create</h1>
 
-<h4>GiaSukien</h4>
+<h4>Tuyến</h4>
 <hr />
 
 <form asp-action="Create">
@@ -23,29 +23,33 @@
                 </div>
 
                 <div class="mb-3">
-                    <label asp-for="Gia_hang" class="form-label">Giá hàng</label>
-                    <input type="number" min="5" max="40" class="form-control" asp-for="Gia_hang" />
+                    <label asp-for="Khoangcach" class="form-label">Khoảng cách</label>
+                    <input type="number" min="0" max="10000" class="form-control" asp-for="Khoangcach" />
                     <span class="text-danger"></span>
                 </div>
-
                 <div class="mb-3">
-                    <label asp-for="Gia_ve" class="form-label">Giá vé</label>
-                    <input type="number" class="form-control" asp-for="Gia_ve" />
-                    <span class="text-danger"></span>
+                    <label asp-for="DiemDi" class="form-label">Điểm đi</label>
+                    <select class="form-select" id="HangXe" asp-for="DiemDi" name="diemdiID" aria-label="Default select example">
+                        <option value="">-- Select --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                    <span asp-validation-for="DiemDi" class="text-danger"></span>
                 </div>
-
                 <div class="mb-3">
-                    <label asp-for="NgayBatDau" class="form-label">Ngày bắt đầu</label>
-                    <input type="datetime-local" class="form-control" asp-for="NgayBatDau" />
-                    <span class="text-danger"></span>
+                    <label asp-for="DiemDen" class="form-label">Điểm Đến</label>
+                    <select class="form-select" id="HangXe" asp-for="DiemDen" name="diemdenID" aria-label="Default select example">
+                        <option value="">-- Select --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                    <span asp-validation-for="DiemDen" class="text-danger"></span>
                 </div>
-
-                <div class="mb-3">
-                    <label asp-for="NgayKetThuc" class="form-label">Ngày kết thúc</label>
-                    <input type="datetime-local" class="form-control" asp-for="NgayKetThuc" />
-                    <span class="text-danger"></span>
-                </div>
-
+               
                 <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </div>

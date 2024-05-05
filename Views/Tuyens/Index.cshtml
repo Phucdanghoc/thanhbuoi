@@ -1,16 +1,64 @@
 ﻿@model IEnumerable<ThanhBuoi.Models.Tuyen>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-
 <div class="row">
-    <div class="col-12">
+    <div class="col-md-6">
         <div class="bg-light rounded h-100 p-4 m-4">
-            <h6 class="mb-4">Quản lí Tuyến</h6>
+            <h3>Tạo Tuyến mới</h3>
+            <form asp-action="Create">
+                <div class="mb-3">
+                    <label for="Khoangcach" class="form-label">Khoảng cách</label>
+                    <input type="number" min="0" max="10000" class="form-control" for="Khoangcach" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="DiemDi" class="form-label">Điểm đi</label>
+                    <select class="form-select" id="DiemDi" name="diemdiId" aria-label="Default select example">
+                        <option value="">-- Select --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="DiemDen" class="form-label">Điểm Đến</label>
+                    <select class="form-select" id="DiemDen" name="diemdenId" aria-label="Default select example">
+                        <option value="">-- Select --</option>
+                        @foreach (var item in ViewBag.ListDiaDiem)
+                        {
+                            <option value="@item.Id">@item.Ten</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create</button>
+            </form>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="bg-light rounded h-100 p-4 m-4">
+            <h3>Danh sách tuyến</h3>
+            @using (Html.BeginForm("Index", "Tuyens", FormMethod.Get))
+            {
+                <div class="form-floating mb-3 w-25">
+                    <select class="form-select" id="floatingSelect" name="t" aria-label="Floating label select example" onchange="this.form.submit()">
+                        <option selected disabled>Tỉnh thành</option>
+                        <option value="all">Tất cả</option>
+                        @foreach (var item in ViewBag.ListDiaDiemDistinct)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <label for="floatingSelect">Works with selects</label>
+                </div>
+            }
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -40,6 +88,5 @@
                 </table>
             </div>
         </div>
-       
     </div>
 </div>
