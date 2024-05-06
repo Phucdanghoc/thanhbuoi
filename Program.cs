@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static async Task Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
         var configuration = builder.Configuration;
@@ -16,12 +16,13 @@ internal class Program
             options.UseSqlServer(configuration.GetConnectionString("DbContext"));
         });
         builder.Services.AddDefaultIdentity<TaiKhoan>(options =>
-                                               options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<DataContext>();
+                                               options.SignIn.RequireConfirmedAccount = false)
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
         builder.Services.AddRazorPages();
+        builder.Services.AddOptions();
 
         var app = builder.Build();
-
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
         {
@@ -40,7 +41,34 @@ internal class Program
         app.MapControllerRoute(
             name: "default",
             pattern: "{controller=Home}/{action=Index}/{id?}");
-
+        using(var scope = app.Services.CreateScope())
+        {
+            var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roles = new[] { "ADMIN", "SALER", "USER" };
+            foreach (var role in roles )
+            {
+                if (!await roleManager.RoleExistsAsync(role))
+                {
+                    await roleManager.CreateAsync(new IdentityRole(role));
+                    
+                }
+            }
+            var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TaiKhoan>>();
+            string email = "admin@admin.com";
+            string password = "Admin123@";
+            if (await userManager.FindByEmailAsync(email) == null)
+            {
+                var user = new TaiKhoan
+                {
+                    Email = email,
+                    Ten = "Admin",
+                    UserName = email,
+                    EmailConfirmed = true,
+                };
+                await userManager.CreateAsync(user, password);
+                await  userManager.AddToRoleAsync(user, "ADMIN");
+            }
+        }
         app.Run();
     }
 }

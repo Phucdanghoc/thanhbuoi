@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ThanhBuoi.Models
 {
+    public enum TrangThaiVe
+    {
+        Cancel,
+        Empty,
+        Booked,
+    }
     public class Ve
     {
         [Key]
@@ -11,7 +17,6 @@ namespace ThanhBuoi.Models
 
         [ForeignKey("ID_TaiKhoan")]
         public TaiKhoan? TaiKhoan { get; set; }
-
 
         [ForeignKey("ID_Chuyen")]
         public Chuyen Chuyen { get; set; }
@@ -37,8 +42,9 @@ namespace ThanhBuoi.Models
         public string? DiemDon { get; set; }
 
         [Required]
-        [StringLength(255)]
-        public bool? TrangThai { get; set; }
+        public TrangThaiVe  TrangThai { get; set; }
+
+        public int Hanhli { get; set; }
 
         public DateTime NgayTao { get; set; }
     }

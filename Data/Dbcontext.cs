@@ -31,6 +31,12 @@ namespace ThanhBuoi.Data
             base.OnModelCreating(modelBuilder);
 
         }
+
+        internal bool FindAsync(Func<object, bool> value)
+        {
+            throw new NotImplementedException();
+        }
+
         public DbSet<TaiKhoan> DbSet { get; set; }
         public DbSet<Tuyen> Tuyens { get; set; }
         public DbSet<Diadiem> Diadiems { get; set; }

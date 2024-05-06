@@ -14,9 +14,6 @@ namespace ThanhBuoi.Models
 
         public double Gia_ve { get; set; }
 
-        public DateTime NgayBatDau { get; set; }
-
-        public DateTime NgayKetThuc { get; set; }
 
     }
 }

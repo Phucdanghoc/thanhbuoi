@@ -39,6 +39,7 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/lib/chart/chart.min.js"></script>
     <script src="~/lib/easing/easing.min.js"></script>
     <script src="~/lib/waypoints/waypoints.min.js"></script>
@@ -48,9 +49,10 @@
     <script src="~/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/main.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
     <!-- Template Javascript -->
-    <script src="~/js/main.js"></script>
 </head>
 
 <body>
@@ -74,47 +76,18 @@
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
-                        <h6 class="mb-0">@user.Ten</h6>
+                        <h6 class="mb-0">@user?.Ten</h6>
                         <span>Admin</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    @*  <a href="index.html" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                    <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Elements</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                    <a href="button.html" class="dropdown-item">Buttons</a>
-                    <a href="typography.html" class="dropdown-item">Typography</a>
-                    <a href="element.html" class="dropdown-item">Other Elements</a>
-                    </div>
-                    </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
-                    <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a>
-                    <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a>
-                    <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a>
-                    <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
-                    <div class="dropdown-menu bg-transparent border-0">
-                    <a href="signin.html" class="dropdown-item">Sign In</a>
-                    <a href="signup.html" class="dropdown-item">Sign Up</a>
-                    <a href="404.html" class="dropdown-item">404 Error</a>
-                    <a href="blank.html" class="dropdown-item">Blank Page</a>
-                    </div>
-                    </div> *@
                     <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
                     <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
                     <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
                     <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
                     <a asp-controller="GiaSukiens" asp-action="Index" class="nav-item nav-link"><i class="bi bi-pause-circle me-2"></i>Giá sự kiện</a>
                     <a asp-controller="Chuyens" asp-action="Index" class="nav-item nav-link"><i class="bi bi-pause-circle me-2"></i>Chuyến</a>
-                    @* <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Phương tiện</a>
-                        <div class="dropdown-menu bg-transparent border-0">
-                            <a asp-controller="Xes" asp-action="Index" class="dropdown-item">><i class="fa fa-th me-2"></i>Quản lí Xe</a>
-                            <a asp-controller="LoaiXes" asp-action="Index" class="dropdown-item">><i class="fa fa-th me-2"></i>Quản lí loai xe</a>
-                        </div>
-                    </div>
- *@
+                    <a asp-controller="Booking" asp-action="Index" class="nav-item nav-link btn btn-primary">Đặt Vé</a>
                 </div>
             </nav>
         </div>
@@ -242,7 +215,13 @@
     </div>
 
     <!-- JavaScript Libraries -->
-
+    <script>
+        $(document).ready(function () {
+            $('.sidebar-toggler').click(function () {
+                $('.sidebar, .content').toggleClass('open');
+            });
+        });
+    </script>
 
 </body>
 

@@ -22,7 +22,7 @@ namespace ThanhBuoi.Controllers
         // GET: Chuyens
         public async Task<IActionResult> Index()
         {
-            ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == false).ToList();
+            ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == TrangThaiXe.NoActive).ToList();
             ViewBag.listTuyen = _context.Tuyens.ToList();
             ViewBag.listGiaSuKien = _context.GiaTuyens.ToList();
             return View(await _context.Chuyens.ToListAsync());
@@ -57,37 +57,35 @@ namespace ThanhBuoi.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string Ten, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, DateTime ThoiGianDen, string Trangthai, int GiaSukienID, double Gia, double KhoiluongHang, double GiaHangKhoiDiem)
+        public async Task<IActionResult> Create( int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, DateTime ThoiGianDen, int GiaSukienID, double Gia)
         {
             // Retrieve necessary entities from the database
-            Xe xe = await _context.Xes.Include(xe => xe.soDoGhes).FirstOrDefaultAsync(m => m.Id == XeId);
-            Tuyen tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
-            GiaSukien gia = await _context.GiaTuyens.FirstOrDefaultAsync(m => m.Id == GiaSukienID);
+            Xe? xe = await _context.Xes.Include(xe => xe.soDoGhes).FirstOrDefaultAsync(m => m.Id == XeId);
+            Tuyen? tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
+            GiaSukien? gia = await _context.GiaTuyens.FirstOrDefaultAsync(m => m.Id == GiaSukienID);
 
-            // Create a new Chuyen object
             var chuyen = new Chuyen
             {
-                Ten = Ten,
+                Ten = $"{tuyen?.Ten}",
                 Xe = xe,
                 Tuyen = tuyen,
                 DiemDon = DiemDon,
                 ThoiGianDi = ThoiGianDi,
                 ThoiGianDen = ThoiGianDen,
-                Trangthai = Trangthai,
+                Trangthai = TrangThaiChuyen.WAITING,
                 GiaSukien = gia,
                 Gia = Gia,
-                KhoiluongHang = KhoiluongHang,
-                GiaHangKhoiDiem = GiaHangKhoiDiem
+                KhoiluongHang = 0,
             };
 
             if (ModelState.IsValid)
             {
                 _context.Add(chuyen);
-                SoDoGhe soDoGhe = await _context.SoDoGhes.Include(sdg=>sdg.Tangs)
+                SoDoGhe? soDoGhe = await _context.SoDoGhes.Include(sdg=>sdg.Tangs)
                             .ThenInclude(t => t.Hangs)
                             .ThenInclude(h => h.Ghes).
-                    FirstOrDefaultAsync(s => s.Id == xe.soDoGhes.FirstOrDefault().Id);
-                foreach (var Tang in soDoGhe.Tangs)
+                    FirstOrDefaultAsync(s => s.Id == xe!.soDoGhes.FirstOrDefault()!.Id);
+                foreach (var Tang in soDoGhe!.Tangs)
                 {
                     foreach (var Hang in Tang.Hangs)
                     {
@@ -105,7 +103,7 @@ namespace ThanhBuoi.Controllers
                                 Sdt = null,
                                 CMND = null,
                                 DiemDon = chuyen.DiemDon,
-                                TrangThai = false,
+                                TrangThai = TrangThaiVe.Empty,
                                 NgayTao = DateTime.Now,
                             };
                             
@@ -127,12 +125,12 @@ namespace ThanhBuoi.Controllers
         [Route("Detail/{id}")]
         public async Task<IActionResult> Details(int id)
         {
-            Chuyen chuyen = await _context.Chuyens.FindAsync(id);
+            Chuyen? chuyen = await _context.Chuyens.FindAsync(id);
             if (chuyen == null)
             {
                 return View();
             }
-            ViewBag.listVe = await _context.Ves.Include(c => c.Id == chuyen.Id)
+            ViewBag.listVe = await _context.Ves.Include(c => c.Chuyen)
                 .Include(g => g.Ghe)
                 .Include(t => t.TaiKhoan)
                 .ToListAsync();
@@ -190,25 +188,7 @@ namespace ThanhBuoi.Controllers
 
             return View(chuyen);
         }
-        [HttpGet]
-        [Route("Ve/{id}")]
-        public async Task<IActionResult> Ve(int id)
-        {
-            var chuyen = await _context.Chuyens.FindAsync(id);
-            if (chuyen == null)
-            {
-                return NotFound();
-            }
 
-            // Lấy danh sách vé cho chuyến này
-            var ves = await _context.Ves.Include(c => c.Id == chuyen.Id)
-                .Include(g => g.Ghe)
-                .Include(t => t.TaiKhoan)
-                .FirstOrDefaultAsync(v => v.Id == id);
-
-            // Trả về view hoặc dữ liệu cần thiết
-            return View(ves);
-        }
 
         // POST: Chuyens/Delete/5
         [HttpPost, ActionName("Delete")]

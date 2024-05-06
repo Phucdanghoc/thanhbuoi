@@ -175,9 +175,6 @@ namespace ThanhBuoi.Migrations
                     b.Property<double>("Gia")
                         .HasColumnType("float");
 
-                    b.Property<double>("GiaHangKhoiDiem")
-                        .HasColumnType("float");
-
                     b.Property<int>("ID_GiaSuKien")
                         .HasColumnType("int");
 
@@ -201,10 +198,9 @@ namespace ThanhBuoi.Migrations
                     b.Property<DateTime>("ThoiGianDi")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Trangthai")
-                        .IsRequired()
+                    b.Property<int>("Trangthai")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -363,12 +359,6 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<double>("Gia_ve")
                         .HasColumnType("float");
-
-                    b.Property<DateTime>("NgayBatDau")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("NgayKetThuc")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Ten")
                         .IsRequired()
@@ -714,6 +704,9 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<int>("Hanhli")
+                        .HasColumnType("int");
+
                     b.Property<int>("ID_Chuyen")
                         .HasColumnType("int");
 
@@ -740,10 +733,8 @@ namespace ThanhBuoi.Migrations
                     b.Property<double>("Tien")
                         .HasColumnType("float");
 
-                    b.Property<bool?>("TrangThai")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("bit");
+                    b.Property<int>("TrangThai")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -785,8 +776,11 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<bool>("Trangthai")
-                        .HasColumnType("bit");
+                    b.Property<int>("Trangthai")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrongTaiHang")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

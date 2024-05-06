@@ -54,12 +54,14 @@ namespace ThanhBuoi.Controllers
         {
             ViewBag.getLoaiXeList = _context.loaiXes.ToList();
             ViewBag.getHangXe = new List<string> { "Toyota", "Honda", "Ford", "Mercedes-Benz", "Volkswagen", "Hyundai", "Kia", "Nissan", "Chevrolet", "Peugeot" };
-            xe.LoaiXe = _context.loaiXes.FirstOrDefault(p => p.Id == loaixe_id);
+            xe.LoaiXe = _context.loaiXes.FirstOrDefault(p => p.Id == loaixe_id)!;
             xe.MaXe = DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(1000, 9999);
+            xe.Trangthai = TrangThaiXe.NoActive;
             try
             {
-                String LoaiGhe = xe.LoaiXe.Ma.Split("-")[1];
                 String SoGhe = xe.LoaiXe.Ma.Split("-")[0];
+                String LoaiGhe = xe.LoaiXe.Ma.Split("-")[1];
+                xe.TrongTaiHang = 10 * int.Parse(SoGhe) + 100;
                 SoDoGhe sdg = new SoDoGhe
                 {
                     LoaiGhe = LoaiGhe,
@@ -95,6 +97,7 @@ namespace ThanhBuoi.Controllers
                                 Ten = $"N{j + 1}T{i + 1}",
                                 STT = j + 1,
                                 Hang = hang,
+                                KhoangTrong = true,
                             };
                             _context.Ghes.Add(ghe);
                         }
@@ -126,6 +129,8 @@ namespace ThanhBuoi.Controllers
                                     Ten = $"GN{soGhe + 1}T{SoGhe + 1}",
                                     STT = soGhe + 1,
                                     Hang = HangGHe,
+                                    KhoangTrong = true,
+
                                 };
                                 _context.Ghes.Add(ghe);
                             }

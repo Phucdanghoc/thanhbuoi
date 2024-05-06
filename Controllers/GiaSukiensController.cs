@@ -46,11 +46,10 @@ namespace ThanhBuoi.Controllers
 
      
         [HttpPost]
-        public async Task<IActionResult> Create(String Ten,int Gia_hang,int Gia_ve,DateTime NgayBatDau,DateTime NgayKetThuc)
+        public async Task<IActionResult> Create(String Ten,int Gia_hang,int Gia_ve)
         {
                 GiaSukien giaSukien = new GiaSukien();
-                giaSukien.NgayBatDau = NgayBatDau;
-                giaSukien.NgayKetThuc = NgayKetThuc;
+              
                 giaSukien.Ten = Ten;
                 giaSukien.Gia_ve = Gia_ve;
                 giaSukien.Gia_hang = Gia_hang;

@@ -4,6 +4,12 @@ using System.Text.Json.Serialization;
 
 namespace ThanhBuoi.Models
 {
+    public enum TrangThaiChuyen
+    {
+        WAITING,
+        ACTIVE,
+        COMPLETE
+    }
     public class Chuyen
     {
         [Key]
@@ -25,12 +31,11 @@ namespace ThanhBuoi.Models
         public DateTime ThoiGianDen { get; set; }
         [Required]
         [StringLength(255)]
-        public string? Trangthai { get; set; }
+        public TrangThaiChuyen? Trangthai { get; set; }
         [ForeignKey("ID_GiaSuKien")]
         public GiaSukien GiaSukien { get; set; }
         public double Gia { get; set; }
         public double KhoiluongHang { get; set; }
-        public double GiaHangKhoiDiem { get; set; }
 
         [JsonIgnore]
         public ICollection<Ve> Ves;

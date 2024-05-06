@@ -4,6 +4,13 @@ using System.Text.Json.Serialization;
 
 namespace ThanhBuoi.Models
 {
+
+    public enum TrangThaiXe
+    {
+        Acitve,
+        NoActive,
+        Maintenance
+    }
     public class Xe
     {
         [Key]
@@ -22,9 +29,11 @@ namespace ThanhBuoi.Models
         [ForeignKey("ID_LoaiXe")]
         public LoaiXe LoaiXe { get; set; }
 
-        public bool Trangthai { get; set; }
+        public TrangThaiXe Trangthai { get; set; }
 
         public string HangXe { get; set; }
+        public int TrongTaiHang { get; set; }
+
         [JsonIgnore]
         public ICollection<SoDoGhe> soDoGhes { get; set; }
 

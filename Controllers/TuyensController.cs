@@ -65,22 +65,25 @@ namespace ThanhBuoi.Controllers
         public async Task<IActionResult> Create(int diemdenID, int diemdiID,int Khoangcach)
         {
             ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
-            Tuyen tuyen = new Tuyen();
             Diadiem DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
             Diadiem DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
-            if(diemdenID == diemdiID)
+            Tuyen tuyen = new Tuyen();
+            tuyen.DiemDen = DiemDen;
+            tuyen.Khoangcach = Khoangcach;
+            tuyen.DiemDi = DiemDi;
+            tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";
+            _context.Tuyens.Add(tuyen);
+            if (diemdenID == diemdiID)
             {
                 TempData["ErrorMessage"] = "Không thể tạo tuyến trùng một địa điểm ";
+                return RedirectToAction(nameof(Index));
+            }else if (await _context.Tuyens.FirstOrDefaultAsync(t => t.Ten == tuyen.Ten) != null)
+            {
+                TempData["ErrorMessage"] = "Chuyến này đã tồn tại";
                 return RedirectToAction(nameof(Index));
             }
             if (DiemDi != null && DiemDen != null)
             {
-                
-                tuyen.DiemDen = DiemDen;
-                tuyen.Khoangcach = Khoangcach;
-                tuyen.DiemDi = DiemDi;
-                tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";
-                _context.Tuyens.Add(tuyen);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
                 return RedirectToAction(nameof(Index));
