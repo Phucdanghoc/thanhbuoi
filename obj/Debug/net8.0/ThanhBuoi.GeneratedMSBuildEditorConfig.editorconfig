@@ -78,8 +78,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Chuyens.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDaHV5ZW5zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Ve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xWZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Chuyens/Create.cshtml]
@@ -140,26 +148,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/DonHangs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GiaSukiens/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhU3VraWVuc1xDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GiaSukiens/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhU3VraWVuc1xEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GiaSukiens/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhU3VraWVuc1xEZXRhaWxzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GiaSukiens/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhU3VraWVuc1xFZGl0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GiaSukiens/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lhU3VraWVuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Home/Index.cshtml]

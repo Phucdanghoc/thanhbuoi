@@ -28,14 +28,12 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string? DiemDon { get; set; }
         public DateTime ThoiGianDi { get; set; }
-        public DateTime ThoiGianDen { get; set; }
         [Required]
         [StringLength(255)]
         public TrangThaiChuyen? Trangthai { get; set; }
-        [ForeignKey("ID_GiaSuKien")]
-        public GiaSukien GiaSukien { get; set; }
         public double Gia { get; set; }
-        public double KhoiluongHang { get; set; }
+        public String? Ngayle { get; set; }
+        public double? GiaTang {  get; set; }
 
         [JsonIgnore]
         public ICollection<Ve> Ves;

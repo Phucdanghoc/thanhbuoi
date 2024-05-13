@@ -62,14 +62,13 @@ namespace ThanhBuoi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create(int diemdenID, int diemdiID,int Khoangcach)
+        public async Task<IActionResult> Create(int diemdenID, int diemdiID)
         {
             ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
             Diadiem DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
             Diadiem DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
             Tuyen tuyen = new Tuyen();
             tuyen.DiemDen = DiemDen;
-            tuyen.Khoangcach = Khoangcach;
             tuyen.DiemDi = DiemDi;
             tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";
             _context.Tuyens.Add(tuyen);
@@ -77,7 +76,7 @@ namespace ThanhBuoi.Controllers
             {
                 TempData["ErrorMessage"] = "Không thể tạo tuyến trùng một địa điểm ";
                 return RedirectToAction(nameof(Index));
-            }else if (await _context.Tuyens.FirstOrDefaultAsync(t => t.Ten == tuyen.Ten) != null)
+            }else if (await _context.Tuyens.FirstOrDefaultAsync(t => t.DiemDen.Id == diemdenID && t.DiemDi.Id == diemdiID) != null)
             {
                 TempData["ErrorMessage"] = "Chuyến này đã tồn tại";
                 return RedirectToAction(nameof(Index));

@@ -47,5 +47,6 @@ namespace ThanhBuoi.Models
         public int Hanhli { get; set; }
 
         public DateTime NgayTao { get; set; }
+
     }
 }

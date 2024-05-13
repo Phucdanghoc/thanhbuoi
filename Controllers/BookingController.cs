@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Drawing.Printing;
@@ -7,13 +8,17 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+
     public class BookingController : Controller
     {
         private readonly DataContext _context;
         private const int PageSize = 10; // Số lượng chuyến trên mỗi trang
+        UserManager<TaiKhoan> _userManager;
 
-        public BookingController(DataContext context) {
+        public BookingController(DataContext context, UserManager<TaiKhoan> userManager) {
             _context = context;
+            _userManager = userManager;
+
         }
         // GET: BookingController
         public IActionResult Index(int page = 1, string searchString = null)
@@ -68,7 +73,7 @@ namespace ThanhBuoi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(int veId,String SDT, String CMND,String Ten,int HanhLi)
+        public async Task<ActionResult> Create(int Id, String SDT, String CMND, String Ten,int HanhLi)
         {
             try
             {
@@ -76,14 +81,15 @@ namespace ThanhBuoi.Controllers
                     .Include(g =>g.Ghe)
                     .Include(c => c.Chuyen)
                     .ThenInclude(x => x.Xe)
-                    .FirstOrDefaultAsync(v => v.Id == veId);
+                    .FirstOrDefaultAsync(v => v.Id == Id);
                 if (ve != null)
                 {
                     ve.Ten = Ten;
                     ve.CMND = CMND;
                     ve.Sdt = SDT;
-                    ve.MaVe = $"{ve.Chuyen.Xe!.MaXe}-{DateTime.Now.ToString("yyyyMMddHHmmssfff")}";
+                    ve.MaVe = $"TB-{ve.Chuyen.ThoiGianDi.Day}-{ve.Chuyen.Xe.MaXe}{Id}";
                     ve.TrangThai = TrangThaiVe.Booked;
+                    ve.TaiKhoan = await _userManager.GetUserAsync(HttpContext.User);
                     ve.Ghe.KhoangTrong = false;
                     ve.Hanhli = HanhLi;
                     if (ve.Hanhli > 20)
@@ -94,7 +100,6 @@ namespace ThanhBuoi.Controllers
                     {
                         ve.Tien = ve.Chuyen.Gia;
                     }
-                    ve.Chuyen.KhoiluongHang += ve.Hanhli;
 
                 }
                 _context.Chuyens.Update(ve.Chuyen);
@@ -102,21 +107,15 @@ namespace ThanhBuoi.Controllers
                 await _context.SaveChangesAsync();
                  return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                TempData["ErrorMessage"] = e.Message;
+                return RedirectToAction("Ve", "Booking", new { id = Id });
+
             }
         }
-        [HttpGet]
-        [Route("Ve/{id}")]
         public async Task<IActionResult> Ve(int id)
         {
-            var chuyen = await _context.Chuyens.FindAsync(id);
-            if (chuyen == null)
-            {
-                return NotFound();
-            }
-
             // Lấy danh sách vé cho chuyến này
             var ves = await _context.Ves.Include(c =>  c.Chuyen)
                 .Include(g => g.Ghe)
@@ -142,8 +141,13 @@ namespace ThanhBuoi.Controllers
 
             return View();
         }
-
-
+        public async Task<ActionResult> Chuyens(int id) 
+        {
+            Chuyen? chuyens = await _context.Chuyens.Include(t => t.Tuyen).Include(x => x.Xe).FirstOrDefaultAsync(c => c.Id == id);
+            ViewBag.Ves = await _context.Ves.Include(c => c.Chuyen)
+                .Include(g => g.Ghe).ToListAsync();
+            return  View(chuyens);
+        }
         // GET: BookingController/Edit/5
         public ActionResult Edit(int id)
         {

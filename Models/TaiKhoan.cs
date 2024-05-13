@@ -20,5 +20,10 @@ namespace ThanhBuoi.Models
 
         [JsonIgnore]
         public ICollection<Ve> Ves { get; set; }
+
+        public static implicit operator TaiKhoan(UserManager<TaiKhoan> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

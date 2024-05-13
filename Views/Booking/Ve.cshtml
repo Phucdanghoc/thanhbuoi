@@ -1,0 +1,140 @@
+﻿@model ThanhBuoi.Models.Ve
+
+@{
+    ViewData["Title"] = "Ticket Details";
+}
+
+
+<div class="container bg-light m-4 me-4 p-4">
+    <div class="row">
+        <div class="col-md-10">
+            <h4>Thông tin vé</h4>
+            <hr />
+            <dl class="row">
+                <dt class="col-sm-6">
+                    <strong>Chuyến : @Model.Chuyen.Ten</strong>
+                </dt>
+            </dl>
+            <dt class="col-sm-4">
+                <strong>Tên ghế : @Model.Ghe.Ten</strong>
+            </dt>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Đặt vé cho khách</h4>
+            <hr />
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group p-3">
+                    <label asp-for="Ten" class="control-label">Họ và tên</label>
+                    <input id="tenInput" asp-for="Ten" class="form-control" />
+                    <span id="tenError" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="CMND" class="control-label">Căn cước công dân</label>
+                    <input id="cmndInput" asp-for="CMND" class="form-control" />
+                    <span id="cmndError" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="Sdt" class="control-label">Số điện thoại</label>
+                    <input id="sdtInput" asp-for="Sdt" class="form-control" />
+                    <span id="sdtError" class="text-danger"></span>
+                </div>
+                <div class="form-group p-3">
+                    <label asp-for="Hanhli" class="control-label">Số hành lí (Kg) : </label>
+                    <input id="hanhLiInput" asp-for="Hanhli" class="form-control" />
+                    <span id="hanhLiError" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="Id"  value="@Model.Id" />
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary">Đặt vé</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h4 class="mb-4">Thông tin chuyến đi</h4>
+            <hr />
+            <p class="mb-2"><strong>Giá vé:</strong> <span id="ticketPrice"></span></p>
+            <p class="mb-2"><strong>Ngày lễ:</strong> @Model.Chuyen.Ngayle </p>
+            <p class="mb-2"><strong>Giá tăng:</strong> @Model.Chuyen.GiaTang %</p>
+            <p class="mb-2"><strong>Tổng tiền:</strong> <span id="totalPrice"></span></p>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Retrieve ticket price from Model and format to VND
+        var ticketPrice = @Model.Chuyen.Gia;
+        $('#ticketPrice').text(ticketPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+
+        // Calculate total price increase and format to VND
+        var giaTang = @Model.Chuyen.GiaTang;
+        var totalIncrease = giaTang * ticketPrice / 100;
+        $('#totalPriceIncrease').text(totalIncrease.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+
+        $('#hanhLiInput').on('input', function () {
+            var hanhLi = $(this).val();
+            var totalPrice = hanhLi > 20 ? ticketPrice + Math.round((hanhLi - 20) * 0.5) : ticketPrice;
+            $('#totalPrice').text(totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+        });
+
+        $('form').submit(function (event) {
+            var errors = false;
+
+            // Validate 'Ten' input
+            var tenInput = $('#tenInput');
+            var tenError = $('#tenError');
+            if (tenInput.val().trim() === '') {
+                tenError.text('Họ và tên là trường bắt buộc.');
+                errors = true;
+            } else {
+                tenError.text('');
+            }
+
+            // Validate 'CMND' input
+            var cmndInput = $('#cmndInput');
+            var cmndError = $('#cmndError');
+            if (cmndInput.val().trim() === '') {
+                cmndError.text('Căn cước công dân là trường bắt buộc.');
+                errors = true;
+            } else {
+                cmndError.text('');
+            }
+
+            // Validate 'Sdt' input
+            var sdtInput = $('#sdtInput');
+            var sdtError = $('#sdtError');
+            if (sdtInput.val().trim() === '') {
+                sdtError.text('Số điện thoại là trường bắt buộc.');
+                errors = true;
+            } else if (!/^0\d{9,10}$/.test(sdtInput.val().trim())) {
+                sdtError.text('Số điện thoại không hợp lệ.');
+                errors = true;
+            } else {
+                sdtError.text('');
+            }
+
+            // Validate 'Hanhli' input
+            var hanhLiInput = $('#hanhLiInput');
+            var hanhLiError = $('#hanhLiError');
+            if (hanhLiInput.val().trim() === '') {
+                hanhLiError.text('Số hành lí là trường bắt buộc.');
+                errors = true;
+            } else if (isNaN(hanhLiInput.val().trim()) || parseInt(hanhLiInput.val().trim()) < 0) {
+                hanhLiError.text('Số hành lí phải là số không âm.');
+                errors = true;
+            } else {
+                hanhLiError.text('');
+            }
+
+            if (errors) {
+                event.preventDefault();
+            }
+        });
+    });
+</script>
+

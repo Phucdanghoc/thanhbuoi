@@ -22,8 +22,6 @@ namespace ThanhBuoi.Models
         public int ID_DiemDen { get; set; }
         public Diadiem DiemDen { get; set; }
 
-        public double Khoangcach { get; set; }
-
         [JsonIgnore]
         public ICollection<Chuyen> Chuyens { get; set; }
     }

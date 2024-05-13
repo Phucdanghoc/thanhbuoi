@@ -1,0 +1,65 @@
+﻿@model ThanhBuoi.Models.Chuyen
+
+@{
+    ViewData["Title"] = "Đặt vé";
+}
+
+<div class="container">
+    <div class="row justify-content-center bg-light rounded mt-5 m-4">
+        <div class="col-md-8">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin chuyến đi</h5>
+                    <p class="card-text"><strong>Tên chuyến:</strong> @Model.Ten</p>
+                    <p class="card-text"><strong>Thời gian đi:</strong> @Model.ThoiGianDi.ToString("dd/MM/yyyy ")</p>
+                    <p class="card-text"><strong>Tuyến:</strong> @Model.Tuyen.Ten</p>
+                    <p class="card-text"><strong>Xe:</strong> @Model.Xe.Ten - Biển số: @Model.Xe.BienSo</p>
+                </div>
+            </div>
+            <div class="input-group mb-3 mt-3">
+                <h4>Danh sách vé</h4>
+                <div class="custom-control custom-switch ms-5">
+                    <input type="checkbox" class="custom-control-input" id="filterSwitch">
+                    <label class="custom-control-label" for="filterSwitch">Show Empty Tickets</label>
+                </div>
+            </div>
+            <div class="mt-4">
+                <div class="row">
+                    @foreach (var ve in ViewBag.Ves)
+                    {
+                        <div class="col-md-4 mb-3 empty-ticket">
+                            @if (ve.MaVe == null)
+                            {
+                                <a asp-action="Ve" asp-route-id="@ve.Id" class="text-decoration-none">
+                                    <div class="card bg-primary text-white">
+                                        <div class="card-body">
+                                            <h6 class="card-title text-white">Trống</h6>
+                                            <p class="card-text"><strong>Tên hành khách:</strong> @ve.Ten</p>
+                                            <p class="card-text"><strong>Số điện thoại:</strong> @ve.Sdt</p>
+                                            <p class="card-text"><strong>CMND:</strong> @ve.CMND</p>
+                                            <p class="card-text"><strong>Hành lý (kg):</strong> @ve.Hanhli</p>
+                                            <p class="card-text"><strong>Tình trạng:</strong> @ve.TrangThai</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <div class="card bg-secondary text-white">
+                                    <div class="card-body">
+                                        <h6 class="card-title ">Mã vé: @ve.MaVe</h6>
+                                        <p class="card-text"><strong>Tên hành khách:</strong> @ve.Ten</p>
+                                        <p class="card-text"><strong>Số điện thoại:</strong> @ve.Sdt</p>
+                                        <p class="card-text"><strong>CMND:</strong> @ve.CMND</p>
+                                        <p class="card-text"><strong>Hành lý (kg):</strong> @ve.Hanhli</p>
+                                        <p class="card-text"><strong>Tình trạng:</strong> @ve.TrangThai</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

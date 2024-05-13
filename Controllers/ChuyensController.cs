@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
@@ -14,8 +9,12 @@ namespace ThanhBuoi.Controllers
     {
         private readonly DataContext _context;
 
+        private readonly Dictionary<string, double> _listGiaTang = new Dictionary<string, double>();
         public ChuyensController(DataContext context)
         {
+            _listGiaTang.Add("Tết Nguyên Đán", 0.1);
+            _listGiaTang.Add("Quốc khánh", 0.05);
+            _listGiaTang.Add("30-4, 1-5", 0.03);
             _context = context;
         }
 
@@ -24,7 +23,7 @@ namespace ThanhBuoi.Controllers
         {
             ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == TrangThaiXe.NoActive).ToList();
             ViewBag.listTuyen = _context.Tuyens.ToList();
-            ViewBag.listGiaSuKien = _context.GiaTuyens.ToList();
+            ViewBag.listGiaTang = _listGiaTang;
             return View(await _context.Chuyens.ToListAsync());
         }
 
@@ -52,36 +51,31 @@ namespace ThanhBuoi.Controllers
             return View();
         }
 
-        // POST: Chuyens/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, DateTime ThoiGianDen, int GiaSukienID, double Gia)
+        public async Task<IActionResult> Create(string ngayle, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, double Gia)
         {
-            // Retrieve necessary entities from the database
-            Xe? xe = await _context.Xes.Include(xe => xe.soDoGhes).FirstOrDefaultAsync(m => m.Id == XeId);
-            Tuyen? tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
-            GiaSukien? gia = await _context.GiaTuyens.FirstOrDefaultAsync(m => m.Id == GiaSukienID);
-
-            var chuyen = new Chuyen
+            try
             {
-                Ten = $"{tuyen?.Ten}",
-                Xe = xe,
-                Tuyen = tuyen,
-                DiemDon = DiemDon,
-                ThoiGianDi = ThoiGianDi,
-                ThoiGianDen = ThoiGianDen,
-                Trangthai = TrangThaiChuyen.WAITING,
-                GiaSukien = gia,
-                Gia = Gia,
-                KhoiluongHang = 0,
-            };
+                Xe? xe = await _context.Xes.Include(x => x.soDoGhes).FirstOrDefaultAsync(x => x.Id == XeId);
+                Tuyen? tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
+                double giatang = _listGiaTang[ngayle];
+                var chuyen = new Chuyen
+                {
+                    Ten = $"{tuyen?.Ten}",
+                    Xe = xe,
+                    Tuyen = tuyen,
+                    DiemDon = DiemDon,
+                    ThoiGianDi = ThoiGianDi,
+                    GiaTang = giatang,
+                    Trangthai = TrangThaiChuyen.WAITING,
+                    Gia = Gia,
+                    Ngayle = ngayle
 
-            if (ModelState.IsValid)
-            {
+                };
+
                 _context.Add(chuyen);
-                SoDoGhe? soDoGhe = await _context.SoDoGhes.Include(sdg=>sdg.Tangs)
+                SoDoGhe? soDoGhe = await _context.SoDoGhes.Include(sdg => sdg.Tangs)
                             .ThenInclude(t => t.Hangs)
                             .ThenInclude(h => h.Ghes).
                     FirstOrDefaultAsync(s => s.Id == xe!.soDoGhes.FirstOrDefault()!.Id);
@@ -97,7 +91,7 @@ namespace ThanhBuoi.Controllers
                                 Chuyen = chuyen,
                                 TaiKhoan = null,
                                 Ghe = ghe,
-                                Tien = Math.Round(chuyen.Gia * (gia.Gia_ve / 100)),
+                                Tien = Math.Round(chuyen.Gia * giatang),
                                 Ten = null,
                                 MaVe = null,
                                 Sdt = null,
@@ -106,8 +100,7 @@ namespace ThanhBuoi.Controllers
                                 TrangThai = TrangThaiVe.Empty,
                                 NgayTao = DateTime.Now,
                             };
-                            
-                     
+
                             _context.Ves.Add(ve);
                         }
                     }
@@ -115,12 +108,15 @@ namespace ThanhBuoi.Controllers
 
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
-
                 return RedirectToAction(nameof(Index));
             }
-            TempData["ErrorrMessage"] = "Lỗi !";
-            return RedirectToAction(nameof(Index));
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "Lỗi: " + ex.Message;
+                return RedirectToAction(nameof(Index));
+            }
         }
+
         [HttpGet]
         [Route("Detail/{id}")]
         public async Task<IActionResult> Details(int id)
@@ -134,10 +130,10 @@ namespace ThanhBuoi.Controllers
                 .Include(g => g.Ghe)
                 .Include(t => t.TaiKhoan)
                 .ToListAsync();
-            
+
             return View(chuyen);
         }
-        
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]

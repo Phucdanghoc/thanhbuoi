@@ -15,14 +15,6 @@
             <div class="bg-light rounded p-4">
                 <h6 class="mb-4">Basic Form</h6>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-
-                <div class="mb-3">
-                    <label asp-for="Khoangcach" class="form-label">Khoảng cách</label>
-                    <input type="number" name="Khoangcach" min="0" max="10000" class="form-control" asp-for="Khoangcach" />
-                    <span class="text-danger"></span>
-                </div>
                 <div class="mb-3">
                     <label asp-for="DiemDi" class="form-label">Điểm đi</label>
                     <select class="form-select" id="HangXe" asp-for="DiemDi" name="diemdiID" aria-label="Default select example">

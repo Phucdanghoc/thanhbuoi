@@ -175,8 +175,8 @@ namespace ThanhBuoi.Migrations
                     b.Property<double>("Gia")
                         .HasColumnType("float");
 
-                    b.Property<int>("ID_GiaSuKien")
-                        .HasColumnType("int");
+                    b.Property<double?>("GiaTang")
+                        .HasColumnType("float");
 
                     b.Property<int?>("ID_Xe")
                         .HasColumnType("int");
@@ -184,16 +184,13 @@ namespace ThanhBuoi.Migrations
                     b.Property<int?>("Id_Tuyen")
                         .HasColumnType("int");
 
-                    b.Property<double>("KhoiluongHang")
-                        .HasColumnType("float");
+                    b.Property<string>("Ngayle")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Ten")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
-
-                    b.Property<DateTime>("ThoiGianDen")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ThoiGianDi")
                         .HasColumnType("datetime2");
@@ -203,8 +200,6 @@ namespace ThanhBuoi.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ID_GiaSuKien");
 
                     b.HasIndex("ID_Xe");
 
@@ -344,32 +339,6 @@ namespace ThanhBuoi.Migrations
                     b.HasIndex("ID_Hang");
 
                     b.ToTable("Ghes");
-                });
-
-            modelBuilder.Entity("ThanhBuoi.Models.GiaSukien", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<double>("Gia_hang")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Gia_ve")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Ten")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Ten")
-                        .IsUnique();
-
-                    b.ToTable("GiaTuyens");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.Hang", b =>
@@ -667,9 +636,6 @@ namespace ThanhBuoi.Migrations
                     b.Property<int>("ID_DiemDi")
                         .HasColumnType("int");
 
-                    b.Property<double>("Khoangcach")
-                        .HasColumnType("float");
-
                     b.Property<string>("Ten")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -735,6 +701,9 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
+
+                    b.Property<double>("ngaydacbiet")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -848,12 +817,6 @@ namespace ThanhBuoi.Migrations
 
             modelBuilder.Entity("ThanhBuoi.Models.Chuyen", b =>
                 {
-                    b.HasOne("ThanhBuoi.Models.GiaSukien", "GiaSukien")
-                        .WithMany()
-                        .HasForeignKey("ID_GiaSuKien")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ThanhBuoi.Models.Xe", "Xe")
                         .WithMany("Chuyens")
                         .HasForeignKey("ID_Xe");
@@ -861,8 +824,6 @@ namespace ThanhBuoi.Migrations
                     b.HasOne("ThanhBuoi.Models.Tuyen", "Tuyen")
                         .WithMany("Chuyens")
                         .HasForeignKey("Id_Tuyen");
-
-                    b.Navigation("GiaSukien");
 
                     b.Navigation("Tuyen");
 

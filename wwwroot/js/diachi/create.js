@@ -1,10 +1,11 @@
 ﻿// Function to fetch provinces and populate the dropdown
 function fetchProvinces() {
-    fetch('https://vnprovinces.pythonanywhere.com/api/provinces/?basic=true&limit=100')
+    fetch('https://vapi.vnappmob.com/api/province/')
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             data.results.forEach(province => {
-                $('#tinh').append(`<option data-id="${province.id}" value="${province.full_name}">${province.full_name}</option>`);
+                $('#tinh').append(`<option data-id="${province.province_id}" value="${province.province_name}">${province.province_name}</option>`);
             });
         })
         .catch(error => {
@@ -22,12 +23,12 @@ function getDistricts() {
     // Clear previous options
     $('#huyen').empty().append('<option selected disabled>Chọn huyện</option>');
 
-    fetch(`https://vnprovinces.pythonanywhere.com/api/provinces/${provinceId}/?basic=true`)
+    fetch(`https://vapi.vnappmob.com/api/province/district/${provinceId}`)
         .then(response => response.json())
         .then(data => {
             // Iterate over districts and append options to the dropdown
-            data.districts.forEach(district => {
-                $('#huyen').append(`<option data-id="${district.id}" value="${district.full_name}">${district.full_name}</option>`);
+            data.results.forEach(district => {
+                $('#huyen').append(`<option data-id="${district.district_id}" value="${district.district_name}">${district.district_name}</option>`);
             });
         })
         .catch(error => {
@@ -42,12 +43,12 @@ function getCommunes() {
     // Clear previous options
     $('#xa').empty().append('<option selected disabled>Chọn xã</option>');
 
-    fetch(`https://vnprovinces.pythonanywhere.com/api/districts/${districtId}/?basic=true`)
+    fetch(`https://vapi.vnappmob.com/api/province/ward/${districtId}`)
         .then(response => response.json())
         .then(data => {
             // Iterate over communes and append options to the dropdown
-            data.wards.forEach(ward => {
-                $('#xa').append(`<option data-id="${ward.id}" value="${ward.full_name}">${ward.full_name}</option>`);
+            data.results.forEach(ward => {
+                $('#xa').append(`<option data-id="${ward.ward_id}" value="${ward.ward_name}">${ward.ward_name}</option>`);
             });
         })
         .catch(error => {
@@ -61,6 +62,3 @@ function disbleAddress() {
     $("#diaChi").prop("disabled", false);
 }
 // Call getCommunes function on page load in case "Xã" is pre-selected
-$(document).ready(function () {
-    getCommunes();
-});

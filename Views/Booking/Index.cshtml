@@ -1,6 +1,4 @@
-﻿@{
-    ViewData["Title"] = "Đặt vé";
-}
+﻿
   @model IEnumerable<ThanhBuoi.Models.Chuyen>
 
 @{
@@ -36,14 +34,14 @@
                             <div class="row justify-content-between">
                                 <div class="col">
                                     <p class="card-text">Đi: @chuyen.ThoiGianDi</p>
-                                    <p class="card-text">Đến: @chuyen.ThoiGianDen</p>
                                 </div>
                                 <div class="col">
                                     <p class="card-text">Giá: @string.Format("{0:#,##0} VND", chuyen.Gia)</p>
                                 </div>
                                 <div class="col-auto">
                                     <div class="mt-auto">
-                                        <a href="@Url.Action("Chuyen", "Booking", new { id = chuyen.Id })" class="btn btn-primary">Đặt vé</a>
+
+                                        <a asp-action="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-primary">Đặt vé</a>
                                     </div>
                                 </div>
                             </div>

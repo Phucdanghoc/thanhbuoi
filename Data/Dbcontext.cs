@@ -18,9 +18,6 @@ namespace ThanhBuoi.Data
             modelBuilder.Entity<Tuyen>()
                     .HasIndex(u => u.Ten)
                     .IsUnique(); 
-            modelBuilder.Entity<GiaSukien>()
-                    .HasIndex(u => u.Ten)
-                    .IsUnique();
             modelBuilder.Entity<Xe>()
                     .HasIndex(u => u.BienSo)
                     .IsUnique();
@@ -41,7 +38,6 @@ namespace ThanhBuoi.Data
         public DbSet<Tuyen> Tuyens { get; set; }
         public DbSet<Diadiem> Diadiems { get; set; }
         public DbSet<DonHang> DonHangs { get; set; }
-        public DbSet<GiaSukien> GiaTuyens { get; set; }
         public DbSet<DonHangChiTiet> DonHangChiTiets { get; set; }
         public DbSet<HangGui> HangGuis { get; set; }
         public DbSet<Chuyen> Chuyens { get; set; }
