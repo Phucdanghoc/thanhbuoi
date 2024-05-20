@@ -1,5 +1,4 @@
-﻿
-  @model IEnumerable<ThanhBuoi.Models.Chuyen>
+﻿@model IEnumerable<ThanhBuoi.Models.Chuyen>
 
 @{
     ViewData["Title"] = "Danh sách chuyến";
@@ -7,7 +6,7 @@
 
 <div class="container-fluid pt-4 px-4">
     <div class="row bg-light rounded justify-content-center p-4">
-        <div class="col-md-12 ">
+        <div class="col-md-12 vh-75">
             <h2 class="text-center">Danh sách chuyến</h2>
             <!-- Thanh tìm kiếm -->
             <div class="row mb-3">
@@ -20,34 +19,31 @@
                     </form>
                 </div>
             </div>
-            <!-- Card group -->
-            <div class="card-group col-md-8 mx-auto">
-                @foreach (var chuyen in Model)
-                {
-                    <div class="card mb-3">
-                        <div class="card-body d-flex flex-column">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="card-title">@chuyen.Ten</h5>
-                                </div>
-                            </div>
-                            <div class="row justify-content-between">
-                                <div class="col">
-                                    <p class="card-text">Đi: @chuyen.ThoiGianDi</p>
-                                </div>
-                                <div class="col">
-                                    <p class="card-text">Giá: @string.Format("{0:#,##0} VND", chuyen.Gia)</p>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="mt-auto">
-
-                                        <a asp-action="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-primary">Đặt vé</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
+            <!-- Table list -->
+            <div class="table-responsive col-md-12 mx-auto">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên chuyến</th>
+                            <th scope="col">Thời gian đi</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var chuyen in Model)
+                        {
+                            <tr>
+                                <td>@chuyen.Ten</td>
+                                <td>@chuyen.ThoiGianDi</td>
+                                <td>@string.Format("{0:#,##0} VND", chuyen.Gia)</td>
+                                <td>
+                                    <a asp-action="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-primary">Đặt vé</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
             <!-- Phân trang -->
             <div class="row">

@@ -19,9 +19,10 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string Ten { get; set; }
 
+        [JsonIgnore]
         [ForeignKey("ID_Xe")]
         public Xe? Xe { get; set; }
-
+        [JsonIgnore]
         [ForeignKey("Id_Tuyen")] 
         public Tuyen? Tuyen { get; set; }
         [Required]
@@ -37,5 +38,7 @@ namespace ThanhBuoi.Models
 
         [JsonIgnore]
         public ICollection<Ve> Ves;
+
+       
     }
 }

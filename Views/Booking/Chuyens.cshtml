@@ -31,30 +31,25 @@
                             @if (ve.MaVe == null)
                             {
                                 <a asp-action="Ve" asp-route-id="@ve.Id" class="text-decoration-none">
-                                    <div class="card bg-primary text-white">
+                                    <div class="card text-black">
                                         <div class="card-body">
-                                            <h6 class="card-title text-white">Trống</h6>
-                                            <p class="card-text"><strong>Tên hành khách:</strong> @ve.Ten</p>
-                                            <p class="card-text"><strong>Số điện thoại:</strong> @ve.Sdt</p>
-                                            <p class="card-text"><strong>CMND:</strong> @ve.CMND</p>
-                                            <p class="card-text"><strong>Hành lý (kg):</strong> @ve.Hanhli</p>
-                                            <p class="card-text"><strong>Tình trạng:</strong> @ve.TrangThai</p>
+                                            <h6 class="card-title text-black">Trống<img  src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
+                                            <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
                                         </div>
                                     </div>
                                 </a>
                             }
                             else
                             {
+                            <a asp-action="Ve" asp-route-id="@ve.Id" class="text-decoration-none">
                                 <div class="card bg-secondary text-white">
-                                    <div class="card-body">
-                                        <h6 class="card-title ">Mã vé: @ve.MaVe</h6>
-                                        <p class="card-text"><strong>Tên hành khách:</strong> @ve.Ten</p>
-                                        <p class="card-text"><strong>Số điện thoại:</strong> @ve.Sdt</p>
-                                        <p class="card-text"><strong>CMND:</strong> @ve.CMND</p>
-                                        <p class="card-text"><strong>Hành lý (kg):</strong> @ve.Hanhli</p>
-                                        <p class="card-text"><strong>Tình trạng:</strong> @ve.TrangThai</p>
+                                    <div class="card-body bg-opacity-50">
+                                        <h6 class="card-title text-white">Đã Đặt<img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
+                                        <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
+
                                     </div>
                                 </div>
+                                </a>
                             }
                         </div>
                     }

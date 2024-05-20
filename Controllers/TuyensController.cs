@@ -40,8 +40,9 @@ namespace ThanhBuoi.Controllers
             {
                 return NotFound();
             }
-
             var tuyen = await _context.Tuyens
+                .Include(t => t.Chuyens)
+                .ThenInclude(x => x.Xe)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (tuyen == null)
             {
@@ -65,9 +66,9 @@ namespace ThanhBuoi.Controllers
         public async Task<IActionResult> Create(int diemdenID, int diemdiID)
         {
             ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
-            Diadiem DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
-            Diadiem DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
-            Tuyen tuyen = new Tuyen();
+            Diadiem? DiemDi = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdiID);
+            Diadiem? DiemDen = await _context.Diadiems.FirstOrDefaultAsync(m => m.Id == diemdenID);
+            Tuyen? tuyen = new Tuyen();
             tuyen.DiemDen = DiemDen;
             tuyen.DiemDi = DiemDi;
             tuyen.Ten = $"{DiemDi.Ten} - {DiemDen.Ten} - {GetCurrentTimeIntegerWithSecond()}";

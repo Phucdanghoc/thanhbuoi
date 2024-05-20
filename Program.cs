@@ -20,8 +20,10 @@ internal class Program
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
         builder.Services.AddRazorPages();
-        builder.Services.AddOptions();
-
+        builder.Services.AddControllers()
+            .AddJsonOptions(options =>
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve
+            ); builder.Services.AddOptions();
         var app = builder.Build();
         // Configure the HTTP request pipeline.
         if (!app.Environment.IsDevelopment())
@@ -30,7 +32,8 @@ internal class Program
             app.UseHsts();
         }
 
-        app.UseHttpsRedirection();
+    
+    app.UseHttpsRedirection();
         app.UseStaticFiles();
 
         app.UseRouting();
@@ -68,6 +71,7 @@ internal class Program
                 await  userManager.AddToRoleAsync(user, "ADMIN");
             }
         }
+
         app.Run();
     }
 }

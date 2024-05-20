@@ -22,7 +22,7 @@ namespace ThanhBuoi.Models
 
         [Required]
         [StringLength(255)]
-        public string BienSo { get; set; }
+        public required string BienSo { get; set; }
 
         public string MaXe { get; set; }
 
@@ -32,7 +32,7 @@ namespace ThanhBuoi.Models
         public TrangThaiXe Trangthai { get; set; }
 
         public string HangXe { get; set; }
-        public int TrongTaiHang { get; set; }
+        public double TrongTaiHang { get; set; }
 
         [JsonIgnore]
         public ICollection<SoDoGhe> soDoGhes { get; set; }

@@ -11,10 +11,10 @@ namespace ThanhBuoi.Controllers
 
     public class BookingController : Controller
     {
-        private readonly DataContext _context;
         private const int PageSize = 10; // Số lượng chuyến trên mỗi trang
         UserManager<TaiKhoan> _userManager;
 
+        private readonly DataContext _context;
         public BookingController(DataContext context, UserManager<TaiKhoan> userManager) {
             _context = context;
             _userManager = userManager;
@@ -105,9 +105,10 @@ namespace ThanhBuoi.Controllers
                 _context.Chuyens.Update(ve.Chuyen);
                 _context.Ves.Update(ve);
                 await _context.SaveChangesAsync();
-                 return RedirectToAction(nameof(Index));
+                TempData["SuccessMessage"] = "Đặt vé thành công";
+                return RedirectToAction("Ve", "Booking", new { id = Id });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 TempData["ErrorMessage"] = e.Message;
                 return RedirectToAction("Ve", "Booking", new { id = Id });
@@ -117,36 +118,61 @@ namespace ThanhBuoi.Controllers
         public async Task<IActionResult> Ve(int id)
         {
             // Lấy danh sách vé cho chuyến này
-            var ves = await _context.Ves.Include(c =>  c.Chuyen)
+            var ve = await _context.Ves.Include(c =>  c.Chuyen)
                 .Include(g => g.Ghe)
                 .Include(t => t.TaiKhoan)
                 .FirstOrDefaultAsync(v => v.Id == id);
-            return View(ves);
+            return View(ve);
         }
         [HttpPost]
         [Route("Ve/Cancel/{id}")]
         public async Task<ActionResult> Cancel(int id)
         {
-            Ve? ve = _context.Ves.Include(g => g.Ghe).FirstOrDefault(v => v.Id == id);
-            if(ve != null)
+            Ve? ve = await _context.Ves
+                   .Include(g => g.Ghe)
+                   .FirstOrDefaultAsync(v => v.Id == id);
+            try
             {
-                ve.TrangThai = TrangThaiVe.Cancel;
-                ve.Ghe.KhoangTrong = true;
-                _context.Ghes.Update(ve.Ghe);
-                _context.Ves.Update(ve);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = $"Đã hủy vé của {ve.Ten}";
-                return View();
+               
+                if (ve != null)
+                {
+                    ve.TrangThai = TrangThaiVe.Cancel;
+                    ve.Ten = null;
+                    ve.CMND = null;
+                    ve.Sdt = null;
+                    ve.MaVe = null;
+                    ve.TaiKhoan = null;
+                    ve.Hanhli = 0;
+                    ve.Tien = 0;
+                    ve.Ghe.KhoangTrong = true;
+                    _context.Ghes.Update(ve.Ghe);
+                    _context.Ves.Update(ve);
+                    await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = $"Đã hủy vé của {ve.Ten ?? "Người dùng không xác định"}";
+                    return View(ve);
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy vé để hủy.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Đã xảy ra lỗi khi hủy vé: {ex.Message}";
             }
 
-            return View();
+            return View(ve);
         }
+
         public async Task<ActionResult> Chuyens(int id) 
         {
-            Chuyen? chuyens = await _context.Chuyens.Include(t => t.Tuyen).Include(x => x.Xe).FirstOrDefaultAsync(c => c.Id == id);
-            ViewBag.Ves = await _context.Ves.Include(c => c.Chuyen)
-                .Include(g => g.Ghe).ToListAsync();
-            return  View(chuyens);
+            Chuyen? chuyen = await _context.Chuyens.Include(t => t.Tuyen).Include(x => x.Xe).FirstOrDefaultAsync(c => c.Id == id);
+            ViewBag.Ves = await _context.Ves
+                 .Include(c => c.Chuyen)
+                 .Include(g => g.Ghe)
+                 .Where(v => v.Chuyen.Id == chuyen.Id)
+                 .ToListAsync();
+            return  View(chuyen);
         }
         // GET: BookingController/Edit/5
         public ActionResult Edit(int id)

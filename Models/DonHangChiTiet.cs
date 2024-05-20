@@ -12,11 +12,11 @@ namespace ThanhBuoi.Models
         [ForeignKey("ID_DonHang")]
         public DonHang DonHang { get; set; }
 
+        [ForeignKey("ID_HangGui")]
+        public HangGui HangGui { get; set; }
+
         public double Tien { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string LoaiDonHang { get; set; }
 
     }
 }

@@ -105,7 +105,6 @@ namespace ThanhBuoi.Controllers
                         }
                     }
                 }
-
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
                 return RedirectToAction(nameof(Index));
@@ -121,7 +120,10 @@ namespace ThanhBuoi.Controllers
         [Route("Detail/{id}")]
         public async Task<IActionResult> Details(int id)
         {
-            Chuyen? chuyen = await _context.Chuyens.FindAsync(id);
+            var chuyen = await _context.Chuyens
+                  .Include(x => x.Xe)
+                  .Include(t => t.Tuyen)
+                  .FirstOrDefaultAsync(c => c.Id == id);
             if (chuyen == null)
             {
                 return View();
@@ -166,26 +168,6 @@ namespace ThanhBuoi.Controllers
             }
             return View(chuyen);
         }
-
-        // GET: Chuyens/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var chuyen = await _context.Chuyens
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (chuyen == null)
-            {
-                return NotFound();
-            }
-
-            return View(chuyen);
-        }
-
-
         // POST: Chuyens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

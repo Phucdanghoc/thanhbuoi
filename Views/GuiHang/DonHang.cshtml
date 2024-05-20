@@ -1,0 +1,83 @@
+﻿@model ThanhBuoi.Models.DonHang
+@{
+    ViewData["Title"] = "Xác nhận đơn hàng";
+}
+
+<div class="container mt-5 bg-light">
+    <h2>Xác nhận đơn hàng</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <h3>Chi tiết đơn hàng</h3>
+                    <p><strong>Trạng thái:</strong> @Model.Trangthai</p>
+                    <p><strong>Ngày tạo:</strong> @Model.NgayTao</p>
+                    <p><strong>Tổng tiền:</strong> @Model.Tien</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Danh sách hàng </h3>
+            @foreach (var chitiet in ViewBag.listChitietDonhang)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên hàng : @chitiet.HangGui.TenHang</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text"><strong>Người gửi:</strong> @chitiet.HangGui.TenNguoiGui</p>
+                                <p class="card-text"><strong>Số điện thoại người gửi:</strong> @chitiet.HangGui.SdtNguoiGui</p>
+                                <p class="card-text"><strong>Trọng lượng:</strong> @chitiet.HangGui.TrongLuong</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="card-text"><strong>Người nhận:</strong> @chitiet.HangGui.TenNguoiNhan</p>
+                                <p class="card-text"><strong>Số điện thoại người nhận:</strong> @chitiet.HangGui.SdtNguoiNhan</p>
+                                <p class="card-text"><strong>Địa chỉ người nhận:</strong> @chitiet.HangGui.DiachiNguoiNhan</p>
+                            </div>
+                        </div>
+                    </div>
+                 
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Thanh toán</h3>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="mota">Mô tả:</label>
+                    <textarea class="form-control" id="mota" name="mota"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Phương thức thanh toán:</label><br>
+                    <div class="row">
+                    <div class="col-md-4">
+                        <div class="col-md-4">
+                            <input type="radio" id="momo" name="momo" value="method1">
+                            <label for="momo">Momo</label><br>
+                        </div>
+                        <div class="col-md-6">
+                            <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="col-md-4">
+                            <input type="radio" id="tienmat" name="tienmat" value="method2">
+                            <label for="tienmat">Tiền mặt</label><br>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <button type="button" class="btn btn-primary">Thanh toán</button>
+            </form>
+        </div>
+    </div>
+</div>

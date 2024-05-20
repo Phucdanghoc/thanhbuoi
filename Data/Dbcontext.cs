@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Models;
+using ThanhBuoi.Models.DTO;
 
 namespace ThanhBuoi.Data
 {
@@ -54,6 +55,7 @@ namespace ThanhBuoi.Data
         {
 
         }
+        public DbSet<ThanhBuoi.Models.DTO.DTOHang> DTOHang { get; set; } = default!;
        
 
     }

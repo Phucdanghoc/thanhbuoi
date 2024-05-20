@@ -1,0 +1,281 @@
+﻿@model ThanhBuoi.Models.DTO.DTOHang
+
+@{
+    ViewData["Title"] = "HangGui Form";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row bg-light rounded justify-content-center p-4">
+        <div class="col-md-10 vh-75">
+            <form id="hangGuiForm" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Bên gửi</h4>
+                        <div class="form-group mb-3">
+                            <label for="TenHang">Tên gói hàng:</label>
+                            <input type="text" class="form-control" id="TenHang" name="TenHang"
+                                   placeholder="Tên gói hàng" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="TenNguoiGui">Người gửi:</label>
+                            <input type="text" class="form-control" id="TenNguoiGui" name="TenNguoiGui"
+                                   placeholder="Tên người gửi " required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="SdtNguoiGui">Số điện thoại người gửi:</label>
+                            <input type="text" class="form-control" id="SdtNguoiGui" name="SdtNguoiGui"
+                                   placeholder="Số điện thoại người gửi" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="TrongLuong">Trọng lượng hàng (kg):</label>
+                            <input type="number" class="form-control" id="TrongLuong" name="TrongLuong"
+                                   placeholder="Trọng lượng hàng" required>
+                        </div>
+                        <div class=form-group mb-3">
+                            <label  class="form-label">Loại Hàng :</label>
+                            <select class="form-select" id="loaihang" required>
+                                <option value="">--Chọn loại hàng--</option>
+                                @foreach (var hang in ViewBag.loaihang)
+                                {
+                                    <option value="@hang">@hang.ToString()</option>
+                                }
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Bên Nhận</h4>
+                        <div class="form-group mb-3">
+                            <label for="TenNguoiNhan">Người nhận:</label>
+                            <input type="text" class="form-control" id="TenNguoiNhan" name="TenNguoiNhan"
+                                   placeholder="Tên người nhận" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="SdtNguoiNhan">Số điện thoại người nhận:</label>
+                            <input type="text" class="form-control" id="SdtNguoiNhan" name="SdtNguoiNhan"
+                                   placeholder="Số điện thoại người nhận" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="DiachiNguoiNhan">Địa chỉ người nhận:</label>
+                            <input type="text" class="form-control" id="DiachiNguoiNhan" name="DiachiNguoiNhan"
+                                   placeholder="Địa chỉ người nhận" required>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="searchInput">Chọn Chuyến:</label>
+                            <input type="text" class="form-control" id="searchInput" placeholder="-- Chọn Chuyến  --" required>
+                            <div class="dropdown-menu" id="searchDropdown"></div>
+                            <input type="hidden" name="TuyenId" id="selectedTuyenId">
+                        </div>
+                        <div class="text-center p-4">
+                            <button type="submit" class="btn btn-primary">Thêm</button>
+                        </div>
+                        <div class="text-center p-4">
+                            <button type="button" id="GuiHang" class="btn btn-primary">Xác nhận gửi hàng</button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+    <div class="row p-4">
+        <h4 class="text-start ">Danh sách hàng gửi</h4>
+        <div class="col-md-10 vh-75  bg-light rounded justify-content-center" id="submittedPackagesContainer"></div>
+    </div>
+    <div class="row p-4" >
+        <h4 class="text-start " hidden>Xác nhận thanh toán</h4>
+        <div class="col-md-10 vh-75  bg-light rounded justify-content-center" id=""></div>
+    </div>
+    
+</div>
+
+<script>
+    let hangGuiList = []; // Array to store HangGui objects
+
+    $(document).ready(function () {
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+       
+        // Function to fetch data from API
+        const fetchData = async () => {
+            try {
+                let weight = $("#TrongLuong").val();
+                let searchInput = $("#searchInput").val();
+                const response = await fetch(`https://localhost:7273/api/Chuyen/search?weight=${weight}&name=${searchInput}`);
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return await response.json();
+            } catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+        };
+        async function sendHangGuiListToAPI(hangGuiList) {
+                const response = await fetch('https://localhost:7273/api/HangGuis/Batch', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(hangGuiList)
+                });
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                } else{
+                const data = await response.json();
+
+                window.location.href = `/GuiHang/Donhang/${data.donhang}`;
+                }
+                console.log(data);
+        }
+       
+
+
+
+        function closeDialog() {
+            const dialog = document.querySelector('.dialog');
+            if (dialog) {
+                dialog.remove();
+            }
+        }
+        const populateDropdown = async () => {
+            try {
+                const data = await fetchData();
+                $("#searchDropdown").empty(); 
+                if (data && data.length > 0) {
+                    data.forEach(route => {
+                        $("#searchDropdown").append(`<a class="dropdown-item" href="#" data-route-id="${route.Id}">${route.Xe.Ten} - ${route.Ten}</a>`);
+                    });
+                    $("#searchDropdown").addClass('show');
+                } else {
+                    $("#searchDropdown").removeClass('show');
+                }
+
+                // Event listener for selecting a dropdown item
+                $("#searchDropdown .dropdown-item").on("click", function (e) {
+                    e.preventDefault(); // Prevent the default anchor behavior
+                    let routeId = $(this).data("route-id");
+                    let routeName = $(this).text();
+                    $("#searchInput").val(routeName);
+                    $("#selectedTuyenId").val(routeId);
+                    $("#searchDropdown").removeClass('show');
+                });
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        // Event listener for input field change event
+        $("#searchInput").on("input", async () => {
+            await populateDropdown();
+        });
+
+        $("#searchDropdown").removeClass('show');
+
+        // Event listener for change event on TrongLuong input
+        $("#TrongLuong").on("change", async () => {
+            await delay(1000);
+            await populateDropdown();
+        });
+        $('#GuiHang').click(async function (event) {
+            event.preventDefault();
+            await sendHangGuiListToAPI(hangGuiList);
+        });
+
+        $('#hangGuiForm').submit(function  (event)   {
+            event.preventDefault();
+
+            let tenHang = $('#TenHang').val();
+            let tenNguoiGui = $('#TenNguoiGui').val();
+            let sdtNguoiGui = $('#SdtNguoiGui').val();
+            let tenNguoiNhan = $('#TenNguoiNhan').val();
+            let sdtNguoiNhan = $('#SdtNguoiNhan').val();
+            let diaChiNguoiNhan = $('#DiachiNguoiNhan').val();
+            let trongLuong = $('#TrongLuong').val();
+            let IdChuyen = $('#selectedTuyenId').val();
+            let loaihang = $('#loaihang').val();
+
+            let hangGui = {
+                TenHang: tenHang,
+                TenNguoiGui: tenNguoiGui,
+                SdtNguoiGui: sdtNguoiGui,
+                TenNguoiNhan: tenNguoiNhan,
+                SdtNguoiNhan: sdtNguoiNhan,
+                DiaChiNguoiNhan: diaChiNguoiNhan,
+                TrongLuong: trongLuong,
+                IdChuyen: IdChuyen,
+                LoaiHang: loaihang,
+            };
+
+            hangGuiList.push(hangGui);
+
+            displayHangGuiList();
+
+            $('#hangGuiForm')[0].reset();
+            console.log(JSON.stringify(hangGuiList))
+        });
+        
+        // Event listener for clicking a card to show information and edit
+        $(document).on('click', '.hangGuiCard', function () {
+            let index = $(this).data('index');
+            let hangGui = hangGuiList[index];
+            $('#TenHang').val(hangGui.TenHang);
+            $('#TenNguoiGui').val(hangGui.TenNguoiGui);
+            $('#SdtNguoiGui').val(hangGui.SdtNguoiGui);
+            $('#TenNguoiNhan').val(hangGui.TenNguoiNhan);
+            $('#SdtNguoiNhan').val(hangGui.SdtNguoiNhan);
+            $('#DiachiNguoiNhan').val(hangGui.DiaChiNguoiNhan);
+            $('#TrongLuong').val(hangGui.TrongLuong);
+            $('#searchInput').val(hangGui.TuyenId); // Assuming TuyenId corresponds to the text in the searchInput
+            $('#selectedTuyenId').val(hangGui.TuyenId);
+            $('#loaihang').val(hangGui.LoaiHang);
+
+        });
+
+        // Event listener for clicking the delete icon
+        $(document).on('click', '.deleteHangGui', function () {
+            let index = $(this).data('index');
+            hangGuiList.splice(index, 1); // Remove the HangGui from the list
+            displayHangGuiList(); // Update the displayed list
+        });
+    });
+
+    // Function to display the HangGui list
+    // Function to display the HangGui list
+    function displayHangGuiList() {
+        let container = $('#submittedPackagesContainer');
+        container.empty(); // Clear previous content
+
+        hangGuiList.forEach(function (hangGui, index) {
+            let cardHtml = `
+                    <div class="card mb-3 hangGuiCard m-2" data-index="${index}">
+                        <div class="position-relative">
+                            <div class="card-body">
+                                <div class="row">
+                                    <h5 class="card-title">Tên hàng : ${hangGui.TenHang}</h5>
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Người gửi:</strong> ${hangGui.TenNguoiGui}</p>
+                                        <p class="card-text"><strong>Số điện thoại người gửi:</strong> ${hangGui.SdtNguoiGui}</p>
+                                            <p class="card-text"><strong>Trọng lượng:</strong> ${hangGui.TrongLuong}</p>
+                                                <p class="card-text"><strong>Loại hàng:</strong> ${hangGui.LoaiHang}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p class="card-text"><strong>Người nhận:</strong> ${hangGui.TenNguoiNhan}</p>
+                                        <p class="card-text"><strong>Số điện thoại người nhận:</strong> ${hangGui.SdtNguoiNhan}</p>
+                                        <p class="card-text"><strong>Địa chỉ người nhận:</strong> ${hangGui.DiaChiNguoiNhan}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-danger deleteHangGui position-absolute" data-index="${index}" style="top: 10px; right: 10px;">
+                                <i class="fas fa-trash"></i> Xóa
+                            </button>
+                        </div>
+                    </div>
+                `;
+            container.append(cardHtml);
+        });
+    }
+
+
+</script>

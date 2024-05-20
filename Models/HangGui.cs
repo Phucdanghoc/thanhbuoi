@@ -3,22 +3,30 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ThanhBuoi.Models
 {
+    public enum TrangThaiHang
+    {
+        Waiting,
+        Shipping,
+        Recived
+    }
+
+    public enum LoaiHang 
+    {
+        Xeso,
+        Xetayga,
+        HangNho,
+        HangDacBiet
+    }
     public class HangGui
     {
         [Key]
         public int Id { get; set; }
 
-
         [ForeignKey("ID_TaiKhoan")]
-        public TaiKhoan TaiKhoan { get; set; }
-
-
-        [ForeignKey("ID_DonHangChiTiet")]
-        public DonHangChiTiet DonHangChiTiet { get; set; }
-
+        public TaiKhoan? TaiKhoan { get; set; }
 
         [ForeignKey("ID_Chuyen")]
-        public Chuyen Chuyen { get; set; }
+        public Chuyen? Chuyen { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -44,14 +52,13 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string DiachiNguoiNhan { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string TrangThai { get; set; }
+        public TrangThaiHang? TrangThai { get; set; }
 
-        public DateTime NgayTao { get; set; }
-
+        public DateTime? NgayTao { get; set; }
 
         public double TrongLuong { get; set; }
+
+        public string? LoaiHang { get;set; }
     }
 
 }

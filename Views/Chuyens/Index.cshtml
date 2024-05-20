@@ -40,8 +40,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="ThoiGianDi" class="form-label">Thời Gian Đi</label>
-                        <input for="ThoiGianDi" name="ThoiGianDi" class="form-control" type="datetime-local" required />
+                        <label  class="form-label">Thời Gian Đi</label>
+                        <input id="ThoiGianDi" name="ThoiGianDi" class="form-control" type="datetime-local" required />
                     </div>
                     <div class="mb-3">
                         <label for="GiaSukienID" class="form-label">Giá Sự Kiện</label>
@@ -93,7 +93,6 @@
                             <div class="btn-group" role="group">
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm h-auto">Sửa</a>
                                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-success btn-sm h-auto">Chi tiết</a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm h-auto">Xóa</a>
                             </div>
                         </td>
                     </tr>
@@ -104,8 +103,13 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        const today = new Date().toISOString().slice(0, 16);
+        $('#ThoiGianDi').attr('min', today);
+    });
     function scrollToCreateForm() {
         var formSection = document.getElementById("createFormSection");
         formSection.scrollIntoView({ behavior: 'smooth' });
     }
+
 </script>

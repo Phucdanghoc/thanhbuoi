@@ -36,7 +36,7 @@
                         <span asp-validation-for="LoaiXe" class="text-danger"></span>
                     </div>
                 <div class="mb-3">
-                    <label asp-for="HangXe" class="form-label">Loại xe</label>
+                    <label asp-for="HangXe" class="form-label">Hãng xe</label>
                     <select class="form-select" id="HangXe" asp-for="HangXe" aria-label="Default select example">
                         <option value="">-- Select --</option>
                         @foreach (var item in ViewBag.getHangXe)

@@ -61,6 +61,13 @@
             <p class="mb-2"><strong>Ngày lễ:</strong> @Model.Chuyen.Ngayle </p>
             <p class="mb-2"><strong>Giá tăng:</strong> @Model.Chuyen.GiaTang %</p>
             <p class="mb-2"><strong>Tổng tiền:</strong> <span id="totalPrice"></span></p>
+
+            <div class="form-group p-2">
+                @if (Model.TrangThai == TrangThaiVe.Booked)
+                {
+                    <button type="button" class="btn btn-danger" id="cancelTicketButton" onclick="confirmCancelTicket(@Model.Id)">Hủy vé</button>
+                }
+            </div>
         </div>
 
     </div>
@@ -76,9 +83,14 @@
         var totalIncrease = giaTang * ticketPrice / 100;
         $('#totalPriceIncrease').text(totalIncrease.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
 
+        // Calculate initial total price based on default luggage weight
+        var defaultHanhLi = 0; // Set default luggage weight here
+        var totalPrice = defaultHanhLi > 20 ? ticketPrice + Math.round((defaultHanhLi - 20) * 5000) : ticketPrice;
+        $('#totalPrice').text(totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
+
         $('#hanhLiInput').on('input', function () {
             var hanhLi = $(this).val();
-            var totalPrice = hanhLi > 20 ? ticketPrice + Math.round((hanhLi - 20) * 0.5) : ticketPrice;
+            var totalPrice = hanhLi > 20 ? ticketPrice + Math.round((hanhLi - 20) * 5000) : ticketPrice;
             $('#totalPrice').text(totalPrice.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }));
         });
 
@@ -136,5 +148,28 @@
             }
         });
     });
+
+    function confirmCancelTicket(ticketId) {
+        if (confirm('Bạn có chắc chắn muốn hủy vé này?')) {
+            cancelTicket(ticketId);
+        }
+    }
+
+    function cancelTicket(ticketId) {
+        $.ajax({
+            url: `/api/BookVe/Cancel/${ticketId}`,
+            type: 'POST',
+            headers: {
+                'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+            },
+            success: function (response) {
+                alert(response.message);
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                alert(`Đã xảy ra lỗi khi hủy vé: ${xhr.responseJSON.Message}`);
+            }
+        });
+    }
 </script>
 
