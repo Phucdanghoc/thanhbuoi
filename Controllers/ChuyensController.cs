@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class ChuyensController : Controller
     {
         private readonly DataContext _context;
@@ -15,6 +17,7 @@ namespace ThanhBuoi.Controllers
             _listGiaTang.Add("Tết Nguyên Đán", 0.1);
             _listGiaTang.Add("Quốc khánh", 0.05);
             _listGiaTang.Add("30-4, 1-5", 0.03);
+            _listGiaTang.Add("Mặc định",0 );
             _context = context;
         }
 
@@ -91,7 +94,7 @@ namespace ThanhBuoi.Controllers
                                 Chuyen = chuyen,
                                 TaiKhoan = null,
                                 Ghe = ghe,
-                                Tien = Math.Round(chuyen.Gia * giatang),
+                                Tien = chuyen.Gia + Math.Round(chuyen.Gia * giatang),
                                 Ten = null,
                                 MaVe = null,
                                 Sdt = null,
@@ -121,16 +124,17 @@ namespace ThanhBuoi.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var chuyen = await _context.Chuyens
-                  .Include(x => x.Xe)
-                  .Include(t => t.Tuyen)
-                  .FirstOrDefaultAsync(c => c.Id == id);
+                .Include(x => x.Xe)
+                .Include(t => t.Tuyen)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
             if (chuyen == null)
             {
                 return View();
             }
             ViewBag.listVe = await _context.Ves.Include(c => c.Chuyen)
                 .Include(g => g.Ghe)
-                .Include(t => t.TaiKhoan)
+                .Include(t => t.TaiKhoan).Where(c => c.Chuyen.Id == id)
                 .ToListAsync();
 
             return View(chuyen);

@@ -1,4 +1,5 @@
 ﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
@@ -6,6 +7,8 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+
+    [Authorize(Roles = "ADMIN")]
     public class XesController : Controller
     {
         private readonly DataContext _context;
@@ -30,7 +33,7 @@ namespace ThanhBuoi.Controllers
                 return NotFound();
             }
 
-            var xe = await _context.Xes
+            var xe = await _context.Xes.Include(c => c.Chuyens).Include(l => l.LoaiXe)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (xe == null)
             {

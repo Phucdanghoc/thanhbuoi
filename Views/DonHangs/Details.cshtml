@@ -1,66 +1,178 @@
 ﻿@model ThanhBuoi.Models.DonHang
-
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Xác nhận đơn hàng";
 }
 
-<h1>Details</h1>
+<div class="container container-custom mt-5 bg-light">
+    <h2>Xác nhận đơn hàng</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-custom">
+                <div class="card-body card-body-custom">
+                    <h3>Chi tiết đơn hàng</h3>
+                    <p><strong>Trạng thái:</strong> @Model.Trangthai</p>
+                    <p><strong>Ngày tạo:</strong> @Model.NgayTao</p>
+                    <p><strong>Tổng tiền:</strong> @Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div>
-    <h4>DonHang</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RequestId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RequestId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Id_momoRes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id_momoRes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Tien)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Tien)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TienPhaiTra)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TienPhaiTra)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PhuongThucThanhToan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PhuongThucThanhToan)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Mota)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Mota)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Trangthai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Trangthai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NgayTao)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NgayTao)
-        </dd>
-    </dl>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Danh sách hàng</h3>
+            @if (ViewBag.listChitietDonhang != null)
+            {
+                @foreach (var chitiet in ViewBag.listChitietDonhang)
+                {
+                    <div class="card card-custom">
+                        <div class="card-body card-body-custom">
+                            <h5 class="card-title">Tên hàng: @chitiet.HangGui.TenHang</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p class="card-text"><strong>Người gửi:</strong> @chitiet.HangGui.TenNguoiGui</p>
+                                    <p class="card-text"><strong>Số điện thoại người gửi:</strong> @chitiet.HangGui.SdtNguoiGui</p>
+                                    <p class="card-text"><strong>Trọng lượng:</strong> @chitiet.HangGui.TrongLuong</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="card-text"><strong>Người nhận:</strong> @chitiet.HangGui.TenNguoiNhan</p>
+                                    <p class="card-text"><strong>Số điện thoại người nhận:</strong> @chitiet.HangGui.SdtNguoiNhan</p>
+                                    <p class="card-text"><strong>Địa chỉ người nhận:</strong> @chitiet.HangGui.DiachiNguoiNhan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>Không có hàng trong đơn hàng này.</p>
+            }
+        </div>
+    </div>
+
+    <form id="orderForm">
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="form-group form-group-custom">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" value="@Model.email"
+                    @(Model.email != null ? "disabled" : "") required>
+                </div>
+                <div class="form-group form-group-custom">
+                    <label for="mota">Mô tả:</label>
+                    <textarea class="form-control" id="mota" name="mota"
+                    @(Model.Mota != null ? "disabled" : "")>@Model.Mota</textarea>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group form-group-custom">
+                    <label>Phương thức thanh toán:</label><br>
+                  
+                    <div class="row">
+                        @if (Model.PhuongThucThanhToan == "momo"){
+                            <div class="col-md-6 text-center">
+                                <input type="radio" id="momo" name="paymentMethod" value="momo" checked disable required>
+                                <label for="momo">Momo</label><br>
+                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                            </div>
+                        }else if (Model.PhuongThucThanhToan == "momo")
+                        {
+                            <div class="col-md-6 text-center">
+                                <input type="radio" id="tienmat" name="paymentMethod" value="cash"  checked disable required>
+                                <label for="tienmat">Tiền mặt</label><br>
+                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-6 text-center">
+                                <input type="radio" id="momo" name="paymentMethod" value="momo"  required>
+                                <label for="momo">Momo</label><br>
+                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                            </div>
+                            <div class="col-md-6 text-center">
+                                <input type="radio" id="tienmat" name="paymentMethod" value="cash"  required>
+                                <label for="tienmat">Tiền mặt</label><br>
+                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
+                            </div>
+                        }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.Trangthai == TrangThaiDonHang.Waiting)
+        {
+            <div id="loadingSpinner" hidden>
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                    <button type="button" class="btn btn-custom" id="btnThanhToan">Thanh toán</button>
+                    <button type="button" class="btn btn-secondary" id="btnHuyDon">Hủy đơn hàng</button>
+                </div>
+            </div>
+        }
+    </form>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#btnThanhToan").click(function (e) {
+                e.preventDefault();
+                $("#loadingSpinner").show();
+
+                var orderData = {
+                    email: $("#email").val(),
+                    mota: $("#mota").val(),
+                    paymentMethod: $("input[name='paymentMethod']:checked").val() ?? "Null",
+                    id: @Model.Id
+                                };
+
+                fetch("/api/donhang/Checkout", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(orderData)
+                })
+                    .then(response => {
+                        $("#loadingSpinner").hide();
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert("Đơn hàng của bạn đã được thanh toán thành công!");
+                        window.location.href = "/DonHang/Create";
+                    })
+                    .catch(error => {
+                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                    });
+            });
+
+            $("#btnHuyDon").click(function (e) {
+                e.preventDefault();
+                var orderId = @Model.Id;
+                $.ajax({
+                    type: "DELETE",
+                    url: `/api/donhang/cancel/${orderId}`,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        alert("Đơn hàng của bạn đã được hủy thành công!");
+                        window.location.href = "/DonHang/Create";
+                    },
+                    error: function (error) {
+                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                    }
+                });
+            });
+        });
+    </script>
+}

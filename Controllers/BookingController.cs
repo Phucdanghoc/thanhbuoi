@@ -1,23 +1,25 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing.Printing;
+using Org.BouncyCastle.Utilities;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
+using ThanhBuoi.Services;
 
 namespace ThanhBuoi.Controllers
 {
-
+    [Authorize(Roles = "ADMIN,SALER")]
     public class BookingController : Controller
     {
-        private const int PageSize = 10; // Số lượng chuyến trên mỗi trang
+        private const int PageSize = 10;
         UserManager<TaiKhoan> _userManager;
-
+        private IEmailService _emailService;
         private readonly DataContext _context;
-        public BookingController(DataContext context, UserManager<TaiKhoan> userManager) {
+        public BookingController(DataContext context, UserManager<TaiKhoan> userManager,IEmailService emailService) {
             _context = context;
             _userManager = userManager;
+            _emailService = emailService;
 
         }
         // GET: BookingController
@@ -30,7 +32,6 @@ namespace ThanhBuoi.Controllers
             }
             catch (Exception ex)
             {
-                // Xử lý ngoại lệ, ví dụ: ghi log, hiển thị thông báo lỗi, ...
                 ViewBag.ErrorMessage = "Đã xảy ra lỗi khi tải danh sách chuyến. Vui lòng thử lại sau.";
                 return View();
             }
@@ -88,7 +89,7 @@ namespace ThanhBuoi.Controllers
                     ve.CMND = CMND;
                     ve.Sdt = SDT;
                     ve.MaVe = $"TB-{ve.Chuyen.ThoiGianDi.Day}-{ve.Chuyen.Xe.MaXe}{Id}";
-                    ve.TrangThai = TrangThaiVe.Booked;
+                    ve.TrangThai = TrangThaiVe.Waiting;
                     ve.TaiKhoan = await _userManager.GetUserAsync(HttpContext.User);
                     ve.Ghe.KhoangTrong = false;
                     ve.Hanhli = HanhLi;
@@ -100,13 +101,12 @@ namespace ThanhBuoi.Controllers
                     {
                         ve.Tien = ve.Chuyen.Gia;
                     }
-
                 }
                 _context.Chuyens.Update(ve.Chuyen);
                 _context.Ves.Update(ve);
                 await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Đặt vé thành công";
-                return RedirectToAction("Ve", "Booking", new { id = Id });
+
+                return RedirectToAction("Payment", "Booking", new { id = Id });
             }
             catch (Exception e)
             {
@@ -115,12 +115,47 @@ namespace ThanhBuoi.Controllers
 
             }
         }
+        [HttpGet]
+        public async Task<IActionResult> Payment(int id)
+        {
+            var ve = await _context.Ves.Include(c => c.Chuyen).ThenInclude(x => x.Xe)
+               .Include(g => g.Ghe)
+               .FirstOrDefaultAsync(v => v.Id == id);
+            return View(ve);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Payment(int id,string email,string paymentmethod)
+        {
+
+            if (id != null)
+            {
+                var ve = await _context.Ves.Include(c => c.Chuyen).ThenInclude(x => x.Xe).ThenInclude(l => l.LoaiXe)
+                   .Include(g => g.Ghe)
+                   .FirstOrDefaultAsync(v => v.Id == id);
+                if (paymentmethod == null)
+                {
+                    TempData["ErrorrMessage"] = "Chưa chọn phương thức thanh toán";
+                    return View(ve);
+                }
+                ve.TrangThai = TrangThaiVe.Booked;
+                _context.Ves.Update(ve);
+                await _context.SaveChangesAsync();
+                if (email != null)
+                {
+                    string body =  _emailService.makeBodyTicketBooked(ve);
+                    await _emailService.SendEmailAsync(email, "Xác nhận vé xe ", body);
+                }
+                TempData["SuccessMeassge"] = "Thanh toán thành công! Nhắc khách hàng kiẻm tra email";
+                return View(ve);
+            }
+            TempData["ErrorrMessage"] = "Vé không tồn tại";
+            return View();
+        }
         public async Task<IActionResult> Ve(int id)
         {
             // Lấy danh sách vé cho chuyến này
-            var ve = await _context.Ves.Include(c =>  c.Chuyen)
+            var ve = await _context.Ves.Include(c =>  c.Chuyen).ThenInclude(x => x.Xe)
                 .Include(g => g.Ghe)
-                .Include(t => t.TaiKhoan)
                 .FirstOrDefaultAsync(v => v.Id == id);
             return View(ve);
         }

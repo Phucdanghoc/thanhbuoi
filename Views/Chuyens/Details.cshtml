@@ -1,48 +1,60 @@
 ﻿@model ThanhBuoi.Models.Chuyen
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Chuyến Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
+    <div class="card mb-4 bg-light rounded">
+        <div class="card-header bg-primary p-2">
+            <h4 class="card-title text-white">Thông tin của tuyến </h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-3">Chuyến:</dt>
+                <dd class="col-sm-9">@Model.Ten</dd>
 
-<div>
-    <h4>Chuyen</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ten)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ten)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DiemDon)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DiemDon)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThoiGianDi)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThoiGianDi)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Trangthai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Trangthai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gia)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                <dt class="col-sm-3">Điểm đón:</dt>
+                <dd class="col-sm-9">@Model.DiemDon</dd>
+
+                <dt class="col-sm-3">Thời gian đi:</dt>
+                <dd class="col-sm-9">@Model.ThoiGianDi</dd>
+
+                <dt class="col-sm-3">Trạng thái:</dt>
+                <dd class="col-sm-9">@Model.Trangthai</dd>
+
+                <dt class="col-sm-3">Giá:</dt>
+                <dd class="col-sm-9">@Model.Gia.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</dd>
+            </dl>
+        </div>
+        <div class="card-footer">
+            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+
+    <h3 class="my-4">Danh sách vé</h3>
+    <div class="row row-cols-1 row-cols-md-5 g-4 bg-light rounded-1">
+        @foreach (var ve in ViewBag.listVe)
+        {
+            <div class="col">
+                <div class="card h-70">
+                    <div class="card-body">
+                        @if (ve.MaVe == null)
+                        {
+                            <div class="badge bg-success mb-2">Trống</div>
+                        }
+                        else
+                        {
+                            <div class="badge bg-danger mb-2">Đã Đặt</div>
+                        }
+                        <h5 class="card-title">Số Ghế: @ve.Ghe.Ten</h5>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-controller="Booking" asp-action="Ve" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

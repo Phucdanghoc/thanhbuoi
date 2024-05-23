@@ -35,7 +35,7 @@ namespace ThanhBuoi.Models
         public TrangThaiDonHang? Trangthai { get; set; }
 
         public DateTime NgayTao { get; set; }
-
+        public string? email { get; set; }
         public ICollection<DonHangChiTiet> DonHangChiTiets { get; set; }
     }
 }

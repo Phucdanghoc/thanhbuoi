@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -11,6 +11,7 @@ namespace ThanhBuoi.APIS
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "ADMIN")]
     public class Chuyen : ControllerBase
     {
         private readonly Dictionary<string, double> _listGiaTang = new Dictionary<string, double>();

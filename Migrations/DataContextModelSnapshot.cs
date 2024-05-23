@@ -274,6 +274,9 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("int");
 
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TaiKhoanId");
@@ -443,6 +446,9 @@ namespace ThanhBuoi.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("LoaiGheXe")
+                        .HasColumnType("int");
 
                     b.Property<string>("Ma")
                         .IsRequired()

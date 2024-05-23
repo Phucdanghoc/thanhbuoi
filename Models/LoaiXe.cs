@@ -3,6 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ThanhBuoi.Models
 {
+
+    public enum LoaiGheXe
+    {
+        GiuongNam,
+        Ngoi
+    }
     public class LoaiXe
     {
         [Key]
@@ -16,9 +22,11 @@ namespace ThanhBuoi.Models
         [StringLength(50)]
         public string Ma { get; set; }
 
-
         [Required]
         [StringLength(50)]  
         public string Mota { get; set;}
+
+        public LoaiGheXe LoaiGheXe { get; set; }
+      
     }
 }

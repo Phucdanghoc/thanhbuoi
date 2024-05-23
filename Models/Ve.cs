@@ -8,6 +8,7 @@ namespace ThanhBuoi.Models
         Cancel,
         Empty,
         Booked,
+        Waiting
     }
     public class Ve
     {

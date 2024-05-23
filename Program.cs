@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Models;
 using ThanhBuoi.Data;
 using Microsoft.AspNetCore.Identity;
+using ThanhBuoi.Services;
+using ThanhBuoi.Models.DTO;
 
 internal class Program
 {
@@ -15,6 +17,8 @@ internal class Program
         {
             options.UseSqlServer(configuration.GetConnectionString("DbContext"));
         });
+        builder.Services.Configure<EmailSetting>(builder.Configuration.GetSection("EmailSettings"));
+        builder.Services.AddTransient<IEmailService, EmailService>();
         builder.Services.AddDefaultIdentity<TaiKhoan>(options =>
                                                options.SignIn.RequireConfirmedAccount = false)
             .AddRoles<IdentityRole>()
@@ -32,12 +36,10 @@ internal class Program
             app.UseHsts();
         }
 
-    
-    app.UseHttpsRedirection();
+        app.UseAuthentication(); ;
+        app.UseHttpsRedirection();
         app.UseStaticFiles();
-
         app.UseRouting();
-
         app.UseAuthorization();
         app.MapRazorPages();
         app.MapControllerRoute(

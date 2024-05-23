@@ -6,8 +6,9 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+    [Authorize(Roles = "ADMIN,SALER")]
     public class HomeController : Controller
-    {
+        {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<TaiKhoan> _singManager;
         private readonly UserManager<TaiKhoan> _userManager;
@@ -18,10 +19,7 @@ namespace ThanhBuoi.Controllers
             _logger = logger;
             _singManager = signInManager;
             _userManager = _userManager;
-
-
         }
-        [Authorize]
         public IActionResult Index()
         {
             return View();

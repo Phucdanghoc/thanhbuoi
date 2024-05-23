@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,8 +10,10 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.APIS
 {
+ 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] 
     public class BookVe : ControllerBase
     {
         private readonly DataContext _context;

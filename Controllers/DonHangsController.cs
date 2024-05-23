@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +12,12 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+
+    [Authorize(Roles = "ADMIN")]
     public class DonHangsController : Controller
     {
         private readonly DataContext _context;
+        private const int PageSize = 10;
 
         public DonHangsController(DataContext context)
         {
@@ -20,26 +25,59 @@ namespace ThanhBuoi.Controllers
         }
 
         // GET: DonHangs
-        public async Task<IActionResult> Index()
+        // GET: DonHangs
+        public IActionResult Index(int page = 1, string searchString = null)
         {
-            return View(await _context.DonHangs.ToListAsync());
+            try
+            {
+                var listDonHang = GetPaginatedDonHangs(page, searchString);
+                return View(listDonHang);
+            }
+            catch (Exception ex)
+            {
+                // Handle exception, e.g., log it, display an error message, etc.
+                ViewBag.ErrorMessage = "Đã xảy ra lỗi khi tải danh sách đơn hàng. Vui lòng thử lại sau.";
+                return View();
+            }
+        }
+
+        private IEnumerable<DonHang> GetPaginatedDonHangs(int page, string searchString = null)
+        {
+            var query = _context.DonHangs.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                query = query.Where(d =>d.PhuongThucThanhToan.Contains(searchString) || d.Mota.Contains(searchString) || d.email.Contains(searchString));
+            }
+
+            int startIndex = (page - 1) * PageSize;
+            var listDonHang = query.OrderByDescending(d => d.NgayTao).Skip(startIndex).Take(PageSize).ToList();
+            int totalDonHangs = query.Count();
+            int totalPages = (int)Math.Ceiling((double)totalDonHangs / PageSize);
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+
+            return listDonHang;
+        }
+
+        // Other actions like Details, Create, Edit, Delete ...
+
+        private bool DonHangExists(int id)
+        {
+            return _context.DonHangs.Any(e => e.Id == id);
         }
 
         // GET: DonHangs/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var donHang = await _context.DonHangs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (donHang == null)
-            {
-                return NotFound();
-            }
-
+            DonHang donHang = await _context.DonHangs.FirstOrDefaultAsync(d => d.Id == id);
+            var listChitietDonhang = await _context.DonHangChiTiets
+                                                .Include(d => d.HangGui)
+                                                .Where(c => c.DonHang.Id == id)
+                                                .ToListAsync();
+            ViewBag.listChitietDonhang = listChitietDonhang;
             return View(donHang);
         }
 
@@ -48,10 +86,6 @@ namespace ThanhBuoi.Controllers
         {
             return View();
         }
-
-        // POST: DonHangs/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,RequestId,Id_momoRes,Tien,TienPhaiTra,PhuongThucThanhToan,Mota,Trangthai,NgayTao")] DonHang donHang)
@@ -80,10 +114,6 @@ namespace ThanhBuoi.Controllers
             }
             return View(donHang);
         }
-
-        // POST: DonHangs/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,RequestId,Id_momoRes,Tien,TienPhaiTra,PhuongThucThanhToan,Mota,Trangthai,NgayTao")] DonHang donHang)
@@ -149,9 +179,6 @@ namespace ThanhBuoi.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DonHangExists(int id)
-        {
-            return _context.DonHangs.Any(e => e.Id == id);
-        }
+
     }
 }

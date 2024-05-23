@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+    [Authorize(Roles = "ADMIN")] 
     public class DiadiemsController : Controller
     {
         private readonly DataContext _context;

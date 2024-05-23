@@ -1,0 +1,29 @@
+﻿@model ThanhBuoi.Models.DTO.RegisterDTO
+
+@{
+    ViewBag.Title = "Create Account";
+}
+
+<div class="container ">
+  <form  asp-action="Create" >
+        <h2>Tạo tài khoảng mới</h2>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password)
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SDT)
+            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ten)
+            @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create Account</button>
+    </form>
+</div>

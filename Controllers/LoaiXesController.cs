@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,7 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
+    [Authorize(Roles = "ADMIN")]
     public class LoaiXesController : Controller
     {
         private readonly DataContext _context;
@@ -54,19 +56,34 @@ namespace ThanhBuoi.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public async Task<IActionResult> Create([Bind("Ten,Mota")] LoaiXe loaiXe, int SoGhe, string LoaiGhe)
+        public async Task<IActionResult> Create([Bind("Ten, Mota")] LoaiXe loaiXe, int SoGhe, string LoaiGhe)
         {
+            if (LoaiGhe == null)
+            {
+                TempData["ErrorMessage"] = "Loại ghế không được để trống.";
+                return RedirectToAction(nameof(Index));
+            }
             loaiXe.Ma = $"{SoGhe}-{LoaiGhe}";
-                if (_context.loaiXes.Any(x => x.Ten == loaiXe.Ten))
-                {
-                    TempData["ErrorMessage"] = "Tên đã tồn tại.";
-                    return RedirectToAction(nameof(Index));
-                }
-                _context.Add(loaiXe);
+            loaiXe.LoaiGheXe = LoaiGhe.Contains("GN") ? LoaiGheXe.GiuongNam : LoaiGheXe.Ngoi;
+            if (_context.loaiXes.Any(x => x.Ten == loaiXe.Ten))
+            {
+                TempData["ErrorMessage"] = "Tên đã tồn tại.";
+                return RedirectToAction(nameof(Index));
+            }
+            _context.Add(loaiXe);
+            try
+            {
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
-                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.WriteLine(ex.Message);
+                TempData["ErrorMessage"] = "Đã xảy ra lỗi khi lưu dữ liệu. Vui lòng thử lại.";
+            }
+            return RedirectToAction(nameof(Index));
         }
+
         // GET: LoaiXes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

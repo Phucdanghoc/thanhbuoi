@@ -1,43 +1,59 @@
 ﻿@model ThanhBuoi.Models.Xe
 
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Views/_ViewImports.cshtml";
+    ViewData["Title"] = "Chi tiết xe";
 }
 
-<h1>Details</h1>
+<div class="container">
 
-<div>
-    <h4>Xe</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ten)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ten)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BienSo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BienSo)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MaXe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MaXe)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LoaiXe)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LoaiXe)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <div class="card mb-4">
+        <h5 class="card-header">Thông tin xe </h5>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4">Tên Xe:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.Ten)</dd>
+                <dt class="col-sm-4">Biển số:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.BienSo)</dd>
+                <dt class="col-sm-4">Mã Xe:</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(model => model.MaXe)</dd>
+                <dt class="col-sm-4">Loại Xe:</dt>
+                <dd class="col-sm-8">@(@Model.LoaiXe.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</dd>
+
+            </dl>
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">Trips Associated with this Vehicle</h5>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tên chuyến </th>
+                            <th>Thời gian đi</th>
+                            <th>Giá vé</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var chuyen in Model.Chuyens)
+                        {
+                            <tr>
+                                <td>@chuyen.Ten</td>
+                                <td>@chuyen.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@chuyen.Gia.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+                                <td><a asp-action="Details" asp-route-id="@chuyen.Id">Chi tiết</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa </a>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại </a>
+    </div>
 </div>
