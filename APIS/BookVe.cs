@@ -30,10 +30,10 @@ namespace ThanhBuoi.APIS
         public async Task<ActionResult<Ve>> Get(int id)
         {
             var ve = await _context.Ves
-                .Include(c => c.Chuyen) // Include the related 'Chuyen' entity
-                .Include(g => g.Ghe)    // Include the related 'Ghe' entity
-                .Include(t => t.TaiKhoan) // Include the related 'TaiKhoan' entity
-                .FirstOrDefaultAsync(v => v.Id == id); // Find the ticket by id
+                .Include(c => c.Chuyen)
+                .Include(g => g.Ghe)
+                .Include(t => t.TaiKhoan)
+                .FirstOrDefaultAsync(v => v.Id == id);
 
             if (ve == null)
             {
@@ -42,7 +42,6 @@ namespace ThanhBuoi.APIS
 
             return Ok(ve); 
         }
-        // POST api/<BookVe>
         // POST api/BookVe/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

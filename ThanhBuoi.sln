@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThanhBuoi", "ThanhBuoi.csproj", "{27158E04-D8B5-48E1-B453-5832D7CDD523}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThanhBuoiAPI", "..\ThanhBuoiAPI\ThanhBuoiAPI.csproj", "{6458BD44-435C-4DD6-B1D1-931DDA28BB25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{27158E04-D8B5-48E1-B453-5832D7CDD523}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27158E04-D8B5-48E1-B453-5832D7CDD523}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27158E04-D8B5-48E1-B453-5832D7CDD523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6458BD44-435C-4DD6-B1D1-931DDA28BB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6458BD44-435C-4DD6-B1D1-931DDA28BB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6458BD44-435C-4DD6-B1D1-931DDA28BB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6458BD44-435C-4DD6-B1D1-931DDA28BB25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

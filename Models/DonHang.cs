@@ -15,6 +15,8 @@ namespace ThanhBuoi.Models
         [Key]
         public int Id { get; set; }
 
+        public string MaDon {  get; set; }
+
         [StringLength(255)]
         public string? RequestId { get; set; }
 

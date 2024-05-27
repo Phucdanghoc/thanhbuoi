@@ -246,6 +246,10 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("MaDon")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Mota")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -707,6 +711,9 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
+
+                    b.Property<string>("email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

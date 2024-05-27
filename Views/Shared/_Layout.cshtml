@@ -5,6 +5,8 @@
 @inject UserManager<TaiKhoan> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
+    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "Admin");
+    var isManager = user != null && await UserManager.IsInRoleAsync(user, "Manager");
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -81,15 +83,23 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
-                    <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
-                    <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
-                    <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
-                    <a asp-controller="TaiKhoan" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Tài Khoản</a>
-                    <a asp-controller="Donhangs" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Đơn hàng</a>
-                    <a asp-controller="Chuyens" asp-action="Index" class="nav-item nav-link"><i class="bi bi-pause-circle me-2"></i>Chuyến</a>
                     <a asp-controller="Booking" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Đặt Vé</a>
                     <a asp-controller="GuiHang" asp-action="Create" class="nav-item text-light nav-link btn btn-primary mt-4">Gửi Hàng</a>
+                    @if (isAdmin)
+                    {
+                        <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
+                        <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
+                        <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
+                        <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
+                        <a asp-controller="TaiKhoan" asp-action="Index" class="nav-item nav-link"><i class="bi bi-person me-2"></i>Tài Khoản</a>
+                        <a asp-controller="Donhangs" asp-action="Index" class="nav-item nav-link"><i class="bi bi-cart me-2"></i>Đơn hàng</a>
+                        <a asp-controller="Chuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Chuyến</a>
+                        <a asp-controller="DoanhThu" asp-action="Index" class="nav-item nav-link"><i class="bi bi-graph-up me-2"></i>Doanh Thu</a>
+
+                    }
+                
+                  
+
                 </div>
             </nav>
         </div>

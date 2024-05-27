@@ -5,6 +5,7 @@ using ThanhBuoi.Data;
 using Microsoft.AspNetCore.Identity;
 using ThanhBuoi.Models.DTO;
 using ThanhBuoi.Services;
+using System;
 
 namespace ThanhBuoi.APIS
 {
@@ -56,16 +57,19 @@ namespace ThanhBuoi.APIS
             {
                 return BadRequest("No HangGui objects were provided.");
             }
+            var chuyen = await _context.Chuyens.FirstOrDefaultAsync(c => c.Id == hangGuis[0].IdChuyen);
+
             DonHang donHang = new DonHang
             {
                 NgayTao = DateTime.Now,
-                Trangthai = TrangThaiDonHang.Waiting
+                Trangthai = TrangThaiDonHang.Waiting,
+                MaDon = $"{chuyen.Id}{int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"))}"
             };
             foreach (var hang in hangGuis)
             {
                 hang.NgayTao = DateTime.Now;
                 hang.TrangThai = TrangThaiHang.Waiting;
-                hang.Chuyen = await _context.Chuyens.FirstOrDefaultAsync(c => c.Id == hang.IdChuyen);
+                hang.Chuyen = chuyen;
                 hang.TaiKhoan = await _userManager.GetUserAsync(HttpContext.User);
                 double basePrice = (double)(hang.Chuyen.Gia * (1 + hang.Chuyen.GiaTang));
                 double finalPrice = basePrice + (basePrice * dictGiaHang[hang.LoaiHang]);

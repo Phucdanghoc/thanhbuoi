@@ -1,0 +1,287 @@
+﻿@{
+    ViewData["Title"] = "Bootstrap Tab Example";
+}
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    .tab-container {
+        background-color: #f8f9fa;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px;
+    }
+
+    .tab-content .content {
+        margin-top: 20px;
+    }
+
+    .tab-pane {
+        padding: 20px;
+    }
+</style>
+
+
+
+<div class="tab-container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Tổng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Hàng</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Vé</a>
+        </li>
+    </ul>
+    <div class="tab-content bg-white" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+            <div class="container-fluid pt-4">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-primary" onclick="getTotalRevenue('today')">Today</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('yesterday')">Yesterday</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('thisweek')">This Week</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('thismonth')">This Month</button>
+                       @*  <input type="date" id="customDate">
+                        <button class="btn btn-primary" onclick="getTotalRevenue('custom')">Show</button> *@
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid pt-4">
+                <div class="row">
+                    <div class="col-sm-4 ">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Tổng tiền Vé</p>
+                                <h6 class="mb-0" id="total-ve">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Tổng tiền Hàng</p>
+                                <h6 class="mb-0" id="total-hang">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 ">
+                        <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Tổng tiền Hàng</p>
+                                <h6 class="mb-0" id="total-all">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Multiple Line Chart</h6>
+                        <canvas id="salse-revenue"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class="col-sm-12 col-xl-12">
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Single Line Chart</h6>
+                        <canvas id="line-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+            <h2>Content of Hàng</h2>
+            <p>This is the content of Hàng.</p>
+        </div>
+        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+            <h2>Content of Vé</h2>
+            <p>This is the content of Vé.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getTotalRevenue(period) {
+        let fromDate, toDate;
+
+        switch (period) {
+            case 'today':
+                fromDate = toDate = new Date().toISOString().split('T')[0];
+                break;
+            case 'yesterday':
+                const yesterday = new Date();
+                yesterday.setDate(yesterday.getDate() - 1);
+                fromDate = toDate = yesterday.toISOString().split('T')[0];
+                break;
+            case 'thisweek':
+                const today = new Date();
+                const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
+                const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+                fromDate = firstDay.toISOString().split('T')[0];
+                toDate = lastDay.toISOString().split('T')[0];
+                break;
+            case 'thismonth':
+                const firstDate = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+                const lastDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
+                fromDate = firstDate.toISOString().split('T')[0];
+                toDate = lastDate.toISOString().split('T')[0];
+                break;
+            case 'custom':
+                const customDate = document.getElementById('customDate').value;
+                fromDate = toDate = customDate;
+                break;
+            default:
+                break;
+        }
+
+        fetch(`/api/doanhthu/total?fromDate=${fromDate}&toDate=${toDate}`)
+            .then(response => response.json())
+            .then(data => {
+                processData(data);
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+    }
+
+    // Hàm vẽ biểu đồ
+    function drawCharts(listDate, listTotalHang, listTotalVe, listTotal) {
+        // Destroy existing charts
+        if (window.myChart2) {
+            window.myChart2.destroy();
+        }
+        if (window.myChart3) {
+            window.myChart3.destroy();
+        }
+
+        // Multiple Line Chart
+        var ctx2 = $("#salse-revenue").get(0).getContext("2d");
+        window.myChart2 = new Chart(ctx2, {
+            type: "line",
+            data: {
+                labels: listDate,
+                datasets: [{
+                    label: "Vé",
+                    data: listTotalVe,
+                    backgroundColor: "rgba(0, 156, 255, .5)",
+                    fill: true
+                },
+                {
+                    label: "Đơn hàng",
+                    data: listTotalHang,
+                    backgroundColor: "rgba(0, 156, 255, .3)",
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+
+        // Single Line Chart
+        var ctx3 = $("#line-chart").get(0).getContext("2d");
+        window.myChart3 = new Chart(ctx3, {
+            type: "line",
+            data: {
+                labels: listDate,
+                datasets: [{
+                    label: "Tổng doanh thu",
+                    fill: false,
+                    backgroundColor: "rgba(0, 156, 255, .3)",
+                    data: listTotal
+                }]
+            },
+            options: {
+                responsive: true
+            }
+        });
+    }
+
+    function processData(data) {
+        console.log(data);
+        var listDate = [];
+        var listTotalHang = [];
+        var listTotalVe = [];
+        var listTotal = [];
+        data.$values.forEach(function (item) {
+            listDate.push(formatDate(item.datetime));
+            listTotalHang.push(item.totalHang);
+            listTotalVe.push(item.totalVe);
+            listTotal.push(item.totalHang + item.totalVe);
+        });
+        const totalHang = sumArray(listTotalHang);
+        const totalVe = sumArray(listTotalVe);
+        console.log(totalHang, totalVe)
+        setTotal(totalVe, totalHang);
+        drawCharts(listDate, listTotalHang, listTotalVe, listTotal);
+    }
+    function formatVND(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
+    function setTotal(totalVe, totalHang) {
+        $("#total-ve").text(formatVND(totalVe));
+        $("#total-hang").text(formatVND(totalHang));
+        var totalAll = totalVe + totalHang;
+        $("#total-all").text(formatVND(totalAll));
+    }
+    function sumArray(arr) {
+        return arr.reduce((acc, val) => acc + val, 0);
+    }
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return `${day}/${month.toString().padStart(2, '0')}`;
+    }
+    $(document).ready(function () {
+        // Mặc định hiển thị tab "Tổng"
+        $('#tab2-tab').tab('show');
+
+        // Xử lý sự kiện click vào tab để hiển thị tab tương ứng
+        $('#myTab a').on('click', function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        // Xử lý URL hash để mở tab cụ thể
+        var hash = window.location.hash;
+        if (hash) {
+            $('#myTab a[href="' + hash + '"]').tab('show');
+        }
+
+        // Hiển thị tab "Tổng" và vẽ biểu đồ khi tab được hiển thị
+        $('#tab2-tab').on('shown.bs.tab', function () {
+            drawCharts();
+        });
+
+        
+
+        // Vẽ biểu đồ khi tải trang
+        drawCharts();
+    });
+
+    // Các hàm để mở tab cụ thể
+    function openTongTab() {
+        $('#tab2-tab').tab('show');
+    }
+
+    function openHangTab() {
+        $('#tab3-tab').tab('show');
+    }
+
+    function openVeTab() {
+        $('#tab4-tab').tab('show');
+    }
+</script>

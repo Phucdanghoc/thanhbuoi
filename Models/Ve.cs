@@ -24,10 +24,14 @@ namespace ThanhBuoi.Models
 
         public string? MaVe { get; set; }    
 
+ 
+
         [ForeignKey("ID_Ghe")]
         public Ghe Ghe { get; set; }
 
         public double Tien { get; set; }
+
+        public string? email {  get; set; }
 
         [StringLength(255)]
         public string? Ten { get; set; }

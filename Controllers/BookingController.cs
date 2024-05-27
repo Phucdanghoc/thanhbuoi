@@ -15,6 +15,7 @@ namespace ThanhBuoi.Controllers
         private const int PageSize = 10;
         UserManager<TaiKhoan> _userManager;
         private IEmailService _emailService;
+        private List<int> _listIdBooked = new List<int>();
         private readonly DataContext _context;
         public BookingController(DataContext context, UserManager<TaiKhoan> userManager,IEmailService emailService) {
             _context = context;
@@ -74,90 +75,166 @@ namespace ThanhBuoi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(int Id, String SDT, String CMND, String Ten,int HanhLi)
+        public async Task<ActionResult> BookTickets(List<Ve> veList)
         {
             try
             {
-                Ve? ve = await _context.Ves
-                    .Include(g =>g.Ghe)
-                    .Include(c => c.Chuyen)
-                    .ThenInclude(x => x.Xe)
-                    .FirstOrDefaultAsync(v => v.Id == Id);
-                if (ve != null)
+                List<String> codeTickets = [];
+                foreach (var ve in veList)
                 {
-                    ve.Ten = Ten;
-                    ve.CMND = CMND;
-                    ve.Sdt = SDT;
-                    ve.MaVe = $"TB-{ve.Chuyen.ThoiGianDi.Day}-{ve.Chuyen.Xe.MaXe}{Id}";
-                    ve.TrangThai = TrangThaiVe.Waiting;
-                    ve.TaiKhoan = await _userManager.GetUserAsync(HttpContext.User);
-                    ve.Ghe.KhoangTrong = false;
-                    ve.Hanhli = HanhLi;
-                    if (ve.Hanhli > 20)
+                    Ve? existingVe = await _context.Ves
+                        .Include(g => g.Ghe)
+                        .Include(c => c.Chuyen)
+                        .ThenInclude(x => x.Xe)
+                        .FirstOrDefaultAsync(v => v.Id == ve.Id);
+
+                    if (existingVe != null)
                     {
-                        ve.Tien = ve.Chuyen.Gia + Math.Round((ve.Hanhli - 20) * 0.5);
-                    }
-                    else
-                    {
-                        ve.Tien = ve.Chuyen.Gia;
+                        existingVe.Ten = ve.Ten;
+                        existingVe.CMND = ve.CMND;
+                        existingVe.Sdt = ve.Sdt;
+                        existingVe.MaVe = $"TB-{existingVe.Chuyen.ThoiGianDi.Day}-{existingVe.Chuyen.Xe.MaXe}{existingVe.Id}";
+                        existingVe.TrangThai = TrangThaiVe.Waiting;
+                        existingVe.TaiKhoan = await _userManager.GetUserAsync(HttpContext.User);
+                        existingVe.Ghe.KhoangTrong = false;
+                        existingVe.NgayTao = DateTime.Now;
+                        existingVe.Hanhli = ve.Hanhli;
+
+                        if (existingVe.Hanhli > 20)
+                        {
+                            existingVe.Tien = existingVe.Chuyen.Gia + Math.Round((existingVe.Hanhli - 20) * 0.1 * existingVe.Chuyen.Gia);
+                        }
+                        else
+                        {
+                            existingVe.Tien = existingVe.Chuyen.Gia;
+                        }
+
+                        _context.Chuyens.Update(existingVe.Chuyen);
+                        _context.Ves.Update(existingVe);
+                        codeTickets.Add(existingVe.MaVe);
                     }
                 }
-                _context.Chuyens.Update(ve.Chuyen);
-                _context.Ves.Update(ve);
                 await _context.SaveChangesAsync();
-
-                return RedirectToAction("Payment", "Booking", new { id = Id });
+                return RedirectToAction("Payment", "Booking", new { codeTickets });
             }
             catch (Exception e)
             {
                 TempData["ErrorMessage"] = e.Message;
-                return RedirectToAction("Ve", "Booking", new { id = Id });
-
+                return RedirectToAction("Ve", "Booking");
             }
         }
+
         [HttpGet]
-        public async Task<IActionResult> Payment(int id)
+        public async Task<IActionResult> Payment(List<string> codetickets)
         {
-            var ve = await _context.Ves.Include(c => c.Chuyen).ThenInclude(x => x.Xe)
-               .Include(g => g.Ghe)
-               .FirstOrDefaultAsync(v => v.Id == id);
-            return View(ve);
+            List<Ve> veList = new List<Ve>();
+            try
+            {
+                foreach (var code in codetickets)
+                {
+                    var ve = await _context.Ves
+                        .Include(c => c.Chuyen)
+                        .ThenInclude(x => x.Xe)
+                        .Include(g => g.Ghe)
+                        .FirstOrDefaultAsync(v => v.MaVe == code);
+
+                    if (ve != null)
+                    {
+                        veList.Add(ve);
+                    }
+                }
+                if (veList.Count == 0)
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy thông tin vé.";
+                    return RedirectToAction("Index", "Home");
+                }
+
+                var firstChuyenId = veList.First().Chuyen.Id;
+                if (veList.Any(ve => ve.Chuyen.Id != firstChuyenId))
+                {
+                    TempData["ErrorMessage"] = "Vé không thuộc cùng một chuyến.";
+                    return RedirectToAction("Index", "Home");
+                }
+                if (veList.Any(ve => ve.TrangThai == TrangThaiVe.Booked))
+                {
+                    TempData["ErrorMessage"] = "Một hoặc nhiều vé đã được thanh toán.";
+                    return RedirectToAction("Index", "Booking");
+                }
+
+                return View(veList);
+            }
+            catch (Exception e)
+            {
+                TempData["ErrorMessage"] = "Đã xảy ra lỗi khi xử lý yêu cầu: " + e.Message;
+                return RedirectToAction("Index", "Booking");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult SubmitTickets(string selectedTickets)
+        {
+            if (string.IsNullOrEmpty(selectedTickets))
+            {
+                return RedirectToAction("DatVe");
+            }
+            var ticketIds = selectedTickets.Split(',').Select(int.Parse).ToList();
+            return RedirectToAction("Ve" ,new { ticketIds } );
         }
         [HttpPost]
-        public async Task<IActionResult> Payment(int id,string email,string paymentmethod)
+        public async Task<IActionResult> Payment(string email, string paymentMethod, List<int> codetickets)
         {
-
-            if (id != null)
+            if (codetickets == null || !codetickets.Any())
             {
-                var ve = await _context.Ves.Include(c => c.Chuyen).ThenInclude(x => x.Xe).ThenInclude(l => l.LoaiXe)
-                   .Include(g => g.Ghe)
-                   .FirstOrDefaultAsync(v => v.Id == id);
-                if (paymentmethod == null)
-                {
-                    TempData["ErrorrMessage"] = "Chưa chọn phương thức thanh toán";
-                    return View(ve);
-                }
-                ve.TrangThai = TrangThaiVe.Booked;
-                _context.Ves.Update(ve);
-                await _context.SaveChangesAsync();
-                if (email != null)
-                {
-                    string body =  _emailService.makeBodyTicketBooked(ve);
-                    await _emailService.SendEmailAsync(email, "Xác nhận vé xe ", body);
-                }
-                TempData["SuccessMeassge"] = "Thanh toán thành công! Nhắc khách hàng kiẻm tra email";
-                return View(ve);
+                TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
+                return RedirectToAction("Index", "Home");
             }
-            TempData["ErrorrMessage"] = "Vé không tồn tại";
-            return View();
-        }
-        public async Task<IActionResult> Ve(int id)
-        {
-            // Lấy danh sách vé cho chuyến này
-            var ve = await _context.Ves.Include(c =>  c.Chuyen).ThenInclude(x => x.Xe)
+
+            if (string.IsNullOrEmpty(paymentMethod))
+            {
+                TempData["ErrorMessage"] = "Chưa chọn phương thức thanh toán";
+                return RedirectToAction("Payment", new { codetickets });
+            }
+
+            var tickets = await _context.Ves
+                .Include(c => c.Chuyen).ThenInclude(x => x.Xe).ThenInclude(l => l.LoaiXe)
                 .Include(g => g.Ghe)
-                .FirstOrDefaultAsync(v => v.Id == id);
-            return View(ve);
+                .Where(v => codetickets.Contains(v.Id))
+                .ToListAsync();
+
+            if (!tickets.Any())
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            foreach (var ve in tickets)
+            {
+                ve.TrangThai = TrangThaiVe.Booked;
+                ve.email = email;
+                _context.Ves.Update(ve);
+            }
+
+            await _context.SaveChangesAsync();
+
+            if (!string.IsNullOrEmpty(email))
+            {
+                var emailBody = _emailService.makeBodyTicketBooked(tickets);
+                await _emailService.SendEmailAsync(email, "Xác nhận vé xe", emailBody);
+            }
+
+            TempData["SuccessMessage"] = "Thanh toán thành công! Nhắc khách hàng kiểm tra email";
+            return RedirectToAction("Index", "Booking");
+        }
+
+        public async Task<IActionResult> Ve(List<int> ticketIds)
+        {
+            var tickets = await _context.Ves
+                                 .Include(c => c.Chuyen).ThenInclude(x => x.Xe)
+                                 .Include(g => g.Ghe)
+                                 .Where(v => ticketIds.Contains(v.Id))
+                                 .ToListAsync();
+
+            return View(tickets);
         }
         [HttpPost]
         [Route("Ve/Cancel/{id}")]
@@ -209,46 +286,6 @@ namespace ThanhBuoi.Controllers
                  .ToListAsync();
             return  View(chuyen);
         }
-        // GET: BookingController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: BookingController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: BookingController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: BookingController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

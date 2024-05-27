@@ -8,6 +8,7 @@
     <div class="card mb-4 bg-light rounded">
         <div class="card-header bg-primary p-2">
             <h4 class="card-title text-white">Thông tin của tuyến </h4>
+
         </div>
         <div class="card-body">
             <dl class="row">
@@ -33,28 +34,50 @@
         </div>
     </div>
 
-    <h3 class="my-4">Danh sách vé</h3>
-    <div class="row row-cols-1 row-cols-md-5 g-4 bg-light rounded-1">
-        @foreach (var ve in ViewBag.listVe)
-        {
-            <div class="col">
-                <div class="card h-70">
-                    <div class="card-body">
-                        @if (ve.MaVe == null)
-                        {
-                            <div class="badge bg-success mb-2">Trống</div>
-                        }
-                        else
-                        {
-                            <div class="badge bg-danger mb-2">Đã Đặt</div>
-                        }
-                        <h5 class="card-title">Số Ghế: @ve.Ghe.Ten</h5>
+    <div class="container mt-4 bg-light rounded-1">
+        <h3 class="my-4 p-3">Danh sách vé</h3>
+        <div class="row mt-4 mb-4">
+            <div class="col-md-6 offset-md-3">
+                <form id="searchForm" method="get">
+                    <div class="input-group">
+                        <input id="searchInput" type="text" class="form-control" name="searchString" placeholder="Tìm kiếm vé...">
+                        <button id="searchButton" class="btn btn-outline-secondary" type="submit">Tìm kiếm</button>
                     </div>
-                    <div class="card-footer">
-                        <a asp-controller="Booking" asp-action="Ve" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
+                </form>
+            </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-4 g-4 bg-light rounded-1">
+            @foreach (var ve in ViewBag.listVe)
+            {
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            @if (ve.MaVe == null)
+                            {
+                                <div class="badge bg-success mb-2">Trống</div>
+                            }
+                            else
+                            {
+                                <div class="badge bg-danger mb-2">Đã Đặt</div>
+                            }
+                            <h5 class="card-title">Số Ghế: @ve.Ghe.Ten</h5>
+                            @if (ve.TrangThai == TrangThaiVe.Booked)
+                            {
+                                <p class="card-text">Tên: @ve.Ten</p>
+                                <p class="card-text">CMND: @ve.CMND</p>
+                            }else{
+                                <p class="card-text">Ghế trống</p>
+
+                            }
+                        </div>
+                        <div class="card-footer">
+                            <a asp-controller="Ve" asp-action="Detail" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
+
 </div>

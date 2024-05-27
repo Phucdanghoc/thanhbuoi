@@ -23,38 +23,89 @@
                     <label class="custom-control-label" for="filterSwitch">Show Empty Tickets</label>
                 </div>
             </div>
-            <div class="mt-4">
-                <div class="row">
-                    @foreach (var ve in ViewBag.Ves)
-                    {
-                        <div class="col-md-4 mb-3 empty-ticket">
-                            @if (ve.MaVe == null)
-                            {
-                                <a asp-action="Ve" asp-route-id="@ve.Id" class="text-decoration-none">
-                                    <div class="card text-black">
-                                        <div class="card-body">
-                                            <h6 class="card-title text-black">Trống<img  src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
-                                            <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            }
-                            else
-                            {
-                            <a asp-action="Ve" asp-route-id="@ve.Id" class="text-decoration-none">
-                                <div class="card bg-secondary text-white">
-                                    <div class="card-body bg-opacity-50">
-                                        <h6 class="card-title text-white">Đã Đặt<img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
-                                        <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
-
-                                    </div>
-                                </div>
-                                </a>
-                            }
-                        </div>
-                    }
-                </div>
+            <div class="mb-3">
+                <h5>Số vé đã chọn: <span id="selectedTicketsCount">0</span></h5>
             </div>
+            <form id="selectedTicketsForm" asp-action="SubmitTickets" method="post">
+                <button type="submit" class="btn btn-primary mt-3">Đặt vé</button>
+                <input type="hidden" name="selectedTickets" id="selectedTickets">
+                <div class="mt-4">
+                    <div class="row">
+                        @foreach (var ve in ViewBag.Ves)
+                        {
+                            <div class="col-md-3 mb-3 ticket-item" data-id="@ve.Id" data-mave="@ve.MaVe">
+                                @if (ve.MaVe == null)
+                                {
+                                    <a href="javascript:void(0)" class="text-decoration-none">
+                                        <div class="card text-black">
+                                            <div class="card-body">
+                                                <h6 class="card-title text-black">Trống<img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
+                                                <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0)" class="text-decoration-none">
+                                        <div class="card bg-secondary text-white">
+                                            <div class="card-body bg-opacity-50">
+                                                <h6 class="card-title text-white">Đã Đặt<img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small me-lg-n5"></h6>
+                                                <p class="card-text"><strong>Số Ghế:</strong> @ve.Ghe.Ten</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const selectedTickets = new Set();
+
+            $('.ticket-item').click(function () {
+                const ticketId = $(this).data('id');
+                const maVe = $(this).data('mave');
+
+                // Only allow selection if the ticket is available (maVe is null)
+                if (maVe === "") {
+                    if (selectedTickets.has(ticketId)) {
+                        selectedTickets.delete(ticketId);
+                        $(this).find('.card').removeClass('selected');
+                    } else {
+                        selectedTickets.add(ticketId);
+                        $(this).find('.card').addClass('selected');
+                    }
+                    $('#selectedTickets').val(Array.from(selectedTickets).join(','));
+                    $('#selectedTicketsCount').text(selectedTickets.size);
+                }
+            });
+
+            $('#filterSwitch').change(function () {
+                if ($(this).is(':checked')) {
+                    $('.ticket-item').each(function () {
+                        if ($(this).find('.card').hasClass('text-black')) {
+                            $(this).show();
+                        } else {
+                            $(this).hide();
+                        }
+                    });
+                } else {
+                    $('.ticket-item').show();
+                }
+            });
+        });
+    </script>
+    <style>
+        .card.selected {
+            border: 2px solid blue;
+        }
+    </style>
+}

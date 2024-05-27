@@ -1,27 +1,36 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
-    [Authorize(Roles = "ADMIN,SALER")]
+    [Authorize]
     public class HomeController : Controller
         {
         private readonly ILogger<HomeController> _logger;
         private readonly SignInManager<TaiKhoan> _singManager;
         private readonly UserManager<TaiKhoan> _userManager;
+        private readonly DataContext _context;
 
-        public HomeController(ILogger<HomeController> logger,SignInManager<TaiKhoan> signInManager, UserManager<TaiKhoan> _userManager)
+        public HomeController(ILogger<HomeController> logger,SignInManager<TaiKhoan> signInManager, UserManager<TaiKhoan> _userManager,DataContext dataContext)
 
         {
+            _context = dataContext;
             _logger = logger;
             _singManager = signInManager;
             _userManager = _userManager;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.Chuyens = await _context.Chuyens.Include(c => c.Xe).ThenInclude(l => l.LoaiXe)
+                .Where(c => c.ThoiGianDi.Date == DateTime.Today)
+                .ToListAsync();
+            ViewBag.ListVe = await _context.Ves.Include(v => v.Chuyen).Where(v => v.NgayTao == DateTime.Today).ToListAsync();
+            ViewBag.DonHang = await _context.DonHangs.Where(v => v.NgayTao == DateTime.Today).ToListAsync();
             return View();
         }
 

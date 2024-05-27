@@ -121,7 +121,7 @@ namespace ThanhBuoi.Controllers
 
         [HttpGet]
         [Route("Detail/{id}")]
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int id, string searchString)
         {
             var chuyen = await _context.Chuyens
                 .Include(x => x.Xe)
@@ -132,13 +132,26 @@ namespace ThanhBuoi.Controllers
             {
                 return View();
             }
-            ViewBag.listVe = await _context.Ves.Include(c => c.Chuyen)
-                .Include(g => g.Ghe)
-                .Include(t => t.TaiKhoan).Where(c => c.Chuyen.Id == id)
-                .ToListAsync();
+
+            // Tạo chuỗi truy vấn
+            var query = _context.Ves.Include(c => c.Chuyen)
+                                    .Include(g => g.Ghe)
+                                    .Include(t => t.TaiKhoan)
+                                    .Where(c => c.Chuyen.Id == id);
+
+            // Kiểm tra xem có chuỗi tìm kiếm không
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                // Thêm điều kiện tìm kiếm vào chuỗi truy vấn
+                query = query.Where(v => v.Ghe.Ten.Contains(searchString) || v.Ten.Contains(searchString) || v.CMND.Contains(searchString));
+            }
+
+            // Lấy danh sách vé
+            ViewBag.listVe = await query.ToListAsync();
 
             return View(chuyen);
         }
+
 
 
         [HttpPost]
