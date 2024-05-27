@@ -68,11 +68,14 @@
                                 <p class="card-text">CMND: @ve.CMND</p>
                             }else{
                                 <p class="card-text">Ghế trống</p>
-
                             }
                         </div>
                         <div class="card-footer">
-                            <a asp-controller="Ve" asp-action="Detail" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
+                            @if (ve.TrangThai == TrangThaiVe.Booked)
+                            {
+                                <a asp-controller="Ve" asp-action="Detail" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
+
+                            }
                         </div>
                     </div>
                 </div>

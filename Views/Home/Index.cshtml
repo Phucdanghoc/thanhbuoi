@@ -47,8 +47,9 @@
                                         var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", ve.Tien);
                                     }
                                     <span class="fw-bold text-info">@formattedPrice</span>
+                                    <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info">Chi tiết</a>
+
                                 </div>
-                                <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info">Chi tiết</a>
                             </div>
                         }
                     </ul>
@@ -102,7 +103,7 @@
                             <td>@chuyen.ThoiGianDi.ToString("HH:mm")</td>
                             <td>@chuyen.Xe.Ten</td>
                             <td>@chuyen.Xe.LoaiXe.Ten</td>
-                            <td><a asp-action="Details" asp-controller="Chuyen" asp-route-id="@chuyen.Id" class="btn btn-sm btn-primary" href="">Chi tiết</a></td>
+                            <td><a asp-action="Details" asp-controller="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-sm btn-primary">Chi tiết</a></td>
                         </tr>
                     }
                 </tbody>

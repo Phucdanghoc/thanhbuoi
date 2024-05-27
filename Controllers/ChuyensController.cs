@@ -30,23 +30,7 @@ namespace ThanhBuoi.Controllers
             return View(await _context.Chuyens.ToListAsync());
         }
 
-        // GET: Chuyens/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var chuyen = await _context.Chuyens
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (chuyen == null)
-            {
-                return NotFound();
-            }
-
-            return View(chuyen);
-        }
 
         // GET: Chuyens/Create
         public IActionResult Create()
@@ -120,7 +104,6 @@ namespace ThanhBuoi.Controllers
         }
 
         [HttpGet]
-        [Route("Detail/{id}")]
         public async Task<IActionResult> Details(int id, string searchString)
         {
             var chuyen = await _context.Chuyens

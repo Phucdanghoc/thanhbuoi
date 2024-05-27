@@ -40,7 +40,7 @@ namespace ThanhBuoi.Controllers
 
         private IEnumerable<Chuyen> GetPaginatedChuyens(int page, string searchString = null)
         {
-            var query = _context.Chuyens.Include(x => x.Xe).OrderByDescending(c => c.ThoiGianDi).AsQueryable();
+            var query = _context.Chuyens.Include(x => x.Xe).OrderByDescending(c => c.ThoiGianDi).Where(c => c.ThoiGianDi >= DateTime.Now).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {

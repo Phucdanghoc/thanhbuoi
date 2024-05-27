@@ -29,8 +29,8 @@ namespace ThanhBuoi.Controllers
             ViewBag.Chuyens = await _context.Chuyens.Include(c => c.Xe).ThenInclude(l => l.LoaiXe)
                 .Where(c => c.ThoiGianDi.Date == DateTime.Today)
                 .ToListAsync();
-            ViewBag.ListVe = await _context.Ves.Include(v => v.Chuyen).Where(v => v.NgayTao == DateTime.Today).ToListAsync();
-            ViewBag.DonHang = await _context.DonHangs.Where(v => v.NgayTao == DateTime.Today).ToListAsync();
+            ViewBag.ListVe = await _context.Ves.Include(v => v.Chuyen).Where(v => v.NgayTao.Date == DateTime.Today && v.TrangThai == TrangThaiVe.Booked).ToListAsync();
+            ViewBag.DonHang = await _context.DonHangs.Where(v => v.NgayTao.Date == DateTime.Today).ToListAsync();
             return View();
         }
 

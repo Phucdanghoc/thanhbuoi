@@ -63,7 +63,7 @@ namespace ThanhBuoi.APIS
             {
                 NgayTao = DateTime.Now,
                 Trangthai = TrangThaiDonHang.Waiting,
-                MaDon = $"{chuyen.Id}{int.Parse(DateTime.Now.ToString("yyyyMMddHHmmss"))}"
+                MaDon = $"{chuyen.Id}{int.Parse(DateTime.Now.ToString("MMddHHmmss"))}"
             };
             foreach (var hang in hangGuis)
             {
