@@ -57,7 +57,7 @@ namespace ThanhBuoi.APIS
         [Route("Search")]
         public async Task<ActionResult<IEnumerable<Chuyen>>> GetChuyens([FromQuery] double weight, [FromQuery] string name)
         {
-            var query = _context.Chuyens.Include(c => c.Tuyen).Include(c => c.Xe).AsQueryable();
+            var query = _context.Chuyens.Include(c => c.Tuyen).Include(c => c.Xe).Where(t=>t.ThoiGianDi.Date > DateTime.Now.Date).AsQueryable();
 
             if (weight > 0)
             {

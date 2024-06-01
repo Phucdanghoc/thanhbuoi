@@ -84,9 +84,8 @@ namespace ThanhBuoi.Controllers
             }
 
             var user = await _context.Users
-                                     .Include(u => u.Ves)
                                      .FirstOrDefaultAsync(u => u.Id == id);
-
+            ViewBag.ListVe = await _context.Ves.Include(c => c.Chuyen).Include(g => g.Ghe).ThenInclude(h => h.Hang).Include(t => t.TaiKhoan).Where(u => u.TaiKhoan!.Id == id).ToListAsync();
             if (user == null)
             {
                 return NotFound();

@@ -24,7 +24,7 @@ namespace ThanhBuoi.Models
 
         public string? MaVe { get; set; }    
 
- 
+        public string? phuongthucthanhtoan { get; set; } 
 
         [ForeignKey("ID_Ghe")]
         public Ghe Ghe { get; set; }

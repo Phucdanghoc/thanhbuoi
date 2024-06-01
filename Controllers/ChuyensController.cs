@@ -14,9 +14,9 @@ namespace ThanhBuoi.Controllers
         private readonly Dictionary<string, double> _listGiaTang = new Dictionary<string, double>();
         public ChuyensController(DataContext context)
         {
-            _listGiaTang.Add("Tết Nguyên Đán", 0.1);
-            _listGiaTang.Add("Quốc khánh", 0.05);
-            _listGiaTang.Add("30-4, 1-5", 0.03);
+            _listGiaTang.Add("Tết Nguyên Đán", 0.2);
+            _listGiaTang.Add("Quốc khánh", 0.1);
+            _listGiaTang.Add("30-4, 1-5", 0.15);
             _listGiaTang.Add("Mặc định",0 );
             _context = context;
         }
@@ -24,10 +24,10 @@ namespace ThanhBuoi.Controllers
         // GET: Chuyens
         public async Task<IActionResult> Index()
         {
-            ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == TrangThaiXe.NoActive).ToList();
+            ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == TrangThaiXe.NoActive).Include(l => l.LoaiXe).ToList();
             ViewBag.listTuyen = _context.Tuyens.ToList();
             ViewBag.listGiaTang = _listGiaTang;
-            return View(await _context.Chuyens.ToListAsync());
+            return View(await _context.Chuyens.Include(x => x.Xe).ThenInclude(l => l.LoaiXe).ToListAsync());
         }
 
 

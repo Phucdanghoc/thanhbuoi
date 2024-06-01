@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Newtonsoft.Json;
+using System.Net;
+using System.Threading.Tasks;
+using ThanhBuoi.Models.DTO;
+using ThanhBuoi.Services;
 
 namespace ThanhBuoi.APIS
 {
@@ -8,36 +11,67 @@ namespace ThanhBuoi.APIS
     [ApiController]
     public class Payment : ControllerBase
     {
-        // GET: api/<PaymentController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly MomoServices _momoServices;
+
+        public Payment(MomoServices momoServices)
         {
-            return new string[] { "value1", "value2" };
+            _momoServices = momoServices;
         }
 
-        // GET api/<PaymentController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("Pay")]
+        public async Task<IActionResult> Pay([FromBody] PaymentDTO paymentDTO)
         {
-            return "value";
-        }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        // POST api/<PaymentController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+            MomoPaymentResponseDTO momoPaymentResponseDTO = await _momoServices.Pay(paymentDTO);
 
-        // PUT api/<PaymentController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+            if (momoPaymentResponseDTO.ResultCode == 0)
+            {
+                return Ok(momoPaymentResponseDTO);
+            }
+            else
+            {
+                return BadRequest("Payment failed. Please try again later.");
+            }
 
-        // DELETE api/<PaymentController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+
+        }
+        [HttpPost("CallBack")]
+        public async Task<IActionResult> CallBack()
         {
+            // Read the request body
+            string requestBody;
+            using (var reader = new System.IO.StreamReader(Request.Body))
+            {
+                requestBody = await reader.ReadToEndAsync();
+            }
+
+            // Deserialize the request body to a PaymentDTO object
+            var paymentDTO = JsonConvert.DeserializeObject<PaymentDTO>(requestBody);
+
+            // Validate the input
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Call the Momo service to process the payment
+            MomoPaymentResponseDTO momoPaymentResponseDTO = await _momoServices.Pay(paymentDTO);
+
+            // Check if the payment was successful
+            if (momoPaymentResponseDTO.ResultCode == 0)
+            {
+                // Return the payment details with HTTP status code 200 (OK)
+                return Ok(momoPaymentResponseDTO);
+            }
+            else
+            {
+                // Return a meaningful error message with HTTP status code 400 (Bad Request)
+                return BadRequest("Payment failed. Please try again later.");
+            }
         }
     }
 }

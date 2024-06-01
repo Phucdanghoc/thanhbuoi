@@ -1,29 +1,40 @@
 ﻿@model ThanhBuoi.Models.DTO.RegisterDTO
 
 @{
-    ViewBag.Title = "Create Account";
+    ViewBag.Title = "Đăng kí tài khoản";
 }
 
-<div class="container ">
-  <form  asp-action="Create" >
-        <h2>Tạo tài khoảng mới</h2>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email)
-            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary ">
+                    <h2 class="mb-0 text-white">Tạo tài khoản Nhân viên</h2>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create">
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Email, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Password, new { @class = "form-label" })
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", placeholder = "Mật khẩu" })
+                        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.SDT, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", placeholder = "Số điện thoại" })
+                        </div>
+                        <div class="form-group mb-3">
+                            @Html.LabelFor(model => model.Ten, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Ten, new { @class = "form-control", placeholder = "Tên" })
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Create Account</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password)
-            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.SDT)
-            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control" })
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ten)
-            @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
-        </div>
-
-        <button type="submit" class="btn btn-primary">Create Account</button>
-    </form>
+    </div>
 </div>

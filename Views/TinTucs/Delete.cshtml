@@ -1,0 +1,54 @@
+﻿@model ThanhBuoi.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Xóa tin tức</h1>
+    <h3>Bạn có chắc chắn muốn xóa tin tức này không?</h3>
+    <div class="card bg-light rounded shadow-sm p-4">
+        <h4 class="card-title">Chi tiết tin tức</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.TieuDe)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.NoiDung)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
+            <dt class="col-sm-3">
+                @Html.DisplayNameFor(model => model.LuotXem)
+            </dt>
+            <dd class="col-sm-9">
+                @Html.DisplayFor(model => model.LuotXem)
+            </dd>
+        </dl>
+    </div>
+
+    <form asp-action="Delete" class="mt-4">
+        <input type="hidden" asp-for="Id" />
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-danger">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary">Trở lại danh sách</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

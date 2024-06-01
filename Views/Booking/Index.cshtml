@@ -4,68 +4,122 @@
     ViewData["Title"] = "Danh sách chuyến";
 }
 
-<div class="container-fluid pt-4 px-4">
-    <div class="row bg-light rounded justify-content-center p-4">
-        <div class="col-md-12 vh-75">
-            <h2 class="text-center">Danh sách chuyến</h2>
-            <!-- Thanh tìm kiếm -->
-            <div class="row mb-3">
-                <div class="col-md-8 mx-auto">
-                    <form method="get" action="@Url.Action("Index", "Booking")">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Tìm kiếm theo tên chuyến" name="searchString">
-                            <button class="btn btn-outline-secondary" type="submit">Tìm kiếm</button>
-                        </div>
-                    </form>
+<div class="m-2 pt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h2 class="text-center  text-white m-0">Tìm chuyến</h2>
                 </div>
-            </div>
-            <!-- Table list -->
-            <div class="table-responsive col-md-12 mx-auto">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tên chuyến</th>
-                            <th scope="col">Thời gian đi</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Hành động</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var chuyen in Model)
-                        {
-                            <tr>
-                                <td>@chuyen.Ten</td>
-                                <td>@chuyen.ThoiGianDi</td>
-                                <td>@string.Format("{0:#,##0} VND", chuyen.Gia)</td>
-                                <td>
-                                    <a asp-action="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-primary">Đặt vé</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <!-- Phân trang -->
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <nav aria-label="Page navigation" class="mx-auto">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
-                                <a class="page-link" href="@Url.Action("Index", "Booking", new { page = ViewBag.CurrentPage - 1 })" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
-                            {
-                                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
-                                    <a class="page-link" href="@Url.Action("Index", "Booking", new { page = i })">@i</a>
-                                </li>
-                            }
-                            <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
-                                <a class="page-link" href="@Url.Action("Index", "Booking", new { page = ViewBag.CurrentPage + 1 })">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
+                <div class="card-body">
+                    <!-- Search bar -->
+                    <form method="get" action="@Url.Action("Index", "Booking")">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <select class="form-control" name="from" id="fromSelect">
+                                    <option value="">Từ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" name="to" id="toSelect">
+                                    <option value="">Đến</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="datetime-local" min="@DateTime.Now" class="form-control" id="datepicker" placeholder="Chọn ngày đi" name="datetime">
+                            </div>
+                            <div class="col-md-3">
+                                <select class="form-control" name="type">
+                                    <option value="">Loại ghế</option>
+                                    <option value="N">Ngồi</option>
+                                    <option value="G">Giường nằm</option>
+                                </select>
+                            </div>
+                     
+                        </div>
+                        <div class="col-md-12 mt-3 mb-3 align-items-center text-center">
+                            <button type="submit" class="btn btn-primary btn-block">Tìm kiếm</button>
+                        </div>
+
+                    </form>
+                    <!-- Table list -->
+                    <div class="table-responsive mt-4">
+                        <h4>Danh sách các chuyến</h4>
+                        <table class="table table-bordered table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th scope="col">Tên chuyến</th>
+                                    <th scope="col">Thời gian đi</th>
+                                    <th scope="col">Giá</th>
+                                    <th scope="col">Loại</th>
+                                    <th scope="col">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var chuyen in Model)
+                                {
+                                    <tr>
+                                        <td>@chuyen.Ten</td>
+                                        <td>@chuyen.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@string.Format("{0:#,##0} VND", chuyen.Gia)</td>
+                                        <td>@(chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</td>
+                                        <td>
+                                            <a asp-action="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-success">Đặt vé</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="row mt-4">
+                        <div class="col-md-12 d-flex justify-content-center">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination">
+                                    <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
+                                        <a class="page-link" href="@Url.Action("Index", "Booking", new { page = ViewBag.CurrentPage - 1, searchString = ViewBag.SearchString })" tabindex="-1" aria-disabled="true">Trước</a>
+                                    </li>
+                                    @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                                    {
+                                        <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Index", "Booking", new { page = i, searchString = ViewBag.SearchString })">@i</a>
+                                        </li>
+                                    }
+                                    <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
+                                        <a class="page-link" href="@Url.Action("Index", "Booking", new { page = ViewBag.CurrentPage + 1, searchString = ViewBag.SearchString })">Sau</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            fetchProvinces();
+        });
+
+        function fetchProvinces() {
+            $.get('https://vapi.vnappmob.com/api/province/', function (data) {
+                console.log(data);
+                const fromSelect = $('#fromSelect');
+                const toSelect = $('#toSelect');
+
+                fromSelect.empty().append($('<option>').val('').text('Từ'));
+                toSelect.empty().append($('<option>').val('').text('Đến'));
+
+                data.results.forEach(function (province) {
+                    fromSelect.append($('<option>').val(province.province_name).text(province.province_name));
+                    toSelect.append($('<option>').val(province.province_name).text(province.province_name));
+                });
+            }).fail(function (error) {
+                console.error('Error fetching provinces:', error);
+            });
+        }
+    </script>
+}

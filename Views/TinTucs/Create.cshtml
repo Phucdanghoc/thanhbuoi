@@ -1,0 +1,48 @@
+﻿@model ThanhBuoi.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Tạo bài viết";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Tạo bài viết mới</h1>
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <form asp-action="Create" class="bg-light p-4 rounded shadow-sm">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="TieuDe" class="form-label">Tiêu Đề</label>
+                    <input asp-for="TieuDe" class="form-control" placeholder="Nhập tiêu đề bài viết" />
+                    <span asp-validation-for="TieuDe" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NoiDung" class="form-label">Nội Dung</label>
+                    <textarea asp-for="NoiDung" class="form-control" id="noiDungEditor" rows="10" placeholder="Nhập nội dung bài viết"></textarea>
+                    <span asp-validation-for="NoiDung" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label asp-for="NgayDang" class="form-label">Ngày Đăng</label>
+                    <input asp-for="NgayDang" class="form-control" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                    <span asp-validation-for="NgayDang" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group text-end">
+                    <input type="submit" value="Tạo bài viết" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary ms-2">Trở về danh sách</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        CKEDITOR.replace('noiDungEditor');
+    </script>
+
+}

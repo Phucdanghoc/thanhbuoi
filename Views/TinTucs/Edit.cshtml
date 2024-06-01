@@ -1,0 +1,48 @@
+﻿@model ThanhBuoi.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+    <div class="m-4 p-4 bg-light">
+        <h3 class="text-center text-dark">Chỉnh sửa tin tức</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mb-3">
+                        <label asp-for="TieuDe" class="control-label">Tiêu đề</label>
+                        <input asp-for="TieuDe" class="form-control" />
+                        <span asp-validation-for="TieuDe" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="NoiDung" class="control-label">Nội dung</label>
+                        <textarea asp-for="NoiDung" class="form-control" rows="10"></textarea>
+                        <span asp-validation-for="NoiDung" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="NgayDang" class="control-label">Ngày đăng</label>
+                        <input asp-for="NgayDang" class="form-control" />
+                        <span asp-validation-for="NgayDang" class="text-danger"></span>
+                    </div>
+                    <div class="form-row justify-content-between mb-3">
+                        <div class="col-auto">
+                            <a asp-action="Index" class="btn btn-secondary">Trở lại</a>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Lưu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

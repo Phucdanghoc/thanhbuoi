@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     // Hide seat layout container by default
     $('#seatLayoutContainer').hide();
 
@@ -12,11 +11,7 @@ $(document).ready(function () {
         sogheDropdown.empty();
 
         // Define options based on the selected type of seat
-        const options = selectedOption === "GN" ?
-            [{ value: '20', text: '20' }, { value: '36', text: '36' }] :
-            selectedOption === "N" ?
-                [{ value: '7', text: '7' }, { value: '12', text: '12' }, { value: '30', text: '30' }, {value: '40' , text : '40'}] :
-                [];
+        const options = getOptionsForLoaiGhe(selectedOption);
 
         // Add options to the dropdown
         options.forEach(option => {
@@ -40,16 +35,27 @@ $(document).ready(function () {
     });
 });
 
+// Function to get options for the "Number of Seats" dropdown based on selected "LoaiGhe"
+function getOptionsForLoaiGhe(loaiGhe) {
+    switch (loaiGhe) {
+        case "GN":
+            return [{ value: '30', text: '30' }];
+        case "N":
+            return [{ value: '36', text: '36' }, { value: '40', text: '40' }];
+        default:
+            return [];
+    }
+}
+
+// Function to generate seat layout
 function generateSeatLayout(loaiGhe, soGhe) {
     const container = $('#seatLayoutContainer');
     container.empty();
-    var floor = 2;
-    if (loaiGhe == "GN") {
-        floor = 4;
-    } 
+    const floor = loaiGhe === "GN" ? 4 : 2;
+
     // Calculate number of columns and rows
-    var numCols = Math.ceil(soGhe / floor);
-    var numRows = floor;
+    const numCols = Math.ceil(soGhe / floor);
+    const numRows = floor;
 
     // Generate seat boxes
     for (let i = 0; i < numRows; i++) {

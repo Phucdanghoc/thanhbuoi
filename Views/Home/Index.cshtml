@@ -8,7 +8,7 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Doanh thu vé</p>
+                    <p class="mb-2">Vé</p>
                     <h6 id="total-ve" class="mb-0"></h6>
                 </div>
             </div>
@@ -17,7 +17,7 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Doanh thu đơn hàng </p>
+                    <p class="mb-2">Đơn hàng </p>
                     <h6 id="total-hang" class="mb-0"></h6>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         {
                             <li>
                                 @donHang.MaDon đã được tạo lúc @donHang.NgayTao.ToString("HH:mm")
-                                <a href="@Url.Action("DonHang", "GuiHang", new { id = donHang.Id })" class="button text-info">Chi tiết</a>
+                                <a href="@Url.Action("Details", "Donhangs", new { id = donHang.Id })" class="button text-info">Chi tiết</a>
                             </li>
                         }
 
@@ -81,8 +81,7 @@
 <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
-            <h6 class="mb-0">Recent Sales</h6>
-            <a href="">Show All</a>
+            <h6 class="mb-0">Các chuyến chạy hôm nay</h6>
         </div>
         <div class="table-responsive">
             <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -135,11 +134,19 @@
     function sumArray(arr) {
         return arr.reduce((acc, val) => acc + val, 0);
     }
+    function formatDate(dateString) {
+        var date = new Date(dateString);
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        return `${day}/${month.toString().padStart(2, '0')}`;
+    }
     $(document).ready(function () {
         fromDate = toDate = new Date().toISOString().split('T')[0];
-        fetch(`/api/doanhthu/total?fromDate=${fromDate}&toDate=${toDate}`)
+        fetch(`/api/doanhthu/total`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 processData(data);
             })
             .catch(error => {

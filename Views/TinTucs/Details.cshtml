@@ -1,0 +1,43 @@
+﻿@model ThanhBuoi.Models.TinTuc
+
+@{
+    ViewData["Title"] = "Chi tiết tin tức";
+}
+
+<div class="container mt-5">
+    <h1 class="mb-4">Chi tiết tin tức</h1>
+    <div class="card bg-light rounded shadow-sm p-4">
+        <h4 class="card-title">Thông tin chi tiết</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TieuDe)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TieuDe)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NoiDung)
+            </dt>
+            <dd class="col-sm-10">
+                <textarea rows="10" class="form-control" readonly>@Model.NoiDung</textarea>
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayDang)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NgayDang)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.LuotXem)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.LuotXem)
+            </dd>
+        </dl>
+    </div>
+    <div class="mt-4">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Chỉnh sửa</a>
+        <a asp-action="Index" class="btn btn-secondary">Trở lại danh sách</a>
+    </div>
+</div>

@@ -98,18 +98,19 @@ namespace ThanhBuoi.Services
             foreach (var ve in tickets)
             {
                 string GiaTien = ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"));
+                string loaighe = ve.Chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi ? "Ghế Ngồi " : "Giường nằm";
 
                 stringBuilder.AppendLine("<div class='ticket-info'>");
                 stringBuilder.AppendLine("<p class='ticket-heading'>Thông tin chuyến :</p>");
                 stringBuilder.AppendLine($"<p><strong>Tuyến:</strong> {ve.Chuyen.Ten}</p>");
-                stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi}</p>");
+                stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi.ToString("HH:mm")} - {ve.Chuyen.ThoiGianDi.ToString("dd:MM:yyyyy")}</p>");
                 stringBuilder.AppendLine($"<p><strong>Điểm đón:</strong> {ve.Chuyen.DiemDon}</p>");
                 stringBuilder.AppendLine($"<p><strong>Giá vé:</strong> <span class='special-price'>{GiaTien}</span></p>");
 
                 stringBuilder.AppendLine("<div class='vehicle-info'>");
                 stringBuilder.AppendLine("<p class='ticket-heading'>Thông tin xe :</p>");
                 stringBuilder.AppendLine($"<p><strong>Tên xe:</strong> {ve.Chuyen.Xe.Ten}</p>");
-                stringBuilder.AppendLine($"<p><strong>Loại xe:</strong> {ve.Chuyen.Xe.LoaiXe.Ten}</p>");
+                stringBuilder.AppendLine($"<p><strong>Loại xe:</strong> {loaighe}</p>");
                 stringBuilder.AppendLine($"<p><strong>Biển số:</strong> {ve.Chuyen.Xe.BienSo}</p>");
                 stringBuilder.AppendLine("</div>");
 

@@ -8,13 +8,13 @@
     <h2 class="mb-4">Thanh toán</h2>
 
     <div class="row">
-        <div class="col-12 ">
-            <div class="card mb-4 bg-light rounded">
+        <div class="col-md-8 mx-auto">
+            <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Chi tiết vé</h5>
                     @foreach (var ve in Model)
                     {
-                        <div class="card mb-3 shadow-sm">
+                        <div class="card mb-3">
                             <div class="card-body">
                                 <h6 class="card-subtitle mb-2 text-muted">Mã vé: @ve.MaVe</h6>
                                 <p><strong>Giá vé:</strong> <span class="text-danger">@ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
@@ -32,15 +32,15 @@
                 </div>
             </div>
 
-            <div class="card mb-4 bg-light rounded">
+            <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Thông tin thanh toán</h5>
-                    <form asp-action="Payment">
-                        <div class="form-group mb-3">
+                    <form asp-action="Payment" class="mb-4">
+                        <div class="form-group">
                             <label for="email">Email xác nhận:</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email người gửi">
                         </div>
-                        <div class="form-group mb-4">
+                        <div class="form-group">
                             <label>Phương thức thanh toán:</label><br>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="paymentMethod" id="momo" value="momo">
@@ -59,18 +59,36 @@
                         {
                             <input type="hidden" name="codetickets" value="@ve.Id" />
                         }
-                        <div class="row align-items-center mb-4">
+                        <div class="form-group row">
                             <div class="col-md-6">
-                                <h5 class="card-title mb-0">Tổng giá trị</h5>
+                                <h5 class="mb-0">Tổng giá trị</h5>
                                 <p class="h4 text-danger">@totalPrice.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
                             </div>
                             <div class="col-md-6 text-right">
-                                <button type="submit" class="btn btn-primary p-3 w-50 w-md-50">Thanh toán</button>
+                                <button type="submit" class="btn btn-primary p-3 w-100">Thanh toán</button>
                             </div>
                         </div>
                     </form>
+                    <div class="d-flex justify-content-end">
+                        <form asp-action="Cancel">
+                            @foreach (var ve in Model)
+                            {
+                                <input type="hidden" name="codetickets" value="@ve.Id" />
+                            }
+                            <button type="submit" class="btn btn-danger pe-3 ps-3 w-100">Hủy</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // Ngăn chặn người dùng quay lại trang trước
+        $(window).on('popstate', function (event) {
+            history.pushState(null, null, window.location.pathname);
+        });
+    });
+</script>

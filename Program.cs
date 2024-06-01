@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +32,7 @@ internal class Program
         .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<DataContext>()
         .AddDefaultTokenProviders();
-
+        builder.Services.AddScoped<MomoServices>();
         builder.Services.AddRazorPages();
         builder.Services.AddControllers().AddJsonOptions(options =>
         {
@@ -61,6 +61,7 @@ internal class Program
 
         using (var scope = app.Services.CreateScope())
         {
+            
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<TaiKhoan>>();
 

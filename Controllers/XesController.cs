@@ -84,7 +84,7 @@ namespace ThanhBuoi.Controllers
 
                     };
                     _context.Tangs.Add(tang);
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < int.Parse(SoGhe) / 8; i++)
                     {
                         Hang hang = new Hang
                         {
@@ -93,7 +93,7 @@ namespace ThanhBuoi.Controllers
                             Tang = tang
                         };
                         _context.Hangs.Add(hang);
-                        for (int j = 0; j < sdg.SoGhe / 2; j++)
+                        for (int j = 0; j < 8; j++)
                         {
                             Ghe ghe = new Ghe
                             {
@@ -111,11 +111,11 @@ namespace ThanhBuoi.Controllers
                         Tang tang = new Tang
                         {
                             Ten = $"Tầng {Sotang+1}",
-                            STT = 1,
+                            STT = Sotang+1,
                             SoDoGhe = sdg
 
                         };
-                        for (int Sohang = 0; Sohang < 2; Sohang++)
+                        for (int Sohang = 0; Sohang < 5; Sohang++)
                         {
                             Hang HangGHe = new Hang
                             {
@@ -125,7 +125,7 @@ namespace ThanhBuoi.Controllers
                             };
                             _context.Hangs.Add(HangGHe);
 
-                            for (int soGhe = 0; soGhe < sdg.SoGhe/4;  soGhe++)
+                            for (int soGhe = 0; soGhe < 3;  soGhe++)
                             {
                                 Ghe ghe = new Ghe
                                 {

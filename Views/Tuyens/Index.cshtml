@@ -1,83 +1,92 @@
 ﻿@model IEnumerable<ThanhBuoi.Models.Tuyen>
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Tạo Tuyến";
 }
-
-<div class="row">
-    <div class="col-md-6">
-        <div class="bg-light rounded h-100 p-4 m-4">
-            <h3>Tạo Tuyến mới</h3>
-            <form asp-action="Create">
-                <div class="mb-3">
-                    <label for="DiemDi" class="form-label">Điểm đi</label>
-                    <select class="form-select" id="DiemDi" name="diemdiId" aria-label="Default select example">
-                        <option value="">-- Select --</option>
-                        @foreach (var item in ViewBag.ListDiaDiem)
-                        {
-                            <option value="@item.Id">@item.Ten</option>
-                        }
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <label for="DiemDen" class="form-label">Điểm Đến</label>
-                    <select class="form-select" id="DiemDen" name="diemdenId" aria-label="Default select example">
-                        <option value="">-- Select --</option>
-                        @foreach (var item in ViewBag.ListDiaDiem)
-                        {
-                            <option value="@item.Id">@item.Ten</option>
-                        }
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Create</button>
-            </form>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<style>
+    .scrollable-table {
+        max-height: 500px; /* Adjust the height as needed */
+        overflow-y: auto;
+    }
+</style>
+<div class="container-fluid pt-4 px-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="bg-light rounded p-4">
+                <h3 class="text-center">Tạo Tuyến mới</h3>
+                <form asp-action="Create">
+                    <div class="mb-3">
+                        <label for="DiemDi" class="form-label">Điểm đi</label>
+                        <select class="form-select" id="DiemDi" name="diemdiId" aria-label="Chọn điểm đi">
+                            <option value="">-- Chọn điểm đi --</option>
+                            @foreach (var item in ViewBag.ListDiaDiem)
+                            {
+                                <option value="@item.Id">@item.Ten</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="DiemDen" class="form-label">Điểm Đến</label>
+                        <select class="form-select" id="DiemDen" name="diemdenId" aria-label="Chọn điểm đến">
+                            <option value="">-- Chọn điểm đến --</option>
+                            @foreach (var item in ViewBag.ListDiaDiem)
+                            {
+                                <option value="@item.Id">@item.Ten</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Tạo mới</button>
+                    </div>
+                </form>
+                <div asp-validation-summary="ModelOnly" class="text-danger mt-3"></div>
+            </div>
         </div>
     </div>
-</div>
-
-<div class="row mt-4">
-    <div class="col-md-12">
-        <div class="bg-light rounded h-100 p-4 m-4">
-            <h3>Danh sách tuyến</h3>
-            @using (Html.BeginForm("Index", "Tuyens", FormMethod.Get))
-            {
-                <div class="form-floating mb-3 w-25">
-                    <select class="form-select" id="floatingSelect" name="t" aria-label="Floating label select example" onchange="this.form.submit()">
-                        <option selected disabled>Tỉnh thành</option>
-                        <option value="all">Tất cả</option>
-                        @foreach (var item in ViewBag.ListDiaDiemDistinct)
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <label for="floatingSelect">Works with selects</label>
-                </div>
-            }
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Tên Tuyến</th>
-                            <th scope="col">Điểm đi</th>
-                            <th scope="col">Điểm đến</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
+    <div class="row mt-4 justify-content-center h-100">
+        <div class="col-md-12">
+            <div class="bg-light rounded p-4">
+                <h3 class="text-center">Danh sách tuyến</h3>
+                @using (Html.BeginForm("Index", "Tuyens", FormMethod.Get))
+                {
+                    <div class="form-floating mb-3 w-25 mx-auto">
+                        <select class="form-select" id="floatingSelect" name="t" aria-label="Chọn tỉnh thành" onchange="this.form.submit()">
+                            <option selected disabled>Tỉnh thành</option>
+                            <option value="all">Tất cả</option>
+                            @foreach (var item in ViewBag.ListDiaDiemDistinct)
+                            {
+                                <option value="@item">@item</option>
+                            }
+                        </select>
+                        <label for="floatingSelect">Lọc theo tỉnh thành</label>
+                    </div>
+                }
+                <div class="table-responsive scrollable-table">
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <td>@Html.DisplayFor(modelItem => item.Ten)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DiemDi.Ten)</td>
-                                <td>@Html.DisplayFor(modelItem => item.DiemDen.Ten)</td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">Các Chuyến</a> |
-                                </td>
+                                <th scope="col">Tên Tuyến</th>
+                                <th scope="col">Điểm đi</th>
+                                <th scope="col">Điểm đến</th>
+                                <th scope="col"></th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(modelItem => item.Ten)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DiemDi.Ten)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.DiemDen.Ten)</td>
+                                    <td>
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -24,7 +24,7 @@
     </div>
 
     <div class="card">
-        <h5 class="card-header">Trips Associated with this Vehicle</h5>
+        <h5 class="card-header">Các Chuyến xe sẽ đi</h5>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -43,7 +43,7 @@
                                 <td>@chuyen.Ten</td>
                                 <td>@chuyen.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</td>
                                 <td>@chuyen.Gia.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
-                                <td><a asp-action="Details" asp-route-id="@chuyen.Id">Chi tiết</a></td>
+                                <td><a asp-controller="Chuyens" asp-action="Details" asp-route-id="@chuyen.Id">Chi tiết</a></td>
                             </tr>
                         }
                     </tbody>

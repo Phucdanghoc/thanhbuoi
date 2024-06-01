@@ -71,7 +71,7 @@
                         <div class="col-md-6 text-center">
                             <input type="radio" id="momo" name="paymentMethod" value="momo" @(Model.PhuongThucThanhToan == "momo" ? "checked disable" : "") required>
                             <label for="momo">Momo</label><br>
-                            <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo"  class="mt-2" style="width: 100px;">
+                            <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
                         </div>
                         <div class="col-md-6 text-center">
                             <input type="radio" id="tienmat" name="paymentMethod" value="cash" @(Model.PhuongThucThanhToan == "cash" ? "checked disable" : "") required>
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-        @if(Model.Trangthai == TrangThaiDonHang.Waiting)
+        @if (Model.Trangthai == TrangThaiDonHang.Waiting)
         {
             <div id="loadingSpinner" hidden>
                 <div class="spinner-border" role="status">
@@ -91,64 +91,69 @@
             </div>
             <div class="row mt-4">
                 <div class="col-md-12 text-center">
-                    <button type="button" class="btn btn-custom" id="btnThanhToan">Thanh toán</button>
-                    <button type="button" class="btn btn-secondary" id="btnHuyDon">Hủy đơn hàng</button>
+                    <button type="button" class="btn btn-primary" id="btnThanhToan">Thanh toán</button>
+                    <button type="button" class="btn btn-danger" id="btnHuyDon">Hủy đơn hàng</button>
                 </div>
             </div>
         }
     </form>
 </div>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $("#btnThanhToan").click(function (e) {
-                e.preventDefault();
-                $("#loadingSpinner").show();
+<script>
+    $(document).ready(function () {
+        $("#btnThanhToan").click(async function (e) {
+            e.preventDefault();
+            $("#loadingSpinner").show();
 
-                var orderData = {
-                    email: $("#email").val(),
-                    mota: $("#mota").val(),
-                    paymentMethod: $("input[name='paymentMethod']:checked").val() ?? "Null",
-                    id: @Model.Id
-                        };
+            var orderData = {
+                email: $("#email").val(),
+                mota: $("#mota").val(),
+                paymentMethod: $("input[name='paymentMethod']:checked").val() ?? "Null",
+                id: @Model.Id
+                            };
 
-                fetch("/api/donhang/Checkout", {
+            try {
+                const response = await fetch("/api/donhang/Checkout", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify(orderData)
-                })
-                    .then(response => {
-                        $("#loadingSpinner").hide();
-                        if (!response.ok) {
-                            throw new Error("Network response was not ok");
-                        }else{
-                            alert("Đơn hàng của bạn đã được thanh toán thành công!");
-                            window.location.href = "/GuiHang/Create";
-                        }
-                        return response.json();
-                    })
-            });
-
-            $("#btnHuyDon").click(function (e) {
-                e.preventDefault();
-                var orderId = @Model.Id;
-                $.ajax({
-                    type: "DELETE",
-                    url: `/api/donhang/cancel/${orderId}`,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Đơn hàng của bạn đã được hủy thành công!");
-                        window.location.href = "/GuiHang/Create";
-                    },
-                    error: function (error) {
-                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                    }
                 });
+
+                $("#loadingSpinner").hide();
+
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+
+                const data = await response.json();
+                console.log(data);
+                // Uncomment the next line if you want to redirect after successful checkout
+                window.location.href = data.url;
+            } catch (error) {
+                $("#loadingSpinner").hide();
+                console.error("There was a problem with the fetch operation:", error);
+                alert("Đã xảy ra lỗi khi thanh toán. Vui lòng thử lại.");
+            }
+        });
+
+        $("#btnHuyDon").click(function (e) {
+            e.preventDefault();
+            var orderId = @Model.Id;
+            $.ajax({
+                type: "DELETE",
+                url: `/api/donhang/cancel/${orderId}`,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alert("Đơn hàng của bạn đã được hủy thành công!");
+                    window.location.href = "/DonHangs";
+                },
+                error: function (error) {
+                    alert("Có lỗi xảy ra, vui lòng thử lại sau.");
+                }
             });
         });
-    </script>
-}
+    });
+</script>

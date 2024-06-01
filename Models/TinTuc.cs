@@ -12,7 +12,6 @@ namespace ThanhBuoi.Models
         public string TieuDe { get; set; }
 
         [Required]
-        [StringLength(255)]
         public string NoiDung { get; set; }
 
         public DateTime NgayDang { get; set; }

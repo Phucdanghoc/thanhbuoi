@@ -1,25 +1,29 @@
 ﻿@model IEnumerable<ThanhBuoi.Models.Xe>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Quản lí Xe";
 }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="container-fluid pt-4 px-4">
+    <div class="row bg-light rounded justify-content-center p-4">
+        <div class="col-md-12">
+            <h2 class="text-center mb-4">Quản lí Xe</h2>
 
-<div class="row">
-    <div class="col-12">
-        <div class="bg-light rounded h-100 p-4 m-4">
-            <h6 class="mb-4">Quản lí Xe</h6>
+            <!-- Create New button -->
+            <div class="mb-4 text-end">
+                <a asp-action="Create" class="btn btn-primary">Tạo mới </a>
+            </div>
+
+            <!-- Table list -->
             <div class="table-responsive">
-                <table class="table">
-                    <thead>
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table">
                         <tr>
                             <th scope="col">Tên Xe</th>
                             <th scope="col">Biển Số</th>
                             <th scope="col">Mã xe</th>
                             <th scope="col">Loại Xe</th>
+                            <th scope="col" class="text-center">Thao tác</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -30,10 +34,10 @@
                                 <td>@Html.DisplayFor(modelItem => item.BienSo)</td>
                                 <td>@Html.DisplayFor(modelItem => item.MaXe)</td>
                                 <td>@(item.LoaiXe?.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <td class="text-center">
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Sửa</a>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Chi tiết</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Xóa</a>
                                 </td>
                             </tr>
                         }
@@ -41,6 +45,5 @@
                 </table>
             </div>
         </div>
-       
     </div>
 </div>

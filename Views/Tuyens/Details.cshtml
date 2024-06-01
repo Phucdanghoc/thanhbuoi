@@ -30,7 +30,7 @@
                             {
                                 <tr>
                                     <td>@Html.DisplayFor(modelItem => item.Ten)</td>
-                                    <td><a href="#">@Html.DisplayFor(modelItem => item.Xe.Ten)</a> </td>
+                                    <td><a asp-action="Details" asp-controller="Xes" asp-route-id="@item.Xe.Id">@Html.DisplayFor(modelItem => item.Xe.Ten)</a> </td>
                                     <td>@Html.DisplayFor(modelItem => item.DiemDon)</td>
                                     <td>@Html.DisplayFor(modelItem => item.ThoiGianDi)</td>
                                     <td>@String.Format("{0:N0} VND", item.Gia)</td>

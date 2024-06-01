@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Bootstrap Tab Example";
+    ViewData["Title"] = "Doanh thu";
 }
 
 <style>
@@ -31,22 +31,16 @@
         <li class="nav-item">
             <a class="nav-link active" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="true">Tổng</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" id="tab3-tab" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false">Hàng</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="tab4-tab" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false">Vé</a>
-        </li>
     </ul>
     <div class="tab-content bg-white" id="myTabContent">
         <div class="tab-pane fade show active" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
             <div class="container-fluid pt-4">
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn btn-primary" onclick="getTotalRevenue('today')">Today</button>
-                        <button class="btn btn-primary" onclick="getTotalRevenue('yesterday')">Yesterday</button>
-                        <button class="btn btn-primary" onclick="getTotalRevenue('thisweek')">This Week</button>
-                        <button class="btn btn-primary" onclick="getTotalRevenue('thismonth')">This Month</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('today')">Hôm nay</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('yesterday')">Hôm qua</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('thisweek')">Tuần này</button>
+                        <button class="btn btn-primary" onclick="getTotalRevenue('thismonth')">Tháng này</button>
                        @*  <input type="date" id="customDate">
                         <button class="btn btn-primary" onclick="getTotalRevenue('custom')">Show</button> *@
                     </div>
@@ -76,7 +70,7 @@
                         <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Tổng tiền Hàng</p>
+                                <p class="mb-2">Tổng tiền</p>
                                 <h6 class="mb-0" id="total-all">0</h6>
                             </div>
                         </div>
@@ -86,7 +80,7 @@
             <div class="col-12 mt-4">
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Multiple Line Chart</h6>
+                        <h6 class="mb-4">Hàng và vé</h6>
                         <canvas id="salse-revenue"></canvas>
                     </div>
                 </div>
@@ -94,20 +88,13 @@
             <div class="col-12 mt-4">
                 <div class="col-sm-12 col-xl-12">
                     <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Single Line Chart</h6>
+                        <h6 class="mb-4">Tổng doanh thu</h6>
                         <canvas id="line-chart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
-            <h2>Content of Hàng</h2>
-            <p>This is the content of Hàng.</p>
-        </div>
-        <div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
-            <h2>Content of Vé</h2>
-            <p>This is the content of Vé.</p>
-        </div>
+        
     </div>
 </div>
 
@@ -117,7 +104,7 @@
 
         switch (period) {
             case 'today':
-                fromDate = toDate = new Date().toISOString().split('T')[0];
+                fromDate = toDate = "";
                 break;
             case 'yesterday':
                 const yesterday = new Date();

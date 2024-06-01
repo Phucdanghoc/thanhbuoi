@@ -81,6 +81,7 @@ namespace ThanhBuoi.APIS
             if (!fromDate.HasValue)
             {
                 fromDate = DateTime.Today;
+                
             }
             if (!toDate.HasValue)
             {
@@ -103,20 +104,9 @@ namespace ThanhBuoi.APIS
                 var chuyens = _context.Chuyens
                     .Where(d => d.ThoiGianDi.Date == date.Date)
                     .ToList();
-                double totalChuyen = 0;
-
-                foreach (var chuyen in chuyens)
-                {
-                    double total = _context.Ves
-                        .Where(c => c.Chuyen.Id == chuyen.Id && c.TrangThai == Models.TrangThaiVe.Booked)
-                        .ToList()
-                        .Sum(v => v.Tien);
-                    totalChuyen += total;
-                }
-
+                double totalChuyen = _context.Ves.Where(v => v.NgayTao.Date == date.Date && v.TrangThai == Models.TrangThaiVe.Booked).ToList().Sum(v => v.Tien);
                 // Calculate combined total
                 double combinedTotal = totalDonHang + totalChuyen;
-
                 // Create DoanhTheoNgay object for the day
                 var dailyTotal = new DoanhTheoNgay
                 {

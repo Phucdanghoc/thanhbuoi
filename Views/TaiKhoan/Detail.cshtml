@@ -1,51 +1,44 @@
 ﻿@model ThanhBuoi.Models.TaiKhoan
 
 @{
-    ViewData["Title"] = "User Details";
+    ViewData["Title"] = "Thông tin người dùng";
 }
 
-<div class="container mt-4">
-    <h1 class="mb-4">User Details</h1>
-
+<div class=" bg-light rounded p-2 m-4">
     <div class="card">
         <div class="card-header">
-            User Information
+            Thông tin người dùng 
         </div>
         <div class="card-body">
-            <p><strong>UserName:</strong> @Model.UserName</p>
-            <p><strong>Email:</strong> @Model.Email</p>
-            <p><strong>PhoneNumber:</strong> @Model.PhoneNumber</p>
+            <p><strong>Tên người dùng :</strong> @Model.UserName</p>
+            <p><strong>Email :</strong> @Model.Email</p>
+            <p><strong>Số điện thoại :</strong> @Model.PhoneNumber</p>
         </div>
     </div>
 
     <!-- Tabs -->
     <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="hangguis-tab" data-bs-toggle="tab" data-bs-target="#hangguis" type="button" role="tab" aria-controls="hangguis" aria-selected="true">Hang Guis</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="ves-tab" data-bs-toggle="tab" data-bs-target="#ves" type="button" role="tab" aria-controls="ves" aria-selected="false">Ves</button>
+            <button class="nav-link active" id="ves-tab" data-bs-toggle="tab" data-bs-target="#ves" type="button" role="tab" aria-controls="ves" aria-selected="true">Vé</button>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <!-- Ves Tab -->
-        <div class="tab-pane fade" id="ves" role="tabpanel" aria-labelledby="ves-tab">
+        <div class="tab-pane fade show active" id="ves" role="tabpanel" aria-labelledby="ves-tab">
             <div class="mt-4">
-                <h2>Ves</h2>
+                <h2>Các vé</h2>
 
                 <!-- Search Input -->
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search by MaVe, Ten Chuyen, or Ten Ghe" aria-label="Search" aria-describedby="button-search" id="searchVeInput">
+                    <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="button-search" id="searchVeInput">
                     <button class="btn btn-outline-secondary" type="button" id="button-search">Search</button>
                 </div>
-                 <table class="table table-striped table-bordered" id="vesTable">
+                <table class="table table-striped table-bordered" id="vesTable">
                     <!-- Table Headers -->
                     <thead class="thead-light">
                         <tr>
                             <th>Mã vé</th>
                             <th>Chuyến</th>
-                            <th>Ghế</th>
-                            <th>Hành lí</th>
                             <th>Ngày đặt vé</th>
                             <th>Tổng tiền</th>
                             <th></th>
@@ -53,16 +46,15 @@
                     </thead>
                     <!-- Table Body -->
                     <tbody>
-                        @foreach (var ve in Model.Ves)
+                        @foreach (var ve in ViewBag.ListVe)
                         {
                             <tr>
                                 <td>@ve.MaVe</td>
                                 <td><a asp-controller="Chuyens" asp-action="Details" asp-route-itemid="@ve.Chuyen.Id">@ve.Chuyen.Ten</a></td>
-                                <td>@ve.Ghe.Ten</td>
-                                <td>@ve.Hanhli</td>
-                                <td>@ve.NgayTao</td>
-                                <td>@ve.Tien</td>
-                                <td><a asp-action="Ve" asp-controller="Booking" asp-route-id="@ve.Id">Chi tiết</a></td>
+                                <td>@ve.NgayTao.ToString("dd/MM/yyyy")</td>
+                                        <td>@string.Format("{0:#,##0} VND", ve.Tien)</td>
+
+                                <td><a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-primary btn-sm">Chi tiết</a></td>
                             </tr>
                         }
                     </tbody>
@@ -71,6 +63,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script>
         $(document).ready(function () {

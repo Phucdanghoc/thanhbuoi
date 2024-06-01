@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using ThanhBuoi.Models.DTO;
 using ThanhBuoi.Services;
 using System;
+using Newtonsoft.Json;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace ThanhBuoi.APIS
 {
@@ -17,16 +20,19 @@ namespace ThanhBuoi.APIS
         private readonly UserManager<TaiKhoan> _userManager;
         Dictionary<string, double> dictGiaHang = new Dictionary<string, double>();
         private IEmailService _emailService ;
+        private MomoServices _momoServices ;
 
-        public DonhangController(DataContext context, UserManager<TaiKhoan> userManager, IEmailService emailService)
+        public DonhangController(DataContext context, UserManager<TaiKhoan> userManager, IEmailService emailService, MomoServices momoServices)
         {
             _context = context;
             _userManager = userManager;
             _emailService = emailService;
+            _momoServices = momoServices;
             dictGiaHang.Add("Xe tay ga ", 0.7);
             dictGiaHang.Add("Xe số ", 0.3);
             dictGiaHang.Add("Hàng nhỏ", 0.2);
             dictGiaHang.Add("Hàng đặc biệt lớn", 1);
+            _momoServices = momoServices;
         }
 
         // GET: api/HangGuis
@@ -162,10 +168,10 @@ namespace ThanhBuoi.APIS
                                                 .FirstOrDefaultAsync(dh => dh.Id == CheckoutDto.Id); if (donHang != null)
             {
                 donHang.PhuongThucThanhToan = CheckoutDto.PaymentMethod;
+
                 donHang.Mota = CheckoutDto.Mota;
                 donHang.email = CheckoutDto.Email ?? "";
                 donHang.Trangthai = TrangThaiDonHang.Cod;
-                _context.DonHangs.Entry(donHang).State = EntityState.Modified;
                 try
                 {
                     await _context.SaveChangesAsync();
@@ -179,6 +185,22 @@ namespace ThanhBuoi.APIS
                 {
                     return BadRequest(e.Message);
                 }
+                if (CheckoutDto.PaymentMethod == "momo")
+                {
+                    MomoPaymentResponseDTO momoPaymentResponseDTO = await _momoServices.Pay(new PaymentDTO
+                    {
+                        url = $"https://localhost:7273/Donhangs/Details/{CheckoutDto.Id}",
+                        cost = donHang.Tien.ToString(),
+                    });
+                    if (momoPaymentResponseDTO.ResultCode == 0)
+                    {
+                        donHang.RequestId = momoPaymentResponseDTO.RequestId;
+                        donHang.Id_momoRes = momoPaymentResponseDTO.OrderId;
+                        _context.DonHangs.Entry(donHang).State = EntityState.Modified;
+                        return Ok(new {url = momoPaymentResponseDTO.PayUrl });
+                    }
+                }
+                _context.DonHangs.Entry(donHang).State = EntityState.Modified;
                 return Ok();
             }
             else
@@ -236,5 +258,6 @@ namespace ThanhBuoi.APIS
         {
             return _context.HangGuis.Any(e => e.Id == id);
         }
+       
     }
 }
