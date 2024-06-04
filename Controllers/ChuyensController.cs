@@ -83,6 +83,7 @@ namespace ThanhBuoi.Controllers
                                 MaVe = null,
                                 Sdt = null,
                                 CMND = null,
+                                isCancel = false,
                                 DiemDon = chuyen.DiemDon,
                                 TrangThai = TrangThaiVe.Empty,
                                 NgayTao = DateTime.Now,

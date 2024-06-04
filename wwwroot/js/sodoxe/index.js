@@ -1,7 +1,5 @@
 ﻿$(document).ready(function () {
     // Hide seat layout container by default
-    $('#seatLayoutContainer').hide();
-
     $('#loaighe').change(function () {
         const selectedOption = $(this).val();
         const sogheDropdown = $('#soghe');
@@ -21,11 +19,10 @@
     $('#soghe').change(function () {
         const loaiGhe = $('#loaighe').val();
         const soGhe = $(this).val();
-        generateSeatLayout(loaiGhe, soGhe);
+
     });
 });
 
-// Function to get options for the "Number of Seats" dropdown based on selected "LoaiGhe"
 function getOptionsForLoaiGhe(loaiGhe) {
     switch (loaiGhe) {
         case "GN":
@@ -37,5 +34,4 @@ function getOptionsForLoaiGhe(loaiGhe) {
     }
 }
 
-// Function to generate seat layout
 

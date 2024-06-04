@@ -165,10 +165,10 @@ namespace ThanhBuoi.APIS
             }
             DonHang? donHang = await _context.DonHangs
                                                 .Include(dh => dh.DonHangChiTiets).ThenInclude(h => h.HangGui)
-                                                .FirstOrDefaultAsync(dh => dh.Id == CheckoutDto.Id); if (donHang != null)
+                                                .FirstOrDefaultAsync(dh => dh.Id == CheckoutDto.Id);
+            if (donHang != null)
             {
                 donHang.PhuongThucThanhToan = CheckoutDto.PaymentMethod;
-
                 donHang.Mota = CheckoutDto.Mota;
                 donHang.email = CheckoutDto.Email ?? "";
                 donHang.Trangthai = TrangThaiDonHang.Cod;
@@ -201,7 +201,7 @@ namespace ThanhBuoi.APIS
                     }
                 }
                 _context.DonHangs.Entry(donHang).State = EntityState.Modified;
-                return Ok();
+                return Ok(new {url = ""});
             }
             else
             {

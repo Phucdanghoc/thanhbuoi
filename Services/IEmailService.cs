@@ -9,5 +9,6 @@ namespace ThanhBuoi.Services
         string makeBodyEmailOrder(DonHang donhang);
 
         string makeBodyTicketBooked(List<Ve> ve);
+        string makeBodyTicketCancel(Ve ve,double refund,string momoreq = null);
     }
 }

@@ -138,16 +138,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonVe/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uVmVcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonVe/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uVmVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/GuiHang/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/GuiHang/DonHang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xEb25IYW5nLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GuiHang/Payments.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xQYXltZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Home/Index.cshtml]
@@ -244,6 +248,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/VeHuys/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVIdXlzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/VeHuys/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVIdXlzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Ve/Detail.cshtml]

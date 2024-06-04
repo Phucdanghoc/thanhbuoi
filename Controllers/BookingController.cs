@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 using ThanhBuoi.Models.DTO;
@@ -208,7 +209,7 @@ namespace ThanhBuoi.Controllers
             return RedirectToAction("Ve" ,new { ticketIds } );
         }
         [HttpPost]
-        public async Task<IActionResult> Payment(string email, string paymentMethod, List<int> codetickets)
+        public async Task<IActionResult> Payment(string email, string paymentMethod, List<int> codetickets,string mota)
         {
             if (codetickets == null || !codetickets.Any())
             {
@@ -233,32 +234,50 @@ namespace ThanhBuoi.Controllers
                 TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
                 return RedirectToAction("Index", "Home");
             }
-
+            DonHang donhang = new DonHang();
             foreach (var ve in tickets)
             {
+                DonHangChiTiet donhangChitiet = new DonHangChiTiet();
+                donhangChitiet.DonHang = donhang;
+                donhangChitiet.Ve = ve;
+                donhangChitiet.Tien = ve.Tien;
                 ve.TrangThai = TrangThaiVe.Booked;
                 ve.email = email;
+                _context.DonHangChiTiets.Add(donhangChitiet);
                 _context.Ves.Update(ve);
             }
 
-            await _context.SaveChangesAsync();
 
             if (!string.IsNullOrEmpty(email))
             {
                 var emailBody = _emailService.makeBodyTicketBooked(tickets);
                 await _emailService.SendEmailAsync(email, "Xác nhận vé xe", emailBody);
             }
-
+            double cost = tickets.Sum(t => t.Tien);
+            donhang.email = email;
+            donhang.PhuongThucThanhToan = paymentMethod;
+            donhang.Tien = cost;
+            donhang.MaDon = $"{tickets[0].Chuyen.Id}{int.Parse(DateTime.Now.ToString("MMddHHmmss"))}";
+            donhang.NgayTao = DateTime.Now;
+            donhang.Trangthai = TrangThaiDonHang.Payment;
+            donhang.Mota = mota;
             TempData["SuccessMessage"] = "Thanh toán thành công! Nhắc khách hàng kiểm tra email";
             if (paymentMethod == "momo")
             {
                 MomoPaymentResponseDTO momoPaymentResponseDTO = await _momoServices.Pay(new PaymentDTO
                 {
-                    cost = tickets.Sum(t => t.Tien).ToString(),
+                    cost = cost.ToString(),
                     url = "https://localhost:7273/Booking"
                 });
+               
+                donhang.RequestId = momoPaymentResponseDTO.RequestId;
+                donhang.Id_momoRes = momoPaymentResponseDTO.OrderId;
+                _context.DonHangs.Add(donhang);
+                await _context.SaveChangesAsync();
                 return Redirect(momoPaymentResponseDTO.ShortLink);
             }
+            _context.DonHangs.Add(donhang);
+            await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Home");
 
 

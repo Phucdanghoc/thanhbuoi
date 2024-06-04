@@ -38,6 +38,7 @@ namespace ThanhBuoi.Data
         public DbSet<TaiKhoan> DbSet { get; set; }
         public DbSet<Tuyen> Tuyens { get; set; }
         public DbSet<Diadiem> Diadiems { get; set; }
+        public DbSet<VeHuy> VeHuys { get; set; }
         public DbSet<DonHang> DonHangs { get; set; }
         public DbSet<DonHangChiTiet> DonHangChiTiets { get; set; }
         public DbSet<HangGui> HangGuis { get; set; }

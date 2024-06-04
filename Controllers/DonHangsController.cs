@@ -24,8 +24,6 @@ namespace ThanhBuoi.Controllers
             _context = context;
         }
 
-        // GET: DonHangs
-        // GET: DonHangs
         public IActionResult Index(int page = 1, string searchString = null)
         {
             try
@@ -35,7 +33,6 @@ namespace ThanhBuoi.Controllers
             }
             catch (Exception ex)
             {
-                // Handle exception, e.g., log it, display an error message, etc.
                 ViewBag.ErrorMessage = "Đã xảy ra lỗi khi tải danh sách đơn hàng. Vui lòng thử lại sau.";
                 return View();
             }
@@ -43,7 +40,13 @@ namespace ThanhBuoi.Controllers
 
         private IEnumerable<DonHang> GetPaginatedDonHangs(int page, string searchString = null)
         {
-            var query = _context.DonHangs.AsQueryable();
+            var query = _context.DonHangs
+                                                  .Include(dh => dh.DonHangChiTiets)
+                                                  .ThenInclude(dhct => dhct.HangGui)
+                                                  .Where(dh => dh.DonHangChiTiets.Any(dhct => dhct.HangGui != null))
+                                                  .AsQueryable();
+
+
 
             if (!string.IsNullOrEmpty(searchString))
             {

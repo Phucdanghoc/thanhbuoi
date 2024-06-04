@@ -299,7 +299,10 @@ namespace ThanhBuoi.Migrations
                     b.Property<int>("ID_DonHang")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_HangGui")
+                    b.Property<int?>("ID_HangGui")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ID_Ve")
                         .HasColumnType("int");
 
                     b.Property<double>("Tien")
@@ -310,6 +313,8 @@ namespace ThanhBuoi.Migrations
                     b.HasIndex("ID_DonHang");
 
                     b.HasIndex("ID_HangGui");
+
+                    b.HasIndex("ID_Ve");
 
                     b.ToTable("DonHangChiTiets");
                 });
@@ -714,6 +719,9 @@ namespace ThanhBuoi.Migrations
                     b.Property<string>("email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("isCancel")
+                        .HasColumnType("bit");
+
                     b.Property<string>("phuongthucthanhtoan")
                         .HasColumnType("nvarchar(max)");
 
@@ -726,6 +734,51 @@ namespace ThanhBuoi.Migrations
                     b.HasIndex("ID_TaiKhoan");
 
                     b.ToTable("Ves");
+                });
+
+            modelBuilder.Entity("ThanhBuoi.Models.VeHuy", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CMND")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GheId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ID_Chuyen")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Mave")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("hoantien")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("ngaytao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GheId");
+
+                    b.HasIndex("ID_Chuyen");
+
+                    b.ToTable("VeHuys");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.Xe", b =>
@@ -866,13 +919,17 @@ namespace ThanhBuoi.Migrations
 
                     b.HasOne("ThanhBuoi.Models.HangGui", "HangGui")
                         .WithMany()
-                        .HasForeignKey("ID_HangGui")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ID_HangGui");
+
+                    b.HasOne("ThanhBuoi.Models.Ve", "Ve")
+                        .WithMany()
+                        .HasForeignKey("ID_Ve");
 
                     b.Navigation("DonHang");
 
                     b.Navigation("HangGui");
+
+                    b.Navigation("Ve");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.Ghe", b =>
@@ -976,6 +1033,25 @@ namespace ThanhBuoi.Migrations
                     b.Navigation("Ghe");
 
                     b.Navigation("TaiKhoan");
+                });
+
+            modelBuilder.Entity("ThanhBuoi.Models.VeHuy", b =>
+                {
+                    b.HasOne("ThanhBuoi.Models.Ghe", "Ghe")
+                        .WithMany()
+                        .HasForeignKey("GheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ThanhBuoi.Models.Chuyen", "chuyen")
+                        .WithMany()
+                        .HasForeignKey("ID_Chuyen")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ghe");
+
+                    b.Navigation("chuyen");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.Xe", b =>

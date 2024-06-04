@@ -105,9 +105,7 @@ namespace ThanhBuoi.APIS
                     .Where(d => d.ThoiGianDi.Date == date.Date)
                     .ToList();
                 double totalChuyen = _context.Ves.Where(v => v.NgayTao.Date == date.Date && v.TrangThai == Models.TrangThaiVe.Booked).ToList().Sum(v => v.Tien);
-                // Calculate combined total
                 double combinedTotal = totalDonHang + totalChuyen;
-                // Create DoanhTheoNgay object for the day
                 var dailyTotal = new DoanhTheoNgay
                 {
                     totalHang = totalDonHang,

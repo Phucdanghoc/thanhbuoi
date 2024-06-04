@@ -123,14 +123,24 @@
 
                 $("#loadingSpinner").hide();
 
+                console.log(response.ok);
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    alert("Đã xảy ra lỗi khi thanh toán. Vui lòng thử lại.");
+                }else{
+
                 }
 
                 const data = await response.json();
-                console.log(data);
-                // Uncomment the next line if you want to redirect after successful checkout
-                window.location.href = data.url;
+                if (data.url) {
+                    window.location.href = data.url;
+
+                }else{
+                    alert("Thanh toán thành công");
+                    location.reload(true);
+
+
+                }
+
             } catch (error) {
                 $("#loadingSpinner").hide();
                 console.error("There was a problem with the fetch operation:", error);

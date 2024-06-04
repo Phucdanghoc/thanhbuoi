@@ -51,6 +51,8 @@ namespace ThanhBuoi.Models
 
         public int Hanhli { get; set; }
 
+        public bool isCancel { get; set; }
+
         public DateTime NgayTao { get; set; }
 
     }
