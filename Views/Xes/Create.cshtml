@@ -25,9 +25,9 @@
                         <label for="loaixe_id" class="form-label">Loại xe</label>
                         <select class="form-select" id="loaixe_id" name="loaixe_id" aria-label="Chọn loại xe">
                             <option value="">-- Chọn loại xe --</option>
-                            @foreach (var item in ViewBag.getLoaiXeList)
+                            @foreach (LoaiXe item in ViewBag.getLoaiXeList)
                             {
-                                <option value="@item.Id">@item.Mota</option>
+                                <option value="@item.Id">@item.Ten - @(item.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</option>
                             }
                         </select>
                         <span asp-validation-for="LoaiXe" class="text-danger"></span>

@@ -2,15 +2,12 @@
     // Hide seat layout container by default
     $('#seatLayoutContainer').hide();
 
-    // Handle change event for the type of seat dropdown
     $('#loaighe').change(function () {
         const selectedOption = $(this).val();
         const sogheDropdown = $('#soghe');
 
-        // Clear existing options
         sogheDropdown.empty();
 
-        // Define options based on the selected type of seat
         const options = getOptionsForLoaiGhe(selectedOption);
 
         // Add options to the dropdown
@@ -18,20 +15,13 @@
             sogheDropdown.append($('<option>', option));
         });
 
-        // Show or hide the "Number of Seats" dropdown container
         $('#sogheContainer').toggle(options.length > 0);
     });
 
-    // Handle change event for the "Number of Seats" dropdown
     $('#soghe').change(function () {
         const loaiGhe = $('#loaighe').val();
         const soGhe = $(this).val();
-
-        // Generate seat layout
         generateSeatLayout(loaiGhe, soGhe);
-
-        // Show seat layout container
-        $('#seatLayoutContainer').show();
     });
 });
 
@@ -48,23 +38,4 @@ function getOptionsForLoaiGhe(loaiGhe) {
 }
 
 // Function to generate seat layout
-function generateSeatLayout(loaiGhe, soGhe) {
-    const container = $('#seatLayoutContainer');
-    container.empty();
-    const floor = loaiGhe === "GN" ? 4 : 2;
 
-    // Calculate number of columns and rows
-    const numCols = Math.ceil(soGhe / floor);
-    const numRows = floor;
-
-    // Generate seat boxes
-    for (let i = 0; i < numRows; i++) {
-        const rowContainer = $('<div>').addClass('row');
-        for (let c = 0; c < numCols; c++) {
-            const seatNumber = i * numCols + c + 1;
-            const seatBox = $('<div>').addClass('seat').text(seatNumber);
-            rowContainer.append(seatBox);
-        }
-        container.append(rowContainer);
-    }
-}

@@ -18,15 +18,27 @@
                             <div class="col-md-3">
                                 <select class="form-control" name="from" id="fromSelect">
                                     <option value="">Từ</option>
+                                    @foreach (var item in ViewBag.listTinh)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control" name="to" id="toSelect">
                                     <option value="">Đến</option>
+                                    @foreach (var item in ViewBag.listTinh)
+                                    {
+                                        <option value="@item">@item</option>
+                                    }
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <input type="datetime-local" min="@DateTime.Now" class="form-control" id="datepicker" placeholder="Chọn ngày đi" name="datetime">
+                                @{
+                                    string minDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+                                }
+
+                                <input type="datetime-local" min="@minDate" class="form-control" id="datepicker" placeholder="Chọn ngày đi" name="datetime">
                             </div>
                             <div class="col-md-3">
                                 <select class="form-control" name="type">

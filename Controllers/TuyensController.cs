@@ -22,14 +22,15 @@ namespace ThanhBuoi.Controllers
         }
 
         // GET: Tuyens
-        public async Task<IActionResult> Index(string di, string den)
+        public async Task<IActionResult> Index(string t = null)
         {
             ViewBag.ListDiaDiemDistinct = await _context.Diadiems.Select(d => d.Ten).Distinct().ToListAsync();
             ViewBag.ListDiaDiem = _context.Diadiems?.ToList();
             IQueryable<Tuyen> tuyens = _context.Tuyens;
-            if (!string.IsNullOrEmpty(di) && !string.IsNullOrEmpty(den))
+      
+            if (!string.IsNullOrEmpty(t) && t != "all")
             {
-                tuyens = tuyens.Where(d => d.DiemDen.Ten == den && d.DiemDi.Ten == di);
+                tuyens = tuyens.Where(d => d.DiemDen.Ten == t || d.DiemDi.Ten == t);
             }
             return View(await tuyens.Include(x => x.DiemDi).Include(x => x.DiemDen).ToListAsync());
         }

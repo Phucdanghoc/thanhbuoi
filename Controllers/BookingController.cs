@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 using ThanhBuoi.Models.DTO;
@@ -32,6 +31,7 @@ namespace ThanhBuoi.Controllers
             try
             {
                 var listChuyen = GetPaginatedChuyens(page, from,to,datetime,searchString,type);
+                ViewBag.listTinh = TinhData.GetInstance().GetTinhThanh();
                 return View(listChuyen);
             }
             catch (Exception ex)

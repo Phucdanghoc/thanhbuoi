@@ -22,6 +22,7 @@ namespace ThanhBuoi.Controllers
         {
             IQueryable<Diadiem> diadiems = _context.Diadiems;
             ViewBag.listTinhThanh = diadiems.Select(d => d.Ten).Distinct().ToList();
+            ViewBag.listTinh = TinhData.GetInstance().GetTinhThanh();
             if (!string.IsNullOrEmpty(t))
             {
                 if (t == "all")
@@ -61,37 +62,23 @@ namespace ThanhBuoi.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<IActionResult> Create(string Tinh, string Huyen, string Xa, string diaChi)
+        public async Task<IActionResult> Create(string Tinh)
         {
-            // Check if the Tinh is not null or empty
-            if (!string.IsNullOrEmpty(Tinh) || !string.IsNullOrEmpty(Huyen) || !string.IsNullOrEmpty(Xa) || !string.IsNullOrEmpty(diaChi))
+            if (!string.IsNullOrEmpty(Tinh) )
             {
-                // Check if the Ten already exists in the database
-                if (_context.Diadiems.Any(d => d.Diachi == $"{diaChi}-{Xa}-{Huyen}"))
-                {
-                    // If Ten already exists, set an error message and return to the view
-                    TempData["ErrorMessage"] = "Địa điểm đã tồn tại.";
-                    return View();
-                }
-
-                // If Ten doesn't exist, create a new Diadiem object and add it to the context
                 var diadiem = new Diadiem
                 {
                     Ten = Tinh,
-                    Diachi = $"{diaChi}-{Xa}-{Huyen}"
+                    Diachi = $""
                 };
                 _context.Add(diadiem);
                 await _context.SaveChangesAsync();
-                // Set a success message and redirect to the Index action
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
                 return RedirectToAction(nameof(Index));
             }
-
-            // If Tinh is null or empty, return to the view with an error message
             TempData["ErrorMessage"] = "Vui lòng nhập Tỉnh.";
             return View();
         }
-
 
         // GET: Diadiems/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -108,10 +95,6 @@ namespace ThanhBuoi.Controllers
             }
             return View(diadiem);
         }
-
-        // POST: Diadiems/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,Diachi")] Diadiem diadiem)

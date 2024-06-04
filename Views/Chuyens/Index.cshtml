@@ -48,7 +48,10 @@
                     <div class="card-body">
                         <div class="mb-3">
                             <label for="ThoiGianDi" class="form-label">Thời Gian Đi</label>
-                            <input id="ThoiGianDi" name="ThoiGianDi" class="form-control" type="datetime-local"
+                            @{
+                                string minDate = DateTime.Now.ToString("yyyy-MM-ddTHH:mm");
+                            }
+                            <input min="@minDate" id="ThoiGianDi" name="ThoiGianDi" class="form-control" type="datetime-local"
                                    required />
                         </div>
                         <div class="mb-3">
