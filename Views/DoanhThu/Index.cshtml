@@ -3,6 +3,7 @@
 }
 
 <style>
+    <style >
     body {
         font-family: Arial, sans-serif;
         padding: 20px;
@@ -22,9 +23,41 @@
     .tab-pane {
         padding: 20px;
     }
+
+    .select2-container .select2-selection--single {
+        height: 38px;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        background-color: #fff;
+        color: #333;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 38px;
+    }
+
+    .select2-dropdown {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .select2-results__option {
+        padding: 8px;
+    }
+
+    .select2-results__option--highlighted {
+        background-color: #f1f1f1;
+    }
+
+    /* Custom styles for buttons */
+    .btn {
+        margin: 5px;
+    }
 </style>
-
-
+</style>
 
 <div class="tab-container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -41,8 +74,9 @@
                         <button class="btn btn-primary" onclick="getTotalRevenue('yesterday')">Hôm qua</button>
                         <button class="btn btn-primary" onclick="getTotalRevenue('thisweek')">Tuần này</button>
                         <button class="btn btn-primary" onclick="getTotalRevenue('thismonth')">Tháng này</button>
-                       @*  <input type="date" id="customDate">
-                        <button class="btn btn-primary" onclick="getTotalRevenue('custom')">Show</button> *@
+                        <select class="form-control d-inline-block w-auto ml-2 " id="monthSelect" onchange="getTotalRevenue('selectedMonth')">
+                            <option value="">Chọn tháng</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -94,7 +128,6 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </div>
 
@@ -114,7 +147,8 @@
             case 'thisweek':
                 const today = new Date();
                 const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
-                const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+                const lastDay = new Date(firstDay);
+                lastDay.setDate(firstDay.getDate() + 6);
                 fromDate = firstDay.toISOString().split('T')[0];
                 toDate = lastDay.toISOString().split('T')[0];
                 break;
@@ -123,6 +157,16 @@
                 const lastDate = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0);
                 fromDate = firstDate.toISOString().split('T')[0];
                 toDate = lastDate.toISOString().split('T')[0];
+                break;
+            case 'selectedMonth':
+                const selectedMonth = document.getElementById('monthSelect').value;
+                if (selectedMonth) {
+                    const [year, month] = selectedMonth.split('-');
+                    const firstDayOfMonth = new Date(year, month - 1, 1);
+                    const lastDayOfMonth = new Date(year, month, 0);
+                    fromDate = firstDayOfMonth.toISOString().split('T')[0];
+                    toDate = lastDayOfMonth.toISOString().split('T')[0];
+                }
                 break;
             case 'custom':
                 const customDate = document.getElementById('customDate').value;
@@ -209,22 +253,25 @@
         });
         const totalHang = sumArray(listTotalHang);
         const totalVe = sumArray(listTotalVe);
-        console.log(totalHang, totalVe)
         setTotal(totalVe, totalHang);
         drawCharts(listDate, listTotalHang, listTotalVe, listTotal);
     }
+
     function formatVND(number) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
     }
+
     function setTotal(totalVe, totalHang) {
         $("#total-ve").text(formatVND(totalVe));
         $("#total-hang").text(formatVND(totalHang));
         var totalAll = totalVe + totalHang;
         $("#total-all").text(formatVND(totalAll));
     }
+
     function sumArray(arr) {
         return arr.reduce((acc, val) => acc + val, 0);
     }
+
     function formatDate(dateString) {
         var date = new Date(dateString);
         var day = date.getDate();
@@ -232,43 +279,27 @@
         var year = date.getFullYear();
         return `${day}/${month.toString().padStart(2, '0')}`;
     }
+
+    function populateMonthSelect() {
+        const monthSelect = document.getElementById('monthSelect');
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+
+            for (let month = 1; month <= 12; month++) {
+            const value = `${currentYear}-${month.toString().padStart(2, '0')}`;
+                const text = `Tháng ${month}/${currentYear}`;
+                const option = new Option(text, value);
+                monthSelect.add(option);
+            }
+
+        // Set the current month as selected by default
+        monthSelect.value = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`;
+    }
+
     $(document).ready(function () {
-        // Mặc định hiển thị tab "Tổng"
-        $('#tab2-tab').tab('show');
-
-        // Xử lý sự kiện click vào tab để hiển thị tab tương ứng
-        $('#myTab a').on('click', function (e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
-
-        // Xử lý URL hash để mở tab cụ thể
-        var hash = window.location.hash;
-        if (hash) {
-            $('#myTab a[href="' + hash + '"]').tab('show');
-        }
-
-        // Hiển thị tab "Tổng" và vẽ biểu đồ khi tab được hiển thị
-        $('#tab2-tab').on('shown.bs.tab', function () {
-            drawCharts();
-        });
-
-        
-
-        // Vẽ biểu đồ khi tải trang
-        drawCharts();
+        populateMonthSelect();
+        getTotalRevenue('today');
     });
 
-    // Các hàm để mở tab cụ thể
-    function openTongTab() {
-        $('#tab2-tab').tab('show');
-    }
-
-    function openHangTab() {
-        $('#tab3-tab').tab('show');
-    }
-
-    function openVeTab() {
-        $('#tab4-tab').tab('show');
-    }
+  
 </script>

@@ -3,7 +3,44 @@
 @{
     ViewData["Title"] = "Vé";
 }
+<style>
+    /* Style for search form */
+    .input-group {
+        margin-bottom: 20px;
+    }
 
+    /* Style for card */
+    .card {
+        margin-top: 20px;
+    }
+
+    /* Style for card title */
+    .card-title {
+        color: #333;
+        font-size: 1.2rem;
+    }
+
+    /* Style for card text */
+    .card-text {
+        color: #666;
+    }
+
+    /* Style for detail button */
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+</style>
 <div class="container pt-4">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -29,7 +66,7 @@
                         <h5 class="card-title">@Model.Ten</h5>
                         <p class="card-text"><strong>Mã Vé:</strong> @Model.MaVe</p>
                         <p class="card-text"><strong>Điểm Đón:</strong> @Model.DiemDon</p>
-                        <p class="card-text"><strong>Trạng Thái:</strong> @Model.TrangThai</p>
+                        <p class="card-text"><strong>Trạng Thái:</strong> @(Model.TrangThai == TrangThaiVe.Booked ? "Đã đặt ": " Đã Hủy")</p>
                         <p class="card-text"><strong>Giá Tiền:</strong> @Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
                         <a asp-route-id="@Model.Id" asp-action="Detail" class="btn btn-primary"> Chi tiết</a>
                     </div>

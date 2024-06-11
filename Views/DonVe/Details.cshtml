@@ -3,7 +3,13 @@
 @{
     ViewData["Title"] = "Chi tiết hóa đơn vé";
 }
+<style>
+    .highlight {
+        color: #ff5733; /* Choose your desired highlight color */
+        font-weight: bold;
+    }
 
+</style>
 <div class="container mt-5 bg-light p-4 rounded shadow-sm">
     <h2 class="text-center">Chi tiết đơn vé</h2>
 
@@ -20,11 +26,12 @@
         <h3 class="mb-4">Danh sách hàng</h3>
         @if (ViewBag.ChiTietVe != null)
         {
-            @foreach (var ve in ViewBag.ChiTietVe)
+            @foreach (DonHangChiTiet ve in ViewBag.ChiTietVe)
             {
                 <div class="card my-2 shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Tên : @ve.Ve.Ten</h5>
+                        <h6 class="card-title">Mã vé : @ve.Ve.MaVe</h6>
                         <div class="row">
                             <div class="col-md-6">
                                 <p><strong>Người gửi:</strong> @ve.Ve.Ten</p>
@@ -38,7 +45,7 @@
                                 <p><strong>Phương thức thanh toán:</strong> @ve.Ve.phuongthucthanhtoan</p>
                                 <p><strong>Trạng thái:</strong> @ve.Ve.TrangThai</p>
                                 <p><strong>Ngày tạo:</strong> @ve.Ve.NgayTao.ToString("dd/MM/yyyy")</p>
-                                <p><strong>Giá vé:</strong> @ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+                                <p><strong>Giá vé:</strong> <span class="highlight">@ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
                                 <p><strong>Ghế:</strong> @ve.Ve.Ghe?.Id</p>
                                 <p><strong>Chuyến:</strong> @ve.Ve.Chuyen?.Ten</p>
                             </div>
@@ -62,7 +69,7 @@
                 </div>
                 <div class="form-group">
                     <label for="mota">Mô tả:</label>
-                    <textarea class="form-control" id="mota" name="mota" @(Model.Mota != null ? "disabled" : "")>@Model.Mota</textarea>
+                    <textarea class="form-control" id="mota" name="mota" rows="4" @(Model.Mota != null ? "disabled" : "")>@Model.Mota</textarea>
                 </div>
             </div>
             <div class="col-md-6">
@@ -74,7 +81,7 @@
                             <div class="col-md-6 text-center">
                                 <input type="radio" id="momo" name="paymentMethod" value="momo" checked disabled>
                                 <label for="momo">Momo</label><br>
-                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2 img-fluid" style="max-width: 100px;">
                             </div>
                         }
                         else if (Model.PhuongThucThanhToan == "cash")
@@ -82,7 +89,7 @@
                             <div class="col-md-6 text-center">
                                 <input type="radio" id="tienmat" name="paymentMethod" value="cash" checked disabled>
                                 <label for="tienmat">Tiền mặt</label><br>
-                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
+                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2 img-fluid" style="max-width: 100px;">
                             </div>
                         }
                         else
@@ -90,87 +97,25 @@
                             <div class="col-md-6 text-center">
                                 <input type="radio" id="momo" name="paymentMethod" value="momo">
                                 <label for="momo">Momo</label><br>
-                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2 img-fluid" style="max-width: 100px;">
                             </div>
                             <div class="col-md-6 text-center">
                                 <input type="radio" id="tienmat" name="paymentMethod" value="cash">
                                 <label for="tienmat">Tiền mặt</label><br>
-                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
+                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2 img-fluid" style="max-width: 100px;">
                             </div>
                         }
                     </div>
                 </div>
             </div>
         </div>
-        @if (Model.Trangthai == TrangThaiDonHang.Waiting)
-        {
-            <div id="loadingSpinner" class="text-center my-3" hidden>
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-primary" id="btnThanhToan">Thanh toán</button>
-                <button type="button" class="btn btn-danger" id="btnHuyDon">Hủy đơn hàng</button>
-            </div>
-        }
     </form>
 </div>
 
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $("#btnThanhToan").click(function (e) {
-                e.preventDefault();
-                $("#loadingSpinner").show();
-
-                var orderData = {
-                    email: $("#email").val(),
-                    mota: $("#mota").val(),
-                    paymentMethod: $("input[name='paymentMethod']:checked").val(),
-                    id: @Model.Id
-                                };
-
-                fetch("/api/donhang/Checkout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(orderData)
-                })
-                    .then(response => {
-                        $("#loadingSpinner").hide();
-                        if (!response.ok) {
-                            throw new Error("Network response was not ok");
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        alert("Đơn hàng của bạn đã được thanh toán thành công!");
-                        window.location.href = "/DonHang/Create";
-                    })
-                    .catch(error => {
-                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                    });
-            });
-
-            $("#btnHuyDon").click(function (e) {
-                e.preventDefault();
-                var orderId = @Model.Id;
-                $.ajax({
-                    type: "DELETE",
-                    url: `/api/donhang/cancel/${orderId}`,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Đơn hàng của bạn đã được hủy thành công!");
-                        window.location.href = "/DonHang/Create";
-                    },
-                    error: function (error) {
-                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                    }
-                });
-            });
+            // Any required JavaScript can be added here
         });
     </script>
 }

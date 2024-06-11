@@ -37,7 +37,7 @@ namespace ThanhBuoi.Controllers
         {
             var query = _context.DonHangs
                                        .Include(dh => dh.DonHangChiTiets)
-                                       .ThenInclude(dhct => dhct.HangGui)
+                                       .ThenInclude(dhct => dhct.Ve).ThenInclude(c => c.Chuyen)
                                        .Where(dh => dh.DonHangChiTiets.Any(dhct => dhct.Ve != null))
                                        .AsQueryable();
 
