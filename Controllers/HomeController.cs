@@ -8,7 +8,7 @@ using ThanhBuoi.Models;
 
 namespace ThanhBuoi.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "ADMIN,SALER,USER")]
     public class HomeController : Controller
         {
         private readonly ILogger<HomeController> _logger;
@@ -31,6 +31,8 @@ namespace ThanhBuoi.Controllers
                 .ToListAsync();
             ViewBag.ListVe = await _context.Ves.Include(v => v.Chuyen).Where(v => v.NgayTao.Date == DateTime.Today && v.TrangThai == TrangThaiVe.Booked).ToListAsync();
             ViewBag.DonHang = await _context.DonHangs.Where(v => v.NgayTao.Date == DateTime.Today).ToListAsync();
+
+            ViewBag.Tintucs = await _context.TinTucs.ToListAsync();
             return View();
         }
 

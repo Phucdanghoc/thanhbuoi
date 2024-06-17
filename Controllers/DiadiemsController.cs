@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ThanhBuoi.Controllers
 {
-    [Authorize(Roles = "ADMIN")] 
+    [Authorize(Roles = "ADMIN")]
     public class DiadiemsController : Controller
     {
         private readonly DataContext _context;
@@ -20,17 +21,18 @@ namespace ThanhBuoi.Controllers
         // GET: Diadiems
         public async Task<IActionResult> Index(string t)
         {
-            IQueryable<Diadiem> diadiems = _context.Diadiems;
+            var diadiems = _context.Diadiems.AsQueryable();
             ViewBag.listTinhThanh = diadiems.Select(d => d.Ten).Distinct().ToList();
             ViewBag.listTinh = TinhData.GetInstance().GetTinhThanh();
+
             if (!string.IsNullOrEmpty(t))
             {
-                if (t == "all")
+                if (t != "all")
                 {
-                    return View(await diadiems.ToListAsync());
+                    diadiems = diadiems.Where(d => d.Ten == t);
                 }
-                diadiems = diadiems.Where(d => d.Ten == t);
             }
+
             return View(await diadiems.ToListAsync());
         }
 
@@ -44,6 +46,7 @@ namespace ThanhBuoi.Controllers
 
             var diadiem = await _context.Diadiems
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (diadiem == null)
             {
                 return NotFound();
@@ -58,21 +61,23 @@ namespace ThanhBuoi.Controllers
             return View();
         }
 
+        // POST: Diadiems/Create
         [HttpPost]
         public async Task<IActionResult> Create(string Tinh)
         {
-            if (!string.IsNullOrEmpty(Tinh) )
+            if (!string.IsNullOrEmpty(Tinh))
             {
                 var diadiem = new Diadiem
                 {
                     Ten = Tinh,
-                    Diachi = $""
+                    Diachi = ""
                 };
                 _context.Add(diadiem);
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
                 return RedirectToAction(nameof(Index));
             }
+
             TempData["ErrorMessage"] = "Vui lòng nhập Tỉnh.";
             return View();
         }
@@ -90,8 +95,11 @@ namespace ThanhBuoi.Controllers
             {
                 return NotFound();
             }
+
             return View(diadiem);
         }
+
+        // POST: Diadiems/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,Diachi")] Diadiem diadiem)
@@ -134,6 +142,7 @@ namespace ThanhBuoi.Controllers
 
             var diadiem = await _context.Diadiems
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (diadiem == null)
             {
                 return NotFound();
@@ -151,9 +160,9 @@ namespace ThanhBuoi.Controllers
             if (diadiem != null)
             {
                 _context.Diadiems.Remove(diadiem);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

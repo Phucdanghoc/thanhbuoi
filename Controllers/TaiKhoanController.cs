@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Drawing.Printing;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 using ThanhBuoi.Models.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ThanhBuoi.Controllers
 {
@@ -18,15 +21,15 @@ namespace ThanhBuoi.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
 
         private const int PageSize = 10; // Number of items per page
+
         public TaiKhoanController(UserManager<TaiKhoan> userManager, DataContext dataContext, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _context = dataContext;
             _roleManager = roleManager;
         }
-        // GET: TaiKhoanController
 
-
+        // GET: TaiKhoanController/Index?page=1&searchString=example
         public async Task<IActionResult> Index(int page = 1, string searchString = null)
         {
             try
@@ -48,19 +51,19 @@ namespace ThanhBuoi.Controllers
 
             if (userRoleId == null)
             {
-                throw new Exception("Role 'User' not found.");
+                throw new Exception("Role 'USER' not found.");
             }
 
             var userRoleIds = await _context.UserRoles
-                                             .Where(ur => ur.RoleId == userRoleId)
-                                             .Select(ur => ur.UserId)
-                                             .ToListAsync();
+                                            .Where(ur => ur.RoleId == userRoleId)
+                                            .Select(ur => ur.UserId)
+                                            .ToListAsync();
 
             var query = _userManager.Users.Where(u => userRoleIds.Contains(u.Id)).AsQueryable();
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                query = query.Where(u => u.Ten.Contains(searchString) || u.UserName.Contains(searchString) );
+                query = query.Where(u => u.Ten.Contains(searchString) || u.UserName.Contains(searchString));
             }
 
             int totalUsers = await query.CountAsync();
@@ -75,7 +78,7 @@ namespace ThanhBuoi.Controllers
             return users;
         }
 
-        // GET: TaiKhoanController/Details/5
+        // GET: TaiKhoanController/Detail/abc123
         public async Task<IActionResult> Detail(string id)
         {
             if (id == null)
@@ -85,11 +88,19 @@ namespace ThanhBuoi.Controllers
 
             var user = await _context.Users
                                      .FirstOrDefaultAsync(u => u.Id == id);
-            ViewBag.ListVe = await _context.Ves.Include(c => c.Chuyen).Include(g => g.Ghe).ThenInclude(h => h.Hang).Include(t => t.TaiKhoan).Where(u => u.TaiKhoan!.Id == id).ToListAsync();
+
             if (user == null)
             {
                 return NotFound();
             }
+
+            ViewBag.ListVe = await _context.Ves
+                .Include(c => c.Chuyen)
+                .Include(g => g.Ghe)
+                .ThenInclude(h => h.Hang)
+                .Include(t => t.TaiKhoan)
+                .Where(u => u.TaiKhoan!.Id == id)
+                .ToListAsync();
 
             return View(user);
         }
@@ -108,7 +119,7 @@ namespace ThanhBuoi.Controllers
             var existingUser = await _userManager.FindByEmailAsync(model.Email);
             if (existingUser != null)
             {
-                TempData["ErrorrMessage"] = "Tài khoản đã tồn tại";
+                TempData["ErrorMessage"] = "Tài khoản đã tồn tại";
                 return View();
             }
 
@@ -117,59 +128,107 @@ namespace ThanhBuoi.Controllers
                 Email = model.Email,
                 UserName = model.Email,
                 Ten = model.Ten,
+                PhoneNumber = model.SDT,
             };
 
             var result = await _userManager.CreateAsync(newUser, model.Password);
             await _userManager.AddToRoleAsync(newUser, "SALER");
+
             if (result.Succeeded)
             {
                 TempData["SuccessMessage"] = "Tạo mới tài khoản thành công";
                 return RedirectToAction(nameof(Index));
             }
+
             return RedirectToAction(nameof(Index));
-
         }
 
-        // GET: TaiKhoanController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: TaiKhoanController/Edit/abc123
+        public async Task<ActionResult> Edit(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
 
-        // POST: TaiKhoanController/Edit/5
+        // POST: TaiKhoanController/Edit/abc123
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<ActionResult> Edit(string id, [Bind("Id, Email, Ten")] TaiKhoan user)
         {
-            try
+            if (id != user.Id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var existingUser = await _userManager.FindByIdAsync(id);
+                    existingUser.Email = user.Email;
+                    existingUser.Ten = user.Ten;
+                    await _userManager.UpdateAsync(existingUser);
+                    TempData["SuccessMessage"] = "Chỉnh sửa tài khoản thành công";
+                }
+                catch (Exception ex)
+                {
+                    TempData["ErrorMessage"] = "Đã xảy ra lỗi khi cập nhật tài khoản. Vui lòng thử lại.";
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(user);
         }
 
-        // GET: TaiKhoanController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: TaiKhoanController/Delete/abc123
+        public async Task<ActionResult> Delete(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
         }
 
-        // POST: TaiKhoanController/Delete/5
-        [HttpPost]
+        // POST: TaiKhoanController/Delete/abc123
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            try
+            var user = await _userManager.FindByIdAsync(id);
+            if (user == null)
             {
+                return NotFound();
+            }
+
+            var result = await _userManager.DeleteAsync(user);
+
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Xóa tài khoản thành công";
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            TempData["ErrorMessage"] = "Đã xảy ra lỗi khi xóa tài khoản. Vui lòng thử lại.";
+            return RedirectToAction(nameof(Index));
         }
     }
 }

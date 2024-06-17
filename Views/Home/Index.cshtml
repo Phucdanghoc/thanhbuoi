@@ -1,157 +1,213 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Home Page";
 }
+@inject SignInManager<TaiKhoan> SignInManager
+@inject UserManager<TaiKhoan> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
 
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-chart-line fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <p class="mb-2">Vé</p>
-                    <h6 id="total-ve" class="mb-0"></h6>
+    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "ADMIN");
+    var isUser = user != null && await UserManager.IsInRoleAsync(user, "USER");
+}
+@if (!isUser)
+{
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-line fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Vé</p>
+                        <h6 id="total-ve" class="mb-0"></h6>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
-                <i class="fa fa-chart-bar fa-3x text-primary"></i>
-                <div class="ms-3">
-                    <p class="mb-2">Đơn hàng </p>
-                    <h6 id="total-hang" class="mb-0"></h6>
+            <div class="col-sm-6 col-xl-3">
+                <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
+                    <i class="fa fa-chart-bar fa-3x text-primary"></i>
+                    <div class="ms-3">
+                        <p class="mb-2">Đơn hàng </p>
+                        <h6 id="total-hang" class="mb-0"></h6>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="row g-4">
-        <div class="col-sm-12 col-xl-6">
-            <div class="bg-light text-center rounded p-4" style="height: 300px; overflow-y: auto;">
-                <div class="d-flex align-items-center justify-content-between mb-4">
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <div class="col-sm-6 col-xl-6 bg-light text-center rounded m-2">
+                <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
                     <h6 class="mb-0">Vé đặt hôm nay</h6>
                 </div>
-                <div>
-                    <ul>
-                        @foreach (Ve ve in ViewBag.ListVe)
-                        {
-                            <div class="row border-bottom py-2">
-                                <div class="col-4">@ve.Ten</div>
-                                <div class="col-4">@{
-                                        var chuyens = ve.Chuyen.Ten.Split("-");
-                                        var name = chuyens[0] + chuyens[1];
-                                    }@name
-                                </div>
-                                <div class="col-4">
-                                    @{
-                                        var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", ve.Tien);
-                                    }
-                                    <span class="fw-bold text-info">@formattedPrice</span>
-                                    <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info">Chi tiết</a>
+                <div class=" p-4" style="height: 400px; overflow-y: auto;">
 
+                    <div>
+                        <ul>
+                            @foreach (Ve ve in ViewBag.ListVe)
+                            {
+                                <div class="row border-bottom py-2">
+                                    <div class="col-4">@ve.Ten</div>
+                                    <div class="col-4">
+                                        @{
+                                            var chuyens = ve.Chuyen.Ten.Split("-");
+                                            var name = chuyens[0] + chuyens[1];
+                                        }@name
+                                    </div>
+                                    <div class="col-4">
+                                        @{
+                                            var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", ve.Tien);
+                                        }
+                                        <span class="fw-bold text-info">@formattedPrice</span>
+                                        <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info">Chi tiết</a>
+
+                                    </div>
                                 </div>
-                            </div>
-                        }
-                    </ul>
+                            }
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-6 col-xl-6">
-            <div class="h-100 bg-light rounded p-4" style="height: 300px; overflow-y: auto;">
-                <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="col-sm-5  col-xl-5 bg-light text-center rounded m-2">
+                <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
                     <h6 class="mb-0">Đơn hàng</h6>
                 </div>
-                <div>
-                    <ul>
-                        @foreach (DonHang donHang in ViewBag.DonHang)
-                        {
-                            <li>
-                                @donHang.MaDon đã được tạo lúc @donHang.NgayTao.ToString("HH:mm")
-                                <a href="@Url.Action("Details", "Donhangs", new { id = donHang.Id })" class="button text-info">Chi tiết</a>
-                            </li>
-                        }
+                <div class="  p-4" style="height: 400px; overflow-y: auto;">
 
-                    </ul>
+                    <div>
+                        <ul>
+                            @foreach (DonHang donHang in ViewBag.DonHang)
+                            {
+                                <li>
+                                    @donHang.MaDon đã được tạo lúc @donHang.NgayTao.ToString("HH:mm")
+                                    <a href="@Url.Action("Details", "Donhangs", new { id = donHang.Id })" class="button text-info">Chi tiết</a>
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-</div>
-<div class="container-fluid pt-4 px-4">
-    <div class="bg-light text-center rounded p-4">
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <h6 class="mb-0">Các chuyến chạy hôm nay</h6>
         </div>
-        <div class="table-responsive">
-            <table class="table text-start align-middle table-bordered table-hover mb-0">
-                <thead>
-                    <tr class="text-dark">
-                        <th scope="col">Tên</th>
-                        <th scope="col">Thời gian đi</th>
-                        <th scope="col">Tên xe</th>
-                        <th scope="col">Loại xe</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (Chuyen chuyen in ViewBag.Chuyens)
-                    {
-                        <tr>
-                            <td>@chuyen.Ten</td>
-                            <td>@chuyen.ThoiGianDi.ToString("HH:mm")</td>
-                            <td>@chuyen.Xe.Ten</td>
-                            <td>@chuyen.Xe.LoaiXe.Ten</td>
-                            <td><a asp-action="Details" asp-controller="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-sm btn-primary">Chi tiết</a></td>
+    </div>
+    <div class="container-fluid pt-4 px-4">
+        <div class="bg-light text-center rounded p-4">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+                <h6 class="mb-0">Các chuyến chạy hôm nay</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">Tên</th>
+                            <th scope="col">Thời gian đi</th>
+                            <th scope="col">Tên xe</th>
+                            <th scope="col">Loại xe</th>
+                            <th scope="col"></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (Chuyen chuyen in ViewBag.Chuyens)
+                        {
+                            <tr>
+                                <td>@chuyen.Ten</td>
+                                <td>@chuyen.ThoiGianDi.ToString("HH:mm")</td>
+                                <td>@chuyen.Xe.Ten</td>
+                                <td>@chuyen.Xe.LoaiXe.Ten</td>
+                                <td><a asp-action="Details" asp-controller="Chuyens" asp-route-id="@chuyen.Id" class="btn btn-sm btn-primary">Chi tiết</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
-<script>
-    function processData(data) {
-        var listDate = [];
-        var listTotalHang = [];
-        var listTotalVe = [];
-        data.$values.forEach(function (item) {
-            listDate.push(formatDate(item.datetime));
-            listTotalHang.push(item.totalHang);
-            listTotalVe.push(item.totalVe);
-        });
-        const totalHang = sumArray(listTotalHang);
-        const totalVe = sumArray(listTotalVe);
-        setTotal(totalVe, totalHang);
-    }
-    function formatVND(number) {
-        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
-    }
-    function setTotal(totalVe, totalHang) {
-        $("#total-ve").text(formatVND(totalVe));
-        $("#total-hang").text(formatVND(totalHang));
-    }
-    function sumArray(arr) {
-        return arr.reduce((acc, val) => acc + val, 0);
-    }
-    function formatDate(dateString) {
-        var date = new Date(dateString);
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        return `${day}/${month.toString().padStart(2, '0')}`;
-    }
-    $(document).ready(function () {
-        fromDate = toDate = new Date().toISOString().split('T')[0];
-        fetch(`/api/doanhthu/total`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                processData(data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+    <script>
+        function processData(data) {
+            var listDate = [];
+            var listTotalHang = [];
+            var listTotalVe = [];
+            data.$values.forEach(function (item) {
+                listDate.push(formatDate(item.datetime));
+                listTotalHang.push(item.totalHang);
+                listTotalVe.push(item.totalVe);
             });
-    });
+            const totalHang = sumArray(listTotalHang);
+            const totalVe = sumArray(listTotalVe);
+            setTotal(totalVe, totalHang);
+        }
+        function formatVND(number) {
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+        }
+        function setTotal(totalVe, totalHang) {
+            $("#total-ve").text(formatVND(totalVe));
+            $("#total-hang").text(formatVND(totalHang));
+        }
+        function sumArray(arr) {
+            return arr.reduce((acc, val) => acc + val, 0);
+        }
+        function formatDate(dateString) {
+            var date = new Date(dateString);
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            return `${day}/${month.toString().padStart(2, '0')}`;
+        }
+        $(document).ready(function () {
+            fromDate = toDate = new Date().toISOString().split('T')[0];
+            fetch(`/api/doanhthu/total`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    processData(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        });
 
-</script>
+    </script>
+}
+else
+{
+      <div class="m-4 p-2 rounded">
+        <div class="row">
+            @foreach (var item in ViewBag.TinTucs)
+            {
+                <div class="col-md-3 mb-3">
+                    <div class="card h-100">
+                        @{
+                            List<string> ImageUrls = new List<string>
+                            {
+                                "https://busmap.vn/wp-content/uploads/2023/03/IMG_2589.jpg",
+                                "https://busmap.vn/wp-content/uploads/2023/03/IMG_2590.png",
+                                "https://busmap.vn/wp-content/uploads/2023/03/IMG_2588.jpg",
+                                "https://busmap.vn/wp-content/uploads/2021/10/Picture12.png",
+                                "https://busmap.vn/wp-content/uploads/2021/10/image-18.jpg"
+                            };
+                            Random random = new Random();
+                            int index = random.Next(0, ImageUrls.Count);
+                            var url = ImageUrls[index];
+                        }
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <img src="@url" class="card-img-top mx-auto mb-2" style="width: 200px; height: 200px; object-fit: cover;" alt="Image for @item.TieuDe">
+                            <div>
+                                <h5 class="card-title">
+                                    @(item.TieuDe.Length > 30 ? item.TieuDe.Substring(0, 30) + "..." : item.TieuDe)
+                                </h5>
+                                <p class="card-text">
+                                    @(item.NoiDung.Length > 100 ? item.NoiDung.Substring(0, 100) + "..." : item.NoiDung)
+                                </p>
+                                <p class="card-text"><small class="text-muted">Posted on @item.NgayDang.ToString("yyyy-MM-dd")</small></p>
+                                <p class="card-text"><small class="text-muted">@item.LuotXem views</small></p>
+                                <a asp-controller="Tintucs" asp-action="Read" asp-route-id="@item.Id" class="btn btn-primary mt-auto">Đọc thêm </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}

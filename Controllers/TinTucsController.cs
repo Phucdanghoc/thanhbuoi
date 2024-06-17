@@ -42,7 +42,22 @@ namespace ThanhBuoi.Controllers
 
             return View(tinTuc);
         }
+        public async Task<IActionResult> Read(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
+            var tinTuc = await _context.TinTucs
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (tinTuc == null)
+            {
+                return NotFound();
+            }
+
+            return View(tinTuc);
+        }
         // GET: TinTucs/Create
         public IActionResult Create()
         {

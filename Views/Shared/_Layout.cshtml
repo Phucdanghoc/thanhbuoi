@@ -5,8 +5,16 @@
 @inject UserManager<TaiKhoan> UserManager
 @{
     var user = await UserManager.GetUserAsync(User);
-    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "Admin");
-    var isManager = user != null && await UserManager.IsInRoleAsync(user, "Manager");
+    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "ADMIN");
+    var isUser = user != null && await UserManager.IsInRoleAsync(user, "USER");
+    var isSaler = user != null && await UserManager.IsInRoleAsync(user, "SALER");
+    var role = "";
+    if (user != null)
+    {
+        var roles = await UserManager.GetRolesAsync(user);
+        role = roles.First().ToString();
+    }
+
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +26,7 @@
     <meta content="" name="keywords">
     <meta content="" name="description">
     <!-- Favicon -->
-    <link href="~/img/favicon.ico" rel="icon">
+    <link href="~/img/favicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -82,14 +90,24 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">@user?.Ten</h6>
-                        <span>Admin</span>
+                        <span>@role</span>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
+                    @if (!isUser)
+                    {
+                        <a asp-controller="Ve" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Tìm vé</a>
+                        <a asp-controller="VeHuys" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Vé Hủy</a>
+                    }
+               
                     <a asp-controller="Booking" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Đặt Vé</a>
                     <a asp-controller="GuiHang" asp-action="Create" class="nav-item text-light nav-link btn btn-primary mt-4">Gửi Hàng</a>
-                    <a asp-controller="Ve" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Tìm vé</a>
-                    <a asp-controller="VeHuys" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Vé Hủy</a>
+                    @if (isUser)
+                    {
+                        <a asp-controller="User" asp-action="Ve" class="nav-item text-light nav-link btn btn-primary mt-4">Vé của tôi</a>
+                        <a asp-controller="User" asp-action="DonHang" class="nav-item text-light nav-link btn btn-primary mt-4">Đơn hàng</a>
+
+                    }
                     @if (isAdmin)
                     {
                         <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
@@ -115,9 +133,6 @@
         <div class="content">
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
                 <div class="container">
-                    <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
-                        <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
-                    </a>
                     <a href="#" class="sidebar-toggler flex-shrink-0">
                         <i class="fa fa-bars"></i>
                     </a>
@@ -131,7 +146,7 @@
                                 @if (User.Identity?.IsAuthenticated ?? false)
                                 {
                                     <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                                        <button type="submit" class="dropdown-item btn btn-link text-dark">Log Out</button>
+                                        <button type="submit" class="dropdown-item btn btn-link text-dark">Đăng xuất</button>
                                     </form>
                                 }
                                 else

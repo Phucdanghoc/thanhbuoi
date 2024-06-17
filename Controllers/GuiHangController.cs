@@ -8,7 +8,7 @@ using ThanhBuoi.Models.DTO;
 
 namespace ThanhBuoi.Controllers
 {
-    [Authorize(Roles = "ADMIN,SALER")]
+    [Authorize(Roles = "ADMIN,SALER,USER")]
     public class GuiHangController : Controller
     {
         UserManager<TaiKhoan> _userManager;
@@ -18,8 +18,8 @@ namespace ThanhBuoi.Controllers
         {
             _context = context;
             _userManager = userManager;
-            dictGiaHang.Add("Xe tay ga ", 0.7);
-            dictGiaHang.Add("Xe số ", 0.3);
+            dictGiaHang.Add("Xe tay ga", 0.7);
+            dictGiaHang.Add("Xe số", 0.3);
             dictGiaHang.Add("Hàng nhỏ", 0.2);
             dictGiaHang.Add("Hàng đặc biệt lớn", 1);
 
@@ -31,11 +31,6 @@ namespace ThanhBuoi.Controllers
             return View();
         }
 
-        // GET: GuiHang/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
         // GET: GuiHang/Create
         public ActionResult Create()
@@ -55,48 +50,5 @@ namespace ThanhBuoi.Controllers
             return View(donHang);
         }
 
-
-
-        // GET: GuiHang/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: GuiHang/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: GuiHang/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: GuiHang/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

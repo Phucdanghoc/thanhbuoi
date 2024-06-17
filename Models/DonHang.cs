@@ -15,6 +15,8 @@ namespace ThanhBuoi.Models
         [Key]
         public int Id { get; set; }
 
+        [ForeignKey("ID_TaiKhoan")]
+        public TaiKhoan? TaiKhoan { get; set; }
         public string MaDon {  get; set; }
 
         [StringLength(255)]
@@ -24,6 +26,7 @@ namespace ThanhBuoi.Models
         public string? Id_momoRes { get; set; }
 
         public double Tien { get; set; }
+
 
         public double TienPhaiTra { get; set; }
          

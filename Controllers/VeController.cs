@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
-using ThanhBuoi.Models.DTO;
 using ThanhBuoi.Services;
 
 namespace ThanhBuoi.Controllers
@@ -12,58 +10,74 @@ namespace ThanhBuoi.Controllers
     {
         private readonly DataContext _context;
         private readonly IEmailService _emailService;
-        private readonly MomoServices _momoServices;
-        public VeController(DataContext dataContext,IEmailService emailService,MomoServices momoServices) {
+
+        public VeController(DataContext dataContext, IEmailService emailService)
+        {
             _context = dataContext;
             _emailService = emailService;
-            _momoServices = momoServices;
         }
+
         public IActionResult Index(string mave = null)
         {
             if (!string.IsNullOrEmpty(mave))
             {
-                var ve = _context.Ves.Where(m => m.MaVe == mave).FirstOrDefault();
+                var ve = _context.Ves.FirstOrDefault(m => m.MaVe == mave);
                 if (ve == null)
                 {
                     TempData["ErrorMessage"] = "Không tìm thấy vé";
-
                 }
                 return View(ve);
             }
             return View();
         }
+
         public async Task<IActionResult> Detail(int id)
         {
             var ve = await _context.Ves
-                                   .Include(c => c.Chuyen)
-                                   .ThenInclude(x => x.Xe)
-                                   .Include(g => g.Ghe)
+                                   .Include(v => v.Chuyen).ThenInclude(c => c.Xe).ThenInclude(l => l.LoaiXe)
+                                   .Include(v => v.Ghe).ThenInclude(h => h.Hang)
                                    .FirstOrDefaultAsync(v => v.Id == id);
+
+            if (ve == null)
+            {
+                return NotFound();
+            }
+
             return View(ve);
         }
+
         public async Task<IActionResult> HoaDon(int id)
         {
-            var hoadon = _context.DonHangs.FirstAsync(d => d.Id == id);
-            List<DonHangChiTiet> ves   = _context.DonHangChiTiets.Include(v => v.Ve).Where(h => h.Id == hoadon.Id).ToList();
+            var hoadon = await _context.DonHangs.FirstOrDefaultAsync(d => d.Id == id);
+            if (hoadon == null)
+            {
+                return NotFound();
+            }
+
+            var ves = await _context.DonHangChiTiets
+                                    .Include(d => d.Ve)
+                                    .Where(h => h.DonHang.Id == hoadon.Id)
+                                    .ToListAsync();
+
             return View(ves);
         }
+
         [HttpPost]
         public async Task<ActionResult> Cancel(int id)
         {
-            Ve? ve = await _context.Ves
-                .Include(c => c.Chuyen)
-                    .ThenInclude(x => x.Xe).ThenInclude(l => l.LoaiXe)
-                .Include(g => g.Ghe)
+            var ve = await _context.Ves
+                .Include(v => v.Chuyen).ThenInclude(c => c.Xe).ThenInclude(l => l.LoaiXe)
+                .Include(v => v.Ghe)
                 .FirstOrDefaultAsync(v => v.Id == id);
+
+            if (ve == null)
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy vé để hủy.";
+                return RedirectToAction("Index", "Chuyens");
+            }
 
             try
             {
-                if (ve == null)
-                {
-                    TempData["ErrorMessage"] = "Không tìm thấy vé để hủy.";
-                    return RedirectToAction("Index", "Chuyens");
-                }
-
                 DateTime futureTime = DateTime.Now.AddHours(24);
                 if (ve.Chuyen.ThoiGianDi < futureTime)
                 {
@@ -75,7 +89,7 @@ namespace ThanhBuoi.Controllers
                 double refund = Math.Round(ve.Tien * 0.7);
                 string body = _emailService.makeBodyTicketCancel(ve, refund);
 
-                VeHuy veHuy = new VeHuy
+                var veHuy = new VeHuy
                 {
                     chuyen = ve.Chuyen,
                     Name = ve.Ten,
@@ -100,23 +114,22 @@ namespace ThanhBuoi.Controllers
                 ve.email = null;
 
                 _context.VeHuys.Add(veHuy);
+                await _context.SaveChangesAsync();
+
                 _context.Ves.Update(ve);
                 await _context.SaveChangesAsync();
 
                 // Sending email after updating the database
                 await _emailService.SendEmailAsync(veHuy.Email, "Xác nhận hủy vé", body);
 
-                TempData["SuccessMessage"] = $"Đã hủy vé";
-                return RedirectToAction("Details", "Chuyens", new { id = ve.Chuyen.Id });
+                TempData["SuccessMessage"] = "Đã hủy vé";
+                return RedirectToAction("Details", "Vehuys", new { id = veHuy.Id });
             }
             catch (Exception ex)
             {
                 TempData["ErrorMessage"] = $"Đã xảy ra lỗi khi hủy vé: {ex.Message}";
+                return RedirectToAction("Details", "Chuyens", new { id = ve.Chuyen.Id });
             }
-
-            return RedirectToAction("Details", "Chuyens", new { id = ve.Chuyen.Id });
         }
-
-
     }
 }

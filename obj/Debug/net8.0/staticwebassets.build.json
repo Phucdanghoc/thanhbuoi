@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0713PS46MO9F26XCcyumzcHHe26UnK4lGjP1ZQgrpqA=",
+  "Hash": "zpFyzszHJAklIkFzyoOlI6UVL+ooB1Vb3A+6WBJms+Y=",
   "Source": "ThanhBuoi",
   "BasePath": "_content/ThanhBuoi",
   "Mode": "Default",
@@ -1309,12 +1309,12 @@
       "OriginalItemSpec": "wwwroot\\img\\bed.png"
     },
     {
-      "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-1.jpg",
+      "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\favicon.png",
       "SourceId": "ThanhBuoi",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\",
       "BasePath": "_content/ThanhBuoi",
-      "RelativePath": "img/testimonial-1.jpg",
+      "RelativePath": "img/favicon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1325,26 +1325,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\testimonial-1.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-2.jpg",
-      "SourceId": "ThanhBuoi",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\",
-      "BasePath": "_content/ThanhBuoi",
-      "RelativePath": "img/testimonial-2.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\img\\testimonial-2.jpg"
+      "OriginalItemSpec": "wwwroot\\img\\favicon.png"
     },
     {
       "Identity": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\diachi\\create.js",

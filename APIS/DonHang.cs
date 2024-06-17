@@ -9,11 +9,13 @@ using System;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ThanhBuoi.APIS
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DonhangController : ControllerBase
     {
         private readonly DataContext _context;
@@ -28,8 +30,8 @@ namespace ThanhBuoi.APIS
             _userManager = userManager;
             _emailService = emailService;
             _momoServices = momoServices;
-            dictGiaHang.Add("Xe tay ga ", 0.7);
-            dictGiaHang.Add("Xe số ", 0.3);
+            dictGiaHang.Add("Xe tay ga", 0.7);
+            dictGiaHang.Add("Xe số", 0.3);
             dictGiaHang.Add("Hàng nhỏ", 0.2);
             dictGiaHang.Add("Hàng đặc biệt lớn", 1);
             _momoServices = momoServices;
@@ -68,6 +70,7 @@ namespace ThanhBuoi.APIS
             DonHang donHang = new DonHang
             {
                 NgayTao = DateTime.Now,
+                TaiKhoan = await _userManager.GetUserAsync(HttpContext.User),
                 Trangthai = TrangThaiDonHang.Waiting,
                 MaDon = $"{chuyen.Id}{int.Parse(DateTime.Now.ToString("MMddHHmmss"))}"
             };
@@ -101,23 +104,28 @@ namespace ThanhBuoi.APIS
         [HttpDelete("{donHangId}")]
         public async Task<IActionResult> Delete(int donHangId)
         {
-            if (donHangId == 0)
+            try
             {
-                return BadRequest("Invalid DonHang ID.");
-            }
+                if (donHangId <= 0)
+                {
+                    return BadRequest("Invalid DonHang ID.");
+                }
+                var donHang = await _context.DonHangs.FindAsync(donHangId);
+                if (donHang == null)
+                {
+                    return NotFound();
+                }
+                await DeleteRelatedEntities(donHangId);
 
-            var donHang = await _context.DonHangs.FindAsync(donHangId);
-            if (donHang == null)
+                _context.DonHangs.Remove(donHang);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception ex)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting DonHang with ID {donHangId}: {ex.Message}");
             }
-
-            await DeleteRelatedEntities(donHangId);
-
-            _context.DonHangs.Remove(donHang);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
         }
 
         private async Task DeleteRelatedEntities(int donHangId)
@@ -238,21 +246,6 @@ namespace ThanhBuoi.APIS
             return NoContent();
         }
 
-        // DELETE: api/HangGuis/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteHangGui(int id)
-        {
-            var hangGui = await _context.HangGuis.FindAsync(id);
-            if (hangGui == null)
-            {
-                return NotFound();
-            }
-
-            _context.HangGuis.Remove(hangGui);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
 
         private bool HangGuiExists(int id)
         {

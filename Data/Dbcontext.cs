@@ -50,7 +50,7 @@ namespace ThanhBuoi.Data
         public DbSet<SoDoGhe> SoDoGhes { get; set; }
         public DbSet<Xe> Xes { get; set; }
         public DbSet<TinTuc> TinTucs { get; set; }
-        public DbSet<LoaiXe> loaiXes { get; set; }
+        public DbSet<LoaiXe> LoaiXes { get; set; }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {

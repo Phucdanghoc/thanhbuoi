@@ -10,27 +10,38 @@ namespace ThanhBuoi.Controllers
     public class ChuyensController : Controller
     {
         private readonly DataContext _context;
+        private readonly Dictionary<string, double> _listGiaTang;
 
-        private readonly Dictionary<string, double> _listGiaTang = new Dictionary<string, double>();
         public ChuyensController(DataContext context)
         {
-            _listGiaTang.Add("Tết Nguyên Đán", 0.2);
-            _listGiaTang.Add("Quốc khánh", 0.1);
-            _listGiaTang.Add("30-4, 1-5", 0.15);
-            _listGiaTang.Add("Mặc định",0 );
             _context = context;
+            _listGiaTang = new Dictionary<string, double>
+            {
+                { "Tết Nguyên Đán", 0.2 },
+                { "Quốc khánh", 0.1 },
+                { "30-4, 1-5", 0.15 },
+                { "Mặc định", 0 }
+            };
         }
 
         // GET: Chuyens
         public async Task<IActionResult> Index()
         {
-            ViewBag.listXeTrue = _context.Xes.Where(x => x.Trangthai == TrangThaiXe.NoActive).Include(l => l.LoaiXe).ToList();
-            ViewBag.listTuyen = _context.Tuyens.ToList();
+            ViewBag.listXeTrue = await _context.Xes
+                .Where(x => x.Trangthai == TrangThaiXe.NoActive)
+                .Include(l => l.LoaiXe)
+                .ToListAsync();
+
+            ViewBag.listTuyen = await _context.Tuyens.ToListAsync();
             ViewBag.listGiaTang = _listGiaTang;
-            return View(await _context.Chuyens.Include(x => x.Xe).ThenInclude(l => l.LoaiXe).ToListAsync());
+
+            var chuyens = await _context.Chuyens
+                .Include(x => x.Xe)
+                .ThenInclude(l => l.LoaiXe)
+                .ToListAsync();
+
+            return View(chuyens);
         }
-
-
 
         // GET: Chuyens/Create
         public IActionResult Create()
@@ -38,18 +49,18 @@ namespace ThanhBuoi.Controllers
             return View();
         }
 
-      
         [HttpPost]
         public async Task<IActionResult> Create(string ngayle, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, double Gia)
         {
             try
             {
-                Xe? xe = await _context.Xes.Include(x => x.soDoGhes).FirstOrDefaultAsync(x => x.Id == XeId);
-                Tuyen? tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
+                var xe = await _context.Xes.Include(x => x.soDoGhes).FirstOrDefaultAsync(x => x.Id == XeId);
+                var tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
                 double giatang = _listGiaTang[ngayle];
+
                 var chuyen = new Chuyen
                 {
-                    Ten = $"{tuyen?.Ten}",
+                    Ten = tuyen?.Ten,
                     Xe = xe,
                     Tuyen = tuyen,
                     DiemDon = DiemDon,
@@ -58,41 +69,37 @@ namespace ThanhBuoi.Controllers
                     Trangthai = TrangThaiChuyen.WAITING,
                     Gia = Gia,
                     Ngayle = ngayle
-
                 };
 
                 _context.Add(chuyen);
-                SoDoGhe? soDoGhe = await _context.SoDoGhes.Include(sdg => sdg.Tangs)
-                            .ThenInclude(t => t.Hangs)
-                            .ThenInclude(h => h.Ghes).
-                    FirstOrDefaultAsync(s => s.Id == xe!.soDoGhes.FirstOrDefault()!.Id);
+
+                var soDoGhe = await _context.SoDoGhes
+                    .Include(sdg => sdg.Tangs)
+                    .ThenInclude(t => t.Hangs)
+                    .ThenInclude(h => h.Ghes)
+                    .FirstOrDefaultAsync(s => s.Id == xe!.soDoGhes.FirstOrDefault()!.Id);
+
                 foreach (var Tang in soDoGhe!.Tangs)
                 {
                     foreach (var Hang in Tang.Hangs)
                     {
                         foreach (var Ghe in Hang.Ghes)
                         {
-                            Ghe ghe = Ghe;
-                            Ve ve = new Ve
+                            var ve = new Ve
                             {
                                 Chuyen = chuyen,
-                                TaiKhoan = null,
-                                Ghe = ghe,
+                                Ghe = Ghe,
                                 Tien = chuyen.Gia + Math.Round(chuyen.Gia * giatang),
-                                Ten = null,
-                                MaVe = null,
-                                Sdt = null,
-                                CMND = null,
-                                isCancel = false,
                                 DiemDon = chuyen.DiemDon,
                                 TrangThai = TrangThaiVe.Empty,
-                                NgayTao = DateTime.Now,
+                                NgayTao = DateTime.Now
                             };
 
                             _context.Ves.Add(ve);
                         }
                     }
                 }
+
                 await _context.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Thêm mới thành công.";
                 return RedirectToAction(nameof(Index));
@@ -117,26 +124,21 @@ namespace ThanhBuoi.Controllers
                 return View();
             }
 
-            // Tạo chuỗi truy vấn
-            var query = _context.Ves.Include(c => c.Chuyen)
-                                    .Include(g => g.Ghe)
-                                    .Include(t => t.TaiKhoan)
-                                    .Where(c => c.Chuyen.Id == id);
+            var query = _context.Ves
+                .Include(c => c.Chuyen)
+                .Include(g => g.Ghe)
+                .Include(t => t.TaiKhoan)
+                .Where(c => c.Chuyen.Id == id);
 
-            // Kiểm tra xem có chuỗi tìm kiếm không
             if (!string.IsNullOrEmpty(searchString))
             {
-                // Thêm điều kiện tìm kiếm vào chuỗi truy vấn
                 query = query.Where(v => v.Ghe.Ten.Contains(searchString) || v.Ten.Contains(searchString) || v.CMND.Contains(searchString));
             }
 
-            // Lấy danh sách vé
             ViewBag.listVe = await query.ToListAsync();
 
             return View(chuyen);
         }
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -169,6 +171,7 @@ namespace ThanhBuoi.Controllers
             }
             return View(chuyen);
         }
+
         // POST: Chuyens/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

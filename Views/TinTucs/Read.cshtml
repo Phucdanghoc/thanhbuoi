@@ -1,0 +1,65 @@
+﻿@model ThanhBuoi.Models.TinTuc
+
+@{
+    ViewData["Title"] = "News Detail";
+}
+<style>
+    /* Custom styles for the news detail page */
+
+    .container {
+        max-width: 800px; /* Adjust max-width as per your design */
+    }
+
+    .card {
+        border: none; /* Remove border */
+    }
+
+    .card-img-top {
+        object-fit: cover; /* Ensure images maintain aspect ratio */
+        height: 400px; /* Fixed height for the image */
+        border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0; /* Rounded top corners */
+    }
+
+    .card-body {
+        padding: 1.25rem; /* Padding inside the card body */
+    }
+
+    .card-text {
+        line-height: 1.6; /* Increase line height for better readability */
+    }
+
+    .text-muted {
+        opacity: 0.7; /* Reduce opacity for metadata */
+    }
+
+</style>
+<div class="rounded m-4 p-3">
+
+
+<div class="container mt-4">
+        <h1 class="mt-4">@Model.TieuDe</h1>
+
+    <div class="card shadow">
+        @{
+            List<string> ImageUrls = new List<string>
+        {
+        "https://busmap.vn/wp-content/uploads/2023/03/IMG_2589.jpg",
+        "https://busmap.vn/wp-content/uploads/2023/03/IMG_2590.png",
+        "https://busmap.vn/wp-content/uploads/2023/03/IMG_2588.jpg",
+        "https://busmap.vn/wp-content/uploads/2021/10/Picture12.png",
+        "https://busmap.vn/wp-content/uploads/2021/10/image-18.jpg"
+        };
+            Random random = new Random();
+            int index = random.Next(0, ImageUrls.Count);
+            var url = ImageUrls[index];
+        }
+        <img src="@url" class="card-img-top rounded-top" alt="Image for @Model.TieuDe">
+
+        <div class="card-body">
+            <p class="card-text">@Model.NoiDung</p>
+            <p class="card-text"><small class="text-muted">Posted on @Model.NgayDang.ToString("yyyy-MM-dd")</small></p>
+            <p class="card-text"><small class="text-muted">@Model.LuotXem views</small></p>
+        </div>
+    </div>
+</div>
+</div>

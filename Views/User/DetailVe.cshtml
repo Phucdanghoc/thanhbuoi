@@ -1,0 +1,79 @@
+﻿@model ThanhBuoi.Models.Ve
+@{
+    ViewData["Title"] = "Chi tiết vé";
+    var totalPrice = Model.Tien;
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Chi tiết vé</h2>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4 bg-light rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin vé</h5>
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Mã vé: @Model.MaVe</h6>
+                            <p><strong>Giá vé:</strong> <span class="text-danger">@Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
+                            <p><strong>Điểm đón:</strong> @Model.DiemDon</p>
+                            <p><strong>Hành lý:</strong> @Model.Hanhli kg</p>
+                            <p><strong>Ngày Đặt:</strong> @Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card mb-4 bg-light rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin chuyến đi</h5>
+                    <div class="card mb-3 shadow-sm">
+                        <div class="card-body">
+                            <p><strong>Chuyến:</strong> @Model.Chuyen.Ten.Split("-")[0] - @Model.Chuyen.Ten.Split("-")[1]</p>
+                            <p><strong>Ngày đi:</strong> @Model.Chuyen.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</p>
+                            <p><strong>Xe:</strong> @Model.Chuyen.Xe.Ten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="card mb-4 bg-light rounded">
+                <div class="card-body">
+                    <h5 class="card-title">Thông tin thanh toán</h5>
+                    <form asp-controller="Ve" asp-action="Cancel">
+                        <div class="form-group">
+                            <label for="email">Email xác nhận:</label>
+                            <input type="email" class="form-control" id="email" value="@Model.email" disabled>
+                        </div>
+                        <input type="hidden" name="id" value="@Model.Id" />
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <br />
+                                <h5 class="card-title">Tổng giá trị</h5>
+                                <p class="h4 text-danger">@totalPrice.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                @{
+                                    DateTime futureTime = DateTime.Now.AddHours(24);
+                                }
+                                @if (Model.Chuyen.ThoiGianDi > futureTime)
+                                {
+                                    <button type="submit" class="btn btn-danger">Hủy vé</button>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">Chuyến sắp khởi hành, không thể hủy vé này.</p>
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

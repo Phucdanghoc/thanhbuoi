@@ -46,7 +46,7 @@ namespace ThanhBuoi.Controllers
         // GET: Xes/Create
         public IActionResult Create()
         {
-            ViewBag.getLoaiXeList = _context.loaiXes.ToList();
+            ViewBag.getLoaiXeList = _context.LoaiXes.ToList();
             ViewBag.getHangXe = new List<string> { "Toyota", "Honda", "Ford", "Mercedes-Benz", "Volkswagen", "Hyundai", "Kia", "Nissan", "Chevrolet", "Peugeot" };
             return View();
         }
@@ -55,9 +55,9 @@ namespace ThanhBuoi.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Ten,BienSo,HangXe")] Xe xe,int loaixe_id)
         {
-            ViewBag.getLoaiXeList = _context.loaiXes.ToList();
+            ViewBag.getLoaiXeList = _context.LoaiXes.ToList();
             ViewBag.getHangXe = new List<string> { "Toyota", "Honda", "Ford", "Mercedes-Benz", "Volkswagen", "Hyundai", "Kia", "Nissan", "Chevrolet", "Peugeot" };
-            xe.LoaiXe = _context.loaiXes.FirstOrDefault(p => p.Id == loaixe_id)!;
+            xe.LoaiXe = _context.LoaiXes.FirstOrDefault(p => p.Id == loaixe_id)!;
             xe.MaXe = DateTime.Now.ToString("yyyyMMddHHmmss") + new Random().Next(1000, 9999);
             xe.Trangthai = TrangThaiXe.NoActive;
             try

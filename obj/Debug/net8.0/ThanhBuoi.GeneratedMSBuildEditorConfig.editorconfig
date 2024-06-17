@@ -230,6 +230,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Read.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xSZWFkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -248,6 +252,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DetailDonHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxEb25IYW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DetailVe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxWZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DonHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEb25IYW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/Ve.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/lep61/source/repos/ThanhBuoi/Views/VeHuys/Details.cshtml]

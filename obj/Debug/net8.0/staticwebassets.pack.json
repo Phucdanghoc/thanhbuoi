@@ -29,12 +29,8 @@
       "PackagePath": "staticwebassets\\img\\bed.png"
     },
     {
-      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-1.jpg",
-      "PackagePath": "staticwebassets\\img\\testimonial-1.jpg"
-    },
-    {
-      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\testimonial-2.jpg",
-      "PackagePath": "staticwebassets\\img\\testimonial-2.jpg"
+      "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\img\\favicon.png",
+      "PackagePath": "staticwebassets\\img\\favicon.png"
     },
     {
       "Id": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\wwwroot\\js\\diachi\\create.js",

@@ -153,12 +153,12 @@
                 var orderId = @Model.Id;
                 $.ajax({
                     type: "DELETE",
-                    url: `/api/donhang/cancel/${orderId}`,
+                    url: `/api/donhang/${orderId}`,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
                         alert("Đơn hàng của bạn đã được hủy thành công!");
-                        window.location.href = "/DonHang/Create";
+                        window.location.href = "/DonHangs/";
                     },
                     error: function (error) {
                         alert("Có lỗi xảy ra, vui lòng thử lại sau.");

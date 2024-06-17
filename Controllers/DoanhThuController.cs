@@ -5,7 +5,6 @@ namespace ThanhBuoi.Controllers
 {
     public class DoanhThuController : Controller
     {
-        // GET: DoanhThu
         public ActionResult Index()
         {
             return View();

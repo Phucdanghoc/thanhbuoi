@@ -11,7 +11,7 @@ namespace ThanhBuoi.APIS
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "ADMIN")]
+    [Authorize]
     public class Chuyen : ControllerBase
     {
         private readonly Dictionary<string, double> _listGiaTang = new Dictionary<string, double>();

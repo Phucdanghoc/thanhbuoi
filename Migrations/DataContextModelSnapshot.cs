@@ -242,6 +242,9 @@ namespace ThanhBuoi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ID_TaiKhoan")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Id_momoRes")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -265,9 +268,6 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("TaiKhoanId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Tien")
                         .HasColumnType("float");
 
@@ -283,7 +283,7 @@ namespace ThanhBuoi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TaiKhoanId");
+                    b.HasIndex("ID_TaiKhoan");
 
                     b.ToTable("DonHangs");
                 });
@@ -479,7 +479,7 @@ namespace ThanhBuoi.Migrations
                     b.HasIndex("Ten")
                         .IsUnique();
 
-                    b.ToTable("loaiXes");
+                    b.ToTable("LoaiXes");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.SoDoGhe", b =>
@@ -904,9 +904,11 @@ namespace ThanhBuoi.Migrations
 
             modelBuilder.Entity("ThanhBuoi.Models.DonHang", b =>
                 {
-                    b.HasOne("ThanhBuoi.Models.TaiKhoan", null)
+                    b.HasOne("ThanhBuoi.Models.TaiKhoan", "TaiKhoan")
                         .WithMany("DonHangs")
-                        .HasForeignKey("TaiKhoanId");
+                        .HasForeignKey("ID_TaiKhoan");
+
+                    b.Navigation("TaiKhoan");
                 });
 
             modelBuilder.Entity("ThanhBuoi.Models.DonHangChiTiet", b =>

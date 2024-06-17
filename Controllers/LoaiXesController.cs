@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
@@ -16,8 +14,6 @@ namespace ThanhBuoi.Controllers
     {
         private readonly DataContext _context;
 
-
-
         public LoaiXesController(DataContext context)
         {
             _context = context;
@@ -26,7 +22,7 @@ namespace ThanhBuoi.Controllers
         // GET: LoaiXes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.loaiXes.ToListAsync());
+            return View(await _context.LoaiXes.ToListAsync());
         }
 
         // GET: LoaiXes/Details/5
@@ -37,7 +33,7 @@ namespace ThanhBuoi.Controllers
                 return NotFound();
             }
 
-            var loaiXe = await _context.loaiXes
+            var loaiXe = await _context.LoaiXes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (loaiXe == null)
             {
@@ -55,7 +51,6 @@ namespace ThanhBuoi.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
         public async Task<IActionResult> Create([Bind("Ten, Mota")] LoaiXe loaiXe, int SoGhe, string LoaiGhe)
         {
             if (LoaiGhe == null)
@@ -63,13 +58,16 @@ namespace ThanhBuoi.Controllers
                 TempData["ErrorMessage"] = "Loại ghế không được để trống.";
                 return RedirectToAction(nameof(Index));
             }
+
             loaiXe.Ma = $"{SoGhe}-{LoaiGhe}";
             loaiXe.LoaiGheXe = LoaiGhe.Contains("GN") ? LoaiGheXe.GiuongNam : LoaiGheXe.Ngoi;
-            if (_context.loaiXes.Any(x => x.Ten == loaiXe.Ten))
+
+            if (_context.LoaiXes.Any(x => x.Ten == loaiXe.Ten))
             {
                 TempData["ErrorMessage"] = "Tên đã tồn tại.";
                 return RedirectToAction(nameof(Index));
             }
+
             _context.Add(loaiXe);
             try
             {
@@ -81,6 +79,7 @@ namespace ThanhBuoi.Controllers
                 Console.WriteLine(ex.Message);
                 TempData["ErrorMessage"] = "Đã xảy ra lỗi khi lưu dữ liệu. Vui lòng thử lại.";
             }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -92,11 +91,12 @@ namespace ThanhBuoi.Controllers
                 return NotFound();
             }
 
-            var loaiXe = await _context.loaiXes.FindAsync(id);
+            var loaiXe = await _context.LoaiXes.FindAsync(id);
             if (loaiXe == null)
             {
                 return NotFound();
             }
+
             return View(loaiXe);
         }
 
@@ -127,8 +127,10 @@ namespace ThanhBuoi.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             return View(loaiXe);
         }
 
@@ -140,7 +142,7 @@ namespace ThanhBuoi.Controllers
                 return NotFound();
             }
 
-            var loaiXe = await _context.loaiXes
+            var loaiXe = await _context.LoaiXes
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (loaiXe == null)
             {
@@ -155,19 +157,19 @@ namespace ThanhBuoi.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var loaiXe = await _context.loaiXes.FindAsync(id);
+            var loaiXe = await _context.LoaiXes.FindAsync(id);
             if (loaiXe != null)
             {
-                _context.loaiXes.Remove(loaiXe);
+                _context.LoaiXes.Remove(loaiXe);
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool LoaiXeExists(int id)
         {
-            return _context.loaiXes.Any(e => e.Id == id);
+            return _context.LoaiXes.Any(e => e.Id == id);
         }
     }
 }

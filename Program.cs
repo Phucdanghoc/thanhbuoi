@@ -8,6 +8,7 @@ using ThanhBuoi.Services;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models.DTO;
 using ThanhBuoi.Models;
+using ThanhBuoi;
 
 internal class Program
 {
@@ -53,7 +54,6 @@ internal class Program
         app.UseStaticFiles();
         app.UseAuthentication();
         app.UseAuthorization();
-
         app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",
