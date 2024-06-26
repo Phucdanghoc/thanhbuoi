@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ThanhBuoi.Models.DonHang>
 
 @{
-    ViewData["Title"] = "Danh sách đơn vé ";
+    ViewData["Title"] = "Danh sách đơn vé";
 }
 
 <div class="container mt-4">
     <div class="card">
-        <div class="card-header text-center">
-            <h1 class="mb-0">Danh sách đơn vé</h1>
+        <div class="card-header bg-primary text-white">
+            <h1 class="mb-0 text-center text-light">Danh sách đơn vé</h1>
         </div>
         <div class="card-body">
             <form asp-action="Index" method="get" class="mb-4">
@@ -19,36 +19,40 @@
                 </div>
             </form>
 
-            <table class="table table-hover">
-                <thead class="thead-light">
-                    <tr>
-                        <th>Email</th>
-                        <th>Tổng tiền</th>
-                        <th>Phương thức thanh toán</th>
-                        <th>Ngày tạo</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead class="thead-light">
                         <tr>
-                            <td>@(item.email ?? "Không có")</td>
-                            <td>@item.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
-                            <td>@Html.DisplayFor(modelItem => item.PhuongThucThanhToan)</td>
-                            <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info me-2">Chi tiết</a>
-                                </div>
-                            </td>
+                            <th scope="col">Mã đơn</th>
+                            <th scope="col">Tổng tiền</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Thanh toán</th>
+                            <th scope="col">Ngày tạo</th>
+                            <th scope="col">Chi tiết</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.MaDon)</td>
+                                <td>@item.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
+                                <td class="status-cell @(item.Trangthai == TrangThaiDonHang.Waiting ? "text-warning" : "text-success")">
+                                    @(item.Trangthai == TrangThaiDonHang.Waiting ? "Đang đợi" : "Đã thanh toán")
+                                </td>
+                                <td>@(item.PhuongThucThanhToan == "momo" ? "MoMo" : "Tiền mặt")</td>
+                                <td>@item.NgayTao.ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-light">Chi tiết</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
             <nav aria-label="Page navigation" class="mt-4">
-                <ul class="pagination justify-content-center me-2">
+                <ul class="pagination justify-content-center">
                     <li class="page-item @(ViewBag.CurrentPage == 1 ? "disabled" : "")">
                         <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-searchString="@ViewBag.SearchString">Trước</a>
                     </li>
@@ -58,7 +62,6 @@
                             <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-searchString="@ViewBag.SearchString">@i</a>
                         </li>
                     }
-                    
                     <li class="page-item @(ViewBag.CurrentPage == ViewBag.TotalPages ? "disabled" : "")">
                         <a class="page-link" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-searchString="@ViewBag.SearchString">Sau</a>
                     </li>
@@ -67,3 +70,37 @@
         </div>
     </div>
 </div>
+
+<style>
+    .card {
+        border-radius: 15px; /* Rounded corners for the card */
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0; /* Rounded top corners for card header */
+    }
+
+    .card-body {
+        padding: 20px; /* Add padding inside card body */
+    }
+
+    .table {
+        margin-bottom: 0; /* Remove bottom margin from table */
+    }
+
+        .table th, .table td {
+            vertical-align: middle; /* Align content vertically centered in table cells */
+        }
+
+    .status-cell {
+        font-weight: bold; /* Make status text bold */
+    }
+
+    .pagination {
+        margin-top: 20px; /* Add space above pagination */
+    }
+
+    .page-item.disabled .page-link {
+        pointer-events: none; /* Disable pointer events on disabled pagination links */
+    }
+</style>

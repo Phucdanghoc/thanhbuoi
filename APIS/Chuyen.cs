@@ -57,28 +57,20 @@ namespace ThanhBuoi.APIS
         [Route("Search")]
         public async Task<ActionResult<IEnumerable<Chuyen>>> GetChuyens([FromQuery] double weight, [FromQuery] string name)
         {
-            var query = _context.Chuyens.Include(c => c.Tuyen).Include(c => c.Xe).Where(t=>t.ThoiGianDi.Date > DateTime.Now.Date).AsQueryable();
+            var query = _context.Chuyens.Include(c => c.Tuyen).Include(c => c.Xe)
+                                        .Where(t => t.ThoiGianDi.Date > DateTime.Now.Date && t.Ten.Contains(name));
 
-            if (weight > 0)
-            {
-                query = query.Where(c => c.Xe.TrongTaiHang > weight);
-            }
+            var chuyens = await query.ToListAsync();
 
-            if (!string.IsNullOrEmpty(name))
-            {
-                query = query.Where(c => c.Ten.Contains(name));
-            }
-
-            var result = await query.ToListAsync();
-
-            var jsonResult = JsonConvert.SerializeObject(result, new JsonSerializerSettings
+            // Serialize the result
+            var jsonResult = JsonConvert.SerializeObject(chuyens, new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
             });
-            var jsonObject = JsonConvert.DeserializeObject(jsonResult);
 
             return Ok(jsonResult);
         }
+
         // PUT api/<ChuyenController>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, string ngayle, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, double Gia)

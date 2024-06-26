@@ -12,6 +12,9 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <h5 class="card-title">Chi tiết vé</h5>
+                    @{
+                        Chuyen chuyen = ViewBag.chuyen;
+                    }
                     @foreach (var ve in Model)
                     {
                         <div class="card mb-3">
@@ -22,9 +25,11 @@
                                 <p><strong>Hành lí:</strong> @ve.Hanhli</p>
                                 <p><strong>Ngày Đặt:</strong> @ve.NgayTao</p>
                                 <div class="highlighted-info">
-                                    <p><strong>Chuyến:</strong> @ve.Chuyen.Ten.Split("-")[0] - @ve.Chuyen.Ten.Split("-")[1]</p>
-                                    <p><strong>Ngày đi:</strong> @ve.Chuyen.ThoiGianDi</p>
-                                    <p><strong>Xe:</strong> @ve.Chuyen.Xe.Ten</p>
+                                    <p><strong>Chuyến :</strong> @ve.Chuyen.Ten.Split("-")[0] - @ve.Chuyen.Ten.Split("-")[1]</p>
+                                    <p><strong>Ngày đi :</strong> @ve.Chuyen.ThoiGianDi</p>
+                                    <p><strong>Xe :</strong> @chuyen.Xe.Ten</p>
+                                    <p><strong>Loại ghế :</strong> @(chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</p>
+
                                 </div>
                             </div>
                         </div>
@@ -56,8 +61,8 @@
                                 <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash">
                                 <label class="form-check-label" for="cash">Tiền mặt</label>
                                 <br>
-                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2" style="width: 100px;">
-                            </div>
+                                <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="img-fluid mt-2" style="width: 100px;">
+                                </div>
                         </div>
                         @foreach (var ve in Model)
                         {

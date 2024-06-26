@@ -17,303 +17,307 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ThanhBuoi
 build_property.RootNamespace = ThanhBuoi
-build_property.ProjectDir = C:\Users\lep61\source\repos\ThanhBuoi\
+build_property.ProjectDir = D:\.NET\ThanhBuoi\thanhbuoi\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\lep61\source\repos\ThanhBuoi
+build_property.MSBuildProjectDirectory = D:\.NET\ThanhBuoi\thanhbuoi
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/ConfirmEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Login.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Logout.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Manage/SetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcU2V0UGFzc3dvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX01hbmFnZU5hdi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxNYW5hZ2VcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/Register.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/ResetPassword.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/_ViewImports.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Areas/Identity/Pages/_ViewStart.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Chuyens.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Booking/Chuyens.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xDaHV5ZW5zLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Booking/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Payment.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Booking/Payment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xQYXltZW50LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Booking/Ve.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Booking/Ve.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQm9va2luZ1xWZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Chuyens/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Chuyens/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Chuyens/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Chuyens/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Chuyens/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Chuyens/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Chuyens/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Chuyens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2h1eWVuc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Diadiems/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Diadiems/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlhZGllbXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Diadiems/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Diadiems/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlhZGllbXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Diadiems/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Diadiems/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlhZGllbXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Diadiems/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Diadiems/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlhZGllbXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/DoanhThu/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/DoanhThu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9hbmhUaHVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonHangs/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/DonHangs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonHangs/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/DonHangs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uSGFuZ3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonVe/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/DonVe/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uVmVcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/DonVe/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/DonVe/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9uVmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GuiHang/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/GuiHang/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/GuiHang/DonHang.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/GuiHang/DonHang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xEb25IYW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Home/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/GuiHang/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3VpSGFuZ1xQYXltZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Home/Privacy.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/LoaiXes/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/LoaiXes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haVhlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/LoaiXes/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/LoaiXes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haVhlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/LoaiXes/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/LoaiXes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haVhlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/LoaiXes/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/LoaiXes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haVhlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/LoaiXes/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/LoaiXes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9haVhlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Shared/Error.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Shared/_AuthLayout.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Shared/_AuthLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9BdXRoTGF5b3V0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Shared/_LoginPartial.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Shared/_ValidationScriptsPartial.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TaiKhoan/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TaiKhoan/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFpS2hvYW5cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TaiKhoan/Detail.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TaiKhoan/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFpS2hvYW5cRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TaiKhoan/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TaiKhoan/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFpS2hvYW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/TinTucs/Read.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/TinTucs/Read.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGluVHVjc1xSZWFkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Tuyens/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Tuyens/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Tuyens/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Tuyens/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Tuyens/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Tuyens/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHV5ZW5zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DetailDonHang.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/User/DetailDonHang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxEb25IYW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DetailVe.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/User/DetailVe.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEZXRhaWxWZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/DonHang.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/User/DonHang.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxEb25IYW5nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/User/Ve.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/User/Ve.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxWZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/VeHuys/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/VeHuys/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVIdXlzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/VeHuys/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/VeHuys/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVIdXlzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Ve/Detail.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Ve/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVcRGV0YWlsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Ve/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Ve/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Xes/Create.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Xes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Xes/Delete.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Xes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Xes/Details.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Xes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Xes/Edit.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Xes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Xes/Index.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Xes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcWGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/_ViewImports.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/_ViewStart.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/lep61/source/repos/ThanhBuoi/Views/Shared/_Layout.cshtml]
+[D:/.NET/ThanhBuoi/thanhbuoi/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-vjrj6xkv8l

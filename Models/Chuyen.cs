@@ -29,6 +29,9 @@
             [StringLength(255)]
             public string? DiemDon { get; set; }
             public DateTime ThoiGianDi { get; set; }
+
+            public DateTime ThoiGianDen { get; set; }
+
             [Required]
             [StringLength(255)]
             public TrangThaiChuyen? Trangthai { get; set; }

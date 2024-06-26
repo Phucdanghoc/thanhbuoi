@@ -31,7 +31,7 @@
                                 <div class="col-md-6">
                                     <p class="card-text"><strong>Người gửi:</strong> @chitiet.HangGui.TenNguoiGui</p>
                                     <p class="card-text"><strong>Số điện thoại người gửi:</strong> @chitiet.HangGui.SdtNguoiGui</p>
-                                    <p class="card-text"><strong>Trọng lượng:</strong> @chitiet.HangGui.TrongLuong</p>
+                                    <p class="card-text"><strong>Địa chỉ người gửi:</strong> @chitiet.HangGui.DiaChiNguoiGui</p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="card-text"><strong>Người nhận:</strong> @chitiet.HangGui.TenNguoiNhan</p>
@@ -55,8 +55,8 @@
             <div class="col-md-6">
                 <div class="form-group form-group-custom">
                     <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="@Model.email"
-                    @(Model.email != null ? "disabled" : "") required>
+                    <input type="email" class="form-control" id="email" name="email" value="@Model.Email"
+                    @(Model.Email != null ? "disabled" : "") required>
                 </div>
                 <div class="form-group form-group-custom">
                     <label for="mota">Mô tả:</label>

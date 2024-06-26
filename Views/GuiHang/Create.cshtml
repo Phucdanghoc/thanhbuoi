@@ -1,109 +1,169 @@
-﻿@model ThanhBuoi.Models.DTO.DTOHang
+﻿@model List<ThanhBuoi.Models.DTO.DTOHang>
 
 @{
     ViewData["Title"] = "HangGui Form";
 }
 
-<div class=" p-4 ">
-    <div class="row bg-light rounded justify-content-center p-4">
-        <div class="col-md-10 vh-75">
-            <form id="hangGuiForm" method="post">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>Bên gửi</h4>
-                        <div class="form-group mb-3">
-                            <label for="TenHang">Tên gói hàng:</label>
-                            <input type="text" class="form-control" id="TenHang" name="TenHang"
-                                   placeholder="Tên gói hàng" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="TenNguoiGui">Người gửi:</label>
-                            <input type="text" class="form-control" id="TenNguoiGui" name="TenNguoiGui"
-                                   placeholder="Tên người gửi " required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="SdtNguoiGui">Số điện thoại người gửi:</label>
-                            <input type="text" class="form-control" id="SdtNguoiGui" name="SdtNguoiGui"
-                                   placeholder="Số điện thoại người gửi" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="TrongLuong">Trọng lượng hàng (kg):</label>
-                            <input type="number" class="form-control" id="TrongLuong" name="TrongLuong"
-                                   placeholder="Trọng lượng hàng" required>
-                        </div>
-                        <div class=form-group mb-3">
-                            <label  class="form-label">Loại Hàng :</label>
-                            <select class="form-select" id="loaihang" required>
-                                <option value="">--Chọn loại hàng--</option>
-                                @foreach (var hang in ViewBag.loaihang)
-                                {
-                                    <option value="@hang">@hang.ToString()</option>
-                                }
-                            </select>
-                        </div>
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
 
+    .container {
+        max-width: 900px;
+    }
 
-                    </div>
-                    <div class="col-md-6">
-                        <h4>Bên Nhận</h4>
-                        <div class="form-group mb-3">
-                            <label for="TenNguoiNhan">Người nhận:</label>
-                            <input type="text" class="form-control" id="TenNguoiNhan" name="TenNguoiNhan"
-                                   placeholder="Tên người nhận" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="SdtNguoiNhan">Số điện thoại người nhận:</label>
-                            <input type="text" class="form-control" id="SdtNguoiNhan" name="SdtNguoiNhan"
-                                   placeholder="Số điện thoại người nhận" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="DiachiNguoiNhan">Địa chỉ người nhận:</label>
-                            <input type="text" class="form-control" id="DiachiNguoiNhan" name="DiachiNguoiNhan"
-                                   placeholder="Địa chỉ người nhận" required>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="searchInput">Chọn Chuyến:</label>
-                            <input type="text" class="form-control" id="searchInput" placeholder="-- Chọn Chuyến  --" required>
-                            <div class="dropdown-menu" id="searchDropdown"></div>
-                            <input type="hidden" name="TuyenId" id="selectedTuyenId">
-                        </div>
-                        <div class="text-center p-4">
-                            <button type="submit" class="btn btn-primary">Thêm</button>
-                        </div>
-                        <div class="text-center p-4">
-                            <button type="button" id="GuiHang" class="btn btn-primary">Xác nhận gửi hàng</button>
-                        </div>
-                    </div>
+    .card {
+        cursor: pointer;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
 
+    .card-body {
+        position: relative;
+    }
+
+    .btn-danger {
+        opacity: 0.8;
+        transition: opacity 0.3s;
+    }
+
+    .btn-danger:hover {
+        opacity: 1;
+    }
+
+    .form-control,
+    .form-select {
+        border-radius: 0.25rem;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group label {
+        font-weight: 500;
+    }
+
+    .add-card-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 60px;
+        font-size: 1.2rem;
+        background-color: #e9ecef;
+        border: 2px dashed #6c757d;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .add-card-btn:hover {
+        background-color: #ced4da;
+    }
+</style>
+
+<div class="container my-2">
+    <div class="row  bg-primary rounded shadow p-4 mb-4">
+        <div class="col-md-10 mx-auto  ">
+            <h3 class="text-center text-light">Tạo đơn hàng</h3>
+        </div>
+    </div>
+    <div class="row bg-light rounded shadow p-4 mb-4">
+        <div class="col-md-10 mx-auto">
+            <form id="hangGuiForm"  asp-action="Create">
+                <div id="list-card">
+                    @for (var i = 0; i < Model.Count; i++)
+                    {
+                        var hang = Model[i];
+                        <div class="card">
+                            <div class="card-body">
+                                <button type="button" class="btn btn-sm btn-danger float-end remove-card-btn">&times;</button>
+
+                                <div class="row mb-4">
+
+                                    <div class="col-md-6">
+                                        <h4 class="mb-3">Bên gửi</h4>
+                                        <div class="form-group mb-3">
+                                            <label for="TenHang">Tên gói hàng:</label>
+                                            <input type="text" class="form-control" id="TenHang" name="list[@i].TenHang" placeholder="Tên gói hàng" required value="@hang.TenHang">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="TenNguoiGui">Người gửi:</label>
+                                            <input type="text" class="form-control" id="TenNguoiGui" name="list[@i].TenNguoiGui" placeholder="Tên người gửi" required value="@hang.TenNguoiGui">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="SdtNguoiGui">Số điện thoại người gửi:</label>
+                                            <input type="text" class="form-control" id="SdtNguoiGui" name="list[@i].SdtNguoiGui" placeholder="Số điện thoại người gửi" required value="@hang.SdtNguoiGui">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="DiachiNguoiGui">Địa chỉ người gửi:</label>
+                                            <input type="text" class="form-control" id="DiachiNguoiGui" name="list[@i].DiachiNguoiGui" placeholder="Địa chỉ người gửi" required value="@hang.DiaChiNguoiGui">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="mb-3">Bên Nhận</h4>
+                                        <div class="form-group mb-3">
+                                            <label for="TenNguoiNhan">Người nhận:</label>
+                                            <input type="text" class="form-control" id="TenNguoiNhan" name="list[@i].TenNguoiNhan" placeholder="Tên người nhận" required value="@hang.TenNguoiNhan">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="SdtNguoiNhan">Số điện thoại người nhận:</label>
+                                            <input type="text" class="form-control" id="SdtNguoiNhan" name="list[@i].SdtNguoiNhan" placeholder="Số điện thoại người nhận" required value="@hang.SdtNguoiNhan">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="DiachiNguoiNhan">Địa chỉ người nhận:</label>
+                                            <input type="text" class="form-control" id="DiachiNguoiNhan" name="list[@i].DiachiNguoiNhan" placeholder="Địa chỉ người nhận" required value="@hang.DiachiNguoiNhan">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-4">
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-3">
+                                            <label for="loaihang">Loại Hàng:</label>
+                                            <select class="form-select" id="loaihang" name="list[@i].loaihang" required>
+                                                <option value="">--Chọn loại hàng--</option>
+                                                @foreach (var loaihang in ViewBag.loaihang)
+                                                {
+                                                    <option value="@loaihang">@loaihang.ToString()</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="searchInput">Chọn Chuyến:</label>
+                                            <input type="text" id="searchChuyen" class="form-control searchInput" placeholder="-- Chọn Chuyến --" required value="T">
+                                            <div class="dropdown-menu searchDropdown"></div>
+                                            <input type="hidden" name="list[@i].IdChuyen" class="selectedTuyenId" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Add New DTOHang Card -->
+                <div class="add-card-btn" id="addHang">
+                    + Thêm mới
                 </div>
 
+                <!-- Footer - Action buttons -->
+                <div class="row mt-4">
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-success">Xác nhận gửi hàng</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
-    <div class="row p-4">
-        <h4 class="text-start ">Danh sách hàng gửi</h4>
-        <div class="col-md-10 vh-75  bg-light rounded justify-content-center" id="submittedPackagesContainer"></div>
-    </div>
-    <div class="row p-4" >
-        <h4 class="text-start " hidden>Xác nhận thanh toán</h4>
-        <div class="col-md-10 vh-75  bg-light rounded justify-content-center" id=""></div>
-    </div>
-    
 </div>
 
 <script>
-    let hangGuiList = []; 
-
+    let hangCount = @Model.Count();
     $(document).ready(function () {
         const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-       
-        // Function to fetch data from API
-        const fetchData = async () => {
-            try {
-                let weight = $("#TrongLuong").val();
-                let searchInput = $("#searchInput").val();
-                const response = await fetch(`https://localhost:7273/api/Chuyen/search?weight=${weight}&name=${searchInput}`);
 
+        // Function to fetch data from API
+        const fetchData = async (searchInput,text) => {
+            try {
+                const response = await fetch(`https://localhost:7273/api/Chuyen/search?weight=0&name=${text}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -112,170 +172,116 @@
                 console.error('There was a problem with the fetch operation:', error);
             }
         };
-        async function sendHangGuiListToAPI(hangGuiList) {
-                const response = await fetch('https://localhost:7273/api/DonHang/Batch', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(hangGuiList)
-                });
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                } else{
-                const data = await response.json();
 
-                window.location.href = `/GuiHang/Donhang/${data.donhang}`;
-                }
-                console.log(data);
-        }
-       
+        // Function to add a new DTOHang form section
+        $("#addHang").click(function () {
+            let newHangHtml = `
+            <div class="card">
+                <div class="card-body">
+                    <button type="button" class="btn btn-sm btn-danger float-end remove-card-btn">&times;</button>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4 class="mb-3">Bên gửi</h4>
+                            <div class="form-group mb-3">
+                                <label for="TenHang_${hangCount}">Tên gói hàng:</label>
+                                            <input type="text" class="form-control" id="TenHang_${hangCount}" name="list[${hangCount}].TenHang" placeholder="Tên gói hàng" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="TenNguoiGui_${hangCount}">Người gửi:</label>
+                                    <input type="text" class="form-control" id="TenNguoiGui_${hangCount}" name="list[${hangCount}].TenNguoiGui" placeholder="Tên người gửi" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="SdtNguoiGui_${hangCount}">Số điện thoại người gửi:</label>
+                                    <input type="text" class="form-control" id="SdtNguoiGui_${hangCount}" name="list[${hangCount}].SdtNguoiGui" placeholder="Số điện thoại người gửi" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="DiachiNguoiGui_${hangCount}">Địa chỉ người gửi:</label>
+                                    <input type="text" class="form-control" id="DiachiNguoiGui_${hangCount}" name="list[${hangCount}].DiachiNguoiGui" placeholder="Địa chỉ người gửi" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-3">Bên Nhận</h4>
+                            <div class="form-group mb-3">
+                                <label for="TenNguoiNhan_${hangCount}">Người nhận:</label>
+                                    <input type="text" class="form-control" id="TenNguoiNhan_${hangCount}" name="list[${hangCount}].TenNguoiNhan" placeholder="Tên người nhận" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="SdtNguoiNhan_${hangCount}">Số điện thoại người nhận:</label>
+                                    <input type="text" class="form-control" id="SdtNguoiNhan_${hangCount}" name="list[${hangCount}].SdtNguoiNhan" placeholder="Số điện thoại người nhận" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="DiachiNguoiNhan_${hangCount}">Địa chỉ người nhận:</label>
+                                    <input type="text" class="form-control" id="DiachiNguoiNhan_${hangCount}" name="list[${hangCount}].DiachiNguoiNhan" placeholder="Địa chỉ người nhận" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <div class="form-group mb-3">
+                                <label for="loaihang_${hangCount}">Loại Hàng:</label>
+                                    <select class="form-select" id="loaihang_${hangCount}" name="list[${hangCount}].loaihang" required>
+                                    <option value="">--Chọn loại hàng--</option>
+                                    @foreach (var loaihang in ViewBag.loaihang)
+                                    {
+                                        <option value="@loaihang">@loaihang.ToString()</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="searchInput_${hangCount}">Chọn Chuyến:</label>
+                                    <input type="text" id="searchChuyen" class="form-control searchInput" id="searchInput_${hangCount}" placeholder="-- Chọn Chuyến --" required>
+                                <div class="dropdown-menu searchDropdown"></div>
+                                    <input type="hidden" name="list[${hangCount}].IdChuyen" class="selectedTuyenId">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `;
 
+            // Append the new DTOHang section to the form
+            $("#list-card").append(newHangHtml);
+        });
 
-
-        function closeDialog() {
-            const dialog = document.querySelector('.dialog');
-            if (dialog) {
-                dialog.remove();
-            }
-        }
-        const populateDropdown = async () => {
+        // Function to fetch and populate dropdown
+        const populateDropdown = async (searchInput, text,searchDropdown, selectedTuyenId) => {
             try {
-                const data = await fetchData();
-                $("#searchDropdown").empty(); 
+                const data = await fetchData(searchInput, text);
+                searchDropdown.empty();
                 if (data && data.length > 0) {
                     data.forEach(route => {
-                        $("#searchDropdown").append(`<a class="dropdown-item" href="#" data-route-id="${route.Id}">${route.Xe.Ten} - ${route.Ten}</a>`);
+                        searchDropdown.append(`<a class="dropdown-item" href="#" data-route-id="${route.Id}">${route.Xe.Ten} - ${route.Ten}</a>`);
                     });
-                    $("#searchDropdown").addClass('show');
+                    searchDropdown.addClass('show');
                 } else {
-                    $("#searchDropdown").removeClass('show');
+                    searchDropdown.removeClass('show');
                 }
 
                 // Event listener for selecting a dropdown item
-                $("#searchDropdown .dropdown-item").on("click", function (e) {
-                    e.preventDefault(); // Prevent the default anchor behavior
+                searchDropdown.find(".dropdown-item").on("click", function (e) {
+                    e.preventDefault();
                     let routeId = $(this).data("route-id");
                     let routeName = $(this).text();
-                    $("#searchInput").val(routeName);
-                    $("#selectedTuyenId").val(routeId);
-                    $("#searchDropdown").removeClass('show');
+                    searchInput.val(routeName);
+                    selectedTuyenId.val(routeId);
+                    searchDropdown.removeClass('show');
                 });
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-
+        $(document).on("click", ".remove-card-btn", function () {
+            $(this).closest(".card").remove(); // Remove the closest parent card
+        });
         // Event listener for input field change event
-        $("#searchInput").on("input", async () => {
-            await populateDropdown();
+        $(document).on("input", ".searchInput", function () {
+            let searchInput = $(this);
+            let searchDropdown = searchInput.siblings(".searchDropdown");
+            let selectedTuyenId = searchInput.siblings(".selectedTuyenId");
+            let text = searchInput.val(); 
+            populateDropdown(searchInput, text, searchDropdown, selectedTuyenId);
         });
 
-        $("#searchDropdown").removeClass('show');
-
-        // Event listener for change event on TrongLuong input
-        $("#TrongLuong").on("change", async () => {
-            await delay(1000);
-            await populateDropdown();
-        });
-        $('#GuiHang').click(async function (event) {
-            event.preventDefault();
-            await sendHangGuiListToAPI(hangGuiList);
-        });
-
-        $('#hangGuiForm').submit(function  (event)   {
-            event.preventDefault();
-
-            let tenHang = $('#TenHang').val();
-            let tenNguoiGui = $('#TenNguoiGui').val();
-            let sdtNguoiGui = $('#SdtNguoiGui').val();
-            let tenNguoiNhan = $('#TenNguoiNhan').val();
-            let sdtNguoiNhan = $('#SdtNguoiNhan').val();
-            let diaChiNguoiNhan = $('#DiachiNguoiNhan').val();
-            let trongLuong = $('#TrongLuong').val();
-            let IdChuyen = $('#selectedTuyenId').val();
-            let loaihang = $('#loaihang').val();
-
-            let hangGui = {
-                TenHang: tenHang,
-                TenNguoiGui: tenNguoiGui,
-                SdtNguoiGui: sdtNguoiGui,
-                TenNguoiNhan: tenNguoiNhan,
-                SdtNguoiNhan: sdtNguoiNhan,
-                DiaChiNguoiNhan: diaChiNguoiNhan,
-                TrongLuong: trongLuong,
-                IdChuyen: IdChuyen,
-                LoaiHang: loaihang,
-            };
-
-            hangGuiList.push(hangGui);
-
-            displayHangGuiList();
-
-            $('#hangGuiForm')[0].reset();
-            console.log(JSON.stringify(hangGuiList))
-        });
-        
-        // Event listener for clicking a card to show information and edit
-        $(document).on('click', '.hangGuiCard', function () {
-            let index = $(this).data('index');
-            let hangGui = hangGuiList[index];
-            $('#TenHang').val(hangGui.TenHang);
-            $('#TenNguoiGui').val(hangGui.TenNguoiGui);
-            $('#SdtNguoiGui').val(hangGui.SdtNguoiGui);
-            $('#TenNguoiNhan').val(hangGui.TenNguoiNhan);
-            $('#SdtNguoiNhan').val(hangGui.SdtNguoiNhan);
-            $('#DiachiNguoiNhan').val(hangGui.DiaChiNguoiNhan);
-            $('#TrongLuong').val(hangGui.TrongLuong);
-            $('#searchInput').val(hangGui.TuyenId); // Assuming TuyenId corresponds to the text in the searchInput
-            $('#selectedTuyenId').val(hangGui.TuyenId);
-            $('#loaihang').val(hangGui.LoaiHang);
-
-        });
-
-        // Event listener for clicking the delete icon
-        $(document).on('click', '.deleteHangGui', function () {
-            let index = $(this).data('index');
-            hangGuiList.splice(index, 1); // Remove the HangGui from the list
-            displayHangGuiList(); // Update the displayed list
-        });
+        $(".searchDropdown").removeClass('show');
     });
-
-    // Function to display the HangGui list
-    // Function to display the HangGui list
-    function displayHangGuiList() {
-        let container = $('#submittedPackagesContainer');
-        container.empty(); // Clear previous content
-
-        hangGuiList.forEach(function (hangGui, index) {
-            let cardHtml = `
-                    <div class="card mb-3 hangGuiCard m-2" data-index="${index}">
-                        <div class="position-relative">
-                            <div class="card-body">
-                                <div class="row">
-                                    <h5 class="card-title">Tên hàng : ${hangGui.TenHang}</h5>
-                                    <div class="col-md-6">
-                                        <p class="card-text"><strong>Người gửi:</strong> ${hangGui.TenNguoiGui}</p>
-                                        <p class="card-text"><strong>Số điện thoại người gửi:</strong> ${hangGui.SdtNguoiGui}</p>
-                                            <p class="card-text"><strong>Trọng lượng:</strong> ${hangGui.TrongLuong}</p>
-                                                <p class="card-text"><strong>Loại hàng:</strong> ${hangGui.LoaiHang}</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p class="card-text"><strong>Người nhận:</strong> ${hangGui.TenNguoiNhan}</p>
-                                        <p class="card-text"><strong>Số điện thoại người nhận:</strong> ${hangGui.SdtNguoiNhan}</p>
-                                        <p class="card-text"><strong>Địa chỉ người nhận:</strong> ${hangGui.DiaChiNguoiNhan}</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-danger deleteHangGui position-absolute" data-index="${index}" style="top: 10px; right: 10px;">
-                                <i class="fas fa-trash"></i> Xóa
-                            </button>
-                        </div>
-                    </div>
-                `;
-            container.append(cardHtml);
-        });
-    }
-
-
 </script>

@@ -12,10 +12,11 @@ namespace ThanhBuoi.Models
 
     public enum LoaiHang 
     {
-        Xeso,
-        Xetayga,
+        
         HangNho,
-        HangDacBiet
+        HangLon,
+        HangDacBiet,
+        HangCongKenh
     }
     public class HangGui
     {
@@ -48,6 +49,11 @@ namespace ThanhBuoi.Models
         [StringLength(255)]
         public string SdtNguoiNhan { get; set; }
 
+
+        [Required]
+        [StringLength(255)]
+        public string DiaChiNguoiGui { get; set; }
+
         [Required]
         [StringLength(255)]
         public string DiachiNguoiNhan { get; set; }
@@ -56,7 +62,6 @@ namespace ThanhBuoi.Models
 
         public DateTime? NgayTao { get; set; }
 
-        public double TrongLuong { get; set; }
 
         public string? LoaiHang { get;set; }
     }

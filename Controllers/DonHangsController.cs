@@ -41,9 +41,9 @@ namespace ThanhBuoi.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                query = query.Where(d => d.PhuongThucThanhToan.Contains(searchString) ||
+                query = query.Where(d => d.MaDon.Contains(searchString) ||
                                           d.Mota.Contains(searchString) ||
-                                          d.email.Contains(searchString));
+                                          d.Email.Contains(searchString));
             }
 
             int startIndex = (page - 1) * PageSize;
@@ -70,7 +70,7 @@ namespace ThanhBuoi.Controllers
 
             var donHang = await _context.DonHangs
                                         .Include(dh => dh.DonHangChiTiets)
-                                        .ThenInclude(dhct => dhct.HangGui)
+                                        .ThenInclude(dhct => dhct.HangGui).ThenInclude(c => c.Chuyen).ThenInclude(x => x.Xe)
                                         .FirstOrDefaultAsync(d => d.Id == id);
 
             if (donHang == null) return NotFound();

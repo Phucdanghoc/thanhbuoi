@@ -98,7 +98,7 @@ namespace ThanhBuoi.Controllers
                     CMND = ve.CMND,
                     Mave = ve.MaVe,
                     Ghe = ve.Ghe,
-                    Email = ve.email
+                    Email = ve.Email
                 };
 
                 ve.TrangThai = TrangThaiVe.Empty;
@@ -110,8 +110,7 @@ namespace ThanhBuoi.Controllers
                 ve.Hanhli = 0;
                 ve.Tien = 0;
                 ve.phuongthucthanhtoan = null;
-                ve.isCancel = true;
-                ve.email = null;
+                ve.Email = null;
 
                 _context.VeHuys.Add(veHuy);
                 await _context.SaveChangesAsync();

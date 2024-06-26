@@ -4,61 +4,147 @@
     ViewData["Title"] = "Thông tin người dùng";
 }
 
-<div class=" bg-light rounded p-2 m-4">
-    <div class="card">
+<style>
+    .card {
+        border: none;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .card-title {
+        margin-bottom: 0;
+    }
+
+    .nav-tabs .nav-link {
+        color: #495057;
+        border: none;
+        background-color: transparent;
+        border-bottom: 2px solid transparent;
+    }
+
+        .nav-tabs .nav-link.active {
+            color: #007bff;
+            border-color: #007bff;
+            font-weight: bold;
+        }
+
+        .nav-tabs .nav-link:hover {
+            border-color: #007bff;
+        }
+
+    .table {
+        border: 1px solid #dee2e6;
+        margin-top: 1.25rem;
+    }
+
+        .table th,
+        .table td {
+            border: 1px solid #dee2e6;
+            padding: 0.75rem;
+        }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 123, 255, 0.05);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0069d9;
+            border-color: #0062cc;
+        }
+
+        .btn-primary:focus,
+        .btn-primary.focus {
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+</style>
+
+<div class="container mt-4">
+    <div class="card bg-light rounded">
         <div class="card-header">
-            Thông tin người dùng 
+            <h4 class="card-title mb-0 text-light">Thông tin người dùng</h4>
         </div>
         <div class="card-body">
-            <p><strong>Tên người dùng :</strong> @Model.UserName</p>
-            <p><strong>Email :</strong> @Model.Email</p>
-            <p><strong>Số điện thoại :</strong> @Model.PhoneNumber</p>
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold">Tên người dùng:</div>
+                <div class="col-sm-9">@Model.UserName</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold">Email:</div>
+                <div class="col-sm-9">@Model.Email</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 fw-bold">Số điện thoại:</div>
+                <div class="col-sm-9">@Model.PhoneNumber</div>
+            </div>
         </div>
     </div>
 
     <!-- Tabs -->
     <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="ves-tab" data-bs-toggle="tab" data-bs-target="#ves" type="button" role="tab" aria-controls="ves" aria-selected="true">Vé</button>
+            <button class="nav-link active" id="ves-tab" data-bs-toggle="tab" data-bs-target="#ves" type="button" role="tab" aria-controls="ves" aria-selected="true">Các vé</button>
         </li>
     </ul>
-    <div class="tab-content" id="myTabContent">
-        <!-- Ves Tab -->
+
+    <div class="tab-content mt-3" id="myTabContent">
+        <!-- Vé Tab -->
         <div class="tab-pane fade show active" id="ves" role="tabpanel" aria-labelledby="ves-tab">
-            <div class="mt-4">
-                <h2>Các vé</h2>
+            <div class="card shadow-sm">
+                <div class="card-body">
 
-                <!-- Search Input -->
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="button-search" id="searchVeInput">
-                    <button class="btn btn-outline-secondary" type="button" id="button-search">Search</button>
-                </div>
-                <table class="table table-striped table-bordered" id="vesTable">
-                    <!-- Table Headers -->
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Mã vé</th>
-                            <th>Chuyến</th>
-                            <th>Ngày đặt vé</th>
-                            <th>Tổng tiền</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <!-- Table Body -->
-                    <tbody>
-                        @foreach (var ve in ViewBag.ListVe)
-                        {
-                            <tr>
-                                <td>@ve.MaVe</td>
-                                <td><a asp-controller="Chuyens" asp-action="Details" asp-route-itemid="@ve.Chuyen.Id">@ve.Chuyen.Ten</a></td>
-                                <td>@ve.NgayTao.ToString("dd/MM/yyyy")</td>
+                    <div class="card-header">
+                        <h4 class="card-title mb-0 text-light">Vé đã đặt </h4>
+                    </div>
+                    <br />
+                    <!-- Search Input -->
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm vé..." aria-label="Search" aria-describedby="button-search" id="searchVeInput">
+                        <button class="btn btn-outline-secondary" type="button" id="button-search">Tìm kiếm</button>
+                    </div>
+
+                    <!-- Table -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered" id="vesTable">
+                            <!-- Table Headers -->
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">Mã vé</th>
+                                    <th scope="col">Chuyến</th>
+                                    <th scope="col">Ngày đặt vé</th>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <!-- Table Body -->
+                            <tbody>
+                                @foreach (var ve in ViewBag.ListVe)
+                                {
+                                    <tr>
+                                        <td>@ve.MaVe</td>
+                                        <td><a asp-controller="Chuyens" asp-action="Details" asp-route-id="@ve.Chuyen.Id">@ve.Chuyen.Ten</a></td>
+                                        <td>@ve.NgayTao.ToString("dd/MM/yyyy")</td>
                                         <td>@string.Format("{0:#,##0} VND", ve.Tien)</td>
-
-                                <td><a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-primary btn-sm">Chi tiết</a></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                        <td><a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-primary btn-sm">Chi tiết</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,7 +156,7 @@
             $('#button-search').click(function () {
                 var searchText = $('#searchVeInput').val().toLowerCase();
                 $('#vesTable tbody tr').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1)
+                    $(this).toggle($(this).text().toLowerCase().indexOf(searchText) > -1);
                 });
             });
         });

@@ -4,30 +4,62 @@
     ViewData["Title"] = "Chi tiết vé hủy";
 }
 
-<div class=" mt-5">
-    <h2 class="mb-4">Chi tiết vé hủy</h2>
+<div class="container mt-5">
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card mb-4 bg-light rounded">
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Thông tin vé hủy</h5>
+            <div class="card mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Chi tiết vé hủy</h5>
-                    <div class="card mb-3 shadow-sm">
-                        <div class="card-body">
-                            <h6 class="card-subtitle mb-2 text-muted">Mã vé hủy: @Model.Mave</h6>
-                            <p><strong>Tên người hủy:</strong> @Model.Name</p>
-                            <p><strong>CMND:</strong> @Model.CMND</p>
-                            <p><strong>Email:</strong> @Model.Email</p>
-                            <p><strong>Ngày hủy:</strong> @Model.ngaytao.ToString("HH:mm dd/MM/yyyy")</p>
-                            <div class="highlighted-info">
-                                <p><strong>Chuyến:</strong> @Model.chuyen.Ten</p>
-                                <p><strong>Ghế:</strong> @Model.Ghe.Ten </p>
-                                <p><strong>Hoàn tiền:</strong> <span class="text-success font-weight-bold">@Model.hoantien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
-                            </div>
-                        </div>
+                    <h6 class="card-subtitle mb-2 text-muted">Mã vé hủy: @Model.Mave</h6>
+                    <p><strong>Tên người hủy:</strong> @Model.Name</p>
+                    <p><strong>CMND:</strong> @Model.CMND</p>
+                    <p><strong>Email:</strong> @Model.Email</p>
+                    <p><strong>Ngày hủy:</strong> @Model.ngaytao.ToString("HH:mm dd/MM/yyyy")</p>
+                    <div class="highlighted-info bg-light p-3 mt-3">
+                        <p><strong>Chuyến:</strong> @Model.chuyen.Ten</p>
+                        <p><strong>Ghế:</strong> @Model.Ghe.Ten</p>
+                        <p><strong>Hoàn tiền:</strong> <span class="text-success font-weight-bold">@Model.hoantien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+
+    .card-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .text-primary {
+        color: #007bff;
+    }
+
+    .highlighted-info {
+        border-radius: 5px;
+    }
+</style>

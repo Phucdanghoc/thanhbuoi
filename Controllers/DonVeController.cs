@@ -47,7 +47,7 @@ namespace ThanhBuoi.Controllers
             {
                 query = query.Where(d => d.PhuongThucThanhToan.Contains(searchString) ||
                                          d.Mota.Contains(searchString) ||
-                                         d.email.Contains(searchString));
+                                         d.Email.Contains(searchString));
             }
 
             int startIndex = (page - 1) * PageSize;

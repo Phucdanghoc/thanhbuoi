@@ -23,12 +23,29 @@ namespace ThanhBuoi.Services
             this.emailSetting = options.Value;
         }
 
-        public string makeBodyEmailOrder(DonHang donHang)
+        public string makeBodyEmailOrder(DonHang donHang, List<HangGui> hangGuis)
         {
-
             var stringBuilder = new StringBuilder();
 
             // Header
+            stringBuilder.AppendLine("<!DOCTYPE html>");
+            stringBuilder.AppendLine("<html lang='en'>");
+            stringBuilder.AppendLine("<head>");
+            stringBuilder.AppendLine("<meta charset='UTF-8'>");
+            stringBuilder.AppendLine("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
+            stringBuilder.AppendLine("<title>Chi tiết đơn hàng</title>");
+            stringBuilder.AppendLine("<style>");
+            stringBuilder.AppendLine("body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f8f9fa; }");
+            stringBuilder.AppendLine(".container { max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }");
+            stringBuilder.AppendLine("h1, h2 { color: #007bff; }");
+            stringBuilder.AppendLine("ul { list-style-type: none; padding-left: 0; }");
+            stringBuilder.AppendLine("li { margin-bottom: 10px; }");
+            stringBuilder.AppendLine("</style>");
+            stringBuilder.AppendLine("</head>");
+            stringBuilder.AppendLine("<body>");
+            stringBuilder.AppendLine("<div class='container'>");
+
+            // Content
             stringBuilder.AppendLine("<h1>Chi tiết đơn hàng</h1>");
             stringBuilder.AppendLine("<hr>");
 
@@ -36,25 +53,23 @@ namespace ThanhBuoi.Services
             stringBuilder.AppendLine("<h2>Thông tin đơn hàng</h2>");
             stringBuilder.AppendLine("<ul>");
             stringBuilder.AppendLine($"<li><strong>Trạng thái:</strong> {donHang.Trangthai}</li>");
-            stringBuilder.AppendLine($"<li><strong>Ngày tạo:</strong> {donHang.NgayTao}</li>");
+            stringBuilder.AppendLine($"<li><strong>Ngày tạo:</strong> {donHang.NgayTao.ToString("dd/MM/yyyy")}</li>");
             stringBuilder.AppendLine($"<li><strong>Tổng tiền:</strong> {donHang.Tien.ToString("N0")} ₫</li>");
-            // Add more details as needed
             stringBuilder.AppendLine("</ul>");
 
             // List of items
             stringBuilder.AppendLine("<h2>Danh sách hàng</h2>");
             stringBuilder.AppendLine("<ul>");
-            foreach (var chiTiet in donHang.DonHangChiTiets)
+            foreach (var hanggui in hangGuis)
             {
                 stringBuilder.AppendLine("<li>");
-                stringBuilder.AppendLine($"<strong>Tên hàng:</strong> {chiTiet.HangGui.TenHang}<br>");
-                stringBuilder.AppendLine($"<strong>Người gửi:</strong> {chiTiet.HangGui.TenNguoiGui}<br>");
-                stringBuilder.AppendLine($"<strong>Số điện thoại người gửi:</strong> {chiTiet.HangGui.SdtNguoiGui}<br>");
-                stringBuilder.AppendLine($"<strong>Trọng lượng:</strong> {chiTiet.HangGui.TrongLuong}<br>");
-                stringBuilder.AppendLine($"<strong>Người nhận:</strong> {chiTiet.HangGui.TenNguoiNhan}<br>");
-                stringBuilder.AppendLine($"<strong>Số điện thoại người nhận:</strong> {chiTiet.HangGui.SdtNguoiNhan}<br>");
-                stringBuilder.AppendLine($"<strong>Địa chỉ người nhận:</strong> {chiTiet.HangGui.DiachiNguoiNhan}<br>");
-                // Add more details as needed
+                stringBuilder.AppendLine($"<strong>Tên hàng:</strong> {hanggui.TenHang}<br>");
+                stringBuilder.AppendLine($"<strong>Người gửi:</strong> {hanggui.TenNguoiGui}<br>");
+                stringBuilder.AppendLine($"<strong>Địa chỉ người nhận:</strong> {hanggui.DiaChiNguoiGui}<br>");
+                stringBuilder.AppendLine($"<strong>Số điện thoại người gửi:</strong> {hanggui.SdtNguoiGui}<br>");
+                stringBuilder.AppendLine($"<strong>Người nhận:</strong> {hanggui.TenNguoiNhan}<br>");
+                stringBuilder.AppendLine($"<strong>Số điện thoại người nhận:</strong> {hanggui.SdtNguoiNhan}<br>");
+                stringBuilder.AppendLine($"<strong>Địa chỉ người nhận:</strong> {hanggui.DiachiNguoiNhan}<br>");
                 stringBuilder.AppendLine("</li>");
             }
             stringBuilder.AppendLine("</ul>");
@@ -62,14 +77,18 @@ namespace ThanhBuoi.Services
             // Additional information
             stringBuilder.AppendLine("<h2>Thông tin thêm</h2>");
             stringBuilder.AppendLine("<ul>");
-            stringBuilder.AppendLine($"<li><strong>Email:</strong> {donHang.email}</li>");
+            stringBuilder.AppendLine($"<li><strong>Email:</strong> {donHang.Email}</li>");
             stringBuilder.AppendLine($"<li><strong>Mô tả:</strong> {donHang.Mota}</li>");
             stringBuilder.AppendLine($"<li><strong>Phương thức thanh toán:</strong> {donHang.PhuongThucThanhToan}</li>");
-            // Add more details as needed
             stringBuilder.AppendLine("</ul>");
+
+            stringBuilder.AppendLine("</div>");
+            stringBuilder.AppendLine("</body>");
+            stringBuilder.AppendLine("</html>");
 
             return stringBuilder.ToString();
         }
+
         public string makeBodyTicketBooked(List<Ve> tickets)
         {
             var totalPrice = tickets.Sum(ve => ve.Tien);
@@ -83,8 +102,8 @@ namespace ThanhBuoi.Services
             stringBuilder.AppendLine("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
             stringBuilder.AppendLine("<title>Thông tin vé</title>");
             stringBuilder.AppendLine("<style>");
-            stringBuilder.AppendLine("body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }");
-            stringBuilder.AppendLine(".container { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; }");
+            stringBuilder.AppendLine("body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f8f9fa; }");
+            stringBuilder.AppendLine(".container { max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }");
             stringBuilder.AppendLine(".ticket-heading { font-weight: bold; margin-bottom: 10px; font-size: 1.2em; }");
             stringBuilder.AppendLine(".ticket-info { margin-bottom: 20px; }");
             stringBuilder.AppendLine(".ticket-info p { margin: 5px 0; }");
@@ -103,7 +122,7 @@ namespace ThanhBuoi.Services
                 stringBuilder.AppendLine("<div class='ticket-info'>");
                 stringBuilder.AppendLine("<p class='ticket-heading'>Thông tin chuyến :</p>");
                 stringBuilder.AppendLine($"<p><strong>Tuyến:</strong> {ve.Chuyen.Ten}</p>");
-                stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi.ToString("HH:mm")} - {ve.Chuyen.ThoiGianDi.ToString("dd:MM:yyyy")}</p>");
+                stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi.ToString("HH:mm")} - {ve.Chuyen.ThoiGianDi.ToString("dd/MM/yyyy")}</p>");
                 stringBuilder.AppendLine($"<p><strong>Điểm đón:</strong> {ve.Chuyen.DiemDon}</p>");
                 stringBuilder.AppendLine($"<p><strong>Giá vé:</strong> <span class='special-price'>{GiaTien}</span></p>");
 
@@ -143,8 +162,8 @@ namespace ThanhBuoi.Services
             stringBuilder.AppendLine("<meta name='viewport' content='width=device-width, initial-scale=1.0'>");
             stringBuilder.AppendLine("<title>Thông tin hủy vé</title>");
             stringBuilder.AppendLine("<style>");
-            stringBuilder.AppendLine("body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; }");
-            stringBuilder.AppendLine(".container { width: 100%; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; }");
+            stringBuilder.AppendLine("body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f8f9fa; }");
+            stringBuilder.AppendLine(".container { max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius:10 px}");
             stringBuilder.AppendLine(".ticket-heading { font-weight: bold; margin-bottom: 10px; font-size: 1.2em; }");
             stringBuilder.AppendLine(".ticket-info { margin-bottom: 20px; }");
             stringBuilder.AppendLine(".ticket-info p { margin: 5px 0; }");
@@ -158,7 +177,7 @@ namespace ThanhBuoi.Services
             stringBuilder.AppendLine("<div class='ticket-info'>");
             stringBuilder.AppendLine("<p class='ticket-heading'>Thông tin chuyến :</p>");
             stringBuilder.AppendLine($"<p><strong>Tuyến:</strong> {ve.Chuyen.Ten}</p>");
-            stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi.ToString("HH:mm")} - {ve.Chuyen.ThoiGianDi.ToString("dd:MM:yyyy")}</p>");
+            stringBuilder.AppendLine($"<p><strong>Thời gian khởi hành:</strong> {ve.Chuyen.ThoiGianDi.ToString("HH:mm")} - {ve.Chuyen.ThoiGianDi.ToString("dd/MM/yyyy")}</p>");
             stringBuilder.AppendLine($"<p><strong>Điểm đón:</strong> {ve.Chuyen.DiemDon}</p>");
             stringBuilder.AppendLine($"<p><strong>Giá vé:</strong> <span class='special-price'>{GiaTien}</span></p>");
 
@@ -181,6 +200,7 @@ namespace ThanhBuoi.Services
 
             return stringBuilder.ToString();
         }
+
 
 
         public async Task SendEmailAsync(string email, string subject, string body)

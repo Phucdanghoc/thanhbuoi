@@ -4,13 +4,80 @@
     ViewData["Title"] = "Danh sách đơn vé ";
 }
 
-<div class=" bg-light rounded  m-4">
+<style>
+    /* Container styles */
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Card styles */
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: white;
+        border-radius: 10px 10px 0 0;
+    }
+
+        .card-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+    /* Search form styles */
+    .search-form {
+        margin-bottom: 20px;
+    }
+
+        .search-form input {
+            border-radius: 20px;
+        }
+
+        .search-form button {
+            border-radius: 20px;
+        }
+
+    /* Table styles */
+    .table thead th {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .btn-group .btn {
+        border-radius: 20px;
+    }
+
+    /* Pagination styles */
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .pagination .page-link {
+        color: #007bff;
+    }
+
+    .pagination .page-item.disabled .page-link {
+        color: #ddd;
+    }
+</style>
+<div class="container mt-4">
     <div class="card">
         <div class="card-header text-center">
-            <h1 class="mb-0">Danh sách đơn vé</h1>
+            <h1 class="mb-0 text-white">Vé của tôi</h1>
         </div>
         <div class="card-body">
-            <form asp-action="Index" method="get" class="mb-4">
+            <form asp-action="Index" method="get" class="search-form">
                 <div class="row">
                     <div class="col-md-8 col-sm-12 mb-2">
                         <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm" value="@ViewBag.SearchString" />
@@ -38,11 +105,11 @@
                             <tr>
                                 <td>@(item.MaVe ?? "Không có")</td>
                                 <td>@item.Chuyen.Ten</td>
-                                <td>@item.NgayTao.ToString("MM/hh dd/MM")</td>
+                                <td>@item.NgayTao.ToString("dd/MM/yyyy HH:mm")</td>
                                 <td>@item.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <a asp-action="DetailVe" asp-route-id="@item.Id" class="btn btn-sm btn-info">Chi tiết</a>
+                                        <a asp-action="DetailVe" asp-route-id="@item.Id" class="btn btn-sm btn-info text-white">Chi tiết</a>
                                     </div>
                                 </td>
                             </tr>

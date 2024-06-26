@@ -4,9 +4,55 @@
     ViewData["Title"] = "Danh sách đơn hàng";
 }
 
-<div class=" m-4 p-3 bg-light rounded">
-    <h1 class="mb-4 text-center">Danh sách đơn hàng</h1>
+<style>
+    .container-custom {
+        background-color: #f8f9f9;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin: 2rem auto;
+    }
 
+    .table th,
+    .table td {
+        vertical-align: middle;
+    }
+
+    .pagination .page-item.active .page-link {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .pagination .page-link {
+        color: #007bff;
+    }
+
+        .pagination .page-link:hover {
+            color: #0056b3;
+        }
+        .status-waiting {
+        color: red;
+    }
+
+    .status-paid {
+        color: blue;
+    }
+    .btn-info {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+    }
+
+        .btn-info:hover {
+            background-color: #138496;
+            border-color: #117a8b;
+        }
+</style>
+
+<div class="container container-custom">
+    <div class="card-header bg-primary text-white">
+        <h1 class="mb-0 text-center text-light">Danh sách đơn vé</h1>
+    </div>
+    <br />
     <form asp-action="Index" method="get" class="mb-4">
         <div class="input-group">
             <input type="text" name="searchString" class="form-control" placeholder="Tìm kiếm" value="@ViewBag.SearchString" />
@@ -19,9 +65,10 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-light">
             <tr>
-                <th>Email</th>
+                <th>Mã đơn</th>
                 <th>Tổng tiền</th>
-                <th>Phương thức thanh toán</th>
+                <th>Trạng thái</th>
+                <th>Thanh toán</th>
                 <th>Ngày tạo</th>
                 <th></th>
             </tr>
@@ -30,12 +77,15 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>@Html.DisplayFor(modelItem => item.email)</td>
+                    <td>@Html.DisplayFor(modelItem => item.MaDon)</td>
                     <td>@item.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</td>
-                    <td>@Html.DisplayFor(modelItem => item.PhuongThucThanhToan)</td>
-                    <td>@Html.DisplayFor(modelItem => item.NgayTao)</td>
+                    <td class="@(item.Trangthai == TrangThaiDonHang.Waiting ? "status-waiting" : "status-paid")">
+                        @(item.Trangthai == TrangThaiDonHang.Waiting ? "Đang đợi" : "Đã thanh toán")
+                    </td>
+                    <td class="@(item.PhuongThucThanhToan == "momo" ?  "status-waiting" : "status-paid")">@(item.PhuongThucThanhToan == "momo" ? "MoMo" : "Tiền mặt")</td>
+                    <td>@item.NgayTao.ToString("dd/MM/yyyy")</td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Chi tiết</a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info text-light">Chi tiết</a>
                     </td>
                 </tr>
             }

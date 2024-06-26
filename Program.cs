@@ -16,12 +16,18 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
         var configuration = builder.Configuration;
-
+        builder.Services.AddDistributedMemoryCache(); 
+        builder.Services.AddSession(options =>
+        {
+            options.IdleTimeout = TimeSpan.FromMinutes(30); 
+            options.Cookie.HttpOnly = true; 
+            options.Cookie.IsEssential = true; 
+        });
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         builder.Services.AddDbContext<DataContext>(options =>
         {
-            options.UseSqlServer(configuration.GetConnectionString("DbContext"));
+            options.UseSqlServer(configuration.GetConnectionString("DbContext"));  
         });
         builder.Services.Configure<EmailSetting>(configuration.GetSection("EmailSettings"));
         builder.Services.AddTransient<IEmailService, EmailService>();
@@ -35,11 +41,16 @@ internal class Program
         .AddDefaultTokenProviders();
         builder.Services.AddScoped<MomoServices>();
         builder.Services.AddRazorPages();
-        builder.Services.AddControllers().AddJsonOptions(options =>
+/*        builder.Services.AddControllers().AddJsonOptions(options =>
         {
             options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
-        });
-
+        });*/
+        builder. Services.AddControllersWithViews()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
+            });
         var app = builder.Build();
         var environment = app.Environment;
 
@@ -54,6 +65,8 @@ internal class Program
         app.UseStaticFiles();
         app.UseAuthentication();
         app.UseAuthorization();
+        app.UseSession(); // Use session
+
         app.MapRazorPages();
         app.MapControllerRoute(
             name: "default",

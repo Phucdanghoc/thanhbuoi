@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Đăng nhập";
     Layout = "_AuthLayout";
 }
 
@@ -31,7 +31,10 @@
                             <label class="form-check-label" asp-for="Input.RememberMe">Remember me</label>
                         </div>
                         <div>
-                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                            <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Đăng nhập</button>
+                        </div>
+                        <div class="text-center">
+                            <p>Don't have an account? <a asp-area="Identity" asp-page="/Account/Register">Đăng kí </a></p>
                         </div>
                     </form>
                 </section>

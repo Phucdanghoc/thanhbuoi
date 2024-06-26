@@ -3,114 +3,130 @@
 @{
     ViewData["Title"] = "Chi tiết hóa đơn vé";
 }
+
 <style>
     .highlight {
-        color: #ff5733; /* Choose your desired highlight color */
+        color: #ff5733; /* Highlight color */
         font-weight: bold;
     }
 
+    .card-details {
+        border: 1px solid #ddd;
+        border-radius: 0.25rem;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .card-details:hover {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    .btn-primary:hover {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+    .btn-primary:focus,
+    .btn-primary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .btn-secondary:hover {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-secondary:focus,
+    .btn-secondary.focus {
+        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+    }
+
+    .img-payment {
+        max-width: 100px;
+    }
 </style>
-<div class="container mt-5 bg-light p-4 rounded shadow-sm">
-    <h2 class="text-center">Chi tiết đơn vé</h2>
 
-    <div class="card my-4 shadow-sm">
-        <div class="card-body">
-            <h3>Chi tiết đơn vé</h3>
-            <p><strong>Trạng thái:</strong> @Model.Trangthai</p>
-            <p><strong>Ngày tạo:</strong> @Model.NgayTao.ToString("dd/MM/yyyy")</p>
-            <p><strong>Tổng tiền:</strong> @Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+<div class="container mt-5">
+    <div class="bill-container bg-light p-4 rounded shadow-sm">
+        <h2 class="bill-title">Chi tiết đơn vé</h2>
+
+        <div class="card bill-card shadow-sm">
+            <div class="card-body">
+                <div class="bill-details">
+                    <h5>Thông tin đơn hàng</h5>
+                    <p><strong>Trạng thái:</strong> @Model.Trangthai</p>
+                    <p><strong>Ngày tạo:</strong> @Model.NgayTao.ToString("dd/MM/yyyy")</p>
+                    <p><strong>Tổng tiền:</strong> @Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div>
-        <h3 class="mb-4">Danh sách hàng</h3>
-        @if (ViewBag.ChiTietVe != null)
-        {
-            @foreach (DonHangChiTiet ve in ViewBag.ChiTietVe)
+        <div class="bill-items">
+            <h3 class="my-4">Danh sách hàng</h3>
+            @if (ViewBag.ChiTietVe != null)
             {
-                <div class="card my-2 shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Tên : @ve.Ve.Ten</h5>
-                        <h6 class="card-title">Mã vé : @ve.Ve.MaVe</h6>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <p><strong>Người gửi:</strong> @ve.Ve.Ten</p>
-                                <p><strong>Số điện thoại người gửi:</strong> @ve.Ve.Sdt</p>
-                                <p><strong>Trọng lượng:</strong> @ve.Ve.Hanhli kg</p>
-                                <p><strong>Điểm đón:</strong> @ve.Ve.DiemDon</p>
-                                <p><strong>Email:</strong> @ve.Ve.email</p>
-                                <p><strong>CMND:</strong> @ve.Ve.CMND</p>
-                            </div>
-                            <div class="col-md-6">
-                                <p><strong>Phương thức thanh toán:</strong> @ve.Ve.phuongthucthanhtoan</p>
-                                <p><strong>Trạng thái:</strong> @ve.Ve.TrangThai</p>
-                                <p><strong>Ngày tạo:</strong> @ve.Ve.NgayTao.ToString("dd/MM/yyyy")</p>
-                                <p><strong>Giá vé:</strong> <span class="highlight">@ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
-                                <p><strong>Ghế:</strong> @ve.Ve.Ghe?.Id</p>
-                                <p><strong>Chuyến:</strong> @ve.Ve.Chuyen?.Ten</p>
+                @foreach (DonHangChiTiet ve in ViewBag.ChiTietVe)
+                {
+                    <div class="card bill-card shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title">Tên: @ve.Ve.Ten</h5>
+                                    <p><strong>Mã vé:</strong> @ve.Ve.MaVe</p>
+                                    <p><strong>Người gửi:</strong> @ve.Ve.Ten</p>
+                                    <p><strong>Email:</strong> @ve.Ve.Email</p>
+                                    <p><strong>CMND:</strong> @ve.Ve.CMND</p>
+                                    <p><strong>Số điện thoại người gửi:</strong> @ve.Ve.Sdt</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Phương thức thanh toán:</strong> @ve.Ve.phuongthucthanhtoan</p>
+                                    <p><strong>Trạng thái:</strong> @ve.Ve.TrangThai</p>
+                                    <p><strong>Ngày tạo:</strong> @ve.Ve.NgayTao.ToString("dd/MM/yyyy")</p>
+                                    <p><strong>Giá vé:</strong> <span class="highlight">@ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
+                                    <p><strong>Ghế:</strong> @ve.Ve.Ghe?.Id</p>
+                                    <p><strong>Chuyến:</strong> @ve.Ve.Chuyen?.Ten</p>
+                                    <a class="btn btn-primary mt-3" asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Ve.Id">Chi tiết</a>
+                                </div>
                             </div>
                         </div>
-                        <a class="btn btn-primary mt-3" asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" >Chi tiết</a>
-
                     </div>
-                </div>
+                }
             }
-        }
-        else
-        {
-            <p>Không có hàng trong đơn hàng này.</p>
-        }
-    </div>
+            else
+            {
+                <p>Không có hàng trong đơn hàng này.</p>
+            }
+        </div>
 
-    <form id="orderForm">
         <div class="row mt-4">
             <div class="col-md-6">
-                <div class="form-group">
-                    <label for="email">Email:</label>
-                    <input type="email" class="form-control" id="email" name="email" value="@Model.email" @(Model.email != null ? "disabled" : "") required>
-                </div>
-                <div class="form-group">
-                    <label for="mota">Mô tả:</label>
-                    <textarea class="form-control" id="mota" name="mota" rows="4" @(Model.Mota != null ? "disabled" : "")>@Model.Mota</textarea>
-                </div>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" value="@Model.Email" @(Model.Email != null ? "disabled" : "") required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mota">Mô tả:</label>
+                        <textarea class="form-control" id="mota" name="mota" rows="4" @(Model.Mota != null ? "disabled" : "") readonly>@Model.Mota</textarea>
+                    </div>
+                </form>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Phương thức thanh toán:</label><br>
-                    <div class="row">
-                        @if (Model.PhuongThucThanhToan == "momo")
-                        {
-                            <div class="col-md-6 text-center">
-                                <input type="radio" id="momo" name="paymentMethod" value="momo" checked disabled>
-                                <label for="momo">Momo</label><br>
-                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2 img-fluid" style="max-width: 100px;">
-                            </div>
-                        }
-                        else if (Model.PhuongThucThanhToan == "cash")
-                        {
-                            <div class="col-md-6 text-center">
-                                <input type="radio" id="tienmat" name="paymentMethod" value="cash" checked disabled>
-                                <label for="tienmat">Tiền mặt</label><br>
-                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2 img-fluid" style="max-width: 100px;">
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="col-md-6 text-center">
-                                <input type="radio" id="momo" name="paymentMethod" value="momo">
-                                <label for="momo">Momo</label><br>
-                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2 img-fluid" style="max-width: 100px;">
-                            </div>
-                            <div class="col-md-6 text-center">
-                                <input type="radio" id="tienmat" name="paymentMethod" value="cash">
-                                <label for="tienmat">Tiền mặt</label><br>
-                                <img src="https://th.bing.com/th/id/OIP.IEUB1OoiFFBUrQaKu1quigigAAAA?rs=1&pid=ImgDetMain" alt="Tiền mặt" class="mt-2 img-fluid" style="max-width: 100px;">
-                            </div>
-                        }
+                    <div class="btn-group-toggle btn-payment-method" data-toggle="buttons">
+                        <label class="btn">
+                            <input type="radio" id="momo" name="paymentMethod" value="momo" @(Model.PhuongThucThanhToan == "momo" ? "checked" : "") disabled>
+                            Momo
+                            <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="img-payment">
+                        </label>
+                        <label class="btn">
+                            <input type="radio" id="cash" name="paymentMethod" value="cash" @(Model.PhuongThucThanhToan == "cash" ? "checked" : "") disabled>
+                            Tiền mặt
+                            <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="img-fluid mt-2" style="width: 100px;">
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
-

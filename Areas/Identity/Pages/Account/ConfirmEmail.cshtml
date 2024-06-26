@@ -1,8 +1,18 @@
 ﻿@page
 @model ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Xác nhận email";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+@if (Model.ModelState.IsValid)
+{
+    <div class="alert alert-success">
+        Cảm ơn bạn đã xác nhận địa chỉ email của mình.
+    </div>
+}
+else
+{
+    <div class="alert alert-danger">
+        Đã xảy ra lỗi trong quá trình xác nhận email của bạn.
+    </div>
+}

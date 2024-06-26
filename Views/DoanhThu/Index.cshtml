@@ -111,22 +111,26 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 mt-4">
-                <div class="col-sm-12 col-xl-12">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Hàng và vé</h6>
-                        <canvas id="salse-revenue"></canvas>
+            <div class="row">
+                <div class="col-8 mt-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-light rounded h-100 p-4">
+                            <h6 class="mb-4">Hàng và vé</h6>
+                            <canvas id="salse-revenue"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 mt-4">
-                <div class="col-sm-12 col-xl-12">
-                    <div class="bg-light rounded h-100 p-4">
-                        <h6 class="mb-4">Tổng doanh thu</h6>
-                        <canvas id="line-chart"></canvas>
-                    </div>
+                <div class="col-4 mt-4">
+                     <div class="col-sm-12 col-xl-12">
+                            <div class="bg-light rounded h-100 p-4">
+                                <h6 class="mb-4">Pie Chart</h6>
+                                <canvas id="pie-chart"></canvas>
+                            </div>
+                     </div>
                 </div>
             </div>
+           
+            
         </div>
     </div>
 </div>
@@ -175,10 +179,12 @@
             default:
                 break;
         }
+        console.log( fromDate, toDate);
 
         fetch(`/api/doanhthu/total?fromDate=${fromDate}&toDate=${toDate}`)
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 processData(data);
             })
             .catch(error => {
@@ -188,18 +194,17 @@
 
     // Hàm vẽ biểu đồ
     function drawCharts(listDate, listTotalHang, listTotalVe, listTotal) {
-        // Destroy existing charts
+        // Destroy existing charts if they exist
         if (window.myChart2) {
             window.myChart2.destroy();
         }
-        if (window.myChart3) {
-            window.myChart3.destroy();
+        if (window.myChart5) {
+            window.myChart5.destroy();
         }
-
         // Multiple Line Chart
         var ctx2 = $("#salse-revenue").get(0).getContext("2d");
         window.myChart2 = new Chart(ctx2, {
-            type: "line",
+            type: "bar",
             data: {
                 labels: listDate,
                 datasets: [{
@@ -219,18 +224,20 @@
                 responsive: true
             }
         });
+        console.log(listTotalVe, listTotalHang);
 
-        // Single Line Chart
-        var ctx3 = $("#line-chart").get(0).getContext("2d");
-        window.myChart3 = new Chart(ctx3, {
-            type: "line",
+
+        var ctx5 = $("#pie-chart").get(0).getContext("2d");
+        window.myChart5 = new Chart(ctx5, {
+            type: "pie",
             data: {
-                labels: listDate,
+                labels: ["Vé", "Hàng"],
                 datasets: [{
-                    label: "Tổng doanh thu",
-                    fill: false,
-                    backgroundColor: "rgba(0, 156, 255, .3)",
-                    data: listTotal
+                    backgroundColor: [
+                        "rgba(0, 156, 255, .7)",
+                        "rgba(0, 156, 255, .6)",
+                    ],
+                    data: [sumArray(listTotalVe), sumArray(listTotalHang)]
                 }]
             },
             options: {
@@ -239,23 +246,31 @@
         });
     }
 
+
     function processData(data) {
-        console.log(data);
-        var listDate = [];
-        var listTotalHang = [];
-        var listTotalVe = [];
-        var listTotal = [];
-        data.$values.forEach(function (item) {
-            listDate.push(formatDate(item.datetime));
-            listTotalHang.push(item.totalHang);
-            listTotalVe.push(item.totalVe);
-            listTotal.push(item.totalHang + item.totalVe);
-        });
-        const totalHang = sumArray(listTotalHang);
-        const totalVe = sumArray(listTotalVe);
-        setTotal(totalVe, totalHang);
-        drawCharts(listDate, listTotalHang, listTotalVe, listTotal);
+        if (data && data.length > 0) {
+            var listDate = [];
+            var listTotalHang = [];
+            var listTotalVe = [];
+            var listTotal = [];
+
+            data.forEach(function (item) {
+                listDate.push(formatDate(item.datetime));
+                listTotalHang.push(item.totalHang);
+                listTotalVe.push(item.totalVe);
+                listTotal.push(item.totalHang + item.totalVe);
+            });
+
+            const totalHang = sumArray(listTotalHang);
+            const totalVe = sumArray(listTotalVe);
+            setTotal(totalVe, totalHang);
+            drawCharts(listDate, listTotalHang, listTotalVe, listTotal);
+        } else {
+            // Handle case where no data is returned or data is empty
+            console.error('No data found or empty.');
+        }
     }
+
 
     function formatVND(number) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);

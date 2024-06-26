@@ -192,6 +192,9 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<DateTime>("ThoiGianDen")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("ThoiGianDi")
                         .HasColumnType("datetime2");
 
@@ -242,6 +245,9 @@ namespace ThanhBuoi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ID_TaiKhoan")
                         .HasColumnType("nvarchar(450)");
 
@@ -277,9 +283,6 @@ namespace ThanhBuoi.Migrations
                     b.Property<int?>("Trangthai")
                         .HasMaxLength(255)
                         .HasColumnType("int");
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -382,6 +385,11 @@ namespace ThanhBuoi.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("DiaChiNguoiGui")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
                     b.Property<string>("DiachiNguoiNhan")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -431,9 +439,6 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<int?>("TrangThai")
                         .HasColumnType("int");
-
-                    b.Property<double>("TrongLuong")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -684,6 +689,9 @@ namespace ThanhBuoi.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Hanhli")
                         .HasColumnType("int");
 
@@ -715,12 +723,6 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
-
-                    b.Property<string>("email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("isCancel")
-                        .HasColumnType("bit");
 
                     b.Property<string>("phuongthucthanhtoan")
                         .HasColumnType("nvarchar(max)");
@@ -812,9 +814,6 @@ namespace ThanhBuoi.Migrations
 
                     b.Property<int>("Trangthai")
                         .HasColumnType("int");
-
-                    b.Property<double>("TrongTaiHang")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

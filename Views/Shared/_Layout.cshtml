@@ -1,21 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using ThanhBuoi.Models
-
 @inject SignInManager<TaiKhoan> SignInManager
 @inject UserManager<TaiKhoan> UserManager
+
 @{
     var user = await UserManager.GetUserAsync(User);
-    var isAdmin = user != null && await UserManager.IsInRoleAsync(user, "ADMIN");
-    var isUser = user != null && await UserManager.IsInRoleAsync(user, "USER");
-    var isSaler = user != null && await UserManager.IsInRoleAsync(user, "SALER");
-    var role = "";
-    if (user != null)
-    {
-        var roles = await UserManager.GetRolesAsync(user);
-        role = roles.First().ToString();
-    }
-
+    var roles = user != null ? await UserManager.GetRolesAsync(user) : new List<string>();
+    var role = roles.Any() ? roles.First() : "NoRole";
+    var isAdmin = roles.Contains("ADMIN");
+    var isUser = roles.Contains("USER");
+    var isSaler = roles.Contains("SALER");
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,17 +21,17 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+
     <!-- Favicon -->
     <link href="~/img/favicon.png" rel="icon">
 
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
     <!-- Libraries Stylesheet -->
     <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="~/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
@@ -44,15 +40,11 @@
     <link href="~/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="~/css/style.css" rel="stylesheet">
-
-
+    <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <script src="~/lib/chart/chart.min.js"></script>
     <script src="~/lib/easing/easing.min.js"></script>
     <script src="~/lib/waypoints/waypoints.min.js"></script>
@@ -64,8 +56,7 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/main.js"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
-    <!-- Template Javascript -->
+    <link href="~/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -77,60 +68,59 @@
             </div>
         </div>
         <!-- Spinner End -->
-        <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-light navbar-light">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary">THÀNH BƯỞI</h3>
                 </a>
-                <div class="d-flex align-items-center ms-4 mb-4">
-                    <div class="position-relative">
-                        <img class="rounded-circle" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
-                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                @if (role != "NoRole")
+                {
+                    <div class="d-flex align-items-center ms-4 mb-4">
+                        <div class="position-relative">
+                            <img class="rounded-circle" src="~/img/avt.png" alt="" style="width: 40px; height: 40px;">
+                            <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                        </div>
+                        <div class="ms-3">
+                            <h6 class="mb-0">@user?.Ten</h6>
+                            <span>@role</span>
+                        </div>
                     </div>
-                    <div class="ms-3">
-                        <h6 class="mb-0">@user?.Ten</h6>
-                        <span>@role</span>
+                    <div class="navbar-nav w-100">
+                        @if (!isUser)
+                        {
+                            <a asp-controller="Ve" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Tìm vé</a>
+                            <a asp-controller="VeHuys" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Vé đã hủy</a>
+                        }
+                        <a asp-controller="Booking" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Đặt Vé</a>
+                        <a asp-controller="GuiHang" asp-action="Create" class="nav-item text-light nav-link btn btn-primary mt-4">Gửi Hàng</a>
+                        @if (isUser)
+                        {
+                            <a asp-controller="User" asp-action="Ve" class="nav-item text-light nav-link btn btn-primary mt-4">Vé của tôi</a>
+                            <a asp-controller="User" asp-action="DonHang" class="nav-item text-light nav-link btn btn-primary mt-4">Đơn hàng</a>
+                        }
+                        @if (isAdmin)
+                        {
+                            <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
+                            <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
+                            <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
+                            <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
+                            <a asp-controller="TaiKhoan" asp-action="Index" class="nav-item nav-link"><i class="bi bi-person me-2"></i>Tài Khoản</a>
+                            <a asp-controller="Donhangs" asp-action="Index" class="nav-item nav-link"><i class="bi bi-cart me-2"></i>Đơn hàng</a>
+                            <a asp-controller="Donve" asp-action="Index" class="nav-item nav-link"><i class="bi bi-cart me-2"></i>Vé</a>
+                            <a asp-controller="Chuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Chuyến</a>
+                            <a asp-controller="DoanhThu" asp-action="Index" class="nav-item nav-link"><i class="bi bi-graph-up me-2"></i>Doanh Thu</a>
+                            <a asp-controller="Tintucs" asp-action="Index" class="nav-item nav-link">
+                                <i class="bi bi-newspaper me-2"></i>Tin tức
+                            </a>
+                        }
                     </div>
-                </div>
-                <div class="navbar-nav w-100">
-                    @if (!isUser)
-                    {
-                        <a asp-controller="Ve" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Tìm vé</a>
-                        <a asp-controller="VeHuys" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Vé Hủy</a>
-                    }
-               
-                    <a asp-controller="Booking" asp-action="Index" class="nav-item text-light nav-link btn btn-primary mt-4">Đặt Vé</a>
-                    <a asp-controller="GuiHang" asp-action="Create" class="nav-item text-light nav-link btn btn-primary mt-4">Gửi Hàng</a>
-                    @if (isUser)
-                    {
-                        <a asp-controller="User" asp-action="Ve" class="nav-item text-light nav-link btn btn-primary mt-4">Vé của tôi</a>
-                        <a asp-controller="User" asp-action="DonHang" class="nav-item text-light nav-link btn btn-primary mt-4">Đơn hàng</a>
-
-                    }
-                    @if (isAdmin)
-                    {
-                        <a asp-controller="Xes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Xe</a>
-                        <a asp-controller="LoaiXes" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Loại Xe</a>
-                        <a asp-controller="Tuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Tuyến</a>
-                        <a asp-controller="DiaDiems" asp-action="Index" class="nav-item nav-link"><i class="bi bi-geo-alt me-2"></i>Địa điểm</a>
-                        <a asp-controller="TaiKhoan" asp-action="Index" class="nav-item nav-link"><i class="bi bi-person me-2"></i>Tài Khoản</a>
-                        <a asp-controller="Donhangs" asp-action="Index" class="nav-item nav-link"><i class="bi bi-cart me-2"></i>Đơn hàng</a>
-                        <a asp-controller="Donve" asp-action="Index" class="nav-item nav-link"><i class="bi bi-cart me-2"></i>Đơn Vé</a>
-                        <a asp-controller="Chuyens" asp-action="Index" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Chuyến</a>
-                        <a asp-controller="DoanhThu" asp-action="Index" class="nav-item nav-link"><i class="bi bi-graph-up me-2"></i>Doanh Thu</a>
-                        <a asp-controller="Tintucs" asp-action="Index" class="nav-item nav-link">
-                            <i class="bi bi-newspaper me-2"></i>Tin tức
-                        </a>
-                    }
-                
-                  
-
-                </div>
+                }
             </nav>
         </div>
         <!-- Sidebar End -->
+        <!-- Content Start -->
         <div class="content">
+            <!-- Navbar Start -->
             <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
                 <div class="container">
                     <a href="#" class="sidebar-toggler flex-shrink-0">
@@ -158,7 +148,8 @@
                     </div>
                 </div>
             </nav>
-
+            <!-- Navbar End -->
+            <!-- Alerts Start -->
             @if (TempData["ErrorMessage"] != null)
             {
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -173,6 +164,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             }
+            <!-- Alerts End -->
             @RenderBody()
         </div>
         <!-- Content End -->
@@ -180,15 +172,7 @@
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
-    <!-- JavaScript Libraries -->
-    <script>
-        $(document).ready(function () {
-            $('.sidebar-toggler').click(function () {
-                $('.sidebar, .content').toggleClass('open');
-            });
-        });
-    </script>
-
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 </html>

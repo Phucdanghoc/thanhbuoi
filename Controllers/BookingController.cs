@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Text.Json;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
 using ThanhBuoi.Models.DTO;
@@ -89,18 +91,20 @@ namespace ThanhBuoi.Controllers
             try
             {
                 List<string> codeTickets = new();
+                List<Ve> ves = new List<Ve>();
                 foreach (var ve in veList)
                 {
                     var existingVe = await _context.Ves.Include(c => c.Chuyen).ThenInclude(x => x.Xe).FirstOrDefaultAsync(v => v.Id == ve.Id);
                     if (existingVe != null)
                     {
                         UpdateVeDetails(existingVe, ve);
-                        _context.Chuyens.Update(existingVe.Chuyen);
-                        _context.Ves.Update(existingVe);
+                     /*   _context.Chuyens.Update(existingVe.Chuyen);
+                        _context.Ves.Update(existingVe);*/
                         codeTickets.Add(existingVe.MaVe);
+                        ves.Add(existingVe);
                     }
                 }
-                await _context.SaveChangesAsync();
+                HttpContext.Session.SetString("ListVe", JsonSerializer.Serialize(ves));
                 return RedirectToAction("Payment", "Booking", new { codeTickets });
             }
             catch (Exception e)
@@ -136,9 +140,18 @@ namespace ThanhBuoi.Controllers
         [HttpGet]
         public async Task<IActionResult> Payment(List<string> codetickets)
         {
+            var VesJson = HttpContext.Session.GetString("ListVe");
+            List<Ve> veList = new List<Ve>();
+            if (VesJson != null)
+            {
+                veList = JsonSerializer.Deserialize<List<Ve>>(VesJson);
+            }
+            else
+            {
+                ViewBag.SessionValue = "Session is empty";
+            }
             try
             {
-                var veList = await GetVesByMaVe(codetickets);
                 if (veList.Count == 0)
                 {
                     TempData["ErrorMessage"] = "Không tìm thấy thông tin vé.";
@@ -146,6 +159,10 @@ namespace ThanhBuoi.Controllers
                 }
 
                 var firstChuyenId = veList.First().Chuyen.Id;
+                var chuyen = await _context.Chuyens
+                      .Include(x => x.Xe)
+                          .ThenInclude(l => l.LoaiXe)
+                      .FirstOrDefaultAsync(c => c.Id == firstChuyenId);
                 if (veList.Any(ve => ve.Chuyen.Id != firstChuyenId))
                 {
                     TempData["ErrorMessage"] = "Vé không thuộc cùng một chuyến.";
@@ -156,7 +173,7 @@ namespace ThanhBuoi.Controllers
                     TempData["ErrorMessage"] = "Một hoặc nhiều vé đã được thanh toán.";
                     return RedirectToAction("Index", "Booking");
                 }
-
+                ViewBag.Chuyen = chuyen;
                 return View(veList);
             }
             catch (Exception e)
@@ -194,6 +211,10 @@ namespace ThanhBuoi.Controllers
         [HttpPost]
         public async Task<IActionResult> Payment(string email, string paymentMethod, List<int> codetickets, string mota)
         {
+            if (string.IsNullOrEmpty(email))
+            {
+
+            }
             if (!codetickets.Any())
             {
                 TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
@@ -212,8 +233,48 @@ namespace ThanhBuoi.Controllers
                 TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
                 return RedirectToAction("Index", "Home");
             }
-
+            var VesJson = HttpContext.Session.GetString("ListVe");
+            List<Ve> veList = new List<Ve>();
+            if (VesJson != null)
+            {
+                veList = JsonSerializer.Deserialize<List<Ve>>(VesJson);
+            }
+            else
+            {
+                TempData["SuccessMessage"] = "Vé đã được thanh toán";
+                return View();
+            }
             var donhang = await CreateDonHangAsync(email, paymentMethod, mota, tickets);
+
+            foreach (var ve in veList)
+            {
+                Ve currentve = await _context.Ves.Include(c => c.Chuyen).FirstOrDefaultAsync
+                    (c => c.Id == ve.Id);
+                UpdateVeDetails(currentve, ve);
+                currentve.TrangThai = TrangThaiVe.Booked;
+                currentve.Email = email;
+                currentve.phuongthucthanhtoan = paymentMethod;
+
+                var donhangChitiet = new DonHangChiTiet
+                {
+                    DonHang = donhang,
+                    Ve = currentve,
+                    Tien = ve.Tien
+                };
+                _context.Ves.Update(currentve);
+                _context.DonHangChiTiets.Add(donhangChitiet);
+
+              
+            }
+
+            
+
+            await _context.SaveChangesAsync();
+
+
+
+        
+
             double cost = tickets.Sum(t => t.Tien);
             await _context.SaveChangesAsync();
 
@@ -222,23 +283,36 @@ namespace ThanhBuoi.Controllers
                 var momoPaymentResponse = await _momoServices.Pay(new PaymentDTO
                 {
                     cost = cost.ToString(),
-                    url = "https://localhost:7273/Ve/Detail/" + donhang.Id
+                    url = "https://localhost:7273/DonVe/Details/" + donhang.Id
                 });
 
                 donhang.RequestId = momoPaymentResponse.RequestId;
                 donhang.Id_momoRes = momoPaymentResponse.OrderId;
                 _context.DonHangs.Update(donhang);
                 await _context.SaveChangesAsync();
+                if (!string.IsNullOrEmpty(email))
+                {
+                    var emailBody = _emailService.makeBodyTicketBooked(tickets);
+                    await _emailService.SendEmailAsync(email, "Xác nhận vé xe", emailBody);
+                }
+                HttpContext.Session.Remove("ListVe");
+
                 return Redirect(momoPaymentResponse.PayUrl);
             }
             else
             {
-                return RedirectToAction("Detail", "Ve", new { id = donhang.Id });
+                HttpContext.Session.Remove("ListVe");
+                if (!string.IsNullOrEmpty(email))
+                {
+                    var emailBody = _emailService.makeBodyTicketBooked(tickets);
+                    await _emailService.SendEmailAsync(email, "Xác nhận vé xe", emailBody);
+                }
+                return RedirectToAction("Details", "DonVe", new { id = donhang.Id });
             }
 
         }
-
-        private async Task<List<Ve>> GetTicketsByIds(List<int> ticketIds)
+       
+    private async Task<List<Ve>> GetTicketsByIds(List<int> ticketIds)
         {
             return await _context.Ves
                 .Include(c => c.Chuyen).ThenInclude(x => x.Xe).ThenInclude(l => l.LoaiXe)
@@ -253,11 +327,11 @@ namespace ThanhBuoi.Controllers
             double cost = tickets.Sum(t => t.Tien);
             var donhang = new DonHang
             {
-                email = email,
+                Email = email,
                 TaiKhoan = currentUser,
                 PhuongThucThanhToan = paymentMethod,
                 Tien = cost,
-                MaDon = $"{tickets[0].Chuyen.Id}{int.Parse(DateTime.Now.ToString("MMddHHmmss"))}",
+                MaDon = $"DV{tickets[0].Chuyen.Id}{int.Parse(DateTime.Now.ToString("MMddHHmmss"))}",
                 NgayTao = DateTime.Now,
                 Trangthai = TrangThaiDonHang.Payment,
                 Mota = mota
@@ -265,28 +339,7 @@ namespace ThanhBuoi.Controllers
 
 
 
-            foreach (var ve in tickets)
-            {
-                ve.TrangThai = TrangThaiVe.Booked;
-                ve.email = email;
-
-                var donhangChitiet = new DonHangChiTiet
-                {
-                    DonHang = donhang,
-                    Ve = ve,
-                    Tien = ve.Tien
-                };
-
-                _context.DonHangChiTiets.Add(donhangChitiet);
-                _context.Ves.Update(ve);
-            }
-
-            if (!string.IsNullOrEmpty(email))
-            {
-                var emailBody = _emailService.makeBodyTicketBooked(tickets);
-                await _emailService.SendEmailAsync(email, "Xác nhận vé xe", emailBody);
-            }
-
+           
             return donhang;
         }
 
@@ -353,7 +406,7 @@ namespace ThanhBuoi.Controllers
             {
                 if (chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi)
                 {
-                    if (item.Ghe.STT <= 4) listLeft.Add(item);
+                    if (item.Ghe.STT <= 2) listLeft.Add(item);
                     else listRight.Add(item);
                 }
                 else

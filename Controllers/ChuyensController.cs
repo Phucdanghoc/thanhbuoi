@@ -50,13 +50,13 @@ namespace ThanhBuoi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string ngayle, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, double Gia)
+        public async Task<IActionResult> Create(string GiaSukienID, int XeId, int TuyenId, string DiemDon, DateTime ThoiGianDi, DateTime ThoiGianDen, double Gia)
         {
             try
             {
                 var xe = await _context.Xes.Include(x => x.soDoGhes).FirstOrDefaultAsync(x => x.Id == XeId);
                 var tuyen = await _context.Tuyens.FirstOrDefaultAsync(m => m.Id == TuyenId);
-                double giatang = _listGiaTang[ngayle];
+                double giatang = _listGiaTang[GiaSukienID];
 
                 var chuyen = new Chuyen
                 {
@@ -65,10 +65,11 @@ namespace ThanhBuoi.Controllers
                     Tuyen = tuyen,
                     DiemDon = DiemDon,
                     ThoiGianDi = ThoiGianDi,
+                    ThoiGianDen = ThoiGianDen,
                     GiaTang = giatang,
                     Trangthai = TrangThaiChuyen.WAITING,
                     Gia = Gia,
-                    Ngayle = ngayle
+                    Ngayle = GiaSukienID
                 };
 
                 _context.Add(chuyen);

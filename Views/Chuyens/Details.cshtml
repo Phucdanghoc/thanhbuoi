@@ -4,35 +4,89 @@
     ViewData["Title"] = "Chuyến Details";
 }
 
-<div class="container mt-4">
-    <div class="card mb-4 bg-light rounded">
-        <div class="card-header bg-primary p-2">
-            <h4 class="card-title text-white">Thông tin của tuyến </h4>
+<style>
+    /* Custom CSS for card and hover effects */
+    .card-custom {
+        border: none;
+        transition: all 0.3s;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
 
+        .card-custom:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-custom .card-header {
+            background-color: #007bff;
+            color: white;
+            padding: 1rem;
+            border-radius: 0.25rem 0.25rem 0 0;
+        }
+
+        .card-custom .card-footer {
+            background-color: #f8f9fa;
+            border-top: none;
+            padding: 1rem;
+            border-radius: 0 0 0.25rem 0.25rem;
+        }
+
+    .special-text {
+        color: red;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+        .card-body .row {
+            margin-bottom: 1rem;
+        }
+
+            .card-body .row .col-sm-3 {
+                font-weight: bold;
+            }
+
+            .card-body .row .col-sm-9 {
+                font-weight: normal;
+            }
+</style>
+
+<div class="container mt-4">
+    <div class="card card-custom mb-4">
+        <div class="card-header">
+            <h4 class="card-title mb-0 text-white">Thông tin chuyến đi</h4>
         </div>
         <div class="card-body">
-            <dl class="row">
-                <dt class="col-sm-3">Chuyến:</dt>
-                <dd class="col-sm-9">@Model.Ten</dd>
-
-                <dt class="col-sm-3">Điểm đón:</dt>
-                <dd class="col-sm-9">@Model.DiemDon</dd>
-
-                <dt class="col-sm-3">Thời gian đi:</dt>
-                <dd class="col-sm-9">@Model.ThoiGianDi</dd>
-
-                <dt class="col-sm-3">Giá:</dt>
-                <dd class="col-sm-9">@Model.Gia.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</dd>
-            </dl>
+            <div class="row mb-3">
+                <div class="col-sm-3">Chuyến:</div>
+                <div class="col-sm-9">@Model.Ten</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">Điểm đón:</div>
+                <div class="col-sm-9">@Model.DiemDon</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3">Thời gian đi:</div>
+                <div class="col-sm-9">@Model.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-3 special-text">Giá vé:</div>
+                <div class="col-sm-9 special-text">
+                    @Model.Gia.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))
+                </div>
+            </div>
         </div>
-        <div class="card-footer">
-            <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a>
-            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        <div class="card-footer d-flex justify-content-between align-items-center">
+            <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
         </div>
     </div>
 
-    <div class="container mt-4 bg-light rounded-1">
-        <h3 class="my-4 p-3">Danh sách vé</h3>
+    <div class="container mt-4 bg-light rounded">
+        <div class="card-header bg-primary p-2">
+            <h4 class="card-title text-white">Danh sách vé của chuyến</h4>
+        </div>
         <div class="row mt-4 mb-4">
             <div class="col-md-6 offset-md-3">
                 <form id="searchForm" method="get">
@@ -44,11 +98,11 @@
             </div>
         </div>
 
-        <div class="row row-cols-1 row-cols-md-4 g-4 bg-light rounded-1">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
             @foreach (var ve in ViewBag.listVe)
             {
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card card-custom h-100">
                         <div class="card-body">
                             @if (ve.MaVe == null)
                             {
@@ -63,7 +117,9 @@
                             {
                                 <p class="card-text">Tên: @ve.Ten</p>
                                 <p class="card-text">CMND: @ve.CMND</p>
-                            }else{
+                            }
+                            else
+                            {
                                 <p class="card-text">Ghế trống</p>
                             }
                         </div>
@@ -71,7 +127,6 @@
                             @if (ve.TrangThai == TrangThaiVe.Booked)
                             {
                                 <a asp-controller="Ve" asp-action="Detail" asp-route-id="@ve.Id" class="btn btn-primary">Chi tiết vé</a>
-
                             }
                         </div>
                     </div>
@@ -79,5 +134,4 @@
             }
         </div>
     </div>
-
 </div>

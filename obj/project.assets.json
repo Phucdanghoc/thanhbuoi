@@ -8162,11 +8162,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\ThanhBuoi.csproj",
+      "projectUniqueName": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\ThanhBuoi.csproj",
       "projectName": "ThanhBuoi",
-      "projectPath": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\ThanhBuoi.csproj",
+      "projectPath": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\ThanhBuoi.csproj",
       "packagesPath": "C:\\Users\\lep61\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\obj\\",
+      "outputPath": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\lep61\\AppData\\Roaming\\NuGet\\NuGet.Config",

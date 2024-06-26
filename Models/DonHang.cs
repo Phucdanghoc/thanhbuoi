@@ -27,7 +27,6 @@ namespace ThanhBuoi.Models
 
         public double Tien { get; set; }
 
-
         public double TienPhaiTra { get; set; }
          
         [StringLength(255)]
@@ -40,7 +39,7 @@ namespace ThanhBuoi.Models
         public TrangThaiDonHang? Trangthai { get; set; }
 
         public DateTime NgayTao { get; set; }
-        public string? email { get; set; }
+        public string? Email { get; set; }
         public ICollection<DonHangChiTiet> DonHangChiTiets { get; set; }
     }
 }

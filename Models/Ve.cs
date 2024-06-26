@@ -31,7 +31,7 @@ namespace ThanhBuoi.Models
 
         public double Tien { get; set; }
 
-        public string? email {  get; set; }
+        public string? Email {  get; set; }
 
         [StringLength(255)]
         public string? Ten { get; set; }
@@ -50,8 +50,6 @@ namespace ThanhBuoi.Models
         public TrangThaiVe  TrangThai { get; set; }
 
         public int Hanhli { get; set; }
-
-        public bool isCancel { get; set; }
 
         public DateTime NgayTao { get; set; }
 

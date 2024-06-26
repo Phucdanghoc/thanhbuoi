@@ -21,7 +21,7 @@ namespace ThanhBuoi.Controllers
         // GET: Xes
         public async Task<IActionResult> Index()
         {
-            var xes = await _context.Xes.Include(x => x.LoaiXe).ToListAsync();
+            var xes = await _context.Xes.Include(x => x.LoaiXe).Include(c=>c.Chuyens).ToListAsync();
             return View(xes);
         }
 
@@ -64,7 +64,6 @@ namespace ThanhBuoi.Controllers
             {
                 String SoGhe = xe.LoaiXe.Ma.Split("-")[0];
                 String LoaiGhe = xe.LoaiXe.Ma.Split("-")[1];
-                xe.TrongTaiHang = 10 * int.Parse(SoGhe) + 100;
                 SoDoGhe sdg = new SoDoGhe
                 {
                     LoaiGhe = LoaiGhe,
@@ -84,7 +83,7 @@ namespace ThanhBuoi.Controllers
 
                     };
                     _context.Tangs.Add(tang);
-                    for (int i = 0; i < int.Parse(SoGhe) / 8; i++)
+                    for (int i = 0; i < int.Parse(SoGhe) / 4; i++)
                     {
                         Hang hang = new Hang
                         {
@@ -93,7 +92,7 @@ namespace ThanhBuoi.Controllers
                             Tang = tang
                         };
                         _context.Hangs.Add(hang);
-                        for (int j = 0; j < 8; j++)
+                        for (int j = 0; j < 4; j++)
                         {
                             Ghe ghe = new Ghe
                             {
