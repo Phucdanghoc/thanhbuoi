@@ -133,8 +133,9 @@ namespace ThanhBuoi.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
                 user.Ten = Input.Ten;
+                user.EmailConfirmed = true;
                 await _userManager.AddToRoleAsync(user, "USER");
-
+                await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -153,8 +154,8 @@ namespace ThanhBuoi.Areas.Identity.Pages.Account
                      pageHandler: null,
                      values: new { area = "Identity", userId = user.Id, code = encodedToken, returnUrl = returnUrl },
                      protocol: Request.Scheme);
-                    await _emaService.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(confirmationLink)}'>clicking here</a>.");
+                    await _emaService.SendEmailAsync(Input.Email, "Xác thực tài khoàn",
+                        $"Nhấn vào <a href='{HtmlEncoder.Default.Encode(confirmationLink)}'>đây</a> để xác thực tài khoản của Nhà Xe Thành Bưởi.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

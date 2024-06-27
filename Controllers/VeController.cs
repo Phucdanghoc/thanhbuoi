@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ThanhBuoi.Data;
 using ThanhBuoi.Models;
@@ -10,10 +11,12 @@ namespace ThanhBuoi.Controllers
     {
         private readonly DataContext _context;
         private readonly IEmailService _emailService;
+        private readonly UserManager<TaiKhoan> _userManager;
 
-        public VeController(DataContext dataContext, IEmailService emailService)
+        public VeController(DataContext dataContext, IEmailService emailService,UserManager<TaiKhoan> userManager)
         {
             _context = dataContext;
+            _userManager = userManager;
             _emailService = emailService;
         }
 
@@ -33,6 +36,7 @@ namespace ThanhBuoi.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
+
             var ve = await _context.Ves
                                    .Include(v => v.Chuyen).ThenInclude(c => c.Xe).ThenInclude(l => l.LoaiXe)
                                    .Include(v => v.Ghe).ThenInclude(h => h.Hang)
@@ -41,6 +45,10 @@ namespace ThanhBuoi.Controllers
             if (ve == null)
             {
                 return NotFound();
+            }
+            else
+            {
+
             }
 
             return View(ve);
@@ -66,6 +74,7 @@ namespace ThanhBuoi.Controllers
         public async Task<ActionResult> Cancel(int id)
         {
             var ve = await _context.Ves
+                .Include(t => t.TaiKhoan)
                 .Include(v => v.Chuyen).ThenInclude(c => c.Xe).ThenInclude(l => l.LoaiXe)
                 .Include(v => v.Ghe)
                 .FirstOrDefaultAsync(v => v.Id == id);
@@ -78,7 +87,7 @@ namespace ThanhBuoi.Controllers
 
             try
             {
-                DateTime futureTime = DateTime.Now.AddHours(24);
+                DateTime futureTime = DateTime.Now.AddHours(1);
                 if (ve.Chuyen.ThoiGianDi < futureTime)
                 {
                     TempData["ErrorMessage"] = "Vé không thể hủy bây giờ";
@@ -88,6 +97,23 @@ namespace ThanhBuoi.Controllers
                 string phuongthucthanhtoan = ve.phuongthucthanhtoan;
                 double refund = Math.Round(ve.Tien * 0.7);
                 string body = _emailService.makeBodyTicketCancel(ve, refund);
+
+                var donHangChiTiet = await _context.DonHangChiTiets
+                    .Include(dhct => dhct.Ve)
+                    .Include(dhct => dhct.DonHang)
+                    .FirstOrDefaultAsync(dhct => dhct.Ve.MaVe == ve.MaVe);
+
+                if (donHangChiTiet == null || donHangChiTiet.DonHang == null)
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy đơn hàng liên quan để hủy.";
+                    return RedirectToAction("Details", "Chuyens", new { id = ve.Chuyen.Id });
+                }
+
+                var donHang = await _context.DonHangs
+                    .Include(d => d.DonHangChiTiets)
+                    .FirstOrDefaultAsync(d => d.Id == donHangChiTiet.DonHang.Id);
+
+                donHang.Tien -= ve.Tien;
 
                 var veHuy = new VeHuy
                 {
@@ -108,17 +134,16 @@ namespace ThanhBuoi.Controllers
                 ve.MaVe = null;
                 ve.TaiKhoan = null;
                 ve.Hanhli = 0;
+                ve.DiemDon = "";
                 ve.Tien = 0;
                 ve.phuongthucthanhtoan = null;
                 ve.Email = null;
 
                 _context.VeHuys.Add(veHuy);
-                await _context.SaveChangesAsync();
-
+                _context.DonHangChiTiets.Remove(donHangChiTiet);
                 _context.Ves.Update(ve);
                 await _context.SaveChangesAsync();
 
-                // Sending email after updating the database
                 await _emailService.SendEmailAsync(veHuy.Email, "Xác nhận hủy vé", body);
 
                 TempData["SuccessMessage"] = "Đã hủy vé";
@@ -130,5 +155,6 @@ namespace ThanhBuoi.Controllers
                 return RedirectToAction("Details", "Chuyens", new { id = ve.Chuyen.Id });
             }
         }
+
     }
 }

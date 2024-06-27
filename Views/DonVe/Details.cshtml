@@ -5,97 +5,94 @@
 }
 
 <style>
-    .highlight {
-        color: #ff5733; /* Highlight color */
-        font-weight: bold;
+    .bill-container {
+        margin-top: 10px;
     }
 
-    .card-details {
+    .bill-title {
+        color: #007bff;
+        text-align: center;
+    }
+
+    .bill-card {
         border: 1px solid #ddd;
         border-radius: 0.25rem;
-        transition: box-shadow 0.3s ease;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
     }
 
-        .card-details:hover {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .bill-card:hover {
+            transform: scale(1.02); /* Enlarge on hover */
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.3);
         }
 
-    .btn-primary:hover {
+    .btn-primary {
         background-color: #007bff;
         border-color: #007bff;
     }
 
-    .btn-primary:focus,
-    .btn-primary.focus {
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
-    }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
 
-    .btn-secondary:hover {
+    .btn-secondary {
         background-color: #6c757d;
         border-color: #6c757d;
     }
 
-    .btn-secondary:focus,
-    .btn-secondary.focus {
-        box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
-    }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #545b62;
+        }
 
     .img-payment {
-        max-width: 100px;
+        width: 100px;
+    }
+
+    .highlight {
+        color: #ff5733;
+        font-weight: bold;
     }
 </style>
 
-<div class="container mt-5">
-    <div class="bill-container bg-light p-4 rounded shadow-sm">
+<div class="bg-light rounded m-3 p-3">
+    <div class="bill-container">
         <h2 class="bill-title">Chi tiết đơn vé</h2>
 
-        <div class="card bill-card shadow-sm">
-            <div class="card-body">
-                <div class="bill-details">
-                    <h5>Thông tin đơn hàng</h5>
-                    <p><strong>Trạng thái:</strong> @Model.Trangthai</p>
-                    <p><strong>Ngày tạo:</strong> @Model.NgayTao.ToString("dd/MM/yyyy")</p>
-                    <p><strong>Tổng tiền:</strong> @Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="bill-items">
-            <h3 class="my-4">Danh sách hàng</h3>
-            @if (ViewBag.ChiTietVe != null)
+        @if (ViewBag.ChiTietVe != null)
+        {
+            @foreach (DonHangChiTiet ve in ViewBag.ChiTietVe)
             {
-                @foreach (DonHangChiTiet ve in ViewBag.ChiTietVe)
-                {
-                    <div class="card bill-card shadow-sm mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5 class="card-title">Tên: @ve.Ve.Ten</h5>
-                                    <p><strong>Mã vé:</strong> @ve.Ve.MaVe</p>
-                                    <p><strong>Người gửi:</strong> @ve.Ve.Ten</p>
-                                    <p><strong>Email:</strong> @ve.Ve.Email</p>
-                                    <p><strong>CMND:</strong> @ve.Ve.CMND</p>
-                                    <p><strong>Số điện thoại người gửi:</strong> @ve.Ve.Sdt</p>
-                                </div>
-                                <div class="col-md-6">
-                                    <p><strong>Phương thức thanh toán:</strong> @ve.Ve.phuongthucthanhtoan</p>
-                                    <p><strong>Trạng thái:</strong> @ve.Ve.TrangThai</p>
-                                    <p><strong>Ngày tạo:</strong> @ve.Ve.NgayTao.ToString("dd/MM/yyyy")</p>
-                                    <p><strong>Giá vé:</strong> <span class="highlight">@ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
-                                    <p><strong>Ghế:</strong> @ve.Ve.Ghe?.Id</p>
-                                    <p><strong>Chuyến:</strong> @ve.Ve.Chuyen?.Ten</p>
-                                    <a class="btn btn-primary mt-3" asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Ve.Id">Chi tiết</a>
-                                </div>
+                <div class="card bill-card shadow-sm">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="card-title">Tên: @ve.Ve.Ten</h5>
+                                <p><strong>Mã vé:</strong> @ve.Ve.MaVe</p>
+                                <p><strong>Người gửi:</strong> @ve.Ve.Ten</p>
+                                <p><strong>Email:</strong> @ve.Ve.Email</p>
+                                <p><strong>CMND:</strong> @ve.Ve.CMND</p>
+                                <p><strong>Số điện thoại người gửi:</strong> @ve.Ve.Sdt</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Phương thức thanh toán:</strong> @ve.Ve.phuongthucthanhtoan</p>
+                                <p><strong>Trạng thái:</strong> @ve.Ve.TrangThai</p>
+                                <p><strong>Ngày tạo:</strong> @ve.Ve.NgayTao.ToString("dd/MM/yyyy")</p>
+                                <p><strong>Giá vé:</strong> <span class="highlight">@ve.Ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
+                                <p><strong>Ghế:</strong> @ve.Ve.Ghe?.Id</p>
+                                <p><strong>Chuyến:</strong> @ve.Ve.Chuyen?.Ten</p>
+                                <a class="btn btn-primary mt-3" asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Ve.Id">Chi tiết</a>
                             </div>
                         </div>
                     </div>
-                }
+                </div>
             }
-            else
-            {
-                <p>Không có hàng trong đơn hàng này.</p>
-            }
-        </div>
+        }
+        else
+        {
+            <p>Không có hàng trong đơn hàng này.</p>
+        }
 
         <div class="row mt-4">
             <div class="col-md-6">
@@ -122,7 +119,7 @@
                         <label class="btn">
                             <input type="radio" id="cash" name="paymentMethod" value="cash" @(Model.PhuongThucThanhToan == "cash" ? "checked" : "") disabled>
                             Tiền mặt
-                            <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="img-fluid mt-2" style="width: 100px;">
+                            <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="img-payment">
                         </label>
                     </div>
                 </div>

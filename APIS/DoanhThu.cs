@@ -96,20 +96,29 @@ namespace ThanhBuoi.APIS
             {
                 // Get total from DonHang
                 var donhangs = _context.DonHangs
-                    .Where(d => d.NgayTao.Date == date.Date)
-                    .ToList();
-                double totalDonHang = donhangs.Sum(e => e.Tien);
+                 .Include(d => d.DonHangChiTiets)
+                     .ThenInclude(dhct => dhct.Ve)
+                 .Where(d => d.NgayTao.Date == date.Date && d.DonHangChiTiets.Any(dhct => dhct.Ve == null))
+                 .ToList();
 
+                double totalDonHang = donhangs.Sum(e => e.Tien);
+                
                 // Get total from Chuyen
-                var chuyens = _context.Chuyens
-                    .Where(d => d.ThoiGianDi.Date == date.Date)
-                    .ToList();
-                double totalChuyen = _context.Ves.Where(v => v.NgayTao.Date == date.Date && v.TrangThai == Models.TrangThaiVe.Booked).ToList().Sum(v => v.Tien);
-                double combinedTotal = totalDonHang + totalChuyen;
+                var donves = _context.DonHangs
+                              .Include(d => d.DonHangChiTiets)
+                                  .ThenInclude(dhct => dhct.HangGui)
+                              .Where(d => d.NgayTao.Date == date.Date && d.DonHangChiTiets.Any(dhct => dhct.HangGui == null))
+                              .ToList();
+                double totalDonVe = donves.Sum(e => e.Tien);
+                var donvehuys = _context.VeHuys.Where(c => c.ngaytao.Date == date.Date).ToList();
+
+                double totalDonVeHuy = Math.Round((donvehuys.Sum(e => e.hoantien) / 0.7)*0.3);
+                double combinedTotal = totalDonHang + totalDonVe + totalDonVeHuy;
                 var dailyTotal = new DoanhTheoNgay
                 {
                     totalHang = totalDonHang,
-                    totalVe = totalChuyen,
+                    totalVe = totalDonVe,
+                    totalHuy = totalDonVeHuy,
                     datetime = date
                 };
 

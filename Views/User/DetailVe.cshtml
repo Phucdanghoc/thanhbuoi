@@ -63,7 +63,6 @@
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Mã vé: @Model.MaVe</h6>
                     <p><strong>Giá vé:</strong> <span class="text-danger">@Model.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
-                    <p><strong>Điểm đón:</strong> @Model.DiemDon</p>
                     <p><strong>Hành lý:</strong> @Model.Hanhli kg</p>
                     <p><strong>Ngày Đặt:</strong> @Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</p>
                 </div>
@@ -79,6 +78,8 @@
                 <div class="card-body">
                     <p><strong>Chuyến:</strong> @Model.Chuyen.Ten.Split("-")[0] - @Model.Chuyen.Ten.Split("-")[1]</p>
                     <p><strong>Ngày đi:</strong> @Model.Chuyen.ThoiGianDi.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Ngày đến (dự kiến):</strong> @Model.Chuyen.ThoiGianDen.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p><strong>Điểm đón:</strong> @Model.Chuyen.DiemDon</p>
                     <p><strong>Xe:</strong> @Model.Chuyen.Xe.Ten</p>
                 </div>
             </div>
@@ -105,7 +106,7 @@
                             </div>
                             <div class="col-md-6 text-end">
                                 @{
-                                    DateTime futureTime = DateTime.Now.AddHours(24);
+                                    DateTime futureTime = DateTime.Now.AddHours(1);
                                 }
                                 @if (Model.Chuyen.ThoiGianDi > futureTime)
                                 {

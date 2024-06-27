@@ -3,6 +3,106 @@
 @{
     ViewData["Title"] = "Đặt vé";
 }
+    <style>
+        .ticket-item {
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+            .ticket-item:hover {
+                transform: scale(1.05);
+            }
+
+        .card {
+            transition: box-shadow 0.3s ease-in-out;
+            border-radius: 8px;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+            .card.selected {
+                border: 2px solid blue;
+            }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        font-size: 1.1rem; /* Adjust the font size here */
+    }
+
+    .card-title {
+        font-size: 1.5rem; /* Adjust the card title font size */
+        margin-top: 10px;
+    }
+
+    .card-text {
+        font-size: 1rem; /* Adjust the card text font size */
+        color: #6c757d;
+        margin-bottom: 5px;
+    }
+
+        .img-small {
+            margin-bottom: 10px;
+        }
+
+        .custom-control-label::before,
+        .custom-control-label::after {
+            top: 0.1rem;
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+
+        .custom-switch .custom-control-label::before {
+            left: -2.25rem;
+        }
+
+        .custom-switch .custom-control-label::after {
+            top: 0.25rem;
+            left: -2.5rem;
+        }
+
+        .custom-switch .custom-control-label::after {
+            background-color: #28a745;
+        }
+
+        .pagination {
+            justify-content: center;
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .page-link {
+            color: #007bff;
+        }
+
+            .page-link:hover {
+                color: #0056b3;
+            }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+            .btn-primary:focus,
+            .btn-primary.focus {
+                box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+            }
+    </style>
+
 
 <div class="container">
     <div class="row justify-content-center bg-light rounded mt-5 m-2">
@@ -14,14 +114,14 @@
                     <p class="card-text"><strong>Thời gian đi:</strong> @Model.ThoiGianDi.ToString("dd/MM/yyyy ")</p>
                     <p class="card-text"><strong>Tuyến:</strong> @Model.Tuyen.Ten</p>
                     <p class="card-text"><strong>Xe:</strong> @Model.Xe.Ten - Biển số: @Model.Xe.BienSo</p>
-                    <p class="card-text"><strong>Loại xe :</strong> @(Model.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi ?  "Ngồi" : "Giường nằm ")</p>
+                    <p class="card-text"><strong>Loại xe:</strong> @(Model.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi ? "Ngồi" : "Giường nằm")</p>
                 </div>
             </div>
             <div class="input-group mb-3 mt-3">
                 <h4>Danh sách vé</h4>
                 <div class="custom-control custom-switch ms-5">
                     <input type="checkbox" class="custom-control-input" id="filterSwitch">
-                    <label class="custom-control-label" for="filterSwitch">Các ghế trống</label>
+                    <label class="custom-control-label" for="filterSwitch">Chỉ hiển thị ghế trống</label>
                 </div>
             </div>
             <div class="mb-3">
@@ -33,7 +133,6 @@
                 <div class="mt-4">
                     @if(Model.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi)
                     {
-                        
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>Dãy số 1</h3>
@@ -43,29 +142,28 @@
                                 <div class="col-md-3 mb-3 ticket-item text-center" data-id="@ve.Id" data-mave="@ve.MaVe">
                                     @if (ve.MaVe == null)
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
                                             <div class="card text-black">
                                                 <div class="card-body">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small ">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small">
                                                     </div>
-                                                        <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong>@ve.Ghe.STT</p>
-                                                        <h6 class="card-title text-black">Trống</h6>
-
+                                                    <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong> @ve.Ghe.STT</p>
+                                                    <h6 class="card-title text-black">Trống</h6>
                                                 </div>
                                             </div>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
-                                            <div class="card bg-secondary text-white">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
+                                            <div class="card bg-secondary text-white selected">
                                                 <div class="card-body bg-opacity-50">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small ">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small">
                                                     </div>
-                                                        <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong>@ve.Ghe.STT</p>
-                                                        <h6 class="card-title text-white">Đã đặt</h6>
+                                                    <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong> @ve.Ghe.STT</p>
+                                                    <h6 class="card-title text-white">Đã đặt</h6>
                                                 </div>
                                             </div>
                                         </a>
@@ -82,29 +180,28 @@
                                 <div class="col-md-3 mb-3 ticket-item text-center" data-id="@ve.Id" data-mave="@ve.MaVe">
                                     @if (ve.MaVe == null)
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
                                             <div class="card text-black">
                                                 <div class="card-body">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small ">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small">
                                                     </div>
-                                                        <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong> @ve.Ghe.STT</p>
-                                                        <h6 class="card-title text-black">Trống</h6>
-
+                                                    <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong> @ve.Ghe.STT</p>
+                                                    <h6 class="card-title text-black">Trống</h6>
                                                 </div>
                                             </div>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
-                                            <div class="card bg-secondary text-white">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
+                                            <div class="card bg-secondary text-white selected">
                                                 <div class="card-body bg-opacity-50">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small ">
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/5102/5102957.png" width="40" height="40" alt="" title="" class="img-small">
                                                     </div>
                                                     <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Ghế</strong> @ve.Ghe.STT</p>
-                                                        <h6 class="card-title text-white">Đã đặt</h6>
+                                                    <h6 class="card-title text-white">Đã đặt</h6>
                                                 </div>
                                             </div>
                                         </a>
@@ -121,30 +218,28 @@
                             </div>
                             @foreach (var ve in ViewBag.FirstHalfVes)
                             {
-
                                 <div class="col-md-4 mb-3 ticket-item text-center" data-id="@ve.Id" data-mave="@ve.MaVe">
                                     @if (ve.MaVe == null)
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
                                             <div class="card text-black">
                                                 <div class="card-body">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small ">
+                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small">
                                                     </div>
                                                     <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong> @ve.Ghe.STT</p>
                                                     <h6 class="card-title text-black">Trống</h6>
-
                                                 </div>
                                             </div>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
-                                            <div class="card bg-secondary text-white">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
+                                            <div class="card bg-secondary text-white selected">
                                                 <div class="card-body bg-opacity-50">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small ">
+                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small">
                                                     </div>
                                                     <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong> @ve.Ghe.STT</p>
                                                     <h6 class="card-title text-white">Đã đặt</h6>
@@ -164,28 +259,27 @@
                                 <div class="col-md-4 mb-3 ticket-item text-center" data-id="@ve.Id" data-mave="@ve.MaVe">
                                     @if (ve.MaVe == null)
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
                                             <div class="card text-black">
                                                 <div class="card-body">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small ">
+                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small">
                                                     </div>
-                                                    <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong>@ve.Ghe.STT</p>
+                                                    <p class="card-text text-primary"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong> @ve.Ghe.STT</p>
                                                     <h6 class="card-title text-black">Trống</h6>
-
                                                 </div>
                                             </div>
                                         </a>
                                     }
                                     else
                                     {
-                                        <a href="javascript:void(0)" class="text-decoration-none" onclick="selectTicket('@ve.Id')">
-                                            <div class="card bg-secondary text-white">
+                                        <a href="javascript:void(0)" class="text-decoration-none">
+                                            <div class="card bg-secondary text-white selected">
                                                 <div class="card-body bg-opacity-50">
                                                     <div class="col-12 d-flex justify-content-center align-items-center">
-                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small ">
+                                                        <img src="~/img/bed.png" width="50" height="50" alt="" title="" class="img-small">
                                                     </div>
-                                                    <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong>@ve.Ghe.STT</p>
+                                                    <p class="card-text text-white"><strong>Hàng</strong> @ve.Ghe.Hang.STT - <strong>Giường</strong> @ve.Ghe.STT</p>
                                                     <h6 class="card-title text-white">Đã đặt</h6>
                                                 </div>
                                             </div>
@@ -197,8 +291,6 @@
                     }
                 </div>
             </form>
-
-
         </div>
     </div>
 </div>
@@ -241,9 +333,4 @@
             });
         });
     </script>
-    <style>
-        .card.selected {
-            border: 2px solid blue;
-        }
-    </style>
 }

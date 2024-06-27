@@ -6,14 +6,12 @@
 }
 
 <style>
-    <style >
     body {
         background-color: #f8f9fa;
-        font-family: 'Arial', sans-serif;
     }
 
     .container-custom {
-        background-color: #f9f9f9;
+        background-color: #fff;
         padding: 2rem;
         border-radius: 0.5rem;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,6 +23,12 @@
         border: none;
         border-radius: 0.5rem;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .card-body {
@@ -50,6 +54,11 @@
 
     .btn {
         padding: 0.5rem 1.5rem;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
     }
 
     .btn-danger {
@@ -63,13 +72,36 @@
     .border-danger {
         border: 2px solid red !important;
     }
+
+    @@keyframes spinner-grow {
+        0% {
+            transform: scale(0);
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+
+    .spinner-border {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        vertical-align: text-bottom;
+        border: 0.25em solid currentColor;
+        border-right-color: transparent;
+        border-radius: 50%;
+        animation: spinner-grow 0.75s linear infinite;
+    }
 </style>
 
-</style>
-
-<div class="container container-custom @(isWaiting ? "border-danger" : "")">
-    <h2 class="text-center mb-4">Chi tiết đơn hàng</h2>
-
+<div class="m-4 container-custom @(isWaiting ? "border-danger" : "")">
+    <div class="bg-primary text-white pt-1 pb-1">
+        <h2 class="text-center text-light">Chi tiết đơn hàng</h2>
+    </div>
     <div class="card my-4 shadow-sm">
         <div class="card-body">
             <h3>Chi tiết đơn hàng</h3>
@@ -86,7 +118,6 @@
     </div>
 
     <div>
-        <h3 class="mb-4">Danh sách hàng</h3>
         @if (ViewBag.listChitietDonhang != null)
         {
             @foreach (DonHangChiTiet chitiet in ViewBag.listChitietDonhang)
@@ -165,61 +196,3 @@
         }
     </form>
 </div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $("#btnThanhToan").click(function (e) {
-                e.preventDefault();
-                $("#loadingSpinner").show();
-
-                var orderData = {
-                    email: $("#email").val(),
-                    mota: $("#mota").val(),
-                    paymentMethod: $("input[name='paymentMethod']:checked").val(),
-                    id: @Model.Id
-                        };
-
-                fetch("/api/donhang/Checkout", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(orderData)
-                })
-                    .then(response => {
-                        $("#loadingSpinner").hide();
-                        if (!response.ok) {
-                            throw new Error("Network response was not ok");
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        alert("Đơn hàng của bạn đã được thanh toán thành công!");
-                        window.location.href = "/DonHang/Create";
-                    })
-                    .catch(error => {
-                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                    });
-            });
-
-            $("#btnHuyDon").click(function (e) {
-                e.preventDefault();
-                var orderId = @Model.Id;
-                $.ajax({
-                    type: "DELETE",
-                    url: `/api/donhang/${orderId}`,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        alert("Đơn hàng của bạn đã được hủy thành công!");
-                        window.location.href = "/DonHangs/";
-                    },
-                    error: function (error) {
-                        alert("Có lỗi xảy ra, vui lòng thử lại sau.");
-                    }
-                });
-            });
-        });
-    </script>
-}

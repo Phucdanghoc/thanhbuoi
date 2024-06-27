@@ -20,7 +20,7 @@
         <h3 class="mb-4">Danh sách hàng</h3>
         @if (ViewBag.listChitietDonhang != null)
         {
-            @foreach (var chitiet in ViewBag.listChitietDonhang)
+            @foreach (DonHangChiTiet chitiet in ViewBag.listChitietDonhang)
             {
                 <div class="card my-2 shadow-sm">
                     <div class="card-body">
@@ -29,7 +29,8 @@
                             <div class="col-md-6">
                                 <p><strong>Người gửi:</strong> @chitiet.HangGui.TenNguoiGui</p>
                                 <p><strong>Số điện thoại người gửi:</strong> @chitiet.HangGui.SdtNguoiGui</p>
-                                <p><strong>Trọng lượng:</strong> @chitiet.HangGui.TrongLuong</p>
+                                <p><strong>Địa chỉ người nhận:</strong> @chitiet.HangGui.DiaChiNguoiGui</p>
+
                             </div>
                             <div class="col-md-6">
                                 <p><strong>Người nhận:</strong> @chitiet.HangGui.TenNguoiNhan</p>

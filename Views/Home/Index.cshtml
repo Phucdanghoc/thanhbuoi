@@ -37,51 +37,56 @@
     </div>
     <div class="container-fluid pt-4 px-4">
         <div class="row g-4">
-            <div class="col-sm-6 col-xl-6 bg-light text-center rounded m-2">
-                <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
+            <div class="col-sm-7 col-xl-7 bg-light text-center rounded m-2">
+                <div class="d-flex align-items-center mb-4 mt-4">
                     <h6 class="mb-0">Vé đặt hôm nay</h6>
                 </div>
-                <div class=" p-4" style="height: 400px; overflow-y: auto;">
 
+                <div class="p-2" style="height: 400px; overflow-y: auto;">
                     <div>
                         <ul>
                             @foreach (Ve ve in ViewBag.ListVe)
                             {
                                 <div class="row border-bottom py-2">
-                                    <div class="col-4">@ve.Ten</div>
-                                    <div class="col-4">
+                                    <div class="col-3 d-flex align-items-center">
+                                        @ve.Ten
+                                    </div>
+                                    <div class="col-5 d-flex align-items-center">
                                         @{
                                             var chuyens = ve.Chuyen.Ten.Split("-");
-                                            var name = chuyens[0] + chuyens[1];
-                                        }@name
+                                            var name = chuyens[0] + "-" +  chuyens[1];
+                                        }
+                                        @name
                                     </div>
-                                    <div class="col-4">
+                                    <div class="col-2 d-flex align-items-center">
                                         @{
                                             var formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", ve.Tien);
                                         }
                                         <span class="fw-bold text-info">@formattedPrice</span>
-                                        <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info">Chi tiết</a>
-
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center">
+                                        <a asp-action="Detail" asp-controller="Ve" asp-route-id="@ve.Id" class="btn btn-info text-white" style="font-size: 13px;">Chi tiết</a>
                                     </div>
                                 </div>
+
                             }
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5  col-xl-5 bg-light text-center rounded m-2">
+            <div class="col-sm-4  col-xl-4 bg-light text-center rounded m-2">
                 <div class="d-flex align-items-center justify-content-between mb-4 mt-4">
                     <h6 class="mb-0">Đơn hàng</h6>
                 </div>
-                <div class="  p-4" style="height: 400px; overflow-y: auto;">
+                <div class="  p-2" style="height: 400px; overflow-y: auto;">
 
                     <div>
                         <ul>
                             @foreach (DonHang donHang in ViewBag.DonHang)
                             {
                                 <li>
-                                    @donHang.MaDon đã được tạo lúc @donHang.NgayTao.ToString("HH:mm")
-                                    <a href="@Url.Action("Details", "Donhangs", new { id = donHang.Id })" class="button text-info">Chi tiết</a>
+                                    <a href="@Url.Action("Details", "Donhangs", new { id = donHang.Id })" class="button text-info">@donHang.MaDon</a>                                     
+                                     mới tạo lúc @donHang.NgayTao.ToString("HH:mm")
                                 </li>
                             }
 
@@ -129,7 +134,7 @@
             var listDate = [];
             var listTotalHang = [];
             var listTotalVe = [];
-            data.$values.forEach(function (item) {
+            data.forEach(function (item) {
                 listDate.push(formatDate(item.datetime));
                 listTotalHang.push(item.totalHang);
                 listTotalVe.push(item.totalVe);

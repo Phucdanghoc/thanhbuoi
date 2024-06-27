@@ -5,31 +5,32 @@
 }
 
 <div class="container mt-5">
-    <h2 class="mb-4">Thanh toán</h2>
-
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            <div class="card mb-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
                 <div class="card-body">
-                    <h5 class="card-title">Chi tiết vé</h5>
+                    <h2 class="card-title mb-4 text-center">Chi tiết đơn đặt vé</h2>
                     @{
-                        Chuyen chuyen = ViewBag.chuyen;
+                        var chuyen = ViewBag.Chuyen;
                     }
                     @foreach (var ve in Model)
                     {
-                        <div class="card mb-3">
+                        <div class="card mb-3 ticket-card">
                             <div class="card-body">
-                                <h6 class="card-subtitle mb-2 text-muted">Mã vé: @ve.MaVe</h6>
-                                <p><strong>Giá vé:</strong> <span class="text-danger">@ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
-                                <p><strong>Điểm đón:</strong> @ve.DiemDon</p>
-                                <p><strong>Hành lí:</strong> @ve.Hanhli</p>
-                                <p><strong>Ngày Đặt:</strong> @ve.NgayTao</p>
-                                <div class="highlighted-info">
-                                    <p><strong>Chuyến :</strong> @ve.Chuyen.Ten.Split("-")[0] - @ve.Chuyen.Ten.Split("-")[1]</p>
-                                    <p><strong>Ngày đi :</strong> @ve.Chuyen.ThoiGianDi</p>
-                                    <p><strong>Xe :</strong> @chuyen.Xe.Ten</p>
-                                    <p><strong>Loại ghế :</strong> @(chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.GiuongNam ? "Giường nằm" : "Ngồi")</p>
-
+                                <h5 class="card-title">Mã vé: @ve.MaVe</h5>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <p><strong>Giá vé:</strong> <span class="text-danger">@ve.Tien.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</span></p>
+                                        <p><strong>Điểm đón:</strong> @ve.DiemDon</p>
+                                        <p><strong>Hành lí:</strong> @ve.Hanhli</p>
+                                        <p><strong>Ngày Đặt:</strong> @ve.NgayTao.ToString("dd/MM/yyyy")</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>Chuyến đi:</strong> @chuyen.Ten.Split('-')[0] - @chuyen.Ten.Split('-')[1]</p>
+                                        <p><strong>Ngày đi:</strong> @chuyen.ThoiGianDi.ToString("dd/MM/yyyy")</p>
+                                        <p><strong>Xe:</strong> @chuyen.Xe.Ten</p>
+                                        <p><strong>Loại ghế:</strong> @(chuyen.Xe.LoaiXe.LoaiGheXe == LoaiGheXe.Ngoi ? "Ngồi" : "Giường nằm")</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -37,17 +38,17 @@
                 </div>
             </div>
 
-            <div class="card mb-4">
+            <div class="card shadow mt-4">
                 <div class="card-body">
-                    <h5 class="card-title">Thông tin thanh toán</h5>
-                    <form asp-action="Payment" class="mb-4">
+                    <h2 class="card-title mb-4 text-center">Thông tin thanh toán</h2>
+                    <form asp-action="Payment">
                         <div class="form-group">
                             <label for="email">Email xác nhận:</label>
                             <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email người gửi">
                         </div>
                         <div class="form-group">
-                            <label for="mota">Ghi chú :</label>
-                            <textarea class="form-control" id="mota" name="mota" placeholder="Bạn cần ghi chú gì không" rows="4" cols="50"></textarea>
+                            <label for="mota">Ghi chú:</label>
+                            <textarea class="form-control" id="mota" name="mota" placeholder="Bạn cần ghi chú gì không?" rows="4"></textarea>
                         </div>
                         <div class="form-group">
                             <label>Phương thức thanh toán:</label><br>
@@ -55,49 +56,100 @@
                                 <input class="form-check-input" type="radio" name="paymentMethod" id="momo" value="momo">
                                 <label class="form-check-label" for="momo">Momo</label>
                                 <br>
-                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="mt-2" style="width: 100px;">
+                                <img src="https://developers.momo.vn/v2/images/logo.png" alt="Momo" class="payment-method-icon">
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash">
                                 <label class="form-check-label" for="cash">Tiền mặt</label>
                                 <br>
-                                <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="img-fluid mt-2" style="width: 100px;">
-                                </div>
+                                <img src="https://www.freeiconspng.com/uploads/cash-payment-icon-5.png" alt="Tiền mặt" class="payment-method-icon">
+                            </div>
                         </div>
                         @foreach (var ve in Model)
                         {
                             <input type="hidden" name="codetickets" value="@ve.Id" />
                         }
-                        <div class="form-group row">
+                        <div class="row">
                             <div class="col-md-6">
-                                <h5 class="mb-0">Tổng giá trị</h5>
-                                <p class="h4 text-danger">@totalPrice.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</p>
+                                <h4 class="mb-3">Tổng thanh toán:</h4>
+                                <h2 class="text-danger">@totalPrice.ToString("C0", new System.Globalization.CultureInfo("vi-VN"))</h2>
                             </div>
-                            <div class="col-md-6 text-right">
-                                <button type="submit" class="btn btn-primary p-3 w-100">Thanh toán</button>
+                            <div class="col-md-6 d-flex align-items-center justify-content-end">
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Thanh toán</button>
                             </div>
                         </div>
                     </form>
-                    <div class="d-flex justify-content-end">
+                    @* <div class="text-center mt-4">
                         <form asp-action="Cancel">
                             @foreach (var ve in Model)
                             {
                                 <input type="hidden" name="codetickets" value="@ve.Id" />
                             }
-                            <button type="submit" class="btn btn-danger pe-3 ps-3 w-100">Hủy</button>
+                            <button type="submit" class="btn btn-danger btn-lg w-100">Hủy đặt vé</button>
                         </form>
-                    </div>
+                    </div> *@
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        // Ngăn chặn người dùng quay lại trang trước
-        $(window).on('popstate', function (event) {
-            history.pushState(null, null, window.location.pathname);
-        });
-    });
-</script>
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .card-title {
+        color: #007bff;
+        font-size: 1.8rem;
+    }
+
+    .card-subtitle {
+        color: #6c757d;
+        font-size: 1.2rem;
+    }
+
+    .ticket-card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+        .ticket-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.2);
+        }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .payment-method-icon {
+        width: 100px;
+        margin-top: 10px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+</style>

@@ -22,7 +22,7 @@ namespace ThanhBuoi.Services
             var partnerCode = "MOMO";
             var redirectUrl = paymentDTO.url;
             var ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-            var requestType = "payWithATM";
+            var requestType = "captureWallet";
             var amount = paymentDTO.cost;
             var orderId = partnerCode + DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
             var requestId = orderId;
@@ -73,5 +73,8 @@ namespace ThanhBuoi.Services
             var paymentResponse = JsonConvert.DeserializeObject<MomoPaymentResponseDTO>(result);
             return paymentResponse;
         }
+
     }
+
+
 }

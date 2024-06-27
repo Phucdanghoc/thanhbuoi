@@ -213,12 +213,13 @@ namespace ThanhBuoi.Controllers
         {
             if (string.IsNullOrEmpty(email))
             {
-
+                TempData["ErrorMessage"] = "Vui lòng nhập Email";
+                return RedirectToAction("Payment");
             }
             if (!codetickets.Any())
             {
                 TempData["ErrorMessage"] = "Không tìm thấy vé để thanh toán.";
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Payment");
             }
 
             if (string.IsNullOrEmpty(paymentMethod))
@@ -244,7 +245,7 @@ namespace ThanhBuoi.Controllers
                 TempData["SuccessMessage"] = "Vé đã được thanh toán";
                 return View();
             }
-            var donhang = await CreateDonHangAsync(email, paymentMethod, mota, tickets);
+            var donhang = await CreateDonHangAsync(email, paymentMethod, mota, veList);
 
             foreach (var ve in veList)
             {
@@ -267,16 +268,9 @@ namespace ThanhBuoi.Controllers
               
             }
 
-            
-
             await _context.SaveChangesAsync();
-
-
-
-        
 
             double cost = tickets.Sum(t => t.Tien);
-            await _context.SaveChangesAsync();
 
             if (paymentMethod == "momo")
             {

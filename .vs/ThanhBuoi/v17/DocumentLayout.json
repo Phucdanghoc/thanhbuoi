@@ -3,8 +3,27 @@
   "WorkspaceRootPath": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\services\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\services\\iemailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\controllers\\chuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\controllers\\auhcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\controllers\\tintucscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\controllers\\guihangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|solutionrelative:controllers\\guihangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\controllers\\tuyenscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|solutionrelative:controllers\\tuyenscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\views\\guihang\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -217,10 +236,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|solutionrelative:controllers\\taikhoancontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\controllers\\tuyenscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|solutionrelative:controllers\\tuyenscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\wwwroot\\js\\sodoxe\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
@@ -654,103 +669,88 @@
       "RelativeMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|solutionrelative:migrations\\20240604195132_m15.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\AuhController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\donhangchitiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DonHangChiTiet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\vehuy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\VeHuy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\ve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\controllers\\donhangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\DonHangController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\controllers\\vecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\VeController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\checkoutdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\CheckoutDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\services\\momoservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\MomoServices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\tuyen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\ChuyenController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tuyen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\hang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\IEmailService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\ghe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\ErrorViewModel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\searchdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\TinTucsController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\emailsetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Hang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\dtohang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ghe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\authdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\SearchDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\tang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\EmailSetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\diadiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\DTOHang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\hanggui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\AuthDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\tintuc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\dto\\vedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Diadiem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\taikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\HangGui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\xe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TinTuc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\data\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\VeDTO.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\thanhbuoiapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TaiKhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\donhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Xe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Data\\Dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\EmailService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DonHang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\LoaiXe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6C66A7C8-37A3-4994-9CA6-9EF90867BBD5}|C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\ThanhBuoiAPI.csproj|c:\\users\\lep61\\source\\repos\\thanhbuoiapi\\models\\loaixe.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{27158E04-D8B5-48E1-B453-5832D7CDD523}|ThanhBuoi.csproj|d:\\.net\\thanhbuoi\\thanhbuoi\\migrations\\20240624115056_m21.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -769,97 +769,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "Detail.cshtml",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Detail.cshtml",
-              "RelativeDocumentMoniker": "Views\\TaiKhoan\\Detail.cshtml",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Detail.cshtml",
-              "RelativeToolTip": "Views\\TaiKhoan\\Detail.cshtml",
-              "ViewState": "AQIAAIEAAAAAAAAAAAAgwIkAAABpAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-22T06:06:05.063Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Ve.cshtml",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\Ve.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\Ve.cshtml",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\Ve.cshtml",
-              "RelativeToolTip": "Views\\User\\Ve.cshtml",
-              "ViewState": "AQIAADoAAAAAAAAAAAAQwEsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-17T14:31:13.169Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DetailDonHang.cshtml",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailDonHang.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\DetailDonHang.cshtml",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailDonHang.cshtml",
-              "RelativeToolTip": "Views\\User\\DetailDonHang.cshtml",
-              "ViewState": "AQIAADcAAAAAAAAAAAAUwDYAAAB3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-17T16:19:55.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DetailVe.cshtml",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailVe.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\DetailVe.cshtml",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailVe.cshtml",
-              "RelativeToolTip": "Views\\User\\DetailVe.cshtml",
-              "ViewState": "AQIAACgAAAAAAAAAAAAQwDYAAAAKAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-17T16:17:19.168Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "DonHang.cshtml",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DonHang.cshtml",
-              "RelativeDocumentMoniker": "Views\\User\\DonHang.cshtml",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DonHang.cshtml",
-              "RelativeToolTip": "Views\\User\\DonHang.cshtml",
-              "ViewState": "AQIAABUAAAAAAAAAAAAUwCMAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-17T14:30:52.049Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "DonVeController.cs",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DonVeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DonVeController.cs",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DonVeController.cs",
-              "RelativeToolTip": "Controllers\\DonVeController.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAArwBYAAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T20:07:38.022Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GuiHangController.cs",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\GuiHangController.cs",
-              "RelativeDocumentMoniker": "Controllers\\GuiHangController.cs",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\GuiHangController.cs",
-              "RelativeToolTip": "Controllers\\GuiHangController.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAMwDoAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-19T18:33:58.847Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\GuiHang\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\GuiHang\\Create.cshtml",
@@ -867,12 +776,164 @@
               "RelativeToolTip": "Views\\GuiHang\\Create.cshtml",
               "ViewState": "AQIAAJEAAAAAAAAAAAAAALEAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-19T18:33:35.81Z",
+              "WhenOpened": "2024-05-19T18:33:35.81Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TuyensController.cs",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TuyensController.cs",
+              "RelativeDocumentMoniker": "Controllers\\TuyensController.cs",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TuyensController.cs",
+              "RelativeToolTip": "Controllers\\TuyensController.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAuwEwAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-05T05:32:50.42Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AuhController.cs",
+              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\AuhController.cs",
+              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\AuhController.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwCoAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-30T20:38:50.407Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChuyenController.cs",
+              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\ChuyenController.cs",
+              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\ChuyenController.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAQwB4AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-30T18:28:56.327Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TinTucsController.cs",
+              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\TinTucsController.cs",
+              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\TinTucsController.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAAAwCQAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T22:45:33.85Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IEmailService.cs",
+              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\IEmailService.cs",
+              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\IEmailService.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAASwA0AAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T21:29:02.835Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\EmailService.cs",
+              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\EmailService.cs",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAYwEMAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T21:36:41.943Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GuiHangController.cs",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\GuiHangController.cs",
+              "RelativeDocumentMoniker": "Controllers\\GuiHangController.cs",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\GuiHangController.cs",
+              "RelativeToolTip": "Controllers\\GuiHangController.cs",
+              "ViewState": "AQIAAD4AAAAAAAAAAAAewFUAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-19T18:33:58.847Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "DonVeController.cs",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DonVeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DonVeController.cs",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DonVeController.cs",
+              "RelativeToolTip": "Controllers\\DonVeController.cs",
+              "ViewState": "AQIAAD0AAAAAAAAAAAArwBYAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-04T20:07:38.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DonHang.cshtml",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DonHang.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\DonHang.cshtml",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DonHang.cshtml",
+              "RelativeToolTip": "Views\\User\\DonHang.cshtml",
+              "ViewState": "AQIAABUAAAAAAAAAAAAUwCMAAABEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-17T14:30:52.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DetailVe.cshtml",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailVe.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\DetailVe.cshtml",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailVe.cshtml",
+              "RelativeToolTip": "Views\\User\\DetailVe.cshtml",
+              "ViewState": "AQIAACgAAAAAAAAAAAAQwDYAAAAKAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-17T16:17:19.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DetailDonHang.cshtml",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailDonHang.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\DetailDonHang.cshtml",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\DetailDonHang.cshtml",
+              "RelativeToolTip": "Views\\User\\DetailDonHang.cshtml",
+              "ViewState": "AQIAADcAAAAAAAAAAAAUwDYAAAB3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-17T16:19:55.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Ve.cshtml",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\Ve.cshtml",
+              "RelativeDocumentMoniker": "Views\\User\\Ve.cshtml",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\User\\Ve.cshtml",
+              "RelativeToolTip": "Views\\User\\Ve.cshtml",
+              "ViewState": "AQIAADoAAAAAAAAAAAAQwEsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-17T14:31:13.169Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Detail.cshtml",
+              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Detail.cshtml",
+              "RelativeDocumentMoniker": "Views\\TaiKhoan\\Detail.cshtml",
+              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Detail.cshtml",
+              "RelativeToolTip": "Views\\TaiKhoan\\Detail.cshtml",
+              "ViewState": "AQIAAIEAAAAAAAAAAAAgwIkAAABpAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-22T06:06:05.063Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Chuyens\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Chuyens\\Details.cshtml",
@@ -880,12 +941,11 @@
               "RelativeToolTip": "Views\\Chuyens\\Details.cshtml",
               "ViewState": "AQIAADMAAAAAAAAAAAAAAEMAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-06T09:04:38.19Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-06T09:04:38.19Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "ChuyensController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\ChuyensController.cs",
               "RelativeDocumentMoniker": "Controllers\\ChuyensController.cs",
@@ -893,12 +953,11 @@
               "RelativeToolTip": "Controllers\\ChuyensController.cs",
               "ViewState": "AQIAAHMAAAAAAAAAAAAkwHwAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T16:19:25.756Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-17T16:19:25.756Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\DoanhThu\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\DoanhThu\\Index.cshtml",
@@ -906,12 +965,11 @@
               "RelativeToolTip": "Views\\DoanhThu\\Index.cshtml",
               "ViewState": "AQIAAOQAAAAAAAAAAAAUwO8AAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-26T05:32:39.843Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T05:32:39.843Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 17,
               "Title": "Logout.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Logout.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Logout.cshtml",
@@ -919,12 +977,11 @@
               "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Logout.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-07T13:40:30.664Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-07T13:40:30.664Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "Login.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
@@ -932,12 +989,11 @@
               "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Login.cshtml.cs",
               "ViewState": "AQIAAG4AAAAAAAAAAAAgwHwAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-22T14:11:35.696Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-22T14:11:35.696Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "DoanhThu.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\APIS\\DoanhThu.cs",
               "RelativeDocumentMoniker": "APIS\\DoanhThu.cs",
@@ -945,12 +1001,11 @@
               "RelativeToolTip": "APIS\\DoanhThu.cs",
               "ViewState": "AQIAAEMAAAAAAAAAAAAuwE8AAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-26T14:06:33.5Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T14:06:33.5Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 20,
               "Title": "Detail.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Ve\\Detail.cshtml",
               "RelativeDocumentMoniker": "Views\\Ve\\Detail.cshtml",
@@ -958,12 +1013,11 @@
               "RelativeToolTip": "Views\\Ve\\Detail.cshtml",
               "ViewState": "AQIAAEgAAAAAAAAAAAAAACYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-26T20:38:25.947Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-26T20:38:25.947Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 27,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\VeHuys\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\VeHuys\\Index.cshtml",
@@ -971,12 +1025,11 @@
               "RelativeToolTip": "Views\\VeHuys\\Index.cshtml",
               "ViewState": "AQIAACcAAAAAAAAAAAAAAAgAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-04T21:43:11.686Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T21:43:11.686Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 26,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\VeHuys\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\VeHuys\\Details.cshtml",
@@ -984,12 +1037,11 @@
               "RelativeToolTip": "Views\\VeHuys\\Details.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-04T21:50:50.546Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T21:50:50.546Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 21,
               "Title": "Payment.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\APIS\\Payment.cs",
               "RelativeDocumentMoniker": "APIS\\Payment.cs",
@@ -997,12 +1049,11 @@
               "RelativeToolTip": "APIS\\Payment.cs",
               "ViewState": "AQIAABIAAAAAAAAAAAAiwBwAAABPAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T17:42:00.6Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T17:42:00.6Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 22,
               "Title": "Chuyen.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\APIS\\Chuyen.cs",
               "RelativeDocumentMoniker": "APIS\\Chuyen.cs",
@@ -1010,12 +1061,11 @@
               "RelativeToolTip": "APIS\\Chuyen.cs",
               "ViewState": "AQIAAAIAAAAAAAAAAAAAAAYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T17:43:37.878Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T17:43:37.878Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 23,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
@@ -1023,12 +1073,11 @@
               "RelativeToolTip": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-06T10:15:59.547Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-06T10:15:59.547Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 24,
               "Title": "Payment.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\GuiHang\\Payment.cshtml",
               "RelativeDocumentMoniker": "Views\\GuiHang\\Payment.cshtml",
@@ -1036,12 +1085,11 @@
               "RelativeToolTip": "Views\\GuiHang\\Payment.cshtml",
               "ViewState": "AQIAAFEAAAAAAAAAAAAAAEgAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-26T03:01:03.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-26T03:01:03.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 25,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Ve\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Ve\\Index.cshtml",
@@ -1049,12 +1097,11 @@
               "RelativeToolTip": "Views\\Ve\\Index.cshtml",
               "ViewState": "AQIAAAIAAAAAAAAAAAAQwAgAAAAdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-16T04:56:52.564Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-16T04:56:52.564Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 28,
               "Title": "TinhData.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Data\\TinhData.cs",
               "RelativeDocumentMoniker": "Data\\TinhData.cs",
@@ -1062,12 +1109,11 @@
               "RelativeToolTip": "Data\\TinhData.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAAwBIAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T15:50:50.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T15:50:50.69Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 29,
               "Title": "Dbcontext.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Data\\Dbcontext.cs",
               "RelativeDocumentMoniker": "Data\\Dbcontext.cs",
@@ -1075,12 +1121,11 @@
               "RelativeToolTip": "Data\\Dbcontext.cs",
               "ViewState": "AQIAADEAAAAAAAAAAAAiwDoAAAAxAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T09:21:59.929Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T09:21:59.929Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 30,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Booking\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Booking\\Index.cshtml",
@@ -1088,12 +1133,11 @@
               "RelativeToolTip": "Views\\Booking\\Index.cshtml",
               "ViewState": "AQIAAG8AAAAAAAAAAAAQwIkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-06T08:38:59.615Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-06T08:38:59.615Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 31,
               "Title": "Chuyens.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Booking\\Chuyens.cshtml",
               "RelativeDocumentMoniker": "Views\\Booking\\Chuyens.cshtml",
@@ -1101,12 +1145,11 @@
               "RelativeToolTip": "Views\\Booking\\Chuyens.cshtml",
               "ViewState": "AQIAAD8AAAAAAAAAAAAAADUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-12T18:21:23.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T18:21:23.436Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 32,
               "Title": "DonHang.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\GuiHang\\DonHang.cshtml",
               "RelativeDocumentMoniker": "Views\\GuiHang\\DonHang.cshtml",
@@ -1114,12 +1157,11 @@
               "RelativeToolTip": "Views\\GuiHang\\DonHang.cshtml",
               "ViewState": "AQIAAI4AAAAAAAAAAAAQwKgAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-20T09:12:33.145Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T09:12:33.145Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 33,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\DonHangs\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\DonHangs\\Details.cshtml",
@@ -1127,12 +1169,11 @@
               "RelativeToolTip": "Views\\DonHangs\\Details.cshtml",
               "ViewState": "AQIAAFUAAAAAAAAAAAAhwG0AAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-20T10:37:43.413Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T10:37:43.413Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 34,
               "Title": "DonHangChiTiet.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DonHangChiTiet.cs",
               "RelativeDocumentMoniker": "Models\\DonHangChiTiet.cs",
@@ -1140,12 +1181,11 @@
               "RelativeToolTip": "Models\\DonHangChiTiet.cs",
               "ViewState": "AQIAAAUAAAAAAAAAAAAxwAUAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T09:02:18.807Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T09:02:18.807Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 35,
               "Title": "DonHang.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DonHang.cs",
               "RelativeDocumentMoniker": "Models\\DonHang.cs",
@@ -1153,12 +1193,11 @@
               "RelativeToolTip": "Models\\DonHang.cs",
               "ViewState": "AQIAABQAAAAAAAAAAAAgwAwAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T20:08:07.468Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-21T20:08:07.468Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 37,
               "Title": "IEmailService.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\IEmailService.cs",
               "RelativeDocumentMoniker": "Services\\IEmailService.cs",
@@ -1166,12 +1205,11 @@
               "RelativeToolTip": "Services\\IEmailService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAgAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T20:47:10.284Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T20:47:10.284Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 36,
               "Title": "EmailService.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\EmailService.cs",
               "RelativeDocumentMoniker": "Services\\EmailService.cs",
@@ -1179,12 +1217,11 @@
               "RelativeToolTip": "Services\\EmailService.cs",
               "ViewState": "AQIAACEAAAAAAAAAAAAAwC4AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T18:29:57.088Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T18:29:57.088Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 38,
               "Title": "BookingController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\BookingController.cs",
               "RelativeDocumentMoniker": "Controllers\\BookingController.cs",
@@ -1192,12 +1229,11 @@
               "RelativeToolTip": "Controllers\\BookingController.cs",
               "ViewState": "AQIAADgBAAAAAAAAAAAAwDkBAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T03:14:27.043Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-06T03:14:27.043Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 39,
               "Title": "HangGui.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\HangGui.cs",
               "RelativeDocumentMoniker": "Models\\HangGui.cs",
@@ -1205,12 +1241,11 @@
               "RelativeToolTip": "Models\\HangGui.cs",
               "ViewState": "AQIAACAAAAAAAAAAAAAqwCsAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-21T10:19:41.135Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-21T10:19:41.135Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 40,
               "Title": "CheckoutDTO.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DTO\\CheckoutDTO.cs",
               "RelativeDocumentMoniker": "Models\\DTO\\CheckoutDTO.cs",
@@ -1218,12 +1253,11 @@
               "RelativeToolTip": "Models\\DTO\\CheckoutDTO.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T20:29:35.432Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-20T20:29:35.432Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 41,
               "Title": "DonHangsController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DonHangsController.cs",
               "RelativeDocumentMoniker": "Controllers\\DonHangsController.cs",
@@ -1231,12 +1265,11 @@
               "RelativeToolTip": "Controllers\\DonHangsController.cs",
               "ViewState": "AQIAAF0AAAAAAAAAAAAvwHUAAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T16:01:24.143Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T16:01:24.143Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 43,
               "Title": "DiadiemsController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DiadiemsController.cs",
               "RelativeDocumentMoniker": "Controllers\\DiadiemsController.cs",
@@ -1244,12 +1277,11 @@
               "RelativeToolTip": "Controllers\\DiadiemsController.cs",
               "ViewState": "AQIAABAAAAAAAAAAAADwvxEAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T07:41:38.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T07:41:38.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 42,
               "Title": "DoanhThuController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\DoanhThuController.cs",
               "RelativeDocumentMoniker": "Controllers\\DoanhThuController.cs",
@@ -1257,12 +1289,11 @@
               "RelativeToolTip": "Controllers\\DoanhThuController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T19:11:46.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T19:11:46.392Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 44,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -1270,12 +1301,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAABMAAAAAAAAAAAAewCAAAABFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T18:07:20.207Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-05T18:07:20.207Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 45,
               "Title": "Payment.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Booking\\Payment.cshtml",
               "RelativeDocumentMoniker": "Views\\Booking\\Payment.cshtml",
@@ -1283,12 +1313,11 @@
               "RelativeToolTip": "Views\\Booking\\Payment.cshtml",
               "ViewState": "AQIAACoAAAAAAAAAAAAAAEAAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-21T08:01:32.945Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-21T08:01:32.945Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 46,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\DonVe\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\DonVe\\Details.cshtml",
@@ -1296,12 +1325,11 @@
               "RelativeToolTip": "Views\\DonVe\\Details.cshtml",
               "ViewState": "AQIAAHUAAAAAAAAAAAAgwHwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-04T20:28:15.305Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-04T20:28:15.305Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 47,
               "Title": "VeController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\VeController.cs",
               "RelativeDocumentMoniker": "Controllers\\VeController.cs",
@@ -1313,7 +1341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 48,
               "Title": "20240512174002_m1.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240512174002_m1.cs",
               "RelativeDocumentMoniker": "Migrations\\20240512174002_m1.cs",
@@ -1325,7 +1353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 49,
               "Title": "SessionService.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\SessionService.cs",
               "RelativeDocumentMoniker": "Services\\SessionService.cs",
@@ -1337,7 +1365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 50,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -1349,7 +1377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 51,
               "Title": "_AuthLayout.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Shared\\_AuthLayout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_AuthLayout.cshtml",
@@ -1361,7 +1389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 52,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Tuyens\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Tuyens\\Index.cshtml",
@@ -1373,7 +1401,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 53,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\DonVe\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\DonVe\\Index.cshtml",
@@ -1385,7 +1413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 54,
               "Title": "ScaffoldingReadMe.txt",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\ScaffoldingReadMe.txt",
               "RelativeDocumentMoniker": "ScaffoldingReadMe.txt",
@@ -1397,7 +1425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 55,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
@@ -1409,7 +1437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 56,
               "Title": "HomeController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
@@ -1421,7 +1449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 57,
               "Title": "XesController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\XesController.cs",
               "RelativeDocumentMoniker": "Controllers\\XesController.cs",
@@ -1433,7 +1461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 58,
               "Title": "UserController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -1445,7 +1473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 59,
               "Title": "TaiKhoanController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TaiKhoanController.cs",
               "RelativeDocumentMoniker": "Controllers\\TaiKhoanController.cs",
@@ -1457,19 +1485,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "TuyensController.cs",
-              "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TuyensController.cs",
-              "RelativeDocumentMoniker": "Controllers\\TuyensController.cs",
-              "ToolTip": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TuyensController.cs",
-              "RelativeToolTip": "Controllers\\TuyensController.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAD4vw4AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-05T05:32:50.42Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 60,
               "Title": "index.js",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\wwwroot\\js\\sodoxe\\index.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\sodoxe\\index.js",
@@ -1481,7 +1497,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 61,
               "Title": "create.js",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\wwwroot\\js\\diachi\\create.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\diachi\\create.js",
@@ -1493,7 +1509,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 63,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\TaiKhoan\\Index.cshtml",
@@ -1505,7 +1521,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 62,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Xes\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Xes\\Index.cshtml",
@@ -1517,7 +1533,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
+              "DocumentIndex": 65,
               "Title": "Xe.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Xe.cs",
               "RelativeDocumentMoniker": "Models\\Xe.cs",
@@ -1529,7 +1545,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 64,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Chuyens\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Chuyens\\Index.cshtml",
@@ -1541,7 +1557,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 67,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Chuyens\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Chuyens\\Edit.cshtml",
@@ -1553,7 +1569,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 66,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\DonHangs\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\DonHangs\\Index.cshtml",
@@ -1565,7 +1581,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 68,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Tuyens\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Tuyens\\Edit.cshtml",
@@ -1577,7 +1593,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 71,
               "Title": "_LoginPartial.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Shared\\_LoginPartial.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_LoginPartial.cshtml",
@@ -1589,7 +1605,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 70,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
@@ -1601,7 +1617,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 69,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
@@ -1613,7 +1629,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 72,
               "Title": "LoaiXesController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\LoaiXesController.cs",
               "RelativeDocumentMoniker": "Controllers\\LoaiXesController.cs",
@@ -1625,7 +1641,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 74,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -1637,7 +1653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 75,
               "Title": "Diadiem.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Diadiem.cs",
               "RelativeDocumentMoniker": "Models\\Diadiem.cs",
@@ -1649,7 +1665,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 76,
               "Title": "TinTuc.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\TinTuc.cs",
               "RelativeDocumentMoniker": "Models\\TinTuc.cs",
@@ -1661,7 +1677,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 73,
               "Title": "TinTucsController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\TinTucsController.cs",
               "RelativeDocumentMoniker": "Controllers\\TinTucsController.cs",
@@ -1673,7 +1689,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 77,
               "Title": "LoaiXe.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\LoaiXe.cs",
               "RelativeDocumentMoniker": "Models\\LoaiXe.cs",
@@ -1685,7 +1701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 78,
               "Title": "Hang.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Hang.cs",
               "RelativeDocumentMoniker": "Models\\Hang.cs",
@@ -1697,7 +1713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 79,
               "Title": "DoanhThu.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DTO\\DoanhThu.cs",
               "RelativeDocumentMoniker": "Models\\DTO\\DoanhThu.cs",
@@ -1709,7 +1725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 80,
               "Title": "AuthDTO.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DTO\\AuthDTO.cs",
               "RelativeDocumentMoniker": "Models\\DTO\\AuthDTO.cs",
@@ -1733,7 +1749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 76,
+              "DocumentIndex": 81,
               "Title": "Tuyen.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Tuyen.cs",
               "RelativeDocumentMoniker": "Models\\Tuyen.cs",
@@ -1745,7 +1761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 79,
+              "DocumentIndex": 84,
               "Title": "TaiKhoan.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\TaiKhoan.cs",
               "RelativeDocumentMoniker": "Models\\TaiKhoan.cs",
@@ -1757,7 +1773,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 77,
+              "DocumentIndex": 82,
               "Title": "Ve.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Ve.cs",
               "RelativeDocumentMoniker": "Models\\Ve.cs",
@@ -1769,7 +1785,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 80,
+              "DocumentIndex": 85,
               "Title": "Tang.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Tang.cs",
               "RelativeDocumentMoniker": "Models\\Tang.cs",
@@ -1781,7 +1797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 81,
+              "DocumentIndex": 86,
               "Title": "Ghe.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Ghe.cs",
               "RelativeDocumentMoniker": "Models\\Ghe.cs",
@@ -1793,7 +1809,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 78,
+              "DocumentIndex": 83,
               "Title": "SoDoGhe.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\SoDoGhe.cs",
               "RelativeDocumentMoniker": "Models\\SoDoGhe.cs",
@@ -1805,7 +1821,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 82,
+              "DocumentIndex": 87,
               "Title": "Chuyen.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\Chuyen.cs",
               "RelativeDocumentMoniker": "Models\\Chuyen.cs",
@@ -1817,7 +1833,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 83,
+              "DocumentIndex": 88,
               "Title": "VeHuy.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\VeHuy.cs",
               "RelativeDocumentMoniker": "Models\\VeHuy.cs",
@@ -1829,7 +1845,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 86,
+              "DocumentIndex": 91,
               "Title": "Register.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Register.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Register.cshtml",
@@ -1841,7 +1857,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 87,
+              "DocumentIndex": 92,
               "Title": "ConfirmEmail.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml.cs",
@@ -1853,7 +1869,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 84,
+              "DocumentIndex": 89,
               "Title": "Logout.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Logout.cshtml.cs",
@@ -1865,7 +1881,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 89,
+              "DocumentIndex": 94,
               "Title": "Login.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Login.cshtml",
@@ -1877,7 +1893,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 85,
+              "DocumentIndex": 90,
               "Title": "Register.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
@@ -1889,7 +1905,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 88,
+              "DocumentIndex": 93,
               "Title": "ForgotPassword.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml.cs",
@@ -1901,7 +1917,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 90,
+              "DocumentIndex": 95,
               "Title": "ForgotPassword.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ForgotPassword.cshtml",
@@ -1913,7 +1929,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 91,
+              "DocumentIndex": 96,
               "Title": "ResetPassword.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml",
@@ -1925,7 +1941,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 92,
+              "DocumentIndex": 97,
               "Title": "ConfirmEmail.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ConfirmEmail.cshtml",
@@ -1937,7 +1953,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 94,
+              "DocumentIndex": 99,
               "Title": "Error.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Shared\\Error.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\Error.cshtml",
@@ -1949,7 +1965,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 93,
+              "DocumentIndex": 98,
               "Title": "_ViewStart.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\_ViewStart.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
@@ -1961,7 +1977,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 95,
+              "DocumentIndex": 100,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\_ViewImports.cshtml",
@@ -1973,7 +1989,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 96,
+              "DocumentIndex": 101,
               "Title": "_ValidationScriptsPartial.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
@@ -1985,7 +2001,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 97,
+              "DocumentIndex": 102,
               "Title": "Read.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Read.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Read.cshtml",
@@ -1997,7 +2013,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 98,
+              "DocumentIndex": 103,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Index.cshtml",
@@ -2009,7 +2025,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 99,
+              "DocumentIndex": 104,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\LoaiXes\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\LoaiXes\\Index.cshtml",
@@ -2021,7 +2037,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 100,
+              "DocumentIndex": 105,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\LoaiXes\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\LoaiXes\\Details.cshtml",
@@ -2033,7 +2049,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 101,
+              "DocumentIndex": 106,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\LoaiXes\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\LoaiXes\\Edit.cshtml",
@@ -2045,7 +2061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 102,
+              "DocumentIndex": 107,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\LoaiXes\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\LoaiXes\\Create.cshtml",
@@ -2057,7 +2073,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 103,
+              "DocumentIndex": 108,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Diadiems\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Diadiems\\Details.cshtml",
@@ -2069,7 +2085,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 104,
+              "DocumentIndex": 109,
               "Title": "Index.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Diadiems\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Diadiems\\Index.cshtml",
@@ -2081,7 +2097,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 105,
+              "DocumentIndex": 110,
               "Title": "VeHuysController.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Controllers\\VeHuysController.cs",
               "RelativeDocumentMoniker": "Controllers\\VeHuysController.cs",
@@ -2093,7 +2109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 106,
+              "DocumentIndex": 111,
               "Title": "ThanhBuoi",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\ThanhBuoi.csproj",
               "RelativeDocumentMoniker": "ThanhBuoi.csproj",
@@ -2104,7 +2120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 107,
+              "DocumentIndex": 112,
               "Title": "MomoServices.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\MomoServices.cs",
               "RelativeDocumentMoniker": "Services\\MomoServices.cs",
@@ -2116,7 +2132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 108,
+              "DocumentIndex": 113,
               "Title": "VNPayServices.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\VNPayServices.cs",
               "RelativeDocumentMoniker": "Services\\VNPayServices.cs",
@@ -2128,7 +2144,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 109,
+              "DocumentIndex": 114,
               "Title": "vnpay_refund.aspx.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\vnpay_cs\\VNPAY_CS_ASPX\\vnpay_refund.aspx.cs",
               "RelativeDocumentMoniker": "..\\vnpay_cs\\VNPAY_CS_ASPX\\vnpay_refund.aspx.cs",
@@ -2140,7 +2156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 110,
+              "DocumentIndex": 115,
               "Title": "OrderInfo.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\vnpay_cs\\VNPAY_CS_ASPX\\Models\\OrderInfo.cs",
               "RelativeDocumentMoniker": "..\\vnpay_cs\\VNPAY_CS_ASPX\\Models\\OrderInfo.cs",
@@ -2152,7 +2168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 111,
+              "DocumentIndex": 116,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Chuyens\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Chuyens\\Delete.cshtml",
@@ -2164,7 +2180,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 112,
+              "DocumentIndex": 117,
               "Title": "Ve.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Booking\\Ve.cshtml",
               "RelativeDocumentMoniker": "Views\\Booking\\Ve.cshtml",
@@ -2176,7 +2192,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 113,
+              "DocumentIndex": 118,
               "Title": "20240616031407_m18.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240616031407_m18.cs",
               "RelativeDocumentMoniker": "Migrations\\20240616031407_m18.cs",
@@ -2188,7 +2204,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 114,
+              "DocumentIndex": 119,
               "Title": "20240617164349_m19.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240617164349_m19.cs",
               "RelativeDocumentMoniker": "Migrations\\20240617164349_m19.cs",
@@ -2200,7 +2216,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 115,
+              "DocumentIndex": 120,
               "Title": "20240617181037_m20.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240617181037_m20.cs",
               "RelativeDocumentMoniker": "Migrations\\20240617181037_m20.cs",
@@ -2212,7 +2228,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 117,
+              "DocumentIndex": 122,
               "Title": "strict.d.ts",
               "DocumentMoniker": "C:\\Users\\lep61\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\assert\\strict.d.ts",
               "ToolTip": "C:\\Users\\lep61\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\assert\\strict.d.ts",
@@ -2222,7 +2238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 116,
+              "DocumentIndex": 121,
               "Title": "assert.d.ts",
               "DocumentMoniker": "C:\\Users\\lep61\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\assert.d.ts",
               "ToolTip": "C:\\Users\\lep61\\AppData\\Local\\Microsoft\\TypeScript\\5.2\\node_modules\\@types\\node\\assert.d.ts",
@@ -2232,7 +2248,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 118,
+              "DocumentIndex": 123,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -2244,17 +2260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 165,
-              "Title": "AuhController.cs",
-              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\AuhController.cs",
-              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\AuhController.cs",
-              "ViewState": "AQIAACkAAAAAAAAAAAA3wDQAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-30T20:38:50.407Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 166,
+              "DocumentIndex": 170,
               "Title": "DonHangChiTiet.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DonHangChiTiet.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DonHangChiTiet.cs",
@@ -2264,7 +2270,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 119,
+              "DocumentIndex": 124,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -2276,7 +2282,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 167,
+              "DocumentIndex": 171,
               "Title": "VeHuy.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\VeHuy.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\VeHuy.cs",
@@ -2286,7 +2292,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 168,
+              "DocumentIndex": 172,
               "Title": "Ve.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ve.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ve.cs",
@@ -2296,7 +2302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 120,
+              "DocumentIndex": 125,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\_ViewImports.cshtml",
@@ -2308,7 +2314,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 169,
+              "DocumentIndex": 173,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Program.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Program.cs",
@@ -2318,7 +2324,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 170,
+              "DocumentIndex": 174,
               "Title": "DonHangController.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\DonHangController.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\DonHangController.cs",
@@ -2328,7 +2334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 171,
+              "DocumentIndex": 175,
               "Title": "VeController.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\VeController.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\VeController.cs",
@@ -2338,7 +2344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 172,
+              "DocumentIndex": 176,
               "Title": "CheckoutDTO.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\CheckoutDTO.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\CheckoutDTO.cs",
@@ -2348,7 +2354,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 121,
+              "DocumentIndex": 126,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Diadiems\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Diadiems\\Edit.cshtml",
@@ -2360,7 +2366,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 173,
+              "DocumentIndex": 177,
               "Title": "MomoServices.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\MomoServices.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\MomoServices.cs",
@@ -2370,17 +2376,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 174,
-              "Title": "ChuyenController.cs",
-              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\ChuyenController.cs",
-              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\ChuyenController.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAQwAYAAAAXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-30T18:28:56.327Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 175,
+              "DocumentIndex": 178,
               "Title": "Tuyen.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tuyen.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tuyen.cs",
@@ -2390,17 +2386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 176,
-              "Title": "IEmailService.cs",
-              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\IEmailService.cs",
-              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\IEmailService.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAASwA0AAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T21:29:02.835Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 177,
+              "DocumentIndex": 179,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\ErrorViewModel.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\ErrorViewModel.cs",
@@ -2410,17 +2396,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 178,
-              "Title": "TinTucsController.cs",
-              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\TinTucsController.cs",
-              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Controllers\\TinTucsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T22:45:33.85Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 122,
+              "DocumentIndex": 127,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Details.cshtml",
@@ -2432,7 +2408,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 179,
+              "DocumentIndex": 180,
               "Title": "Hang.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Hang.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Hang.cs",
@@ -2442,7 +2418,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 180,
+              "DocumentIndex": 181,
               "Title": "Ghe.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ghe.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Ghe.cs",
@@ -2452,7 +2428,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 123,
+              "DocumentIndex": 128,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Tuyens\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Tuyens\\Details.cshtml",
@@ -2464,7 +2440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 181,
+              "DocumentIndex": 182,
               "Title": "SearchDTO.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\SearchDTO.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\SearchDTO.cs",
@@ -2474,7 +2450,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 182,
+              "DocumentIndex": 183,
               "Title": "EmailSetting.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\EmailSetting.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\EmailSetting.cs",
@@ -2484,7 +2460,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 183,
+              "DocumentIndex": 184,
               "Title": "DTOHang.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\DTOHang.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\DTOHang.cs",
@@ -2494,7 +2470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 184,
+              "DocumentIndex": 185,
               "Title": "AuthDTO.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\AuthDTO.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\AuthDTO.cs",
@@ -2504,7 +2480,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 185,
+              "DocumentIndex": 186,
               "Title": "Tang.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tang.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Tang.cs",
@@ -2514,7 +2490,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 186,
+              "DocumentIndex": 187,
               "Title": "Diadiem.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Diadiem.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Diadiem.cs",
@@ -2524,7 +2500,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 124,
+              "DocumentIndex": 129,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TaiKhoan\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\TaiKhoan\\Create.cshtml",
@@ -2536,7 +2512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 187,
+              "DocumentIndex": 188,
               "Title": "HangGui.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\HangGui.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\HangGui.cs",
@@ -2546,7 +2522,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 188,
+              "DocumentIndex": 189,
               "Title": "TinTuc.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TinTuc.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TinTuc.cs",
@@ -2556,7 +2532,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 189,
+              "DocumentIndex": 190,
               "Title": "VeDTO.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\VeDTO.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\DTO\\VeDTO.cs",
@@ -2566,7 +2542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 125,
+              "DocumentIndex": 130,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\LoaiXes\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\LoaiXes\\Delete.cshtml",
@@ -2578,7 +2554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 126,
+              "DocumentIndex": 131,
               "Title": "JWTService.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Services\\JWTService.cs",
               "RelativeDocumentMoniker": "Services\\JWTService.cs",
@@ -2590,7 +2566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 127,
+              "DocumentIndex": 132,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Xes\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Xes\\Details.cshtml",
@@ -2602,7 +2578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 190,
+              "DocumentIndex": 191,
               "Title": "TaiKhoan.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TaiKhoan.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\TaiKhoan.cs",
@@ -2612,7 +2588,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 191,
+              "DocumentIndex": 192,
               "Title": "Xe.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Xe.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Models\\Xe.cs",
@@ -2622,7 +2598,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 162,
+              "DocumentIndex": 167,
               "Title": "20240604222523_m17.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240604222523_m17.cs",
               "RelativeDocumentMoniker": "Migrations\\20240604222523_m17.cs",
@@ -2634,7 +2610,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 129,
+              "DocumentIndex": 134,
               "Title": "site.js",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\wwwroot\\js\\site.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\site.js",
@@ -2646,7 +2622,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 128,
+              "DocumentIndex": 133,
               "Title": "main.js",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\wwwroot\\js\\main.js",
               "RelativeDocumentMoniker": "wwwroot\\js\\main.js",
@@ -2658,7 +2634,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 192,
+              "DocumentIndex": 193,
               "Title": "Dbcontext.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Data\\Dbcontext.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Data\\Dbcontext.cs",
@@ -2668,17 +2644,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 193,
-              "Title": "EmailService.cs",
-              "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\EmailService.cs",
-              "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoiAPI\\Services\\EmailService.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAAQwEMAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-04T21:36:41.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 163,
+              "DocumentIndex": 168,
               "Title": "20240604195802_m16.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240604195802_m16.cs",
               "RelativeDocumentMoniker": "Migrations\\20240604195802_m16.cs",
@@ -2690,7 +2656,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 130,
+              "DocumentIndex": 135,
               "Title": "20240604170806_m14.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240604170806_m14.cs",
               "RelativeDocumentMoniker": "Migrations\\20240604170806_m14.cs",
@@ -2702,7 +2668,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 164,
+              "DocumentIndex": 169,
               "Title": "20240604195132_m15.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240604195132_m15.cs",
               "RelativeDocumentMoniker": "Migrations\\20240604195132_m15.cs",
@@ -2714,7 +2680,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 131,
+              "DocumentIndex": 136,
               "Title": "20240520073859_m5.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240520073859_m5.cs",
               "RelativeDocumentMoniker": "Migrations\\20240520073859_m5.cs",
@@ -2766,7 +2732,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 132,
+              "DocumentIndex": 137,
               "Title": "20240519200037_m4.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240519200037_m4.cs",
               "RelativeDocumentMoniker": "Migrations\\20240519200037_m4.cs",
@@ -2778,7 +2744,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 133,
+              "DocumentIndex": 138,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Xes\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Xes\\Create.cshtml",
@@ -2790,7 +2756,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 134,
+              "DocumentIndex": 139,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Diadiems\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Diadiems\\Delete.cshtml",
@@ -2802,7 +2768,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 135,
+              "DocumentIndex": 140,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Tuyens\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Tuyens\\Create.cshtml",
@@ -2814,7 +2780,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 136,
+              "DocumentIndex": 141,
               "Title": "ThanhBuoi.csproj",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\ThanhBuoi.csproj",
               "RelativeDocumentMoniker": "ThanhBuoi.csproj",
@@ -2826,7 +2792,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 141,
+              "DocumentIndex": 146,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Xes\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Xes\\Edit.cshtml",
@@ -2838,7 +2804,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 142,
+              "DocumentIndex": 147,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Create.cshtml",
@@ -2850,7 +2816,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 143,
+              "DocumentIndex": 148,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Delete.cshtml",
@@ -2862,7 +2828,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 144,
+              "DocumentIndex": 149,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\TinTucs\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\TinTucs\\Edit.cshtml",
@@ -2874,7 +2840,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 145,
+              "DocumentIndex": 150,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Xes\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Xes\\Delete.cshtml",
@@ -2886,7 +2852,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 146,
+              "DocumentIndex": 151,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Tuyens\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Tuyens\\Delete.cshtml",
@@ -2898,7 +2864,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 147,
+              "DocumentIndex": 152,
               "Title": "EmailSetting.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Models\\DTO\\EmailSetting.cs",
               "RelativeDocumentMoniker": "Models\\DTO\\EmailSetting.cs",
@@ -2910,7 +2876,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 148,
+              "DocumentIndex": 153,
               "Title": "20240526204926_m12.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240526204926_m12.cs",
               "RelativeDocumentMoniker": "Migrations\\20240526204926_m12.cs",
@@ -2922,7 +2888,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 149,
+              "DocumentIndex": 154,
               "Title": "20240526202824_m11.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240526202824_m11.cs",
               "RelativeDocumentMoniker": "Migrations\\20240526202824_m11.cs",
@@ -2934,7 +2900,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 150,
+              "DocumentIndex": 155,
               "Title": "Privacy.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Views\\Home\\Privacy.cshtml",
               "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
@@ -2946,7 +2912,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 161,
+              "DocumentIndex": 166,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\Views\\Chuyens\\Create.cshtml",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\Views\\Chuyens\\Create.cshtml",
@@ -2955,7 +2921,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 151,
+              "DocumentIndex": 156,
               "Title": "ManageNavPages.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\ManageNavPages.cs",
@@ -2967,7 +2933,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 137,
+              "DocumentIndex": 142,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\.NET\\Project_BookingAir\\AppBooking\\AppBooking\\Program.cs",
               "RelativeDocumentMoniker": "..\\..\\Project_BookingAir\\AppBooking\\AppBooking\\Program.cs",
@@ -2979,7 +2945,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 152,
+              "DocumentIndex": 157,
               "Title": "_ManageNav.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\_ManageNav.cshtml",
@@ -2991,7 +2957,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 153,
+              "DocumentIndex": 158,
               "Title": "_ViewImports.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\_ViewImports.cshtml",
@@ -3003,7 +2969,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 138,
+              "DocumentIndex": 143,
               "Title": "AuthenticationOptions.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\AppData\\Local\\Temp\\.vsdbgsrc\\c419dad7302b3e96c2c38cca4039887fbe745db760d3004f23d2549a94084090\\AuthenticationOptions.cs",
               "ToolTip": "C:\\Users\\lep61\\AppData\\Local\\Temp\\.vsdbgsrc\\c419dad7302b3e96c2c38cca4039887fbe745db760d3004f23d2549a94084090\\AuthenticationOptions.cs",
@@ -3013,7 +2979,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 154,
+              "DocumentIndex": 159,
               "Title": "ResetPassword.cshtml.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml.cs",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\ResetPassword.cshtml.cs",
@@ -3025,7 +2991,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 155,
+              "DocumentIndex": 160,
               "Title": "SetPassword.cshtml",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Areas\\Identity\\Pages\\Account\\Manage\\SetPassword.cshtml",
               "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\SetPassword.cshtml",
@@ -3037,7 +3003,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 156,
+              "DocumentIndex": 161,
               "Title": "20240520075935_m6.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240520075935_m6.cs",
               "RelativeDocumentMoniker": "Migrations\\20240520075935_m6.cs",
@@ -3049,7 +3015,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 157,
+              "DocumentIndex": 162,
               "Title": "DataContextModelSnapshot.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\DataContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Migrations\\DataContextModelSnapshot.cs",
@@ -3061,7 +3027,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 158,
+              "DocumentIndex": 163,
               "Title": "20240519171145_m3.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240519171145_m3.cs",
               "RelativeDocumentMoniker": "Migrations\\20240519171145_m3.cs",
@@ -3073,7 +3039,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 159,
+              "DocumentIndex": 164,
               "Title": "20240513113957_m2.cs",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\Migrations\\20240513113957_m2.cs",
               "RelativeDocumentMoniker": "Migrations\\20240513113957_m2.cs",
@@ -3085,7 +3051,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 139,
+              "DocumentIndex": 144,
               "Title": "Microsoft.Common.CurrentVersion.targets",
               "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
               "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
@@ -3095,7 +3061,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 140,
+              "DocumentIndex": 145,
               "Title": "20240511183617_m11.cs",
               "DocumentMoniker": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\Migrations\\20240511183617_m11.cs",
               "ToolTip": "C:\\Users\\lep61\\source\\repos\\ThanhBuoi\\Migrations\\20240511183617_m11.cs",
@@ -3104,7 +3070,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 160,
+              "DocumentIndex": 165,
               "Title": "chart.min.js",
               "DocumentMoniker": "D:\\.NET\\ThanhBuoi\\thanhbuoi\\wwwroot\\lib\\chart\\chart.min.js",
               "RelativeDocumentMoniker": "wwwroot\\lib\\chart\\chart.min.js",

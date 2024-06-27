@@ -26,10 +26,11 @@ namespace ThanhBuoi.Controllers
             _userManager = userManager;
             _emailService = emailSerive;
             _momoServices = momoService;
+            // Các dạng hàng ....
             dictGiaHang.Add("Hàng nhỏ ( 1 - 5 kg)", 0.2);
             dictGiaHang.Add("Hàng vừa ( 5 - 10 kg)", 0.4);
             dictGiaHang.Add("Hàng to (10 - 20 kg )", 0.6);
-            dictGiaHang.Add("Hàng đặc biệt lớn  ( hơn 20 kg)", 1);
+            dictGiaHang.Add("Hàng đặc biệt lớn ( hơn 20 kg)", 1);
 
         }
         // GET: GuiHang
@@ -215,7 +216,7 @@ namespace ThanhBuoi.Controllers
                     }
                 }
 
-                return RedirectToAction("Details", "Donhangs", new { id = donHang.Id });
+                return RedirectToAction("Details", "Donhangs", new { id = newDonhang.Id });
             }
             catch (DbUpdateConcurrencyException e)
             {

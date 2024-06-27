@@ -115,7 +115,7 @@
                 <div class="col-8 mt-4">
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Hàng và vé</h6>
+                            <h6 class="mb-4">Biểu đồ cột doanh thu </h6>
                             <canvas id="salse-revenue"></canvas>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                 <div class="col-4 mt-4">
                      <div class="col-sm-12 col-xl-12">
                             <div class="bg-light rounded h-100 p-4">
-                                <h6 class="mb-4">Pie Chart</h6>
+                                <h6 class="mb-4">Biểu đồ tròn</h6>
                                 <canvas id="pie-chart"></canvas>
                             </div>
                      </div>
@@ -193,7 +193,7 @@
     }
 
     // Hàm vẽ biểu đồ
-    function drawCharts(listDate, listTotalHang, listTotalVe, listTotal) {
+    function drawCharts(listDate, listTotalHang, listTotalVe, listTotalHuy ,listTotal) {
         // Destroy existing charts if they exist
         if (window.myChart2) {
             window.myChart2.destroy();
@@ -218,7 +218,14 @@
                     data: listTotalHang,
                     backgroundColor: "rgba(0, 156, 255, .3)",
                     fill: true
-                }]
+                },
+                {
+                    label: "Vé đã hủy",
+                    data: listTotalHuy,
+                    backgroundColor: "rgba(0, 156, 255, .1)",
+                    fill: true
+                }
+                ]
             },
             options: {
                 responsive: true
@@ -231,13 +238,14 @@
         window.myChart5 = new Chart(ctx5, {
             type: "pie",
             data: {
-                labels: ["Vé", "Hàng"],
+                labels: ["Vé", "Hàng", "Vé hủy"],
                 datasets: [{
                     backgroundColor: [
                         "rgba(0, 156, 255, .7)",
                         "rgba(0, 156, 255, .6)",
+                        "rgba(0, 156, 255, .4)",
                     ],
-                    data: [sumArray(listTotalVe), sumArray(listTotalHang)]
+                    data: [sumArray(listTotalVe), sumArray(listTotalHang), sumArray(listTotalHuy)]
                 }]
             },
             options: {
@@ -252,19 +260,22 @@
             var listDate = [];
             var listTotalHang = [];
             var listTotalVe = [];
+            var listTotalHuy = [];
             var listTotal = [];
 
             data.forEach(function (item) {
                 listDate.push(formatDate(item.datetime));
                 listTotalHang.push(item.totalHang);
+                listTotalHuy.push(item.totalHuy);
                 listTotalVe.push(item.totalVe);
                 listTotal.push(item.totalHang + item.totalVe);
             });
 
             const totalHang = sumArray(listTotalHang);
             const totalVe = sumArray(listTotalVe);
+            const totalHuy = sumArray(listTotalHuy);
             setTotal(totalVe, totalHang);
-            drawCharts(listDate, listTotalHang, listTotalVe, listTotal);
+            drawCharts(listDate, listTotalHang, listTotalVe,listTotalHuy, listTotal);
         } else {
             // Handle case where no data is returned or data is empty
             console.error('No data found or empty.');

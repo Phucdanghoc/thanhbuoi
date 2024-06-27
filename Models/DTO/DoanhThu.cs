@@ -10,6 +10,7 @@
     {
         public DateTime datetime { get; set; }
         public double totalHang { get; set; }
+        public double totalHuy { get; set; }
         public double totalVe{ get; set; }
 
     }
